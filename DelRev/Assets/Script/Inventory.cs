@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Inventory : MonoBehaviour
 {
@@ -8,6 +9,14 @@ public class Inventory : MonoBehaviour
     private int inventorySize = 4;
     private int currentIndex = 0; // Tracks the currently selected inventory slot
 
+    void Start()
+    {
+        // 고정 크기로 미리 null 채워두기
+        for (int i = 0; i < inventorySize; i++) {
+            inventory.Add(null);
+            inventoryObjects.Add(null);
+        }
+    }
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
@@ -30,11 +39,25 @@ public class Inventory : MonoBehaviour
             if (closestObject != null)
             {
                 Item item = closestObject.GetComponent<Item>();
-                if (inventory.Count < inventorySize)
+                if (inventory.Where(obj => obj != null).Count() < inventorySize)
                 {
-                    inventory.Add(item);
+                    if (inventory[currentIndex] == null)
+                    {
+                        inventory[currentIndex] = item; // Store the item reference in the inventory
+                    }
+                    else 
+                    {
+                        inventory[inventory.FindIndex(item => item == null)] = item;
+                    }
                     closestObject.SetActive(false); // Ensure the object is active in the scene
-                    inventoryObjects.Add(closestObject); // Store the object reference in the inventoryObjects list
+                    if (inventoryObjects[currentIndex] == null)
+                    {
+                        inventoryObjects[currentIndex] = closestObject; // Store the object reference in the inventoryObjects list
+                    }
+                    else 
+                    {
+                        inventoryObjects[inventoryObjects.FindIndex(item => item == null)] = closestObject;
+                    }
                     Debug.Log($"Picked up: {item.itemName}. Inventory: {string.Join(", ", inventory.ConvertAll(i => i?.itemName ?? "Empty"))}");
                 }
                 else
@@ -69,7 +92,6 @@ public class Inventory : MonoBehaviour
             Vector3 dropPosition = transform.position + transform.forward * 2f; // Adjust the distance as needed
             droppedObject.transform.position = dropPosition;
             droppedObject.SetActive(true); // Ensure the object is active in the scene
-            droppedObject = null;
 
             Debug.Log($"Dropped: {droppedItem.itemName}. Inventory: {string.Join(", ", inventory.ConvertAll(i => i?.itemName ?? "Empty"))}");
         }
@@ -88,7 +110,7 @@ public class Inventory : MonoBehaviour
         }
 
         currentIndex = slotIndex;
-        if (currentIndex < inventory.Count && inventory[currentIndex] != null)
+        if (currentIndex < inventory.Where(obj => obj != null).Count() && inventory[currentIndex] != null)
         {
             Debug.Log($"Selected slot {currentIndex + 1}. Current item: {inventory[currentIndex].itemName}");
         }
