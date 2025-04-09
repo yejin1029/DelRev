@@ -15,6 +15,10 @@ public class SceneChanger : MonoBehaviour
             PlayerPrefs.SetFloat("RespawnY", spawnPosition.y);
             PlayerPrefs.SetFloat("RespawnZ", spawnPosition.z);
 
+            // 위치 세팅 완료 표시
+            PlayerPrefs.SetInt("HasRespawnData", 1);
+
+            // 씬 이동
             SceneManager.LoadScene(nextSceneName);
         }
     }
