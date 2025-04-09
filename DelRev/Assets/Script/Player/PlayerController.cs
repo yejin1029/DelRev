@@ -1,11 +1,8 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
-    private static PlayerController instance;
-
     [Header("Stats")]
     public float health = 100f;
 
@@ -45,19 +42,6 @@ public class PlayerController : MonoBehaviour
     private bool isCrouching;
     private bool isRunning;
     private bool exhausted = false;
-
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
 
     private void Start()
     {

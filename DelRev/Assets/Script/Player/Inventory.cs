@@ -7,58 +7,66 @@ public class Inventory : MonoBehaviour
     private List<Item> inventory = new List<Item>();
     private List<GameObject> inventoryObjects = new List<GameObject>();
     private int inventorySize = 4;
-    private int currentIndex = 0; // Tracks the currently selected inventory slot
+    private int currentIndex = 0; // 현재 선택된 인벤토리 슬롯
 
     void Start()
     {
-        // 고정 크기로 미리 null 채워두기
-        for (int i = 0; i < inventorySize; i++) {
+        // 고정 크기의 인벤토리 공간 초기화
+        for (int i = 0; i < inventorySize; i++)
+        {
             inventory.Add(null);
             inventoryObjects.Add(null);
         }
     }
+
     void Update()
     {
+        // 아이템 줍기 (E키)
         if (Input.GetKeyDown(KeyCode.E))
         {
-            // Find the closest object with an Item component
-            Collider[] hitColliders = Physics.OverlapSphere(transform.position, 2f); // Adjust radius as needed
-            GameObject closestObject = null;
-            float closestDistance = float.MaxValue;
+            TryPickupItem();
+        }
 
-            foreach (var hitCollider in hitColliders)
-            {
-                float distance = Vector3.Distance(transform.position, hitCollider.transform.position);
-                if (distance < closestDistance && hitCollider.GetComponent<Item>() != null)
-                {
-                    closestDistance = distance;
-                    closestObject = hitCollider.gameObject;
-                }
-            }
+        // 아이템 버리기 (G키)
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            DropItem();
+        }
 
-            if (closestObject != null)
+        // 인벤토리 슬롯 변경 (1~4 키)
+        if (Input.GetKeyDown(KeyCode.Alpha1)) ChangeSelectedSlot(0);
+        if (Input.GetKeyDown(KeyCode.Alpha2)) ChangeSelectedSlot(1);
+        if (Input.GetKeyDown(KeyCode.Alpha3)) ChangeSelectedSlot(2);
+        if (Input.GetKeyDown(KeyCode.Alpha4)) ChangeSelectedSlot(3);
+    }
+
+    void TryPickupItem()
+    {
+        // 카메라 중심에서 정면으로 레이 발사
+        Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, 2f)) // 줍기 가능한 거리
+        {
+            GameObject hitObject = hit.collider.gameObject;
+            Item item = hitObject.GetComponent<Item>();
+
+            if (item != null)
             {
-                Item item = closestObject.GetComponent<Item>();
-                if (inventory.Where(obj => obj != null).Count() < inventorySize)
+                if (inventory.Where(i => i != null).Count() < inventorySize)
                 {
-                    if (inventory[currentIndex] == null)
+                    int targetIndex = inventory[currentIndex] == null
+                        ? currentIndex
+                        : inventory.FindIndex(i => i == null);
+
+                    if (targetIndex != -1)
                     {
-                        inventory[currentIndex] = item; // Store the item reference in the inventory
+                        inventory[targetIndex] = item;
+                        inventoryObjects[targetIndex] = hitObject;
+                        hitObject.SetActive(false);
+
+                        Debug.Log($"Picked up: {item.itemName}. Inventory: {string.Join(", ", inventory.ConvertAll(i => i?.itemName ?? "Empty"))}");
                     }
-                    else 
-                    {
-                        inventory[inventory.FindIndex(item => item == null)] = item;
-                    }
-                    closestObject.SetActive(false); // Ensure the object is active in the scene
-                    if (inventoryObjects[currentIndex] == null)
-                    {
-                        inventoryObjects[currentIndex] = closestObject; // Store the object reference in the inventoryObjects list
-                    }
-                    else 
-                    {
-                        inventoryObjects[inventoryObjects.FindIndex(item => item == null)] = closestObject;
-                    }
-                    Debug.Log($"Picked up: {item.itemName}. Inventory: {string.Join(", ", inventory.ConvertAll(i => i?.itemName ?? "Empty"))}");
                 }
                 else
                 {
@@ -66,17 +74,6 @@ public class Inventory : MonoBehaviour
                 }
             }
         }
-
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            DropItem();
-        }
-
-        // Change the currently selected inventory slot using keys 1, 2, 3, 4
-        if (Input.GetKeyDown(KeyCode.Alpha1)) ChangeSelectedSlot(0);
-        if (Input.GetKeyDown(KeyCode.Alpha2)) ChangeSelectedSlot(1);
-        if (Input.GetKeyDown(KeyCode.Alpha3)) ChangeSelectedSlot(2);
-        if (Input.GetKeyDown(KeyCode.Alpha4)) ChangeSelectedSlot(3);
     }
 
     void DropItem()
@@ -84,14 +81,14 @@ public class Inventory : MonoBehaviour
         if (inventory.Count > 0 && currentIndex < inventory.Count && inventory[currentIndex] != null)
         {
             Item droppedItem = inventory[currentIndex];
-            inventory[currentIndex] = null;
             GameObject droppedObject = inventoryObjects[currentIndex];
+
+            inventory[currentIndex] = null;
             inventoryObjects[currentIndex] = null;
 
-            // Instantiate the dropped item in front of the player
-            Vector3 dropPosition = transform.position + transform.forward * 2f; // Adjust the distance as needed
+            Vector3 dropPosition = transform.position + transform.forward * 2f;
             droppedObject.transform.position = dropPosition;
-            droppedObject.SetActive(true); // Ensure the object is active in the scene
+            droppedObject.SetActive(true);
 
             Debug.Log($"Dropped: {droppedItem.itemName}. Inventory: {string.Join(", ", inventory.ConvertAll(i => i?.itemName ?? "Empty"))}");
         }
@@ -110,7 +107,8 @@ public class Inventory : MonoBehaviour
         }
 
         currentIndex = slotIndex;
-        if (currentIndex < inventory.Where(obj => obj != null).Count() && inventory[currentIndex] != null)
+
+        if (inventory[currentIndex] != null)
         {
             Debug.Log($"Selected slot {currentIndex + 1}. Current item: {inventory[currentIndex].itemName}");
         }
