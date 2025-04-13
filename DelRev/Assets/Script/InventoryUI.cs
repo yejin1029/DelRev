@@ -7,13 +7,13 @@ using System.Linq;
 public class InventoryUI : MonoBehaviour
 {
 
-  [Header("UI ½½·Ô ¿¬°á")]
-  public List<Image> slotImages; // ÀÎº¥Åä¸® ½½·Ô UIµé (µå·¡±×·Î ÇÒ´ç)
+  [Header("UI ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½")]
+  public List<Image> slotImages; // ï¿½Îºï¿½ï¿½ä¸® ï¿½ï¿½ï¿½ï¿½ UIï¿½ï¿½ (ï¿½å·¡ï¿½×·ï¿½ ï¿½Ò´ï¿½)
 
   private List<Item> inventory = new List<Item>();
   private List<GameObject> inventoryObjects = new List<GameObject>();
   private int inventorySize = 4;
-  private int currentIndex = 0; // ÇöÀç ¼±ÅÃµÈ ÀÎº¥Åä¸® ½½·Ô
+  private int currentIndex = 0; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ãµï¿½ ï¿½Îºï¿½ï¿½ä¸® ï¿½ï¿½ï¿½ï¿½
 
   void Start()
   {
@@ -29,25 +29,25 @@ public class InventoryUI : MonoBehaviour
 
   void Update()
   {
-    // E·Î ¾ÆÀÌÅÛ ÁÝ±â
+    // Eï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ý±ï¿½
     if (Input.GetKeyDown(KeyCode.E))
     {
       TryPickUpItem();
     }
 
-    // G·Î ¾ÆÀÌÅÛ ÁÝ±â
+    // Gï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ý±ï¿½
     if (Input.GetKeyDown(KeyCode.G))
     {
       DropItem();
     }
 
-    // 1,2,3,4 Å°·Î ½½·Ô º¯°æ
+    // 1,2,3,4 Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     if (Input.GetKeyDown(KeyCode.Alpha1)) ChangeSelectedSlot(0);
     if (Input.GetKeyDown(KeyCode.Alpha2)) ChangeSelectedSlot(1);
     if (Input.GetKeyDown(KeyCode.Alpha3)) ChangeSelectedSlot(2);
     if (Input.GetKeyDown(KeyCode.Alpha4)) ChangeSelectedSlot(3);
 
-    // ¸¶¿ì½º ÈÙ·Î ½½·Ô º¯°æ
+    // ï¿½ï¿½ï¿½ì½º ï¿½Ù·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     float scroll = Input.GetAxis("Mouse ScrollWheel");
     if (scroll > 0f)
     {
@@ -61,7 +61,7 @@ public class InventoryUI : MonoBehaviour
     }
   }
 
-  // ¾ÆÀÌÅÛ ÁÝ±â
+  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ý±ï¿½
   void TryPickUpItem()
   {
     Collider[] hitColliders = Physics.OverlapSphere(transform.position, 2f);
@@ -100,7 +100,7 @@ public class InventoryUI : MonoBehaviour
           }
         }
 
-        closestObject.SetActive(false); // ÁÖ¿î ¾ÆÀÌÅÛÀº ºñÈ°¼ºÈ­
+        closestObject.SetActive(false); // ï¿½Ö¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­
         UpdateInventoryUI();
       }
       else
@@ -110,7 +110,7 @@ public class InventoryUI : MonoBehaviour
     }
   }
 
-  // ¾ÆÀÌÅÛ ¹ö¸®±â
+  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
   void DropItem()
   {
     if (inventory.Count > 0 && currentIndex < inventory.Count && inventory[currentIndex] != null)
@@ -132,7 +132,7 @@ public class InventoryUI : MonoBehaviour
     }
   }
 
-  // ½½·Ô º¯°æ
+  // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
   void ChangeSelectedSlot(int slotIndex)
   {
     if (slotIndex < 0 || slotIndex >= inventorySize)
@@ -155,7 +155,7 @@ public class InventoryUI : MonoBehaviour
     UpdateSlotHighlight();
   }
 
-  // UI ¾÷µ¥ÀÌÆ®
+  // UI ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
   void UpdateInventoryUI()
   {
     for (int i = 0; i < inventorySize; i++)
@@ -168,12 +168,12 @@ public class InventoryUI : MonoBehaviour
       else
       {
         slotImages[i].sprite = null;
-        slotImages[i].color = new Color(1, 1, 1, 0); // Åõ¸í
+        slotImages[i].color = new Color(1, 1, 1, 0); // ï¿½ï¿½ï¿½ï¿½
       }
     }
   }
 
-  // ¼±ÅÃÇÏ°í ÀÖ´Â ÀÎº¥Åä¸® Å×µÎ¸® »ö º¯°æ
+  // ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½Ö´ï¿½ ï¿½Îºï¿½ï¿½ä¸® ï¿½×µÎ¸ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
   void UpdateSlotHighlight()
   {
     for (int i = 0; i < slotImages.Count; i++)
