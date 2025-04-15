@@ -9,6 +9,21 @@ public class Inventory : MonoBehaviour
     private int inventorySize = 4;
     private int currentIndex = 0; // 현재 선택된 인벤토리 슬롯
 
+    public List<Item> GetInventoryItems()
+    {
+        return inventory;
+      }
+
+      public int GetCurrentIndex()
+      {
+          return currentIndex;
+      }
+
+      public int GetInventorySize()
+      {
+          return inventorySize;
+      }
+
     void Start()
     {
         // 고정 크기의 인벤토리 공간 초기화
@@ -53,24 +68,18 @@ public class Inventory : MonoBehaviour
 
             if (item != null)
             {
-                if (inventory.Where(i => i != null).Count() < inventorySize)
+                // 현재 슬롯이 비어 있어야만 아이템을 저장
+                if (inventory[currentIndex] == null)
                 {
-                    int targetIndex = inventory[currentIndex] == null
-                        ? currentIndex
-                        : inventory.FindIndex(i => i == null);
+                    inventory[currentIndex] = item;
+                    inventoryObjects[currentIndex] = hitObject;
+                    hitObject.SetActive(false);
 
-                    if (targetIndex != -1)
-                    {
-                        inventory[targetIndex] = item;
-                        inventoryObjects[targetIndex] = hitObject;
-                        hitObject.SetActive(false);
-
-                        Debug.Log($"Picked up: {item.itemName}. Inventory: {string.Join(", ", inventory.ConvertAll(i => i?.itemName ?? "Empty"))}");
-                    }
+                    Debug.Log($"Picked up: {item.itemName} to slot {currentIndex + 1}. Inventory: {string.Join(", ", inventory.ConvertAll(i => i?.itemName ?? "Empty"))}");
                 }
                 else
                 {
-                    Debug.Log("Inventory is full!");
+                    Debug.Log($"Slot {currentIndex + 1} is already occupied!");
                 }
             }
         }
@@ -98,7 +107,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    void ChangeSelectedSlot(int slotIndex)
+    public void ChangeSelectedSlot(int slotIndex)
     {
         if (slotIndex < 0 || slotIndex >= inventorySize)
         {
