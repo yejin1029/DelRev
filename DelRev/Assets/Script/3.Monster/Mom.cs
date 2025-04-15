@@ -67,6 +67,10 @@ public class Mom : MonoBehaviour
                 break;
 
             case State.Return:
+                if (distanceToPlayer < detectionRange && HasLineOfSight())
+                {
+                    currentState = State.Chase;
+                }
                 if (!agent.pathPending && agent.remainingDistance < 3f)
                 {
                     currentState = State.Patrol;

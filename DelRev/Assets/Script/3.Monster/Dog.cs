@@ -72,7 +72,11 @@ public class Dog : MonoBehaviour
                 break;
 
             case State.Return:
-                if (!agent.pathPending && agent.remainingDistance < 3f)
+                if (distanceToPlayer < detectionRange && HasLineOfSight())
+                {
+                    currentState = State.Chase;
+                }
+                else if (!agent.pathPending && agent.remainingDistance < 3f)
                 {
                     currentState = State.Patrol;
                     GoToRandomPosition();
