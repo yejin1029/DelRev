@@ -1,3 +1,4 @@
+// PlayerController.cs
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
@@ -35,6 +36,11 @@ public class PlayerController : MonoBehaviour
     public float stamina;
     public float currentSpeed;
 
+    [Header("Coin System")]
+    [Tooltip("플레이어가 획득한 코인(금액) 총합")]
+    public int coinCount = 0;
+
+    // 내부 사용 변수
     private float xRotation = 0f;
     private CharacterController controller;
     private Vector3 velocity;
@@ -72,38 +78,28 @@ public class PlayerController : MonoBehaviour
     void HandleMovement()
     {
         isGrounded = controller.isGrounded;
-        if (isGrounded && velocity.y < 0)
-        {
+        if (isGrounded && velocity.y < 0f)
             velocity.y = -2f;
-        }
 
-        float moveX = Input.GetAxis("Horizontal");
-        float moveZ = Input.GetAxis("Vertical");
-        Vector3 move = transform.right * moveX + transform.forward * moveZ;
+        Vector3 move = transform.right * Input.GetAxis("Horizontal") 
+                     + transform.forward * Input.GetAxis("Vertical");
         move.Normalize();
 
         currentSpeed = walkSpeed;
-
         isCrouching = Input.GetKey(crouchKey);
         if (isCrouching)
-        {
             currentSpeed *= slowSpeedMultiplier;
-        }
 
-        bool canRun = Input.GetKey(runKey) && !isCrouching && move != Vector3.zero && !exhausted;
+        bool canRun = Input.GetKey(runKey) && !isCrouching 
+                      && move != Vector3.zero && !exhausted;
         isRunning = canRun;
-
         if (canRun)
-        {
             currentSpeed *= highSpeedMultiplier;
-        }
 
         controller.Move(move * currentSpeed * Time.deltaTime);
 
         if (Input.GetKeyDown(jumpKey) && isGrounded)
-        {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
-        }
 
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
@@ -114,7 +110,6 @@ public class PlayerController : MonoBehaviour
         if (isRunning)
         {
             stamina -= staminaDecreaseRate * Time.deltaTime;
-
             if (stamina <= 0f)
             {
                 stamina = 0f;
@@ -124,13 +119,41 @@ public class PlayerController : MonoBehaviour
         else
         {
             stamina += staminaRecoveryRate * Time.deltaTime;
-
             if (exhausted && stamina >= 20f)
-            {
                 exhausted = false;
-            }
+        }
+        stamina = Mathf.Clamp(stamina, 0f, maxStamina);
+    }
+
+    /// <summary>
+    /// 외부(PlaneItemToCoin 등)에서 호출할 때, amount만큼 코인을 추가합니다.
+    /// </summary>
+    public void AddCoins(int amount)
+    {
+        coinCount += amount;
+        Debug.Log($"[PlayerController] AddCoins: +{amount}, Total = {coinCount}");
+        // TODO: UI가 있다면 여기서 갱신하세요.
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        // Coin 태그(프리팹) 충돌 시 1개 추가
+        if (other.CompareTag("Coin"))
+        {
+            AddCoins(1);
+            Destroy(other.gameObject);
+            return;
         }
 
-        stamina = Mathf.Clamp(stamina, 0f, maxStamina);
+        // (만약 플레이어가 직접 Item을 줍는다면 아래 로직 사용)
+        if (other.CompareTag("Item"))
+        {
+            var item = other.GetComponent<Item>();
+            if (item != null)
+            {
+                AddCoins(item.itemPrice);
+                Destroy(other.gameObject);
+            }
+        }
     }
 }
