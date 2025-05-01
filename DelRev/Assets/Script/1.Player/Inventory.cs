@@ -61,7 +61,7 @@ public class Inventory : MonoBehaviour
         Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, 2f)) // 줍기 가능한 거리
+        if (Physics.Raycast(ray, out hit, 4f)) // 줍기 가능한 거리
         {
             GameObject hitObject = hit.collider.gameObject;
             Item item = hitObject.GetComponent<Item>();

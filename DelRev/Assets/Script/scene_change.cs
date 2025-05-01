@@ -1,25 +1,41 @@
+// SceneChanger.cs
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneChanger : MonoBehaviour
 {
-    public string nextSceneName = "Scene_move";
-    public Vector3 spawnPosition = new Vector3(3.5f, 1.3834f, 19.55f);
+    [Header("씬 이름 설정")]
+    public string sceneMoveName  = "Scene_move";
+    public string playerTestName = "PlayerTest";
+
+    [Header("트레일러 주변 반경(보호 영역)")]
+    public float keepRadius = 5f;
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.P))
+            ChangeScene(sceneMoveName);
+        if (Input.GetKeyDown(KeyCode.O))
+            ChangeScene(playerTestName);
+    }
+
+    void ChangeScene(string targetScene)
+    {
+        CleanUpLooseItems();
+        SceneManager.LoadScene(targetScene);
+    }
+
+    void CleanUpLooseItems()
+    {
+        // 1) 씬 안의 현재 트레일러 찾기
+        var trailerObj = GameObject.FindGameObjectWithTag("Car");
+        if (trailerObj == null)
         {
-            // 위치 저장
-            PlayerPrefs.SetFloat("RespawnX", spawnPosition.x);
-            PlayerPrefs.SetFloat("RespawnY", spawnPosition.y);
-            PlayerPrefs.SetFloat("RespawnZ", spawnPosition.z);
-
-            // 위치 세팅 완료 표시
-            PlayerPrefs.SetInt("HasRespawnData", 1);
-
-            // 씬 이동
-            SceneManager.LoadScene(nextSceneName);
+            Debug.LogWarning("CleanUpLooseItems: 트레일러(Car) 오브젝트를 찾을 수 없습니다.");
+            return;
         }
+        Vector3 trailerPos = trailerObj.transform.position;
+
+
     }
 }
