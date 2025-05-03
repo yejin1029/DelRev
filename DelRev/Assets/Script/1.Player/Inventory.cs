@@ -9,6 +9,8 @@ public class Inventory : MonoBehaviour
     private int inventorySize = 4;
     private int currentIndex = 0; // 현재 선택된 인벤토리 슬롯
 
+    public bool isInputLocked = false; // 네비게이션 상호작용 중복 방지
+
     public List<Item> GetInventoryItems()
     {
         return inventory;
@@ -36,6 +38,9 @@ public class Inventory : MonoBehaviour
 
     void Update()
     {
+        // 네비게이션 상호작용 중복 방지
+        if (isInputLocked) return;
+
         // 아이템 줍기 (E키)
         if (Input.GetKeyDown(KeyCode.E))
         {

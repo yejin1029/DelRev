@@ -13,6 +13,9 @@ public class CrossHair : MonoBehaviour
     int crossHairStatus = 0;
     string crosshairText = ""; // 표시할 텍스트 저장
 
+    public bool isAimingAtNavigation = false; // 네비게이션 조준 여부
+    public bool interactionLocked = false; // 네비게이션 화면 열린 여부
+
     void Start()
     {
         cam = Camera.main;
@@ -64,10 +67,26 @@ public class CrossHair : MonoBehaviour
                 crossHairStatus = 1;
                 crosshairText = $"(E) {item.itemName} \n💰 {item.itemPrice}coin";
             }
+            // 네비게이션
+            else if (hit.transform.CompareTag("Navigation"))
+            {
+                if (!interactionLocked) // 화면 고정 상태에서는 표시 X
+                {
+                    crossHairStatus = 1;
+                    crosshairText = "(E) 네비게이션 열기";
+                }
+                else
+                {
+                    crossHairStatus = 0;
+                    crosshairText = "";
+                }
+                isAimingAtNavigation = true;
+            }
             else
             {
                 crossHairStatus = 0;
                 crosshairText = "";
+                isAimingAtNavigation = false;
             }
         }
         else

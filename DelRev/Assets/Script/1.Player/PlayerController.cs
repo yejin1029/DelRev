@@ -40,6 +40,9 @@ public class PlayerController : MonoBehaviour
     [Tooltip("플레이어가 획득한 코인(금액) 총합")]
     public int coinCount = 0;
 
+    [Header("Control Lock")]
+    public bool isLocked = false; // 네비게이션 상호작용 시 동작 정지
+
     // 내부 사용 변수
     private float xRotation = 0f;
     private CharacterController controller;
@@ -58,6 +61,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (isLocked) return; // 네비게이션 상호작용 여부 확인
+
         HandleMouseLook();
         HandleMovement();
         HandleStamina();
