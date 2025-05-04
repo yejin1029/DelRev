@@ -38,6 +38,8 @@ public class CrossHair : MonoBehaviour
         Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         RaycastHit hit;
 
+        isAimingAtNavigation = false;
+
         if (Physics.Raycast(ray, out hit, rayDistance))
         {
             // 문
