@@ -1,15 +1,15 @@
 using UnityEngine;
 using UnityEngine.AI;
+using System.Collections.Generic;
 
 public class Dog : MonoBehaviour
 {
-    private enum State { Patrol, Chase, Return }
+    private enum State { Patrol, Chase, Return, Called }
     private State currentState;
 
-    public Transform centerPoint;
-    public float patrolRadius = 10f;
-    public float waitTime = 2f;
+    public List<BoxCollider> patrolAreas; // 👈 여러 영역 설정 가능
 
+    public float waitTime = 2f;
     public float detectionRange = 5f;
     public float damageAmount = 10f;
     public float damageInterval = 1f;
@@ -19,6 +19,7 @@ public class Dog : MonoBehaviour
 
     private NavMeshAgent agent;
     private Transform playerTransform;
+    private Transform PetCCTV = null;
     private PlayerController playerController;
 
     void Start()
@@ -82,9 +83,22 @@ public class Dog : MonoBehaviour
                     GoToRandomPosition();
                 }
                 break;
+
+            case State.Called:
+                if (!agent.pathPending && agent.remainingDistance < 1f)
+                {
+                    GoToRandomPosition();
+                    currentState = State.Patrol;
+
+                    if (PetCCTV != null)
+                    {
+                        Destroy(PetCCTV.gameObject);
+                        PetCCTV = null;
+                    }
+                }
+                break;
         }
 
-        // 데미지 처리
         if (distanceToPlayer <= agent.stoppingDistance)
         {
             damageTimer += Time.deltaTime;
@@ -101,17 +115,43 @@ public class Dog : MonoBehaviour
         }
     }
 
+    public void MoveToCCTV(Vector3 cctvPosition)
+    {
+        if (PetCCTV != null)
+        {
+            Destroy(PetCCTV.gameObject);
+        }
+
+        PetCCTV = GameObject.FindGameObjectWithTag("PetCCTV").transform;
+        PetCCTV.position = cctvPosition;
+        agent.SetDestination(PetCCTV.position);
+        currentState = State.Called;
+    }
+
     void GoToRandomPosition()
     {
-        Vector3 randomDirection = Random.insideUnitSphere * patrolRadius;
-        randomDirection += centerPoint.position;
-        randomDirection.y = transform.position.y; // Y축 고정
+        if (patrolAreas == null || patrolAreas.Count == 0) return;
 
-        NavMeshHit hit;
-        if (NavMesh.SamplePosition(randomDirection, out hit, patrolRadius, NavMesh.AllAreas))
+        for (int attempts = 0; attempts < 10; attempts++) // 최대 10회 시도
         {
-            agent.SetDestination(hit.position);
+            // 무작위로 박스 중 하나 선택
+            BoxCollider selectedArea = patrolAreas[Random.Range(0, patrolAreas.Count)];
+            Bounds bounds = selectedArea.bounds;
+
+            Vector3 randomPoint = new Vector3(
+                Random.Range(bounds.min.x, bounds.max.x),
+                transform.position.y,
+                Random.Range(bounds.min.z, bounds.max.z)
+            );
+
+            if (NavMesh.SamplePosition(randomPoint, out NavMeshHit hit, 2f, NavMesh.AllAreas))
+            {
+                agent.SetDestination(hit.position);
+                return;
+            }
         }
+
+        Debug.LogWarning("🐶 Dog couldn't find a valid random point on NavMesh!");
     }
 
     bool HasLineOfSight()
@@ -128,10 +168,14 @@ public class Dog : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        if (centerPoint != null)
+        Gizmos.color = Color.cyan;
+        if (patrolAreas != null)
         {
-            Gizmos.color = Color.cyan;
-            Gizmos.DrawWireSphere(centerPoint.position, patrolRadius);
+            foreach (var area in patrolAreas)
+            {
+                if (area != null)
+                    Gizmos.DrawWireCube(area.bounds.center, area.bounds.size);
+            }
         }
 
         Gizmos.color = Color.red;

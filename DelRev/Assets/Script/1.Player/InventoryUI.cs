@@ -45,34 +45,41 @@ public class InventoryUI : MonoBehaviour
     UpdateSlotHighlight(inventory.GetCurrentIndex());
   }
 
-  void UpdateInventoryUI()
-  {
+void UpdateInventoryUI()
+{
     var items = inventory.GetInventoryItems();
 
     for (int i = 0; i < slotImages.Count; i++)
     {
-      if (items[i] != null)
-      {
-        slotImages[i].sprite = items[i].itemImage;
-        slotImages[i].color = Color.white;
-      }
-      else
-      {
-        slotImages[i].sprite = null;
-        slotImages[i].color = new Color(1, 1, 1, 0);
-      }
+        if (slotImages[i] == null) continue; // 💥 파괴된 참조 건너뛰기
+
+        if (items[i] != null)
+        {
+            slotImages[i].sprite = items[i].itemImage;
+            slotImages[i].color = Color.white;
+        }
+        else
+        {
+            slotImages[i].sprite = null;
+            slotImages[i].color = new Color(1, 1, 1, 0); // 투명 처리
+        }
     }
-  }
+}
+
 
   void UpdateSlotHighlight(int currentIndex)
   {
-    for (int i = 0; i < slotImages.Count; i++)
-    {
-      Image parent = slotImages[i].transform.parent.GetComponent<Image>();
-      if (parent != null)
+      for (int i = 0; i < slotImages.Count; i++)
       {
-        parent.color = (i == currentIndex) ? Color.yellow : Color.white;
+          if (slotImages[i] == null || slotImages[i].transform == null || slotImages[i].transform.parent == null)
+              continue;
+
+          Image parent = slotImages[i].transform.parent.GetComponent<Image>();
+          if (parent != null)
+          {
+              parent.color = (i == currentIndex) ? Color.yellow : Color.white;
+          }
       }
-    }
   }
+
 }
