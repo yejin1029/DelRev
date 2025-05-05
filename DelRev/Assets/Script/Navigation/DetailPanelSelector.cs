@@ -88,7 +88,7 @@ public class DetailPanelSelector : MonoBehaviour
     if (sceneChanger != null)
     {
       Debug.Log($"[DetailPanelSelector] 씬 이동: {sceneNameToLoad}");
-      sceneChanger.SendMessage("ChangeScene", sceneNameToLoad); // ChangeScene() 호출
+      sceneChanger.ChangeScene(sceneNameToLoad); // ChangeScene() 호출
     }
     else
     {

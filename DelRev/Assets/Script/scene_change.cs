@@ -19,13 +19,13 @@ public class SceneChanger : MonoBehaviour
             ChangeScene(playerTestName);
     }
 
-    void ChangeScene(string targetScene)
+    public void ChangeScene(string targetScene)
     {
         CleanUpLooseItems();
         SceneManager.LoadScene(targetScene);
     }
 
-    void CleanUpLooseItems()
+    public void CleanUpLooseItems()
     {
         // 1) 씬 안의 현재 트레일러 찾기
         var trailerObj = GameObject.FindGameObjectWithTag("Car");
@@ -35,7 +35,5 @@ public class SceneChanger : MonoBehaviour
             return;
         }
         Vector3 trailerPos = trailerObj.transform.position;
-
-
     }
 }
