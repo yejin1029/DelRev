@@ -15,6 +15,8 @@ public class PetCCTV : MonoBehaviour
 
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+
         dog = GameObject.FindGameObjectWithTag("Dog");
     }
 
