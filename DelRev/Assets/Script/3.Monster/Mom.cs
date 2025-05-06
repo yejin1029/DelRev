@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
 
-//Monster Follow route
+// Monster Follow route
 public class Mom : MonoBehaviour
 {
     public Transform[] patrolPoints;
@@ -14,11 +14,11 @@ public class Mom : MonoBehaviour
     private NavMeshAgent agent;
 
     public Transform introTriggerPoint;      // 이벤트 발생 지점
-    public float introTriggerRadius = 3f;    // 플레이어가 근처에 오면 이벤트 발생
+    public float introTriggerRadius = 0.5f;    // 플레이어가 근처에 오면 이벤트 발생
     public float introApproachDistance = 3f; // 몬스터가 어느 정도까지 다가가는지
     private bool hasDoneIntro = false;       // 한 번만 실행되게
 
-    public float detectionRange = 10f;
+    public float detectionRange = 3f;
     public float damageAmount = 30f;     // 💥 1초당 줄 데미지
     public float damageInterval = 1f;    // ⏱️ 1초마다
     private float damageTimer = 0f;
@@ -31,8 +31,8 @@ public class Mom : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
 
+        // 초기 상태는 Patrol이 아닌 대기 상태로 설정
         currentState = State.Patrol;
-        GoToNextPatrolPoint();
 
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
@@ -41,17 +41,17 @@ public class Mom : MonoBehaviour
             playerController = player.GetComponent<PlayerController>();
         }
 
-        startintro();
+        startintro(); // 플레이어가 introTriggerPoint 근처에 올 때까지 기다린 후 이벤트 실행
     }
 
     void startintro()
     {
-         if (introTriggerPoint == null || hasDoneIntro) return;
+        if (introTriggerPoint == null || hasDoneIntro) return;
 
         float distance = Vector3.Distance(playerTransform.position, introTriggerPoint.position);
         if (distance < introTriggerRadius)
         {
-            hasDoneIntro = true;
+            hasDoneIntro = true; // 한번만 실행되도록 설정
             StartCoroutine(IntroApproachThenReturn());
         }
     }
@@ -59,15 +59,6 @@ public class Mom : MonoBehaviour
     void Update()
     {
         if (playerTransform == null || playerController == null) return;
-
-        if (!hasDoneIntro)
-        {
-            startintro(); // 조건 만족 시 한 번만 실행
-            return;
-        }
-
-        if (playerTransform == null || playerController == null) return;
-
         // Ctrl 키가 눌렸는지 확인
         isShiftPressed = Input.GetKey(KeyCode.LeftControl);
 
@@ -84,7 +75,7 @@ public class Mom : MonoBehaviour
                 {
                     currentState = State.Chase;
                 }
-                else if (!agent.pathPending && agent.remainingDistance < 3f)
+                else if (!agent.pathPending && agent.remainingDistance < 5f)
                 {
                     GoToNextPatrolPoint();
                 }
@@ -104,7 +95,7 @@ public class Mom : MonoBehaviour
                 break;
 
             case State.Return:
-                if (isShiftPressed && distanceToPlayer > 2f)
+                if (distanceToPlayer > 2f && !HasLineOfSight()) // 플레이어가 충분히 멀어지면
                 {
                     currentState = State.Patrol;
                     GoToNextPatrolPoint();
@@ -113,19 +104,19 @@ public class Mom : MonoBehaviour
                 {
                     currentState = State.Chase;
                 }
-                else if (!agent.pathPending && agent.remainingDistance < 3f)
+                else if (!agent.pathPending && agent.remainingDistance < 5f)
                 {
                     currentState = State.Patrol;
                     GoToNextPatrolPoint();
                 }
                 break;
-                
+
             case State.Alert:
                 // 위험 상태에선 무조건 플레이어 추격
                 agent.SetDestination(playerTransform.position);
                 break;
         }
-        
+
         // 📌 공격 범위 안이면 데미지 주기
         if (distanceToPlayer <= agent.stoppingDistance)
         {
@@ -188,12 +179,17 @@ public class Mom : MonoBehaviour
         Vector3 originalPosition = transform.position;
 
         // 플레이어 근처로 이동
-        Vector3 targetPos = playerTransform.position + (transform.position - playerTransform.position).normalized * introApproachDistance;
+        Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
+        Vector3 targetPos = playerTransform.position + directionToPlayer * introApproachDistance;
         agent.SetDestination(targetPos);
 
-        // 도착할 때까지 대기
-        while (Vector3.Distance(transform.position, targetPos) > 1f)
+        // 플레이어 근처로 이동할 때까지 대기 (2f 근처까지 다가가면 멈추기)
+        while (Vector3.Distance(transform.position, targetPos) > 2f)
         {
+            if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+            {
+                break;
+            }
             yield return null;
         }
 
@@ -203,12 +199,17 @@ public class Mom : MonoBehaviour
         // 본래 위치로 복귀
         agent.SetDestination(originalPosition);
 
-        while (Vector3.Distance(transform.position, originalPosition) > 1f)
+        // 원래 위치로 돌아갈 때까지 대기 (2f 이내로 돌아가면 멈추기)
+        while (Vector3.Distance(transform.position, originalPosition) > 2f)
         {
+            if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+            {
+                break;
+            }
             yield return null;
         }
 
-        // 다시 Patrol 상태로
+        // Patrol로 상태 변경 및 순찰 지점으로 이동
         currentState = State.Patrol;
         GoToNextPatrolPoint();
     }

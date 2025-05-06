@@ -18,12 +18,12 @@ public class CrossHair : MonoBehaviour
 
     void Start()
     {
-        cam = Camera.main;
+        cam = GameObject.FindGameObjectWithTag("MainCamera")?.GetComponent<Camera>();
 
         if (cam == null)
         {
             Debug.LogError("Main camera tag not found in scene!");
-            Destroy(this.gameObject);
+            return;
         }
 
         if (!cam.allowHDR)

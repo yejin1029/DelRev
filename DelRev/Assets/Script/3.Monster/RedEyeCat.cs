@@ -14,50 +14,62 @@ public class RedEyeCat : MonoBehaviour
     public float chaseSpeed = 2.0f;
     public float attackDamage = 50f;
 
-    public Transform centerPoint;  // 중심점으로 변경
+    public Transform centerPoint;
 
     private float patrolTimer = 0f;
     private float stareTimer = 0f;
     private float damageTimer = 0f;
-    private float damageInterval = 1f; // 데미지를 줄 간격
-    private bool isStaring = false;
+    private float damageInterval = 1f;
 
     private NavMeshAgent agent;
     private Transform player;
-    private PlayerController playerController; // 플레이어의 상태를 참조
+    private PlayerController playerController;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-        playerController = player.GetComponent<PlayerController>(); // 플레이어의 컨트롤러 가져오기
+        player = GameObject.FindGameObjectWithTag("Player")?.transform;
+        playerController = player?.GetComponent<PlayerController>();
+
+        if (player == null || playerController == null)
+        {
+            Debug.LogError("❌ 플레이어 또는 PlayerController가 설정되지 않았습니다.");
+            enabled = false;
+            return;
+        }
 
         GoToRandomPatrolPoint();
     }
 
     void Update()
     {
-        if (player == null || playerController == null) return;
-
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
         bool hasLOS = HasLineOfSight();
 
         switch (currentState)
         {
             case State.Patrol:
-                HandlePatrol();
                 if (hasLOS)
                 {
+                    agent.ResetPath();  // 즉시 정지
+                    agent.isStopped = true;
+                    LookAtPlayer();
                     stareTimer += Time.deltaTime;
+
                     if (stareTimer >= stareTimeThreshold)
                     {
                         currentState = State.Chase;
+                        agent.isStopped = false;
                         agent.speed = chaseSpeed;
+                        agent.SetDestination(player.position);  // 즉시 추격
+                        Debug.Log("🐾 RedEyeCat: 추격 시작!");
                     }
                 }
                 else
                 {
+                    agent.isStopped = false;
                     stareTimer = 0f;
+                    HandlePatrol();
                 }
                 break;
 
@@ -66,8 +78,9 @@ public class RedEyeCat : MonoBehaviour
                 {
                     currentState = State.Return;
                     agent.speed = 1.5f;
-                    agent.SetDestination(centerPoint.position); // centerPoint로 돌아가기
+                    agent.SetDestination(centerPoint.position);
                     stareTimer = 0f;
+                    Debug.Log("↩️ RedEyeCat: 돌아가는 중...");
                 }
                 else
                 {
@@ -76,18 +89,16 @@ public class RedEyeCat : MonoBehaviour
 
                     if (distanceToPlayer <= agent.stoppingDistance + 0.5f)
                     {
-                        // 📌 공격 범위 안이면 데미지 주기
                         damageTimer += Time.deltaTime;
                         if (damageTimer >= damageInterval)
                         {
                             damageTimer = 0f;
-                            playerController.health -= attackDamage; // 플레이어의 체력 감소
-                            Debug.Log($"💥 Red-eyed cat attacked! Player HP: {playerController.health}");
+                            playerController.health -= attackDamage;
+                            Debug.Log($"💥 RedEyeCat 공격! Player HP: {playerController.health}");
                         }
                     }
                     else
                     {
-                        // 범위 벗어나면 타이머 초기화
                         damageTimer = 0f;
                     }
                 }
@@ -98,6 +109,7 @@ public class RedEyeCat : MonoBehaviour
                 {
                     currentState = State.Patrol;
                     GoToRandomPatrolPoint();
+                    Debug.Log("🚶 RedEyeCat: 순찰로 복귀");
                 }
                 break;
         }
@@ -118,10 +130,7 @@ public class RedEyeCat : MonoBehaviour
 
     void GoToRandomPatrolPoint()
     {
-        Vector3 randomDirection = Random.insideUnitSphere * patrolRadius;
-        randomDirection += centerPoint.position;  // centerPoint를 기준으로 랜덤 위치 계산
-        randomDirection.y = transform.position.y;
-
+        Vector3 randomDirection = Random.insideUnitSphere * patrolRadius + centerPoint.position;
         if (NavMesh.SamplePosition(randomDirection, out NavMeshHit hit, patrolRadius, NavMesh.AllAreas))
         {
             agent.SetDestination(hit.position);
@@ -138,7 +147,8 @@ public class RedEyeCat : MonoBehaviour
         float angle = Vector3.Angle(transform.forward, directionToPlayer.normalized);
         if (angle > viewAngle / 2f) return false;
 
-        if (Physics.Raycast(transform.position + Vector3.up * 0.5f, directionToPlayer.normalized, out RaycastHit hit, viewDistance))
+        Vector3 rayOrigin = transform.position + Vector3.up * 1.2f; // 머리 높이로 보정
+        if (Physics.Raycast(rayOrigin, directionToPlayer.normalized, out RaycastHit hit, viewDistance))
         {
             return hit.collider.CompareTag("Player");
         }
@@ -149,15 +159,15 @@ public class RedEyeCat : MonoBehaviour
     void LookAtPlayer()
     {
         Vector3 directionToPlayer = player.position - transform.position;
-        directionToPlayer.y = 0f; // 무빙이 아닌, y축 회전만 고려
+        directionToPlayer.y = 0f;
         Quaternion lookRotation = Quaternion.LookRotation(directionToPlayer);
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f); // 부드럽게 회전
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
     }
 
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(centerPoint == null ? transform.position : centerPoint.position, patrolRadius);  // centerPoint로 변경
+        Gizmos.DrawWireSphere(centerPoint == null ? transform.position : centerPoint.position, patrolRadius);
 
         Gizmos.color = Color.red;
         Vector3 forward = transform.forward;

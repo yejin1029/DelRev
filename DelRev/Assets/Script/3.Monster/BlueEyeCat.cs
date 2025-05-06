@@ -10,10 +10,10 @@ public class BlueEyeCat : MonoBehaviour
     public float waitTime = 2f;
     public float detectionAngle = 30f;
     public float detectionDistance = 10f;
-    public float eyeContactTime = 2f; // 눈 마주침 시간
-    public float chaseSpeed = 2.0f; // 공격적인 상태에서의 이동 속도
-    public float attackDamage = 50f; // 공격력
-    public float attackSpeed = 1.5f; // 공격 속도 (쿨타임)
+    public float eyeContactTime = 2f;
+    public float chaseSpeed = 2.0f;
+    public float attackDamage = 50f;
+    public float attackSpeed = 1.5f;
 
     public Transform centerPoint;
     public Transform player;
@@ -28,12 +28,16 @@ public class BlueEyeCat : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-        playerCamera = Camera.main; // 플레이어 카메라를 찾습니다.
+
+        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+        player = playerObj?.transform;
+        playerCamera = Camera.main;
+
+        if (player == null)
+            Debug.LogError("❌ Player with 'Player' tag not found in the scene.");
         if (playerCamera == null)
-        {
-            Debug.LogError("Player camera not found. Please assign the player camera in the inspector.");
-        }
+            Debug.LogError("❌ Player's camera not found.");
+
         GoToRandomPosition();
     }
 
@@ -47,18 +51,10 @@ public class BlueEyeCat : MonoBehaviour
         switch (currentState)
         {
             case State.Patrol:
-                if (!agent.pathPending && agent.remainingDistance < 1f)
-                {
-                    waitTimer += Time.deltaTime;
-                    if (waitTimer >= waitTime)
-                    {
-                        GoToRandomPosition();
-                        waitTimer = 0f;
-                    }
-                }
-
                 if (isWithinDetection && isLookingAtCat && hasLineOfSight)
                 {
+                    agent.isStopped = true;
+                    transform.LookAt(player);
                     lookTimer += Time.deltaTime;
                     if (lookTimer >= eyeContactTime)
                     {
@@ -67,6 +63,8 @@ public class BlueEyeCat : MonoBehaviour
                 }
                 else
                 {
+                    agent.isStopped = false;
+
                     if (eyeContactTriggered)
                     {
                         currentState = State.Aggressive;
@@ -75,23 +73,32 @@ public class BlueEyeCat : MonoBehaviour
                     else
                     {
                         lookTimer = 0f;
+                        if (!agent.pathPending && agent.remainingDistance < 1f)
+                        {
+                            waitTimer += Time.deltaTime;
+                            if (waitTimer >= waitTime)
+                            {
+                                GoToRandomPosition();
+                                waitTimer = 0f;
+                            }
+                        }
                     }
                 }
                 break;
 
             case State.Aggressive:
+                agent.isStopped = false;
+
                 if (attackCooldownTimer > 0)
                 {
-                    attackCooldownTimer -= Time.deltaTime; // 공격 쿨타임
+                    attackCooldownTimer -= Time.deltaTime;
                 }
 
                 agent.SetDestination(player.position);
-                if (distanceToPlayer <= agent.stoppingDistance + 0.5f)
+
+                if (distanceToPlayer <= agent.stoppingDistance + 0.5f && attackCooldownTimer <= 0)
                 {
-                    if (attackCooldownTimer <= 0)
-                    {
-                        AttackPlayer();
-                    }
+                    AttackPlayer();
                 }
 
                 if (!isWithinDetection || !hasLineOfSight || !IsWithinPatrolRange())
@@ -103,6 +110,8 @@ public class BlueEyeCat : MonoBehaviour
                 break;
 
             case State.Return:
+                agent.isStopped = false;
+
                 if (!agent.pathPending && agent.remainingDistance < 1f)
                 {
                     currentState = State.Patrol;
@@ -149,10 +158,13 @@ public class BlueEyeCat : MonoBehaviour
 
     void AttackPlayer()
     {
-        // 공격 처리 로직
-        Debug.Log($"💥 Blue-eyed cat attacked! Player HP: {player.GetComponent<PlayerController>().health - attackDamage}");
-        player.GetComponent<PlayerController>().health -= attackDamage; // 플레이어 체력 감소
-        attackCooldownTimer = attackSpeed; // 공격 후 쿨타임 적용
+        PlayerController pc = player.GetComponent<PlayerController>();
+        if (pc != null)
+        {
+            pc.health -= attackDamage;
+            Debug.Log($"💥 Blue-eyed cat attacked! Player HP: {pc.health}");
+            attackCooldownTimer = attackSpeed;
+        }
     }
 
     void OnDrawGizmosSelected()
@@ -166,10 +178,13 @@ public class BlueEyeCat : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, detectionDistance);
 
-        Gizmos.color = Color.green;
-        Vector3 leftRay = Quaternion.Euler(0, -detectionAngle, 0) * playerCamera.transform.forward;
-        Vector3 rightRay = Quaternion.Euler(0, detectionAngle, 0) * playerCamera.transform.forward;
-        Gizmos.DrawRay(playerCamera.transform.position, leftRay * detectionDistance);
-        Gizmos.DrawRay(playerCamera.transform.position, rightRay * detectionDistance);
+        if (playerCamera != null)
+        {
+            Gizmos.color = Color.green;
+            Vector3 leftRay = Quaternion.Euler(0, -detectionAngle, 0) * playerCamera.transform.forward;
+            Vector3 rightRay = Quaternion.Euler(0, detectionAngle, 0) * playerCamera.transform.forward;
+            Gizmos.DrawRay(playerCamera.transform.position, leftRay * detectionDistance);
+            Gizmos.DrawRay(playerCamera.transform.position, rightRay * detectionDistance);
+        }
     }
 }
