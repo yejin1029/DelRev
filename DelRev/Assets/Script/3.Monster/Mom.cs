@@ -180,7 +180,6 @@ public class Mom : MonoBehaviour
         if (patrolPoints.Length == 0) return;
         agent.SetDestination(patrolPoints[currentPatrolIndex].position);
         currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
-        Debug.Log($"currentPatrolIndex = {currentPatrolIndex}");
     }
     
     IEnumerator IntroApproachThenReturn()

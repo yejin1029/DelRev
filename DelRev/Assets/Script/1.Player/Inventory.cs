@@ -80,11 +80,9 @@ public class Inventory : MonoBehaviour
                     inventoryObjects[currentIndex] = hitObject;
                     hitObject.SetActive(false);
 
-                    Debug.Log($"Picked up: {item.itemName} to slot {currentIndex + 1}. Inventory: {string.Join(", ", inventory.ConvertAll(i => i?.itemName ?? "Empty"))}");
                 }
                 else
                 {
-                    Debug.Log($"Slot {currentIndex + 1} is already occupied!");
                 }
             }
         }
@@ -104,11 +102,9 @@ public class Inventory : MonoBehaviour
             droppedObject.transform.position = dropPosition;
             droppedObject.SetActive(true);
 
-            Debug.Log($"Dropped: {droppedItem.itemName}. Inventory: {string.Join(", ", inventory.ConvertAll(i => i?.itemName ?? "Empty"))}");
         }
         else
         {
-            Debug.Log("No item to drop in the selected slot!");
         }
     }
 
@@ -116,7 +112,6 @@ public class Inventory : MonoBehaviour
     {
         if (slotIndex < 0 || slotIndex >= inventorySize)
         {
-            Debug.Log("Invalid slot index!");
             return;
         }
 
@@ -124,11 +119,9 @@ public class Inventory : MonoBehaviour
 
         if (inventory[currentIndex] != null)
         {
-            Debug.Log($"Selected slot {currentIndex + 1}. Current item: {inventory[currentIndex].itemName}");
         }
         else
         {
-            Debug.Log($"Selected slot {currentIndex + 1}. No item in this slot.");
         }
     }
 }
