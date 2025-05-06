@@ -19,6 +19,7 @@ public class Mom : MonoBehaviour
     private bool hasDoneIntro = false;       // 한 번만 실행되게
 
     public float detectionRange = 3f;
+    public float attackRange = 2f;
     public float damageAmount = 30f;     // 💥 1초당 줄 데미지
     public float damageInterval = 1f;    // ⏱️ 1초마다
     private float damageTimer = 0f;
@@ -118,7 +119,7 @@ public class Mom : MonoBehaviour
         }
 
         // 📌 공격 범위 안이면 데미지 주기
-        if (distanceToPlayer <= agent.stoppingDistance)
+        if (distanceToPlayer <= attackRange)
         {
             damageTimer += Time.deltaTime;
             if (damageTimer >= damageInterval)

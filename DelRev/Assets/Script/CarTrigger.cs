@@ -1,39 +1,29 @@
-// TrailerTrigger.cs
 using UnityEngine;
-using UnityEngine.SceneManagement;  // ← 추가
 
-[RequireComponent(typeof(Collider))]
-public class TrailerTrigger : MonoBehaviour
+[RequireComponent(typeof(SphereCollider))]
+public class CarTrigger : MonoBehaviour
 {
     void Awake()
     {
-        var col = GetComponent<Collider>();
+        // 트레일러(차량) 자체를 영속 오브젝트로 만들어
+        // 씬 전환 시 파괴되지 않게 함
+        DontDestroyOnLoad(gameObject);
+
+        // SphereCollider를 트리거로 설정하고 반경 1로 지정
+        var col = GetComponent<SphereCollider>();
         col.isTrigger = true;
+        col.radius    = 1f;
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Item"))
-        {
-            other.transform.SetParent(transform);
-            Debug.Log($"{other.name}: Parent set to {name}");
-        }
-    }
+        // Item 태그만 처리
+        if (!other.CompareTag("Item")) return;
 
-    void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Item"))
-        {
-            // 1) 부모 관계 해제
-            other.transform.SetParent(null);
-            // 2) 다시 '현재 활성 씬'으로 옮겨서
-            //    씬 언로드 시에만 파괴되게 만들기
-            SceneManager.MoveGameObjectToScene(
-                other.gameObject,
-                SceneManager.GetActiveScene()
-            );
+        // 이미 자식이면 무시
+        if (other.transform.parent == transform) return;
 
-            Debug.Log($"{other.name}: Unparented and moved back to scene '{SceneManager.GetActiveScene().name}'");
-        }
+        // CarTrigger의 자식으로 삼아 함께 이동·영속화
+        other.transform.SetParent(transform);
     }
 }

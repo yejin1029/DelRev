@@ -98,7 +98,7 @@ public class Inventory : MonoBehaviour
             inventory[currentIndex] = null;
             inventoryObjects[currentIndex] = null;
 
-            Vector3 dropPosition = transform.position + transform.forward * 2f;
+            Vector3 dropPosition = transform.position + transform.forward * 1f;
             droppedObject.transform.position = dropPosition;
             droppedObject.SetActive(true);
 

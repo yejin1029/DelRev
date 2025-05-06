@@ -7,10 +7,14 @@ public class Dog : MonoBehaviour
     private enum State { Patrol, Chase, Return, Called }
     private State currentState;
 
-    public List<BoxCollider> patrolAreas; // 👈 여러 영역 설정 가능
-
+    [Header("Patrol Settings")]
+    public List<BoxCollider> patrolAreas; // 여러 영역 설정 가능
     public float waitTime = 2f;
+
+    [Header("Detection & Attack")]
     public float detectionRange = 5f;
+    [Tooltip("플레이어에게 데미지를 줄 사거리")] 
+    public float attackRange = 2f;
     public float damageAmount = 10f;
     public float damageInterval = 1f;
 
@@ -25,6 +29,9 @@ public class Dog : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        // NavMeshAgent의 StoppingDistance를 attackRange와 동일하게 설정
+        agent.stoppingDistance = attackRange;
+
         currentState = State.Patrol;
         GoToRandomPosition();
 
@@ -49,7 +56,7 @@ public class Dog : MonoBehaviour
                 {
                     currentState = State.Chase;
                 }
-                else if (!agent.pathPending && agent.remainingDistance < 3f)
+                else if (!agent.pathPending && agent.remainingDistance < 0.1f)
                 {
                     waitTimer += Time.deltaTime;
                     if (waitTimer >= waitTime)
@@ -77,7 +84,7 @@ public class Dog : MonoBehaviour
                 {
                     currentState = State.Chase;
                 }
-                else if (!agent.pathPending && agent.remainingDistance < 3f)
+                else if (!agent.pathPending && agent.remainingDistance < 0.1f)
                 {
                     currentState = State.Patrol;
                     GoToRandomPosition();
@@ -85,7 +92,7 @@ public class Dog : MonoBehaviour
                 break;
 
             case State.Called:
-                if (!agent.pathPending && agent.remainingDistance < 1f)
+                if (!agent.pathPending && agent.remainingDistance < 0.1f)
                 {
                     GoToRandomPosition();
                     currentState = State.Patrol;
@@ -99,6 +106,7 @@ public class Dog : MonoBehaviour
                 break;
         }
 
+        // 공격 로직: agent.stoppingDistance (attackRange) 이내일 때
         if (distanceToPlayer <= agent.stoppingDistance)
         {
             damageTimer += Time.deltaTime;
@@ -132,9 +140,8 @@ public class Dog : MonoBehaviour
     {
         if (patrolAreas == null || patrolAreas.Count == 0) return;
 
-        for (int attempts = 0; attempts < 10; attempts++) // 최대 10회 시도
+        for (int attempts = 0; attempts < 10; attempts++)
         {
-            // 무작위로 박스 중 하나 선택
             BoxCollider selectedArea = patrolAreas[Random.Range(0, patrolAreas.Count)];
             Bounds bounds = selectedArea.bounds;
 
@@ -184,7 +191,7 @@ public class Dog : MonoBehaviour
         if (agent != null)
         {
             Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(transform.position, agent.stoppingDistance);
+            Gizmos.DrawWireSphere(transform.position, attackRange);
         }
     }
 }
