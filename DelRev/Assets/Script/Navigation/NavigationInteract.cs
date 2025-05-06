@@ -11,6 +11,7 @@ public class NavigationInteract : MonoBehaviour
   public PlayerController playerController;
   public Inventory inventory;
   public CrossHair crossHair;
+  public GameObject crossHairUI;
 
   public NavigationButtonSelector buttonSelector;
   public NavigationPanelManager panelManager;
@@ -55,6 +56,10 @@ public class NavigationInteract : MonoBehaviour
     inventory.isInputLocked = true;
     crossHair.interactionLocked = true;
 
+    // 조준점 숨김
+    if (crossHairUI != null)
+      crossHairUI.SetActive(false);
+
     panelManager.ShowMainPanel(true);
   }
 
@@ -75,6 +80,10 @@ public class NavigationInteract : MonoBehaviour
 
     inventory.isInputLocked = false;
     crossHair.interactionLocked = false;
+
+    // 조준점 다시 표시
+    if (crossHairUI != null)
+      crossHairUI.SetActive(true);
 
     buttonSelector.DeactivateSelection();
   }
