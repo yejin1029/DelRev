@@ -1,0 +1,2463 @@
+Using pre-set license
+Built from '2022.3/staging' branch; Version is '2022.3.47f1 (88c277b85d21) revision 8962679'; Using compiler version '192829333'; Build Type 'Release'
+OS: 'Windows 10  (10.0.19045) 64bit Professional' Language: 'ko' Physical Memory: 16107 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 1
+
+COMMAND LINE ARGUMENTS:
+D:\Unity\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker1
+-projectPath
+D:/unity_project/Del/DelRev
+-logFile
+Logs/AssetImportWorker1.log
+-srvPort
+50544
+Successfully changed project path to: D:/unity_project/Del/DelRev
+D:/unity_project/Del/DelRev
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-allocator-temp-initial-block-size-main=262144"
+    "memorysetup-allocator-temp-initial-block-size-worker=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Player connection [67320]  Target information:
+
+Player connection [67320]  * "[IP] 172.25.208.1 [Port] 0 [Flags] 2 [Guid] 3550788822 [EditorId] 3550788822 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-7CSOD70) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+
+Player connection [67320]  * "[IP] 192.168.219.103 [Port] 0 [Flags] 2 [Guid] 3550788822 [EditorId] 3550788822 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-7CSOD70) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+
+Unable to join player connection multicast group (err: 10013).
+Player connection [67320] Host joined alternative multi-casting on [225.0.0.222:34997]...
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+Refreshing native plugins compatible for Editor in 27.13 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2022.3.47f1 (88c277b85d21)
+[Subsystems] Discovering subsystems at path D:/Unity/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path D:/unity_project/Del/DelRev/Assets
+GfxDevice: creating device client; threaded=0; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: Intel(R) Iris(R) Xe Graphics (ID=0x9a49)
+    Vendor:   Intel
+    VRAM:     8053 MB
+    Driver:   27.20.100.9415
+Initialize mono
+Mono path[0] = 'D:/Unity/Editor/Data/Managed'
+Mono path[1] = 'D:/Unity/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'D:/Unity/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56920
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: D:/Unity/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.005757 seconds.
+- Loaded All Assemblies, in  0.610 seconds
+Native extension for WindowsStandalone target not found
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.442 seconds
+Domain Reload Profiling: 1053ms
+	BeginReloadAssembly (233ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (0ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (2ms)
+	RebuildCommonClasses (54ms)
+	RebuildNativeTypeToScriptingClass (13ms)
+	initialDomainReloadingComplete (73ms)
+	LoadAllAssembliesAndSetupDomain (237ms)
+		LoadAssemblies (231ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (233ms)
+			TypeCache.Refresh (231ms)
+				TypeCache.ScanAssembly (208ms)
+			ScanForSourceGeneratedMonoScriptInfo (0ms)
+			ResolveRequiredComponents (1ms)
+	FinalizeReload (443ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (369ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (12ms)
+			SetLoadedEditorAssemblies (14ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (5ms)
+			ProcessInitializeOnLoadAttributes (252ms)
+			ProcessInitializeOnLoadMethodAttributes (86ms)
+			AfterProcessingInitializeOnLoad (0ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (0ms)
+========================================================================
+Worker process is ready to serve import requests
+Caller must complete domain reload
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  1.025 seconds
+Native extension for WindowsStandalone target not found
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  1.221 seconds
+Domain Reload Profiling: 2246ms
+	BeginReloadAssembly (261ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (6ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (37ms)
+	RebuildCommonClasses (48ms)
+	RebuildNativeTypeToScriptingClass (17ms)
+	initialDomainReloadingComplete (60ms)
+	LoadAllAssembliesAndSetupDomain (638ms)
+		LoadAssemblies (489ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (302ms)
+			TypeCache.Refresh (269ms)
+				TypeCache.ScanAssembly (246ms)
+			ScanForSourceGeneratedMonoScriptInfo (24ms)
+			ResolveRequiredComponents (8ms)
+	FinalizeReload (1222ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (990ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (8ms)
+			SetLoadedEditorAssemblies (5ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (86ms)
+			ProcessInitializeOnLoadAttributes (848ms)
+			ProcessInitializeOnLoadMethodAttributes (40ms)
+			AfterProcessingInitializeOnLoad (3ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (21ms)
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.10 seconds
+Refreshing native plugins compatible for Editor in 7.65 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3306 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 24 unused Assets / (460.1 KB). Loaded Objects now: 3801.
+Memory consumption went from 154.2 MB to 153.8 MB.
+Total: 7.076700 ms (FindLiveObjects: 0.467400 ms CreateObjectMapping: 0.460700 ms MarkObjects: 5.696700 ms  DeleteObjects: 0.449200 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-codec-MediaFoundation-h265: e54d7ab0439102e2317fc1e4b246158d -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:CustomObjectIndexerAttribute: 9a22284fe3817be447336de3de66b15e -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 38757.871502 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/Emission/59 EMISSION-WHITE-LPUP.mat
+  artifactKey: Guid(f025c5db938b349a8b450e845b67e20a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/Emission/59 EMISSION-WHITE-LPUP.mat using Guid(f025c5db938b349a8b450e845b67e20a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: 'af0e6b7593a8b3f130cedbc9653291ca') in 0.463591 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000063 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/T/- Meshes_T/Weapons_T/ak-47.fbx
+  artifactKey: Guid(fa3d80007c805e84f853b7c5b7455930) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/T/- Meshes_T/Weapons_T/ak-47.fbx using Guid(fa3d80007c805e84f853b7c5b7455930) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: 'a9d055f4da417459ac3b772b0e9aace3') in 0.416536 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 7
+========================================================================
+Received Import Request.
+  Time since last request: 0.000047 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/T/- Meshes_T/Resources_T/aluminium.fbx
+  artifactKey: Guid(ddc110b806fda66499e87af729292183) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/T/- Meshes_T/Resources_T/aluminium.fbx using Guid(ddc110b806fda66499e87af729292183) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: 'ccccabaf64dba7fb094a61be461638a4') in 0.052049 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 7
+========================================================================
+Received Import Request.
+  Time since last request: 0.000602 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/53 PINK-LIGHT-LPUP.mat
+  artifactKey: Guid(cc039e4bd41a440f793d0b9f704387d3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/53 PINK-LIGHT-LPUP.mat using Guid(cc039e4bd41a440f793d0b9f704387d3) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '91cee30e2919793d06eb459d41164875') in 0.163816 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/14 BROWN LIGHTEST-LPUP.mat
+  artifactKey: Guid(a7862d5615928c34e868320de65c2777) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/14 BROWN LIGHTEST-LPUP.mat using Guid(a7862d5615928c34e868320de65c2777) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '08ffa8584707e9ada71e5f9a32804f71') in 0.048865 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/M/- Meshes_M/Buildings_M/airport-terminal.fbx
+  artifactKey: Guid(d94181a6c7e144f4f96e9a8091ea69cb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/M/- Meshes_M/Buildings_M/airport-terminal.fbx using Guid(d94181a6c7e144f4f96e9a8091ea69cb) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: 'e7afd444817135c1a2964c2f60327245') in 0.095869 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 7
+========================================================================
+Received Import Request.
+  Time since last request: 0.000055 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/9 BROWN-DARKEST-LPUP.mat
+  artifactKey: Guid(3b20fc9e84b968641b7312bdcdd1ffd8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/9 BROWN-DARKEST-LPUP.mat using Guid(3b20fc9e84b968641b7312bdcdd1ffd8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '4520e0623f4599b86c676ae1130a63ff') in 0.124462 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000213 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/12 BROWN-LPUP.mat
+  artifactKey: Guid(d07dc9a550022a74792d211f343e0b16) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/12 BROWN-LPUP.mat using Guid(d07dc9a550022a74792d211f343e0b16) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '10560cee1972cccb87b8239bb39d9219') in 0.179175 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000034 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/Transparent/32 TRANSPARENT-ORANGE-LPUP.mat
+  artifactKey: Guid(f1e82cc3f46e7bd4ea1736faa68a51dd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/Transparent/32 TRANSPARENT-ORANGE-LPUP.mat using Guid(f1e82cc3f46e7bd4ea1736faa68a51dd) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '419180872ff2fc014b51fe5aed459ff0') in 0.454147 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.008279 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/M/- Meshes_M/Props_M/Materials/35 GREEN-MEDIUM.mat
+  artifactKey: Guid(bdc19e5b9b9e6b24c809545b7e54c64a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/M/- Meshes_M/Props_M/Materials/35 GREEN-MEDIUM.mat using Guid(bdc19e5b9b9e6b24c809545b7e54c64a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: 'd4180473be368f529ff9abb60825ae7b') in 0.032416 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.004496 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/57 BLACK-LPUP.mat
+  artifactKey: Guid(66c05709e04ed42a3a537ad26aca9cb8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/57 BLACK-LPUP.mat using Guid(66c05709e04ed42a3a537ad26aca9cb8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '7f0aa82659691ba34ff322460ebf4d85') in 0.035069 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.001853 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/35 GREEN-MEDIUM-LPUP.mat
+  artifactKey: Guid(87ff71ffc286b91449d2296928632aed) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/35 GREEN-MEDIUM-LPUP.mat using Guid(87ff71ffc286b91449d2296928632aed) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '43ccfedbfad5b534775030439fb0d6ec') in 0.040527 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000682 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/M/- Meshes_M/People_M/alien-ufo.fbx
+  artifactKey: Guid(1079981abff3f014084f36222800cb21) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/M/- Meshes_M/People_M/alien-ufo.fbx using Guid(1079981abff3f014084f36222800cb21) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '0016a60d80936cdf715b17ddd72f2834') in 0.051316 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 7
+========================================================================
+Received Import Request.
+  Time since last request: 0.008732 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/Transparent/8 TRANSPARENT-RED-LPUP.mat
+  artifactKey: Guid(7811df1fbcc1efe42b6a67860cfbc159) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/Transparent/8 TRANSPARENT-RED-LPUP.mat using Guid(7811df1fbcc1efe42b6a67860cfbc159) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: 'bcd2bfbdee6adc4651989864b71df686') in 0.098969 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/49 PINK-DARKEST-LPUP.mat
+  artifactKey: Guid(29a84e950ada74848bd4591f0b64bf4d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/49 PINK-DARKEST-LPUP.mat using Guid(29a84e950ada74848bd4591f0b64bf4d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '4b0a462f99866019c11b3beba605c3a2') in 0.085159 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000405 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/28 ORANGE-LPUP.mat
+  artifactKey: Guid(700ae469e5be9ac4095d29b97116027a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/28 ORANGE-LPUP.mat using Guid(700ae469e5be9ac4095d29b97116027a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '862572aa3b203aecff4df7eb89693ecc') in 0.067609 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.023104 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/Emission/63 EMISSION-GREEN-LPUP.mat
+  artifactKey: Guid(c78b6e378cced6e49b9586bae01cbc5b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/Emission/63 EMISSION-GREEN-LPUP.mat using Guid(c78b6e378cced6e49b9586bae01cbc5b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: 'f244e16ed091e979415fdbe1261aa37e') in 0.064784 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/29 ORANGE-LIGHT-LPUP.mat
+  artifactKey: Guid(2768469f7f5282a4282f61dbf62e68e2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/29 ORANGE-LIGHT-LPUP.mat using Guid(2768469f7f5282a4282f61dbf62e68e2) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: 'c1fd4c5e858ea95917d038d466bb1d5d') in 0.103520 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000055 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/18 GREY-DARK-LPUP.mat
+  artifactKey: Guid(40a353f6117398145a3e785d9854de93) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/18 GREY-DARK-LPUP.mat using Guid(40a353f6117398145a3e785d9854de93) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '53ac244a9c5cf2e4946c55db3fbf874e') in 0.031425 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000047 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/25 RED-DARKEST-LPUP.mat
+  artifactKey: Guid(4b6c16c8bf29c9e40bc66796d0674b6e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/25 RED-DARKEST-LPUP.mat using Guid(4b6c16c8bf29c9e40bc66796d0674b6e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: 'cb7943bacc9bbf55ceab88b348c7f82e') in 0.120952 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/46 BLUE-LIGHEST-LPUP.mat
+  artifactKey: Guid(b9bae1e20222386438bc64a9a3089d03) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/46 BLUE-LIGHEST-LPUP.mat using Guid(b9bae1e20222386438bc64a9a3089d03) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '1cef4222acdb9419dce490e48f54c09f') in 0.057285 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000534 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/22 GREY-LIGHTEST-LPUP.mat
+  artifactKey: Guid(c413883b1f5da43f595f8475353613de) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/22 GREY-LIGHTEST-LPUP.mat using Guid(c413883b1f5da43f595f8475353613de) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '90b426f05cdc682bd8617b19621a0b38') in 0.045187 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.001254 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/30 YELLOW-LPUP.mat
+  artifactKey: Guid(42caffe1132386f4daa037a9663088b9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/30 YELLOW-LPUP.mat using Guid(42caffe1132386f4daa037a9663088b9) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '3c587a9b7740c5dc314726c03b3166f0') in 0.064318 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.001689 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/17 GREY-DARKEST-LPUP.mat
+  artifactKey: Guid(c48ed0c67054fc24da0ac1cced5a308c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/17 GREY-DARKEST-LPUP.mat using Guid(c48ed0c67054fc24da0ac1cced5a308c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '06db7480d6ed71430a19913ea2adbc02') in 0.033052 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.001361 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/T/- Meshes_T/Buildings_T/airport-hangar.fbx
+  artifactKey: Guid(739a0f4d3fcd15543b188a24fbf152db) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/T/- Meshes_T/Buildings_T/airport-hangar.fbx using Guid(739a0f4d3fcd15543b188a24fbf152db) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: 'faa98ef8625ae13e65e047947d798431') in 0.040992 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 7
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/38 GREEN-LIGHTEST-LPUP.mat
+  artifactKey: Guid(7bcfec495539b3b4ba46f415eebf76ff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/38 GREEN-LIGHTEST-LPUP.mat using Guid(7bcfec495539b3b4ba46f415eebf76ff) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '48cd04a6dd082cf505a80dcec9d911ca') in 0.028049 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/Transparent/24 TRANSPARENT-GREY-LPUP.mat
+  artifactKey: Guid(9d9bb6bbb2ed44e89aaf71377e273447) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/Transparent/24 TRANSPARENT-GREY-LPUP.mat using Guid(9d9bb6bbb2ed44e89aaf71377e273447) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: 'e0c49d8480025641f76cb14c61456be1') in 0.069449 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.001156 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/41 BLUE-DARKEST-LPUP.mat
+  artifactKey: Guid(d5077596fd03948479386c08b1c99fd1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/41 BLUE-DARKEST-LPUP.mat using Guid(d5077596fd03948479386c08b1c99fd1) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '6d0f09505f0954ed4328739e880f720e') in 0.026528 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000033 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/21 GREY-LIGHT-LPUP.mat
+  artifactKey: Guid(31b29cea830e0e24da72018652e5ed31) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/21 GREY-LIGHT-LPUP.mat using Guid(31b29cea830e0e24da72018652e5ed31) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: 'f69e58cd318ed310b23d1dac6966918f') in 0.029333 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.001260 seconds.
+  path: Assets/Download/SuburbanHouse/Source/Imports/Alarm.FBX
+  artifactKey: Guid(4fe673c0555847545b5e84f520838ca3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/SuburbanHouse/Source/Imports/Alarm.FBX using Guid(4fe673c0555847545b5e84f520838ca3) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: 'bb38b448a0f5d56968a4edd0d94d3de5') in 0.743451 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 13
+========================================================================
+Received Import Request.
+  Time since last request: 0.000037 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/T/- Meshes_T/Buildings_T/airport-terminal.fbx
+  artifactKey: Guid(9bdf2fe3a1ecb7b47b7e46b95cf5318a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/T/- Meshes_T/Buildings_T/airport-terminal.fbx using Guid(9bdf2fe3a1ecb7b47b7e46b95cf5318a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '9fd58b58f40f3c3f2f77a088c078a669') in 0.063623 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 7
+========================================================================
+Received Import Request.
+  Time since last request: 0.001971 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/M/- Meshes_M/People_M/Rigs_M/alien-ufo_Rig.fbx
+  artifactKey: Guid(47a48dc74362ee94ba704d3d7f576197) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/M/- Meshes_M/People_M/Rigs_M/alien-ufo_Rig.fbx using Guid(47a48dc74362ee94ba704d3d7f576197) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '657f496f9eae319d1e60aaf4eed4a41e') in 0.130815 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 66
+========================================================================
+Received Import Request.
+  Time since last request: 0.008691 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/3 SKIN-MEDIUM-LPUP.mat
+  artifactKey: Guid(1fff089ce117d4f04a4c4fb00168f400) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/3 SKIN-MEDIUM-LPUP.mat using Guid(1fff089ce117d4f04a4c4fb00168f400) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '3c9a4cc1ba60e781af40e10ebed099a8') in 0.041597 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000153 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/15 BROWN-WHITE-LPUP.mat
+  artifactKey: Guid(f9c4a99059a34d842b70997d0245fde2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/15 BROWN-WHITE-LPUP.mat using Guid(f9c4a99059a34d842b70997d0245fde2) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '81f270a2b541db7843ae93041a52b215') in 0.032847 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.001115 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/13 BROWN-LIGHT-LPUP.mat
+  artifactKey: Guid(3193cf6cf65b8a748b1a843c78e6c26d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/13 BROWN-LIGHT-LPUP.mat using Guid(3193cf6cf65b8a748b1a843c78e6c26d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: 'dd7036e5534919f5b1e68db40d3b4a6b') in 0.037637 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.001360 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/33 GREEN-DARKEST-LPUP.mat
+  artifactKey: Guid(12ca79d1906ac624994fa91e85880fb8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/33 GREEN-DARKEST-LPUP.mat using Guid(12ca79d1906ac624994fa91e85880fb8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '1615058468cc981aee101235f7546914') in 0.040232 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.002037 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/23 GREY-WHITE-LPUP.mat
+  artifactKey: Guid(579080bda9f89ee42a5447d6d997e266) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/23 GREY-WHITE-LPUP.mat using Guid(579080bda9f89ee42a5447d6d997e266) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '737c4a467010bf5878b7b9c840e3129e') in 0.033599 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.001084 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/44 BLUE-LPUP.mat
+  artifactKey: Guid(0d337a70f9e175348909eb917056c239) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/44 BLUE-LPUP.mat using Guid(0d337a70f9e175348909eb917056c239) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '02d90ead1cb7710dd131a0439f5f510e') in 0.032382 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.003741 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/64 GLASS-LPUP.mat
+  artifactKey: Guid(ffce2a7e1519d465684f3f97da456fa9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/64 GLASS-LPUP.mat using Guid(ffce2a7e1519d465684f3f97da456fa9) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '0e77ec93782e964a8fa04b1c431cfaee') in 0.042287 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000441 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/7 SKIN-WHITE-LPUP.mat
+  artifactKey: Guid(816a1e9d58d34d34b85cfabc577a2fa4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/7 SKIN-WHITE-LPUP.mat using Guid(816a1e9d58d34d34b85cfabc577a2fa4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: 'c86481eaced16f73ce38623a0f6603d7') in 0.038029 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.002133 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/5 SKIN-LIGHT-LPUP.mat
+  artifactKey: Guid(284c356f2f17a644380d230a1abff44b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/5 SKIN-LIGHT-LPUP.mat using Guid(284c356f2f17a644380d230a1abff44b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: 'da6a006590013eea36b508de2affb77e') in 0.057821 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.002019 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/19 GREY-MEDIUM-LPUP.mat
+  artifactKey: Guid(64a4684ba67ced04c811f6174e678a22) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/19 GREY-MEDIUM-LPUP.mat using Guid(64a4684ba67ced04c811f6174e678a22) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: 'dbc104646ed7e4f45dff14ec763029d1') in 0.116756 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000592 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/37 GREEN-LIGHT-LPUP.mat
+  artifactKey: Guid(d41a8bca790345f49b3ae205465ff2f8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/37 GREEN-LIGHT-LPUP.mat using Guid(d41a8bca790345f49b3ae205465ff2f8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '759beb972d2a1831d219aead53ac1e19') in 0.057758 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.001201 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/34 GREEN-DARK-LPUP.mat
+  artifactKey: Guid(2a9bcab9060d28d468fc3c4d93775e7d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/34 GREEN-DARK-LPUP.mat using Guid(2a9bcab9060d28d468fc3c4d93775e7d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: 'bfc2dc97d8de2f49902bb4ca0f073dc4') in 0.035898 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/50 PINK-DARK-LPUP.mat
+  artifactKey: Guid(be11bb95eeb9f45e2a4ab7d03f51b6a0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/50 PINK-DARK-LPUP.mat using Guid(be11bb95eeb9f45e2a4ab7d03f51b6a0) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: 'f068212c361f2e7b1ba24110cbe71f36') in 0.037878 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.001805 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/Transparent/56 TRANSPARENT-WHITE-LPUP.mat
+  artifactKey: Guid(a0889cd32c1a48f4ca4eae10233778ff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/Transparent/56 TRANSPARENT-WHITE-LPUP.mat using Guid(a0889cd32c1a48f4ca4eae10233778ff) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '94b6bf6073fd636b798f7fa03a867374') in 0.036679 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/39 GREEN-WHITE-LPUP.mat
+  artifactKey: Guid(668dd8403bdfc6347a3f5b1c412defa1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/39 GREEN-WHITE-LPUP.mat using Guid(668dd8403bdfc6347a3f5b1c412defa1) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: 'b65cc652b9aa314dfeff46bb62643d94') in 0.038391 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.002351 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/Emission/62 EMISSION-YELLOW-LPUP.mat
+  artifactKey: Guid(6c0d25474dfd33349bfeedd203d2a3e0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/Emission/62 EMISSION-YELLOW-LPUP.mat using Guid(6c0d25474dfd33349bfeedd203d2a3e0) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '508352f32753650cb37c940dff95c233') in 0.046393 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/31 YELLOW-LIGHT-LPUP.mat
+  artifactKey: Guid(a6c5db515b4e26a468041e9e22e41af4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/31 YELLOW-LIGHT-LPUP.mat using Guid(a6c5db515b4e26a468041e9e22e41af4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '677db15bca856f21e2182349d02406b1') in 0.049257 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/42 BLUE-DARK-LPUP.mat
+  artifactKey: Guid(b064f99cf70b44e47a02b3c08c5bafb5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/42 BLUE-DARK-LPUP.mat using Guid(b064f99cf70b44e47a02b3c08c5bafb5) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '67590771cdac429e790957f5d51c0de4') in 0.048516 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000066 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/52 PINK-LPUP.mat
+  artifactKey: Guid(c44501de50bef411e8f88b70fe39490e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/52 PINK-LPUP.mat using Guid(c44501de50bef411e8f88b70fe39490e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '7aeea9e62192c2f5faf513bde231182e') in 0.031429 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/T/- Meshes_T/Sport_T/american-football-gate.fbx
+  artifactKey: Guid(e84a421edb02c784098c105447e9cb31) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/T/- Meshes_T/Sport_T/american-football-gate.fbx using Guid(e84a421edb02c784098c105447e9cb31) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: 'b413c8ad7cc662b4ef69fb1afc4869af') in 0.071239 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 7
+========================================================================
+Received Import Request.
+  Time since last request: 0.002458 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/11 BROWN-MEDIUM-LPUP.mat
+  artifactKey: Guid(0de74cacf6310c64ca1b6862ba4b219c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/11 BROWN-MEDIUM-LPUP.mat using Guid(0de74cacf6310c64ca1b6862ba4b219c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '0f6c72f2e30f5863b1466e72aa77bcaf') in 0.036251 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/M/- Meshes_M/Resources_M/aluminium.fbx
+  artifactKey: Guid(108c30c0c3f6f5a41a377885718efe53) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/M/- Meshes_M/Resources_M/aluminium.fbx using Guid(108c30c0c3f6f5a41a377885718efe53) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '1f160983c2c4c55ff3e1f54340563387') in 0.058382 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 7
+========================================================================
+Received Import Request.
+  Time since last request: 0.000033 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/10 BROWN-DARK-LPUP.mat
+  artifactKey: Guid(6e3ac6e47b4d7a44685dfef9bf209413) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/10 BROWN-DARK-LPUP.mat using Guid(6e3ac6e47b4d7a44685dfef9bf209413) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: 'c0443f8112ebc780707bcd3b4ee20e5d') in 0.041320 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/M/- Meshes_M/Sport_M/american-football-gate.fbx
+  artifactKey: Guid(8dc4d1d64ecb6d84baf1b67167f74725) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/M/- Meshes_M/Sport_M/american-football-gate.fbx using Guid(8dc4d1d64ecb6d84baf1b67167f74725) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: 'bcd79c66ad08eaaede8a476b61192d27') in 0.048330 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 7
+========================================================================
+Received Import Request.
+  Time since last request: 0.001673 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/58 WHITE-LPUP.mat
+  artifactKey: Guid(11a8c080607cf47c299aff53087e0334) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/58 WHITE-LPUP.mat using Guid(11a8c080607cf47c299aff53087e0334) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '69eb3716522dca6957f5c25caa3ed18d') in 0.032642 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000047 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/M/- Meshes_M/Weapons_M/ak-47.fbx
+  artifactKey: Guid(cf7810a6b6dfd8245899010fa059d0c3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/M/- Meshes_M/Weapons_M/ak-47.fbx using Guid(cf7810a6b6dfd8245899010fa059d0c3) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: 'e0ff2cee0b4c194679e6d244190c08ce') in 0.060189 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 7
+========================================================================
+Received Import Request.
+  Time since last request: 0.000047 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/M/- Meshes_M/Weapons_M/ammo-box-bullets.fbx
+  artifactKey: Guid(2deeee1188b8a9248a6340d042b19490) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/M/- Meshes_M/Weapons_M/ammo-box-bullets.fbx using Guid(2deeee1188b8a9248a6340d042b19490) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: 'acc854fce1f3af0d3b1c6319fcdab448') in 0.072673 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 7
+========================================================================
+Received Import Request.
+  Time since last request: 0.000044 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/1 SKIN-DARKEST-LPUP.mat
+  artifactKey: Guid(7e05ef7409d694c74a16dec33c316bd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/1 SKIN-DARKEST-LPUP.mat using Guid(7e05ef7409d694c74a16dec33c316bd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: 'b569b81861f1fe92871226fb66569823') in 0.163660 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/M/- Meshes_M/Buildings_M/airport-control-tower.fbx
+  artifactKey: Guid(0842ea9439597094ca38ad1fcacc678d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/M/- Meshes_M/Buildings_M/airport-control-tower.fbx using Guid(0842ea9439597094ca38ad1fcacc678d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: 'd1d690b8159be55b8210422322abe824') in 0.083560 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 7
+========================================================================
+Received Import Request.
+  Time since last request: 0.002023 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/4 SKIN-LPUP.mat
+  artifactKey: Guid(e4149755fc1d98a498388cedff353ea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/4 SKIN-LPUP.mat using Guid(e4149755fc1d98a498388cedff353ea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '81643590e2f5af87aec3eccbc857e993') in 0.051104 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.001225 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/T/- Meshes_T/Buildings_T/airport-jet-bridge.fbx
+  artifactKey: Guid(96d1eca350d852246a1ff34d66175d43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/T/- Meshes_T/Buildings_T/airport-jet-bridge.fbx using Guid(96d1eca350d852246a1ff34d66175d43) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: 'fefc35bc12dd5fdc1a12fd0c6e07ec97') in 0.051106 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 7
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/Transparent/16 BROWN-MEDIUM-LPUP 1.mat
+  artifactKey: Guid(255427894dd86ac41a173384d08a75ec) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/Transparent/16 BROWN-MEDIUM-LPUP 1.mat using Guid(255427894dd86ac41a173384d08a75ec) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '38defbe3b8b783357b268bf93af38562') in 0.547574 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000056 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/Emission/55 EMISSION-PURPLE-LPUP.mat
+  artifactKey: Guid(bd23a16922c3f904e939e70f26d9a7b5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/Emission/55 EMISSION-PURPLE-LPUP.mat using Guid(bd23a16922c3f904e939e70f26d9a7b5) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '762ac54ac739543b5a8762c2894d6cf5') in 0.048269 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000102 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/Emission/61 EMISSION-ORANGE-LPUP.mat
+  artifactKey: Guid(0901bd31274b7c24a907731fa5e16f5f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/Emission/61 EMISSION-ORANGE-LPUP.mat using Guid(0901bd31274b7c24a907731fa5e16f5f) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '854d8e2bd9ca110a131367e4fa699e1d') in 0.123991 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.003481 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/36 GREEN-LPUP.mat
+  artifactKey: Guid(fb045539f4b18a242aca8e57e88c5cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/36 GREEN-LPUP.mat using Guid(fb045539f4b18a242aca8e57e88c5cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '2fab660f742cc6f4d2fe996b45dfb145') in 0.084092 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000038 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/T/- Meshes_T/Nature_T/aloe-vera.fbx
+  artifactKey: Guid(362c4dee06300b74e94740c7256921df) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/T/- Meshes_T/Nature_T/aloe-vera.fbx using Guid(362c4dee06300b74e94740c7256921df) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '903074012f8b8b869f5b60625cd9b987') in 0.064607 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 7
+========================================================================
+Received Import Request.
+  Time since last request: 0.001357 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/M/- Meshes_M/Buildings_M/airport-jet-bridge.fbx
+  artifactKey: Guid(be5209e5cf484264ba1a50803df05123) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/M/- Meshes_M/Buildings_M/airport-jet-bridge.fbx using Guid(be5209e5cf484264ba1a50803df05123) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: 'a9f00c7636c3ac682854de40c49d4118') in 0.073391 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 7
+========================================================================
+Received Import Request.
+  Time since last request: 0.000116 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/T/- Meshes_T/Fantasy_T/altar.fbx
+  artifactKey: Guid(0472d2c0bc3bb4920a1e803a8c8e3efa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/T/- Meshes_T/Fantasy_T/altar.fbx using Guid(0472d2c0bc3bb4920a1e803a8c8e3efa) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '55a04e7daa206a806a2b9ff44269330f') in 0.057939 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 7
+========================================================================
+Received Import Request.
+  Time since last request: 0.000035 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/45 BLUE-LIGHT-LPUP.mat
+  artifactKey: Guid(6a1a1ff74be63374aa9c17b8e7395b39) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/45 BLUE-LIGHT-LPUP.mat using Guid(6a1a1ff74be63374aa9c17b8e7395b39) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '8ce48468c23a30f4e7973694b7b94634') in 0.055064 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000046 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/47 BLUE-WHITE-LPUP.mat
+  artifactKey: Guid(5f35ae9530edec84085e28d4c3302e29) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/47 BLUE-WHITE-LPUP.mat using Guid(5f35ae9530edec84085e28d4c3302e29) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '2637f1a3f0728300acf2989459af006f') in 0.042282 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000073 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/6 SKIN-LIGHTEST-LPUP.mat
+  artifactKey: Guid(d8b3608c06351da4f8e09a879c0ddc66) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/6 SKIN-LIGHTEST-LPUP.mat using Guid(d8b3608c06351da4f8e09a879c0ddc66) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '32f446c9da3a5a411886dfa2f344fb6a') in 0.046478 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000124 seconds.
+  path: Assets/Download/SuburbanHouse/Source/Imports/AC.FBX
+  artifactKey: Guid(7d284966fc7b74b4c875298e9755d724) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/SuburbanHouse/Source/Imports/AC.FBX using Guid(7d284966fc7b74b4c875298e9755d724) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '317df60bbe6013f4ed3a5e7a4cac1448') in 0.196148 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 20
+========================================================================
+Received Import Request.
+  Time since last request: 0.000037 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/Transparent/48 TRANSPARENT BLUE-LPUP.mat
+  artifactKey: Guid(d0054e2826ae0cc4e8abb517bd8d7ac5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/Transparent/48 TRANSPARENT BLUE-LPUP.mat using Guid(d0054e2826ae0cc4e8abb517bd8d7ac5) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '98f5cffc129d6f77d302060d2437a35b') in 0.043086 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000037 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/M/- Meshes_M/Buildings_M/airport-hangar.fbx
+  artifactKey: Guid(52ac9b43f7abdbd428c6b1415b94ae3b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/M/- Meshes_M/Buildings_M/airport-hangar.fbx using Guid(52ac9b43f7abdbd428c6b1415b94ae3b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '13000bdc69d69a0f18077b56cc1791c3') in 0.049952 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 7
+========================================================================
+Received Import Request.
+  Time since last request: 0.000074 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/27 RED-LPUP.mat
+  artifactKey: Guid(1d41f8c57e738e44f9f12fc053be388c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/27 RED-LPUP.mat using Guid(1d41f8c57e738e44f9f12fc053be388c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: 'df6c5c533e20a405f34cfb313439e8f8') in 0.044542 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.001604 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/51 PINK-MEDIUM-LPUP.mat
+  artifactKey: Guid(52410f6a55176644687c0eddd00feddb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/51 PINK-MEDIUM-LPUP.mat using Guid(52410f6a55176644687c0eddd00feddb) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '46cbd5b4207aaa4e41b972257a982e07') in 0.039547 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000037 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/2 SKIN-DARK-LPUP.mat
+  artifactKey: Guid(7a2d84c5fa819415cad63857c2a30b64) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/2 SKIN-DARK-LPUP.mat using Guid(7a2d84c5fa819415cad63857c2a30b64) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '53158ca17be95d2370e00fa88676b92c') in 0.076998 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000037 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/T/- Meshes_T/People_T/Rigs_T/alien-ufo_Rig.fbx
+  artifactKey: Guid(b7c75e5204a0a564d921e477214f77dc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/T/- Meshes_T/People_T/Rigs_T/alien-ufo_Rig.fbx using Guid(b7c75e5204a0a564d921e477214f77dc) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '12a5fdf2d4db215ddf6077041802b691') in 0.127610 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 66
+========================================================================
+Received Import Request.
+  Time since last request: 0.001403 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/Emission/60 EMISSION-RED-LPUP.mat
+  artifactKey: Guid(ecce1a1895e37524282423faddfd60c9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/Emission/60 EMISSION-RED-LPUP.mat using Guid(ecce1a1895e37524282423faddfd60c9) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '40bdf8d05ad389d4bcc47b71316c22b1') in 0.045226 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000033 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/Transparent/40 TRANSPARENT-GREEN-LPUP.mat
+  artifactKey: Guid(7d937c04fbb734546b29eb971936bb5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/Transparent/40 TRANSPARENT-GREEN-LPUP.mat using Guid(7d937c04fbb734546b29eb971936bb5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: 'ab8a73bd07b87a9c88b1dbd54eb2f2b6') in 0.036811 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/Emission/54 EMISSION-BLUE-LPUP.mat
+  artifactKey: Guid(fd6fc35b57276914f8927f653783b6a4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/Colors/Emission/54 EMISSION-BLUE-LPUP.mat using Guid(fd6fc35b57276914f8927f653783b6a4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '9c8d4fda8fabff362ff0b75b026ebbbe') in 0.045271 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000034 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/T/- Meshes_T/People_T/alien-ufo.fbx
+  artifactKey: Guid(8d4ab77a02c6f824591f7a63b1ba4c44) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/T/- Meshes_T/People_T/alien-ufo.fbx using Guid(8d4ab77a02c6f824591f7a63b1ba4c44) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '9cf278974449364849785893328dd364') in 0.051113 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 7
+========================================================================
+Received Prepare
+Caller must complete domain reload
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.700 seconds
+Native extension for WindowsStandalone target not found
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  1.895 seconds
+Domain Reload Profiling: 2596ms
+	BeginReloadAssembly (256ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (7ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (67ms)
+	RebuildCommonClasses (54ms)
+	RebuildNativeTypeToScriptingClass (17ms)
+	initialDomainReloadingComplete (45ms)
+	LoadAllAssembliesAndSetupDomain (328ms)
+		LoadAssemblies (437ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (37ms)
+			TypeCache.Refresh (11ms)
+				TypeCache.ScanAssembly (2ms)
+			ScanForSourceGeneratedMonoScriptInfo (12ms)
+			ResolveRequiredComponents (11ms)
+	FinalizeReload (1896ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (642ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (11ms)
+			SetLoadedEditorAssemblies (6ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (78ms)
+			ProcessInitializeOnLoadAttributes (494ms)
+			ProcessInitializeOnLoadMethodAttributes (50ms)
+			AfterProcessingInitializeOnLoad (3ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (23ms)
+Refreshing native plugins compatible for Editor in 8.55 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3264 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 18 unused Assets / (431.4 KB). Loaded Objects now: 3850.
+Memory consumption went from 150.6 MB to 150.1 MB.
+Total: 5.257600 ms (FindLiveObjects: 0.412500 ms CreateObjectMapping: 0.440500 ms MarkObjects: 3.926700 ms  DeleteObjects: 0.476100 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-codec-MediaFoundation-h265: e54d7ab0439102e2317fc1e4b246158d -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:CustomObjectIndexerAttribute: 9a22284fe3817be447336de3de66b15e -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Prepare
+Caller must complete domain reload
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.990 seconds
+Native extension for WindowsStandalone target not found
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  1.789 seconds
+Domain Reload Profiling: 2779ms
+	BeginReloadAssembly (332ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (15ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (58ms)
+	RebuildCommonClasses (68ms)
+	RebuildNativeTypeToScriptingClass (28ms)
+	initialDomainReloadingComplete (50ms)
+	LoadAllAssembliesAndSetupDomain (511ms)
+		LoadAssemblies (655ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (53ms)
+			TypeCache.Refresh (21ms)
+				TypeCache.ScanAssembly (3ms)
+			ScanForSourceGeneratedMonoScriptInfo (19ms)
+			ResolveRequiredComponents (11ms)
+	FinalizeReload (1790ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (550ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (6ms)
+			SetLoadedEditorAssemblies (3ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (73ms)
+			ProcessInitializeOnLoadAttributes (440ms)
+			ProcessInitializeOnLoadMethodAttributes (26ms)
+			AfterProcessingInitializeOnLoad (2ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (14ms)
+Refreshing native plugins compatible for Editor in 3.63 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3264 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 18 unused Assets / (431.4 KB). Loaded Objects now: 3853.
+Memory consumption went from 150.6 MB to 150.1 MB.
+Total: 4.654700 ms (FindLiveObjects: 0.375100 ms CreateObjectMapping: 0.438800 ms MarkObjects: 3.566500 ms  DeleteObjects: 0.272600 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-codec-MediaFoundation-h265: e54d7ab0439102e2317fc1e4b246158d -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:CustomObjectIndexerAttribute: 9a22284fe3817be447336de3de66b15e -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 1454.884543 seconds.
+  path: Assets/Download/SuburbanHouse/Source/Imports/Materials/Addons.mat
+  artifactKey: Guid(d6595dbef2d45f44fb6373bcbede88f5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/SuburbanHouse/Source/Imports/Materials/Addons.mat using Guid(d6595dbef2d45f44fb6373bcbede88f5) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: 'd92d06e6b83cfe1b7c5153fcfbe1911d') in 0.281967 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 6
+========================================================================
+Received Import Request.
+  Time since last request: 0.000058 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/atlas-LPUP.mat
+  artifactKey: Guid(03ddc7e460b33402eb7640fab3881ac9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/atlas-LPUP.mat using Guid(03ddc7e460b33402eb7640fab3881ac9) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: 'a91f3df59069ba6dddd2bf4610cbc248') in 0.042675 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 0.000060 seconds.
+  path: Assets/Download/Kindergarten Interior/Models/Materials/ball.mat
+  artifactKey: Guid(9b14dec325734f448bd8382318ffc8d2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Kindergarten Interior/Models/Materials/ball.mat using Guid(9b14dec325734f448bd8382318ffc8d2) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '637c3bd598222ac6f2fbe577a4bcbfa8') in 0.054039 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/Download/SuburbanHouse/Source/Imports/Materials/Bathroom.mat
+  artifactKey: Guid(b948d2fd5e6f8dc47bd1a8779ae2733d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/SuburbanHouse/Source/Imports/Materials/Bathroom.mat using Guid(b948d2fd5e6f8dc47bd1a8779ae2733d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '1553cc6491b7219237b90848bca9738e') in 0.230128 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 5
+========================================================================
+Received Import Request.
+  Time since last request: 0.000035 seconds.
+  path: Assets/Download/SuburbanHouse/Source/Imports/Materials/Non-Emissive Instances/Bathroom_off.mat
+  artifactKey: Guid(3342cc8bd4ab47242b957ea78c3b2224) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/SuburbanHouse/Source/Imports/Materials/Non-Emissive Instances/Bathroom_off.mat using Guid(3342cc8bd4ab47242b957ea78c3b2224) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: 'fe0eb25d748020e375699333f9757de2') in 0.057651 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 5
+========================================================================
+Received Import Request.
+  Time since last request: 0.000050 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/atlas-transparent-LPUP.mat
+  artifactKey: Guid(d7aa94f541bd3694897599829f0a8c32) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/atlas-transparent-LPUP.mat using Guid(d7aa94f541bd3694897599829f0a8c32) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '2244e5907f61e29cd6d9af7818810f8f') in 0.159966 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Download/RPG_FPS_game_assets_industrial/Other_props/Palets/Bags_on_pallet_v1/Source/Bags_on_pallet_v1.mat
+  artifactKey: Guid(9b20318cce963404c8c089075ad8cb87) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/RPG_FPS_game_assets_industrial/Other_props/Palets/Bags_on_pallet_v1/Source/Bags_on_pallet_v1.mat using Guid(9b20318cce963404c8c089075ad8cb87) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: 'f5fc2e738121e12d150c21afd4f6face') in 0.053498 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000042 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Materials/atlas-night-LPUP.mat
+  artifactKey: Guid(5689e02792912784c815757bab07d5b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Materials/atlas-night-LPUP.mat using Guid(5689e02792912784c815757bab07d5b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: 'e3a21b3620b5a80ef71a07796b6cff11') in 0.053031 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 0.000047 seconds.
+  path: Assets/Download/Clock/Materials/ArrowWhite.mat
+  artifactKey: Guid(cb7ba0bfcdb279845b0e2e15bfeb3f6c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Clock/Materials/ArrowWhite.mat using Guid(cb7ba0bfcdb279845b0e2e15bfeb3f6c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '3c323a120788a84fea485e0d3df0e695') in 0.036407 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000034 seconds.
+  path: Assets/Download/RPG_FPS_game_assets_industrial/Barrels/Barrel_v2/Source/Barrel_v2.mat
+  artifactKey: Guid(cd2f24c07b1bce24fa0066430da2910b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/RPG_FPS_game_assets_industrial/Barrels/Barrel_v2/Source/Barrel_v2.mat using Guid(cd2f24c07b1bce24fa0066430da2910b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: 'eecee070a8465a78f9d15deb733c282d') in 0.060894 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Prepare
+Caller must complete domain reload
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.896 seconds
+Native extension for WindowsStandalone target not found
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  2.023 seconds
+Domain Reload Profiling: 2917ms
+	BeginReloadAssembly (321ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (11ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (88ms)
+	RebuildCommonClasses (53ms)
+	RebuildNativeTypeToScriptingClass (28ms)
+	initialDomainReloadingComplete (78ms)
+	LoadAllAssembliesAndSetupDomain (413ms)
+		LoadAssemblies (553ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (31ms)
+			TypeCache.Refresh (14ms)
+				TypeCache.ScanAssembly (3ms)
+			ScanForSourceGeneratedMonoScriptInfo (8ms)
+			ResolveRequiredComponents (7ms)
+	FinalizeReload (2024ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (751ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (7ms)
+			SetLoadedEditorAssemblies (6ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (79ms)
+			ProcessInitializeOnLoadAttributes (591ms)
+			ProcessInitializeOnLoadMethodAttributes (63ms)
+			AfterProcessingInitializeOnLoad (4ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (18ms)
+Refreshing native plugins compatible for Editor in 5.03 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3264 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 18 unused Assets / (431.5 KB). Loaded Objects now: 3856.
+Memory consumption went from 150.5 MB to 150.1 MB.
+Total: 5.833700 ms (FindLiveObjects: 0.410700 ms CreateObjectMapping: 0.427000 ms MarkObjects: 4.633800 ms  DeleteObjects: 0.359300 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-codec-MediaFoundation-h265: e54d7ab0439102e2317fc1e4b246158d -> 
+  custom:scripting/monoscript/fileName/BlueEyeCat.cs: 971410451d323a747de6ea1bdb80e66b -> cd85b9cf00e542c89ebbe419d380f37d
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:CustomObjectIndexerAttribute: 9a22284fe3817be447336de3de66b15e -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/precompiled-assembly-types:Assembly-CSharp: 477c33197ef4129d3cede27b1fc9015d -> a72f26d653756f09d98cadc1d578cf43
+========================================================================
+Received Prepare
+Caller must complete domain reload
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.680 seconds
+Native extension for WindowsStandalone target not found
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  1.372 seconds
+Domain Reload Profiling: 2052ms
+	BeginReloadAssembly (271ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (7ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (48ms)
+	RebuildCommonClasses (52ms)
+	RebuildNativeTypeToScriptingClass (17ms)
+	initialDomainReloadingComplete (38ms)
+	LoadAllAssembliesAndSetupDomain (302ms)
+		LoadAssemblies (441ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (37ms)
+			TypeCache.Refresh (13ms)
+				TypeCache.ScanAssembly (2ms)
+			ScanForSourceGeneratedMonoScriptInfo (9ms)
+			ResolveRequiredComponents (12ms)
+	FinalizeReload (1373ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (629ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (15ms)
+			SetLoadedEditorAssemblies (7ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (110ms)
+			ProcessInitializeOnLoadAttributes (461ms)
+			ProcessInitializeOnLoadMethodAttributes (33ms)
+			AfterProcessingInitializeOnLoad (2ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (19ms)
+Refreshing native plugins compatible for Editor in 9.04 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3264 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 18 unused Assets / (431.6 KB). Loaded Objects now: 3859.
+Memory consumption went from 150.5 MB to 150.1 MB.
+Total: 4.588500 ms (FindLiveObjects: 0.472000 ms CreateObjectMapping: 0.469900 ms MarkObjects: 3.354500 ms  DeleteObjects: 0.290800 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-codec-MediaFoundation-h265: e54d7ab0439102e2317fc1e4b246158d -> 
+  custom:scripting/monoscript/fileName/BlueEyeCat.cs: 971410451d323a747de6ea1bdb80e66b -> cd85b9cf00e542c89ebbe419d380f37d
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:CustomObjectIndexerAttribute: 9a22284fe3817be447336de3de66b15e -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/precompiled-assembly-types:Assembly-CSharp: 477c33197ef4129d3cede27b1fc9015d -> a72f26d653756f09d98cadc1d578cf43
+========================================================================
+Received Prepare
+Caller must complete domain reload
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.810 seconds
+Native extension for WindowsStandalone target not found
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  1.909 seconds
+Domain Reload Profiling: 2719ms
+	BeginReloadAssembly (315ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (8ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (77ms)
+	RebuildCommonClasses (53ms)
+	RebuildNativeTypeToScriptingClass (22ms)
+	initialDomainReloadingComplete (53ms)
+	LoadAllAssembliesAndSetupDomain (367ms)
+		LoadAssemblies (480ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (41ms)
+			TypeCache.Refresh (14ms)
+				TypeCache.ScanAssembly (3ms)
+			ScanForSourceGeneratedMonoScriptInfo (13ms)
+			ResolveRequiredComponents (12ms)
+	FinalizeReload (1910ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (643ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (11ms)
+			SetLoadedEditorAssemblies (5ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (72ms)
+			ProcessInitializeOnLoadAttributes (506ms)
+			ProcessInitializeOnLoadMethodAttributes (42ms)
+			AfterProcessingInitializeOnLoad (6ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (28ms)
+Refreshing native plugins compatible for Editor in 4.40 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3264 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 18 unused Assets / (431.5 KB). Loaded Objects now: 3862.
+Memory consumption went from 150.5 MB to 150.1 MB.
+Total: 5.075500 ms (FindLiveObjects: 0.423600 ms CreateObjectMapping: 0.459700 ms MarkObjects: 3.889100 ms  DeleteObjects: 0.301400 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-codec-MediaFoundation-h265: e54d7ab0439102e2317fc1e4b246158d -> 
+  custom:scripting/monoscript/fileName/BlueEyeCat.cs: 971410451d323a747de6ea1bdb80e66b -> cd85b9cf00e542c89ebbe419d380f37d
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:CustomObjectIndexerAttribute: 9a22284fe3817be447336de3de66b15e -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/precompiled-assembly-types:Assembly-CSharp: 477c33197ef4129d3cede27b1fc9015d -> a72f26d653756f09d98cadc1d578cf43
+========================================================================
+Received Prepare
+Caller must complete domain reload
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.874 seconds
+Native extension for WindowsStandalone target not found
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  1.759 seconds
+Domain Reload Profiling: 2632ms
+	BeginReloadAssembly (326ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (15ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (75ms)
+	RebuildCommonClasses (69ms)
+	RebuildNativeTypeToScriptingClass (14ms)
+	initialDomainReloadingComplete (44ms)
+	LoadAllAssembliesAndSetupDomain (420ms)
+		LoadAssemblies (572ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (39ms)
+			TypeCache.Refresh (15ms)
+				TypeCache.ScanAssembly (2ms)
+			ScanForSourceGeneratedMonoScriptInfo (14ms)
+			ResolveRequiredComponents (8ms)
+	FinalizeReload (1759ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (600ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (5ms)
+			SetLoadedEditorAssemblies (6ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (78ms)
+			ProcessInitializeOnLoadAttributes (473ms)
+			ProcessInitializeOnLoadMethodAttributes (31ms)
+			AfterProcessingInitializeOnLoad (6ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (21ms)
+Refreshing native plugins compatible for Editor in 4.32 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3264 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 18 unused Assets / (431.5 KB). Loaded Objects now: 3865.
+Memory consumption went from 150.5 MB to 150.1 MB.
+Total: 5.291300 ms (FindLiveObjects: 0.554900 ms CreateObjectMapping: 0.597700 ms MarkObjects: 3.817300 ms  DeleteObjects: 0.319300 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-codec-MediaFoundation-h265: e54d7ab0439102e2317fc1e4b246158d -> 
+  custom:scripting/monoscript/fileName/BlueEyeCat.cs: 971410451d323a747de6ea1bdb80e66b -> cd85b9cf00e542c89ebbe419d380f37d
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:CustomObjectIndexerAttribute: 9a22284fe3817be447336de3de66b15e -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/precompiled-assembly-types:Assembly-CSharp: 477c33197ef4129d3cede27b1fc9015d -> a72f26d653756f09d98cadc1d578cf43
+========================================================================
+Received Prepare
+Caller must complete domain reload
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.762 seconds
+Native extension for WindowsStandalone target not found
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  1.971 seconds
+Domain Reload Profiling: 2735ms
+	BeginReloadAssembly (300ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (10ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (64ms)
+	RebuildCommonClasses (90ms)
+	RebuildNativeTypeToScriptingClass (19ms)
+	initialDomainReloadingComplete (61ms)
+	LoadAllAssembliesAndSetupDomain (291ms)
+		LoadAssemblies (457ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (19ms)
+			TypeCache.Refresh (7ms)
+				TypeCache.ScanAssembly (0ms)
+			ScanForSourceGeneratedMonoScriptInfo (0ms)
+			ResolveRequiredComponents (9ms)
+	FinalizeReload (1974ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (1073ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (8ms)
+			SetLoadedEditorAssemblies (5ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (80ms)
+			ProcessInitializeOnLoadAttributes (902ms)
+			ProcessInitializeOnLoadMethodAttributes (74ms)
+			AfterProcessingInitializeOnLoad (5ms)
+			EditorAssembliesLoaded (1ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (28ms)
+Refreshing native plugins compatible for Editor in 4.14 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3264 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 18 unused Assets / (431.6 KB). Loaded Objects now: 3868.
+Memory consumption went from 150.6 MB to 150.1 MB.
+Total: 8.254400 ms (FindLiveObjects: 0.556800 ms CreateObjectMapping: 0.506000 ms MarkObjects: 6.623600 ms  DeleteObjects: 0.562200 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-codec-MediaFoundation-h265: e54d7ab0439102e2317fc1e4b246158d -> 
+  custom:scripting/monoscript/fileName/BlueEyeCat.cs: 971410451d323a747de6ea1bdb80e66b -> cd85b9cf00e542c89ebbe419d380f37d
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:CustomObjectIndexerAttribute: 9a22284fe3817be447336de3de66b15e -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/precompiled-assembly-types:Assembly-CSharp: 477c33197ef4129d3cede27b1fc9015d -> a72f26d653756f09d98cadc1d578cf43
+========================================================================
+Received Prepare
+Caller must complete domain reload
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.958 seconds
+Native extension for WindowsStandalone target not found
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  2.470 seconds
+Domain Reload Profiling: 3429ms
+	BeginReloadAssembly (299ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (16ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (57ms)
+	RebuildCommonClasses (90ms)
+	RebuildNativeTypeToScriptingClass (24ms)
+	initialDomainReloadingComplete (60ms)
+	LoadAllAssembliesAndSetupDomain (484ms)
+		LoadAssemblies (603ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (39ms)
+			TypeCache.Refresh (21ms)
+				TypeCache.ScanAssembly (0ms)
+			ScanForSourceGeneratedMonoScriptInfo (0ms)
+			ResolveRequiredComponents (14ms)
+	FinalizeReload (2472ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (987ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (10ms)
+			SetLoadedEditorAssemblies (9ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (130ms)
+			ProcessInitializeOnLoadAttributes (765ms)
+			ProcessInitializeOnLoadMethodAttributes (67ms)
+			AfterProcessingInitializeOnLoad (5ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (34ms)
+Refreshing native plugins compatible for Editor in 10.88 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3264 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 18 unused Assets / (431.7 KB). Loaded Objects now: 3871.
+Memory consumption went from 150.6 MB to 150.1 MB.
+Total: 8.384800 ms (FindLiveObjects: 0.787400 ms CreateObjectMapping: 1.116100 ms MarkObjects: 5.757400 ms  DeleteObjects: 0.721000 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-codec-MediaFoundation-h265: e54d7ab0439102e2317fc1e4b246158d -> 
+  custom:scripting/monoscript/fileName/BlueEyeCat.cs: 971410451d323a747de6ea1bdb80e66b -> cd85b9cf00e542c89ebbe419d380f37d
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:CustomObjectIndexerAttribute: 9a22284fe3817be447336de3de66b15e -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/precompiled-assembly-types:Assembly-CSharp: 477c33197ef4129d3cede27b1fc9015d -> a72f26d653756f09d98cadc1d578cf43
+========================================================================
+Received Prepare
+Caller must complete domain reload
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.795 seconds
+Native extension for WindowsStandalone target not found
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  3.548 seconds
+Domain Reload Profiling: 4342ms
+	BeginReloadAssembly (292ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (8ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (74ms)
+	RebuildCommonClasses (91ms)
+	RebuildNativeTypeToScriptingClass (40ms)
+	initialDomainReloadingComplete (43ms)
+	LoadAllAssembliesAndSetupDomain (328ms)
+		LoadAssemblies (470ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (26ms)
+			TypeCache.Refresh (8ms)
+				TypeCache.ScanAssembly (0ms)
+			ScanForSourceGeneratedMonoScriptInfo (1ms)
+			ResolveRequiredComponents (15ms)
+	FinalizeReload (3548ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (1000ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (16ms)
+			SetLoadedEditorAssemblies (10ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (136ms)
+			ProcessInitializeOnLoadAttributes (766ms)
+			ProcessInitializeOnLoadMethodAttributes (68ms)
+			AfterProcessingInitializeOnLoad (3ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (19ms)
+Refreshing native plugins compatible for Editor in 4.59 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3264 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 18 unused Assets / (431.6 KB). Loaded Objects now: 3874.
+Memory consumption went from 150.6 MB to 150.1 MB.
+Total: 8.248100 ms (FindLiveObjects: 0.430400 ms CreateObjectMapping: 0.394100 ms MarkObjects: 7.029400 ms  DeleteObjects: 0.392100 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-codec-MediaFoundation-h265: e54d7ab0439102e2317fc1e4b246158d -> 
+  custom:scripting/monoscript/fileName/BlueEyeCat.cs: 971410451d323a747de6ea1bdb80e66b -> cd85b9cf00e542c89ebbe419d380f37d
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:CustomObjectIndexerAttribute: 9a22284fe3817be447336de3de66b15e -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/precompiled-assembly-types:Assembly-CSharp: 477c33197ef4129d3cede27b1fc9015d -> a72f26d653756f09d98cadc1d578cf43
+========================================================================
+Received Prepare
+Caller must complete domain reload
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.764 seconds
+Native extension for WindowsStandalone target not found
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  7.871 seconds
+Domain Reload Profiling: 8646ms
+	BeginReloadAssembly (300ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (5ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (53ms)
+	RebuildCommonClasses (67ms)
+	RebuildNativeTypeToScriptingClass (24ms)
+	initialDomainReloadingComplete (40ms)
+	LoadAllAssembliesAndSetupDomain (334ms)
+		LoadAssemblies (508ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (30ms)
+			TypeCache.Refresh (11ms)
+				TypeCache.ScanAssembly (0ms)
+			ScanForSourceGeneratedMonoScriptInfo (0ms)
+			ResolveRequiredComponents (15ms)
+	FinalizeReload (7882ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (3617ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (27ms)
+			SetLoadedEditorAssemblies (7ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (212ms)
+			ProcessInitializeOnLoadAttributes (3185ms)
+			ProcessInitializeOnLoadMethodAttributes (165ms)
+			AfterProcessingInitializeOnLoad (20ms)
+			EditorAssembliesLoaded (1ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (114ms)
+Refreshing native plugins compatible for Editor in 8.78 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3264 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 18 unused Assets / (431.7 KB). Loaded Objects now: 3877.
+Memory consumption went from 150.6 MB to 150.1 MB.
+Total: 8.283100 ms (FindLiveObjects: 2.015400 ms CreateObjectMapping: 0.539800 ms MarkObjects: 5.311900 ms  DeleteObjects: 0.413700 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-codec-MediaFoundation-h265: e54d7ab0439102e2317fc1e4b246158d -> 
+  custom:scripting/monoscript/fileName/BlueEyeCat.cs: 971410451d323a747de6ea1bdb80e66b -> cd85b9cf00e542c89ebbe419d380f37d
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:CustomObjectIndexerAttribute: 9a22284fe3817be447336de3de66b15e -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/precompiled-assembly-types:Assembly-CSharp: 477c33197ef4129d3cede27b1fc9015d -> a72f26d653756f09d98cadc1d578cf43
+========================================================================
+Received Prepare
+Caller must complete domain reload
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.770 seconds
+Native extension for WindowsStandalone target not found
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  2.660 seconds
+Domain Reload Profiling: 3431ms
+	BeginReloadAssembly (298ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (7ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (55ms)
+	RebuildCommonClasses (65ms)
+	RebuildNativeTypeToScriptingClass (15ms)
+	initialDomainReloadingComplete (54ms)
+	LoadAllAssembliesAndSetupDomain (337ms)
+		LoadAssemblies (506ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (22ms)
+			TypeCache.Refresh (9ms)
+				TypeCache.ScanAssembly (0ms)
+			ScanForSourceGeneratedMonoScriptInfo (0ms)
+			ResolveRequiredComponents (10ms)
+	FinalizeReload (2661ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (972ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (15ms)
+			SetLoadedEditorAssemblies (10ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (155ms)
+			ProcessInitializeOnLoadAttributes (737ms)
+			ProcessInitializeOnLoadMethodAttributes (51ms)
+			AfterProcessingInitializeOnLoad (4ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (25ms)
+Refreshing native plugins compatible for Editor in 19.36 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3264 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 18 unused Assets / (431.6 KB). Loaded Objects now: 3880.
+Memory consumption went from 150.6 MB to 150.1 MB.
+Total: 43.136900 ms (FindLiveObjects: 10.323300 ms CreateObjectMapping: 4.339000 ms MarkObjects: 27.402000 ms  DeleteObjects: 1.068400 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-codec-MediaFoundation-h265: e54d7ab0439102e2317fc1e4b246158d -> 
+  custom:scripting/monoscript/fileName/BlueEyeCat.cs: 971410451d323a747de6ea1bdb80e66b -> cd85b9cf00e542c89ebbe419d380f37d
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:CustomObjectIndexerAttribute: 9a22284fe3817be447336de3de66b15e -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/precompiled-assembly-types:Assembly-CSharp: 477c33197ef4129d3cede27b1fc9015d -> a72f26d653756f09d98cadc1d578cf43
+========================================================================
+Received Prepare
+Caller must complete domain reload
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  1.417 seconds
+Native extension for WindowsStandalone target not found
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  2.900 seconds
+Domain Reload Profiling: 4320ms
+	BeginReloadAssembly (569ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (17ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (120ms)
+	RebuildCommonClasses (97ms)
+	RebuildNativeTypeToScriptingClass (24ms)
+	initialDomainReloadingComplete (85ms)
+	LoadAllAssembliesAndSetupDomain (644ms)
+		LoadAssemblies (978ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (27ms)
+			TypeCache.Refresh (9ms)
+				TypeCache.ScanAssembly (0ms)
+			ScanForSourceGeneratedMonoScriptInfo (0ms)
+			ResolveRequiredComponents (14ms)
+	FinalizeReload (2902ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (626ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (8ms)
+			SetLoadedEditorAssemblies (7ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (89ms)
+			ProcessInitializeOnLoadAttributes (439ms)
+			ProcessInitializeOnLoadMethodAttributes (75ms)
+			AfterProcessingInitializeOnLoad (7ms)
+			EditorAssembliesLoaded (1ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (43ms)
+Refreshing native plugins compatible for Editor in 6.90 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3264 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 18 unused Assets / (431.5 KB). Loaded Objects now: 3883.
+Memory consumption went from 150.6 MB to 150.1 MB.
+Total: 6.413100 ms (FindLiveObjects: 0.441400 ms CreateObjectMapping: 0.401700 ms MarkObjects: 5.067700 ms  DeleteObjects: 0.500300 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-codec-MediaFoundation-h265: e54d7ab0439102e2317fc1e4b246158d -> 
+  custom:scripting/monoscript/fileName/BlueEyeCat.cs: 971410451d323a747de6ea1bdb80e66b -> cd85b9cf00e542c89ebbe419d380f37d
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:CustomObjectIndexerAttribute: 9a22284fe3817be447336de3de66b15e -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/precompiled-assembly-types:Assembly-CSharp: 477c33197ef4129d3cede27b1fc9015d -> a72f26d653756f09d98cadc1d578cf43
+========================================================================
+Received Prepare
+Caller must complete domain reload
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.824 seconds
+Native extension for WindowsStandalone target not found
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  2.793 seconds
+Domain Reload Profiling: 3617ms
+	BeginReloadAssembly (301ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (8ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (57ms)
+	RebuildCommonClasses (51ms)
+	RebuildNativeTypeToScriptingClass (26ms)
+	initialDomainReloadingComplete (41ms)
+	LoadAllAssembliesAndSetupDomain (405ms)
+		LoadAssemblies (569ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (21ms)
+			TypeCache.Refresh (9ms)
+				TypeCache.ScanAssembly (0ms)
+			ScanForSourceGeneratedMonoScriptInfo (0ms)
+			ResolveRequiredComponents (10ms)
+	FinalizeReload (2794ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (1048ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (12ms)
+			SetLoadedEditorAssemblies (7ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (137ms)
+			ProcessInitializeOnLoadAttributes (822ms)
+			ProcessInitializeOnLoadMethodAttributes (66ms)
+			AfterProcessingInitializeOnLoad (5ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (29ms)
+Refreshing native plugins compatible for Editor in 5.54 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3264 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 18 unused Assets / (431.6 KB). Loaded Objects now: 3886.
+Memory consumption went from 150.6 MB to 150.2 MB.
+Total: 6.347600 ms (FindLiveObjects: 0.686200 ms CreateObjectMapping: 0.588900 ms MarkObjects: 4.779100 ms  DeleteObjects: 0.290100 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-codec-MediaFoundation-h265: e54d7ab0439102e2317fc1e4b246158d -> 
+  custom:scripting/monoscript/fileName/BlueEyeCat.cs: 971410451d323a747de6ea1bdb80e66b -> cd85b9cf00e542c89ebbe419d380f37d
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:CustomObjectIndexerAttribute: 9a22284fe3817be447336de3de66b15e -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/precompiled-assembly-types:Assembly-CSharp: 477c33197ef4129d3cede27b1fc9015d -> a72f26d653756f09d98cadc1d578cf43
+========================================================================
+Received Prepare
+Caller must complete domain reload
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.797 seconds
+Native extension for WindowsStandalone target not found
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  2.758 seconds
+Domain Reload Profiling: 3556ms
+	BeginReloadAssembly (308ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (11ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (86ms)
+	RebuildCommonClasses (45ms)
+	RebuildNativeTypeToScriptingClass (21ms)
+	initialDomainReloadingComplete (50ms)
+	LoadAllAssembliesAndSetupDomain (372ms)
+		LoadAssemblies (518ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (22ms)
+			TypeCache.Refresh (9ms)
+				TypeCache.ScanAssembly (0ms)
+			ScanForSourceGeneratedMonoScriptInfo (0ms)
+			ResolveRequiredComponents (10ms)
+	FinalizeReload (2760ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (966ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (12ms)
+			SetLoadedEditorAssemblies (7ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (122ms)
+			ProcessInitializeOnLoadAttributes (744ms)
+			ProcessInitializeOnLoadMethodAttributes (76ms)
+			AfterProcessingInitializeOnLoad (5ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (36ms)
+Refreshing native plugins compatible for Editor in 5.26 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3264 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 18 unused Assets / (431.6 KB). Loaded Objects now: 3889.
+Memory consumption went from 150.6 MB to 150.2 MB.
+Total: 5.905600 ms (FindLiveObjects: 0.454100 ms CreateObjectMapping: 0.425300 ms MarkObjects: 4.699300 ms  DeleteObjects: 0.322800 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-codec-MediaFoundation-h265: e54d7ab0439102e2317fc1e4b246158d -> 
+  custom:scripting/monoscript/fileName/BlueEyeCat.cs: 971410451d323a747de6ea1bdb80e66b -> cd85b9cf00e542c89ebbe419d380f37d
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:CustomObjectIndexerAttribute: 9a22284fe3817be447336de3de66b15e -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/precompiled-assembly-types:Assembly-CSharp: 477c33197ef4129d3cede27b1fc9015d -> a72f26d653756f09d98cadc1d578cf43
+========================================================================
+Received Prepare
+Caller must complete domain reload
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.840 seconds
+Native extension for WindowsStandalone target not found
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  4.047 seconds
+Domain Reload Profiling: 4888ms
+	BeginReloadAssembly (327ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (8ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (97ms)
+	RebuildCommonClasses (79ms)
+	RebuildNativeTypeToScriptingClass (29ms)
+	initialDomainReloadingComplete (61ms)
+	LoadAllAssembliesAndSetupDomain (344ms)
+		LoadAssemblies (499ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (25ms)
+			TypeCache.Refresh (8ms)
+				TypeCache.ScanAssembly (0ms)
+			ScanForSourceGeneratedMonoScriptInfo (0ms)
+			ResolveRequiredComponents (13ms)
+	FinalizeReload (4049ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (1337ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (16ms)
+			SetLoadedEditorAssemblies (9ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (170ms)
+			ProcessInitializeOnLoadAttributes (1042ms)
+			ProcessInitializeOnLoadMethodAttributes (92ms)
+			AfterProcessingInitializeOnLoad (7ms)
+			EditorAssembliesLoaded (1ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (33ms)
+Refreshing native plugins compatible for Editor in 4.93 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3264 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 18 unused Assets / (431.7 KB). Loaded Objects now: 3892.
+Memory consumption went from 150.6 MB to 150.2 MB.
+Total: 5.317700 ms (FindLiveObjects: 0.429900 ms CreateObjectMapping: 0.400600 ms MarkObjects: 3.986000 ms  DeleteObjects: 0.499400 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-codec-MediaFoundation-h265: e54d7ab0439102e2317fc1e4b246158d -> 
+  custom:scripting/monoscript/fileName/BlueEyeCat.cs: 971410451d323a747de6ea1bdb80e66b -> cd85b9cf00e542c89ebbe419d380f37d
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:CustomObjectIndexerAttribute: 9a22284fe3817be447336de3de66b15e -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/precompiled-assembly-types:Assembly-CSharp: 477c33197ef4129d3cede27b1fc9015d -> a72f26d653756f09d98cadc1d578cf43
+========================================================================
+Received Import Request.
+  Time since last request: 4274.642414 seconds.
+  path: Assets/Scenes/Scene_move/NavMesh-Terrain.asset
+  artifactKey: Guid(b3963cfb444dbc14ab7432266b6156a3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/Scene_move/NavMesh-Terrain.asset using Guid(b3963cfb444dbc14ab7432266b6156a3) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '0fb53b8e866f29d7b3b4ab3838cf810e') in 0.197314 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Prepare
+Caller must complete domain reload
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  1.121 seconds
+Native extension for WindowsStandalone target not found
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  3.411 seconds
+Domain Reload Profiling: 4536ms
+	BeginReloadAssembly (404ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (14ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (4ms)
+		CreateAndSetChildDomain (85ms)
+	RebuildCommonClasses (85ms)
+	RebuildNativeTypeToScriptingClass (22ms)
+	initialDomainReloadingComplete (52ms)
+	LoadAllAssembliesAndSetupDomain (559ms)
+		LoadAssemblies (761ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (46ms)
+			TypeCache.Refresh (18ms)
+				TypeCache.ScanAssembly (0ms)
+			ScanForSourceGeneratedMonoScriptInfo (0ms)
+			ResolveRequiredComponents (23ms)
+	FinalizeReload (3414ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (993ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (14ms)
+			SetLoadedEditorAssemblies (12ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (128ms)
+			ProcessInitializeOnLoadAttributes (761ms)
+			ProcessInitializeOnLoadMethodAttributes (73ms)
+			AfterProcessingInitializeOnLoad (5ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (35ms)
+Refreshing native plugins compatible for Editor in 3.73 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3264 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 18 unused Assets / (431.4 KB). Loaded Objects now: 3895.
+Memory consumption went from 150.6 MB to 150.2 MB.
+Total: 6.231800 ms (FindLiveObjects: 0.482900 ms CreateObjectMapping: 0.453400 ms MarkObjects: 4.821500 ms  DeleteObjects: 0.470500 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-codec-MediaFoundation-h265: e54d7ab0439102e2317fc1e4b246158d -> 
+  custom:scripting/monoscript/fileName/BlueEyeCat.cs: 971410451d323a747de6ea1bdb80e66b -> cd85b9cf00e542c89ebbe419d380f37d
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:CustomObjectIndexerAttribute: 9a22284fe3817be447336de3de66b15e -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/precompiled-assembly-types:Assembly-CSharp: 477c33197ef4129d3cede27b1fc9015d -> a72f26d653756f09d98cadc1d578cf43
+========================================================================
+Received Prepare
+Caller must complete domain reload
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  1.048 seconds
+Native extension for WindowsStandalone target not found
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  3.468 seconds
+Domain Reload Profiling: 4519ms
+	BeginReloadAssembly (271ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (9ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (58ms)
+	RebuildCommonClasses (69ms)
+	RebuildNativeTypeToScriptingClass (17ms)
+	initialDomainReloadingComplete (57ms)
+	LoadAllAssembliesAndSetupDomain (635ms)
+		LoadAssemblies (750ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (41ms)
+			TypeCache.Refresh (18ms)
+				TypeCache.ScanAssembly (0ms)
+			ScanForSourceGeneratedMonoScriptInfo (1ms)
+			ResolveRequiredComponents (17ms)
+	FinalizeReload (3469ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (818ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (13ms)
+			SetLoadedEditorAssemblies (7ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (117ms)
+			ProcessInitializeOnLoadAttributes (632ms)
+			ProcessInitializeOnLoadMethodAttributes (46ms)
+			AfterProcessingInitializeOnLoad (3ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (24ms)
+Refreshing native plugins compatible for Editor in 9.76 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3264 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 18 unused Assets / (431.3 KB). Loaded Objects now: 3898.
+Memory consumption went from 150.6 MB to 150.2 MB.
+Total: 6.181900 ms (FindLiveObjects: 0.420300 ms CreateObjectMapping: 0.631400 ms MarkObjects: 4.814400 ms  DeleteObjects: 0.313500 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-codec-MediaFoundation-h265: e54d7ab0439102e2317fc1e4b246158d -> 
+  custom:scripting/monoscript/fileName/BlueEyeCat.cs: 971410451d323a747de6ea1bdb80e66b -> cd85b9cf00e542c89ebbe419d380f37d
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:CustomObjectIndexerAttribute: 9a22284fe3817be447336de3de66b15e -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/precompiled-assembly-types:Assembly-CSharp: 477c33197ef4129d3cede27b1fc9015d -> a72f26d653756f09d98cadc1d578cf43
+========================================================================
+Received Import Request.
+  Time since last request: 498.611398 seconds.
+  path: Assets/Download/SuburbanHouse/Source/Textures/EmissionMaps/Addons_E.png
+  artifactKey: Guid(be97ac57399e85c448caf56e95039544) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/SuburbanHouse/Source/Textures/EmissionMaps/Addons_E.png using Guid(be97ac57399e85c448caf56e95039544) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '3515a37e71b4b8bace59f87af4aff99a') in 0.169464 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000033 seconds.
+  path: Assets/Download/SuburbanHouse/Source/Textures/Addons_M.tif
+  artifactKey: Guid(34675d361bcea534bbcb6d344b883490) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/SuburbanHouse/Source/Textures/Addons_M.tif using Guid(34675d361bcea534bbcb6d344b883490) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '421fe36924133e3d358e05c6fa7f42fa') in 0.047469 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000038 seconds.
+  path: Assets/Download/SuburbanHouse/Source/Textures/Addons_N.png
+  artifactKey: Guid(9cfc342a9db30444f8a00b219f34fdfe) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/SuburbanHouse/Source/Textures/Addons_N.png using Guid(9cfc342a9db30444f8a00b219f34fdfe) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '1a95b2fd0025d9b4d1c59cd4e544a2b7') in 0.073821 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.628234 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Textures/atlas-gradient-LPUP.png
+  artifactKey: Guid(bd9d0343175ea445eae5d3ffa327072e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Textures/atlas-gradient-LPUP.png using Guid(bd9d0343175ea445eae5d3ffa327072e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '3c4b881ed53f9749d49323ff7d226737') in 0.032476 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.071701 seconds.
+  path: Assets/Download/Low Poly Ultimate Pack/- Textures/atlas-specular-LPUP.png
+  artifactKey: Guid(eab512c5f5b6c094e8e29be1f2f51077) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Low Poly Ultimate Pack/- Textures/atlas-specular-LPUP.png using Guid(eab512c5f5b6c094e8e29be1f2f51077) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: 'b3317a99d93048f52854403f58fb58b6') in 0.027815 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/UI/Item/Bag.png
+  artifactKey: Guid(baa94884ceea920439ee9fd9eb924ded) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/UI/Item/Bag.png using Guid(baa94884ceea920439ee9fd9eb924ded) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '10013a056e3f22bafa753e4b3ec53924') in 0.078091 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000049 seconds.
+  path: Assets/Download/Kindergarten Interior/Textures/baby blocks.png
+  artifactKey: Guid(a9b4f050526f7f341b0884d769873b5e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Kindergarten Interior/Textures/baby blocks.png using Guid(a9b4f050526f7f341b0884d769873b5e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: 'c0ef404b19fa276dcb2cb187f409f10b') in 0.031254 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.167689 seconds.
+  path: Assets/Download/Kindergarten Interior/Textures/balls.png
+  artifactKey: Guid(aa8dfe4c60cbe0b4d8a7f9d0e2e25007) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/Kindergarten Interior/Textures/balls.png using Guid(aa8dfe4c60cbe0b4d8a7f9d0e2e25007) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: 'c802ed6d8126fb86c4316d8bf432fbd2') in 0.038003 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000033 seconds.
+  path: Assets/Download/SuburbanHouse/Source/Textures/Barbecue_AT.tif
+  artifactKey: Guid(18204cf52953d63438dbac1384b77eb0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/SuburbanHouse/Source/Textures/Barbecue_AT.tif using Guid(18204cf52953d63438dbac1384b77eb0) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: 'd55b3ccb95ec5e244a1f446e9b82d714') in 0.030221 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.032107 seconds.
+  path: Assets/Download/SuburbanHouse/Source/Textures/Barbecue_O.png
+  artifactKey: Guid(48c7fda3fc6f7d54ea668f67092b94c5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/SuburbanHouse/Source/Textures/Barbecue_O.png using Guid(48c7fda3fc6f7d54ea668f67092b94c5) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '5864a2252bc32fdf1c114367233d8027') in 0.026691 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/Download/RPG_FPS_game_assets_industrial/Barrels/Barrel_v1/Source/Barrel_v1.tga
+  artifactKey: Guid(d432d54d3a70da442896cc2f394cd34f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/RPG_FPS_game_assets_industrial/Barrels/Barrel_v1/Source/Barrel_v1.tga using Guid(d432d54d3a70da442896cc2f394cd34f) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: 'e21cadb647958f04bbe69ba83cfc1c3c') in 0.038945 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.228872 seconds.
+  path: Assets/Download/SuburbanHouse/Source/Textures/Bathroom_A.png
+  artifactKey: Guid(13b209495b9c4fc4fbce13ed7cb9b49a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/SuburbanHouse/Source/Textures/Bathroom_A.png using Guid(13b209495b9c4fc4fbce13ed7cb9b49a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: 'a5ecb833d08118b062dcc7a4707b0161') in 0.024952 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000531 seconds.
+  path: Assets/Download/SuburbanHouse/Source/Textures/Bathroom_M.tif
+  artifactKey: Guid(6f0734e6bbd992248bb2ec92e2d3c8bc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/SuburbanHouse/Source/Textures/Bathroom_M.tif using Guid(6f0734e6bbd992248bb2ec92e2d3c8bc) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '2cd4a754d1f13e5f212923db9c2b1f56') in 0.026740 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.038726 seconds.
+  path: Assets/Download/SuburbanHouse/Source/Textures/Bathtub2_A.png
+  artifactKey: Guid(fc7c89c74f5e40b47ab6611961f7b33e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Download/SuburbanHouse/Source/Textures/Bathtub2_A.png using Guid(fc7c89c74f5e40b47ab6611961f7b33e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: 'cd2908295745f6bc8cac014fd1960238') in 0.026946 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Prepare
+Caller must complete domain reload
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  1.199 seconds
+Native extension for WindowsStandalone target not found
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  2.038 seconds
+Domain Reload Profiling: 3237ms
+	BeginReloadAssembly (376ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (11ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (89ms)
+	RebuildCommonClasses (63ms)
+	RebuildNativeTypeToScriptingClass (23ms)
+	initialDomainReloadingComplete (66ms)
+	LoadAllAssembliesAndSetupDomain (671ms)
+		LoadAssemblies (833ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (63ms)
+			TypeCache.Refresh (30ms)
+				TypeCache.ScanAssembly (5ms)
+			ScanForSourceGeneratedMonoScriptInfo (17ms)
+			ResolveRequiredComponents (12ms)
+	FinalizeReload (2039ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (791ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (16ms)
+			SetLoadedEditorAssemblies (12ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (151ms)
+			ProcessInitializeOnLoadAttributes (573ms)
+			ProcessInitializeOnLoadMethodAttributes (36ms)
+			AfterProcessingInitializeOnLoad (3ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (31ms)
+Refreshing native plugins compatible for Editor in 8.53 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3264 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 18 unused Assets / (431.5 KB). Loaded Objects now: 3907.
+Memory consumption went from 150.6 MB to 150.2 MB.
+Total: 6.689500 ms (FindLiveObjects: 0.395900 ms CreateObjectMapping: 0.473700 ms MarkObjects: 5.509700 ms  DeleteObjects: 0.307800 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-codec-MediaFoundation-h265: e54d7ab0439102e2317fc1e4b246158d -> 
+  custom:scripting/monoscript/fileName/BlueEyeCat.cs: 971410451d323a747de6ea1bdb80e66b -> cd85b9cf00e542c89ebbe419d380f37d
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:CustomObjectIndexerAttribute: 9a22284fe3817be447336de3de66b15e -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/precompiled-assembly-types:Assembly-CSharp: 477c33197ef4129d3cede27b1fc9015d -> a72f26d653756f09d98cadc1d578cf43
