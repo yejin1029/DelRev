@@ -26373,6 +26373,7 @@ MonoBehaviour:
   playerController: {fileID: 2135229692}
   inventory: {fileID: 2135229691}
   crossHair: {fileID: 640386021}
+  crossHairUI: {fileID: 0}
   buttonSelector: {fileID: 62869852}
   panelManager: {fileID: 1312646185}
 --- !u!1001 &875574451
@@ -56720,8 +56721,8 @@ MonoBehaviour:
   attackDamage: 50
   attackSpeed: 1.5
   centerPoint: {fileID: 1781645663}
-  player: {fileID: 0}
-  playerCamera: {fileID: 0}
+  player: {fileID: 2135229693}
+  playerCamera: {fileID: 2133054240}
 --- !u!4 &1935395902 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000013142102898, guid: e890d5ac21025d041a3d5b0a46f5b18b, type: 3}
@@ -63334,6 +63335,7 @@ GameObject:
   - component: {fileID: 2133054240}
   - component: {fileID: 2133054239}
   - component: {fileID: 2133054241}
+  - component: {fileID: 2133054242}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -63416,6 +63418,19 @@ Camera:
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
 --- !u!114 &2133054241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2133054237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 254de3d6982d243f4900c537d802fe29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  persistenceEnabled: 1
+--- !u!114 &2133054242
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
