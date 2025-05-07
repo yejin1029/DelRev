@@ -31,7 +31,7 @@ public class BlueEyeCat : MonoBehaviour
 
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         player = playerObj?.transform;
-        playerCamera = Camera.main;
+        playerCamera = GameObject.FindGameObjectWithTag("MainCamera")?.GetComponent<Camera>();
 
         if (player == null)
             Debug.LogError("❌ Player with 'Player' tag not found in the scene.");
