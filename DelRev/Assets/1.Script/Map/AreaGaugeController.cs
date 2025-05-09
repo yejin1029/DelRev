@@ -6,8 +6,10 @@ public class AreaGaugeController : MonoBehaviour
     [Header("Gauge Settings (0~100)")]
     [Tooltip("1초당 게이지가 채워지는 속도")]
     public float fillSpeed = 20f;
+
     [Tooltip("1초당 게이지가 감소하는 속도")]
     public float drainSpeed = 10f;
+
     [Range(0f, 100f)]
     [SerializeField]
     [Tooltip("현재 채워진 게이지 양")]
@@ -15,11 +17,11 @@ public class AreaGaugeController : MonoBehaviour
 
     [Header("Danger Callback")]
     [Tooltip("게이지가 100이 되면 이 몬스터의 위험 상태를 호출합니다")]
-    public Mom targetMonster;  // Inspector에서 Mom 객체를 드래그하세요
+    public Mom targetMonster;
 
     private bool hasEnteredOnce = false;
     private bool isInside = false;
-    private bool hasTriggeredDanger = false;  // 한 번만 호출하기 위한 플래그
+    private bool hasTriggeredDanger = false;
 
     void Reset()
     {
@@ -30,6 +32,10 @@ public class AreaGaugeController : MonoBehaviour
     void Update()
     {
         if (!hasEnteredOnce) return;
+
+        // 게이지가 이미 100이면 증감 멈춤
+        if (currentGauge >= 100f)
+            return;
 
         // 영역 안/밖에 따라 게이지 증감
         if (isInside)

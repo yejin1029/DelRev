@@ -1,4 +1,3 @@
-// PlayerController.cs
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
@@ -41,9 +40,8 @@ public class PlayerController : MonoBehaviour
     public int coinCount = 0;
 
     [Header("Control Lock")]
-    public bool isLocked = false; // 네비게이션 상호작용 시 동작 정지
+    public bool isLocked = false;
 
-    // 내부 사용 변수
     private float xRotation = 0f;
     private CharacterController controller;
     private Vector3 velocity;
@@ -56,12 +54,14 @@ public class PlayerController : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         stamina = maxStamina;
+
+        // 마우스 커서 잠금
         Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update()
     {
-        if (isLocked) return; // 네비게이션 상호작용 여부 확인
+        if (isLocked) return;
 
         HandleMouseLook();
         HandleMovement();
@@ -75,7 +75,9 @@ public class PlayerController : MonoBehaviour
 
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-        cameraTransform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+
+        if (cameraTransform != null)
+            cameraTransform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
 
         transform.Rotate(Vector3.up * mouseX);
     }
@@ -86,7 +88,7 @@ public class PlayerController : MonoBehaviour
         if (isGrounded && velocity.y < 0f)
             velocity.y = -2f;
 
-        Vector3 move = transform.right * Input.GetAxis("Horizontal") 
+        Vector3 move = transform.right * Input.GetAxis("Horizontal")
                      + transform.forward * Input.GetAxis("Vertical");
         move.Normalize();
 
@@ -95,7 +97,7 @@ public class PlayerController : MonoBehaviour
         if (isCrouching)
             currentSpeed *= slowSpeedMultiplier;
 
-        bool canRun = Input.GetKey(runKey) && !isCrouching 
+        bool canRun = Input.GetKey(runKey) && !isCrouching
                       && move != Vector3.zero && !exhausted;
         isRunning = canRun;
         if (canRun)
@@ -130,19 +132,14 @@ public class PlayerController : MonoBehaviour
         stamina = Mathf.Clamp(stamina, 0f, maxStamina);
     }
 
-    /// <summary>
-    /// 외부(PlaneItemToCoin 등)에서 호출할 때, amount만큼 코인을 추가합니다.
-    /// </summary>
     public void AddCoins(int amount)
     {
         coinCount += amount;
         Debug.Log($"[PlayerController] AddCoins: +{amount}, Total = {coinCount}");
-        // TODO: UI가 있다면 여기서 갱신하세요.
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        // Coin 태그(프리팹) 충돌 시 1개 추가
         if (other.CompareTag("Coin"))
         {
             AddCoins(1);
@@ -150,7 +147,6 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        // (만약 플레이어가 직접 Item을 줍는다면 아래 로직 사용)
         if (other.CompareTag("Item"))
         {
             var item = other.GetComponent<Item>();
