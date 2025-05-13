@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
@@ -42,6 +43,12 @@ public class PlayerController : MonoBehaviour
     [Header("Control Lock")]
     public bool isLocked = false;
 
+    // UI 관련 변수 추가 (예진)
+    [Header("UI References")]
+    public Image staminaImage;
+    public Sprite[] staminaSprites;
+    public Image healthFillImage;
+
     private float xRotation = 0f;
     private CharacterController controller;
     private Vector3 velocity;
@@ -66,6 +73,8 @@ public class PlayerController : MonoBehaviour
         HandleMouseLook();
         HandleMovement();
         HandleStamina();
+        UpdateStaminaUI();
+        UpdateHealthUI();
     }
 
     void HandleMouseLook()
@@ -155,6 +164,28 @@ public class PlayerController : MonoBehaviour
                 AddCoins(item.itemPrice);
                 Destroy(other.gameObject);
             }
+        }
+    }
+
+    // 스태미나 UI 업데이트
+    void UpdateStaminaUI()
+    {
+        if (staminaSprites == null || staminaSprites.Length == 0 || staminaImage == null)
+            return;
+
+        float staminaRatio = stamina / maxStamina;
+        int index = Mathf.Clamp(Mathf.FloorToInt(staminaRatio * (staminaSprites.Length - 1)), 0, staminaSprites.Length - 1);
+
+        staminaImage.sprite = staminaSprites[index];
+    }
+
+    // 체력 UI 업데이트
+    void UpdateHealthUI()
+    {
+        if (healthFillImage != null)
+        {
+            float healthRatio = health / 100f;
+            healthFillImage.fillAmount = Mathf.Clamp01(healthRatio);
         }
     }
 }

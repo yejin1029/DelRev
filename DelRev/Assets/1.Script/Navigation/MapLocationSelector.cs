@@ -102,32 +102,36 @@ public class MapLocationSelector : MonoBehaviour
   }
 
   int GetClosestInDirection(Vector2 dir)
-  {
+{
     Vector2 currentPos = RectTransformUtility.WorldToScreenPoint(null, locations[selectedIndex].rectTransform.position);
-    float closestScore = Mathf.Infinity;
+
+    float closestDist = Mathf.Infinity;
     int bestIndex = selectedIndex;
 
     for (int i = 0; i < locations.Length; i++)
     {
-      if (i == selectedIndex) continue;
+        if (i == selectedIndex) continue;
 
-      Vector2 targetPos = RectTransformUtility.WorldToScreenPoint(null, locations[i].rectTransform.position);
-      Vector2 toTarget = (targetPos - currentPos);
-      float dot = Vector2.Dot(toTarget.normalized, dir);
-      float dist = toTarget.magnitude;
+        Vector2 targetPos = RectTransformUtility.WorldToScreenPoint(null, locations[i].rectTransform.position);
+        Vector2 toTarget = (targetPos - currentPos).normalized;
 
-      // dot가 어느 정도 맞고, 거리도 가까운 애 선택
-      float score = dist / Mathf.Max(dot, 0.01f); // dot 작으면 score 커짐 → 우선도 낮음
+        float dot = Vector2.Dot(toTarget, dir);
+        float absAngle = Vector2.Angle(toTarget, dir);
 
-      if (dot > 0f && score < closestScore)
-      {
-        closestScore = score;
-        bestIndex = i;
-      }
+        // 방향에 따라 필터링 (90도 이내면 허용)
+        if (absAngle < 90f)
+        {
+            float dist = Vector2.Distance(currentPos, targetPos);
+            if (dist < closestDist)
+            {
+                closestDist = dist;
+                bestIndex = i;
+            }
+        }
     }
 
     return bestIndex;
-  }
+}
 
   public void ReactivateFromDetail()
   {
