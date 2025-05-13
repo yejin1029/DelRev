@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Collider))]
 public class AreaGaugeController : MonoBehaviour
@@ -18,6 +19,10 @@ public class AreaGaugeController : MonoBehaviour
     [Header("Danger Callback")]
     [Tooltip("게이지가 100이 되면 이 몬스터의 위험 상태를 호출합니다")]
     public Mom targetMonster;
+
+    // UI 관련 변수 추가
+    [Header("UI References")]
+    public Image gaugeFillImage;
 
     private bool hasEnteredOnce = false;
     private bool isInside = false;
@@ -44,6 +49,9 @@ public class AreaGaugeController : MonoBehaviour
             currentGauge += fillSpeed * Time.deltaTime;
 
         currentGauge = Mathf.Clamp(currentGauge, 0f, 100f);
+
+        if (AreaGaugeUI.Instance != null)
+            AreaGaugeUI.Instance.UpdateGaugeUI(currentGauge);
 
         // 게이지가 100 도달 시 한 번만 위험 상태 호출
         if (!hasTriggeredDanger && currentGauge >= 100f)
@@ -76,5 +84,14 @@ public class AreaGaugeController : MonoBehaviour
 
         isInside = false;
         Debug.Log("영역 이탈: 게이지 채우기 시작");
+    }
+
+    // 게이지 UI 업데이트 
+    void UpdateGaugeUI()
+    {
+        if (gaugeFillImage != null)
+        {
+            gaugeFillImage.fillAmount = currentGauge / 100f;
+        }
     }
 }

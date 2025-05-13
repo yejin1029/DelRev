@@ -46,10 +46,26 @@ public class MapLocationSelector : MonoBehaviour
     if (currentDetailPanel == null)
     {
       // 방향키 입력
-      if (Input.GetKeyDown(KeyCode.W)) Move(Vector2.up);
-      if (Input.GetKeyDown(KeyCode.S)) Move(Vector2.down);
-      if (Input.GetKeyDown(KeyCode.A)) Move(Vector2.left);
-      if (Input.GetKeyDown(KeyCode.D)) Move(Vector2.right);
+      if (Input.GetKeyDown(KeyCode.W))
+      {
+        selectedIndex = GetNextByInput(Vector2.up);
+        UpdateVisuals();
+      }
+      if (Input.GetKeyDown(KeyCode.S))
+      {
+        selectedIndex = GetNextByInput(Vector2.down);
+        UpdateVisuals();
+      }
+      if (Input.GetKeyDown(KeyCode.A))
+      {
+        selectedIndex = GetNextByInput(Vector2.left);
+        UpdateVisuals();
+      }
+      if (Input.GetKeyDown(KeyCode.D))
+      {
+        selectedIndex = GetNextByInput(Vector2.right);
+        UpdateVisuals();
+      }
 
       if (Input.GetKeyDown(KeyCode.Return))
       {
@@ -83,16 +99,6 @@ public class MapLocationSelector : MonoBehaviour
     }
   }
 
-  void Move(Vector2 direction)
-  {
-    int nextIndex = GetClosestInDirection(direction);
-    if (nextIndex != selectedIndex)
-    {
-      selectedIndex = nextIndex;
-      UpdateVisuals();
-    }
-  }
-
   void UpdateVisuals()
   {
     for (int i = 0; i < locations.Length; i++)
@@ -101,37 +107,33 @@ public class MapLocationSelector : MonoBehaviour
     }
   }
 
-  int GetClosestInDirection(Vector2 dir)
-{
-    Vector2 currentPos = RectTransformUtility.WorldToScreenPoint(null, locations[selectedIndex].rectTransform.position);
-
-    float closestDist = Mathf.Infinity;
-    int bestIndex = selectedIndex;
-
-    for (int i = 0; i < locations.Length; i++)
+  int GetNextByInput(Vector2 dir)
+  {
+    switch (selectedIndex)
     {
-        if (i == selectedIndex) continue;
-
-        Vector2 targetPos = RectTransformUtility.WorldToScreenPoint(null, locations[i].rectTransform.position);
-        Vector2 toTarget = (targetPos - currentPos).normalized;
-
-        float dot = Vector2.Dot(toTarget, dir);
-        float absAngle = Vector2.Angle(toTarget, dir);
-
-        // 방향에 따라 필터링 (90도 이내면 허용)
-        if (absAngle < 90f)
-        {
-            float dist = Vector2.Distance(currentPos, targetPos);
-            if (dist < closestDist)
-            {
-                closestDist = dist;
-                bestIndex = i;
-            }
-        }
+      case 0: // 1 (왼쪽위)
+        if (dir == Vector2.right) return 2;
+        if (dir == Vector2.down) return 1;
+        break;
+      case 1: // 2 (왼쪽아래)
+        if (dir == Vector2.up) return 0;
+        if (dir == Vector2.right) return 2;
+        break;
+      case 2: // 3 (가운데)
+        if (dir == Vector2.left) return 0;
+        if (dir == Vector2.right) return 3;
+        break;
+      case 3: // 4 (오른쪽위)
+        if (dir == Vector2.left) return 2;
+        if (dir == Vector2.down) return 4;
+        break;
+      case 4: // 5 (오른쪽아래)
+        if (dir == Vector2.up) return 3;
+        if (dir == Vector2.left) return 2;
+        break;
     }
-
-    return bestIndex;
-}
+    return selectedIndex; // 이동 불가 시 현재 유지
+  }
 
   public void ReactivateFromDetail()
   {
