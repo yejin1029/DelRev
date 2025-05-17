@@ -14,6 +14,8 @@ public class BlueEyeCat : MonoBehaviour
     public float chaseSpeed = 2.0f;
     public float attackDamage = 50f;
     public float attackSpeed = 1.5f;
+    public float closeDetectionDistance = 2f;
+
 
     public Transform centerPoint;
     public Transform player;
@@ -138,7 +140,11 @@ public class BlueEyeCat : MonoBehaviour
     {
         Vector3 directionToCat = (transform.position - playerCamera.transform.position).normalized;
         float angle = Vector3.Angle(playerCamera.transform.forward, directionToCat);
-        return angle < detectionAngle;
+        float distanceToCat = Vector3.Distance(playerCamera.transform.position, transform.position);
+
+        // 조건 1: 시야각 안 + detectionDistance 이내
+        // 조건 2: 시야각 밖이지만 2f 이내
+        return (angle < detectionAngle && distanceToCat <= detectionDistance) || distanceToCat <= closeDetectionDistance;
     }
 
     bool IsWithinPatrolRange()
