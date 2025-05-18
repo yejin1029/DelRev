@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
     public Image healthFillImage;
 
     private float xRotation = 0f;
-    private CharacterController controller;
+    public CharacterController controller;
     private Vector3 velocity;
     private bool isGrounded;
     private bool isCrouching;
@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour
         controller = GetComponent<CharacterController>();
         stamina = maxStamina;
 
-        // 마우스 커서 잠금
+        // 마우스 잠금
         Cursor.lockState = CursorLockMode.Locked;
     }
 

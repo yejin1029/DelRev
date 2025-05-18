@@ -124,4 +124,22 @@ public class Inventory : MonoBehaviour
         {
         }
     }
+
+    public void ClearInventory()
+    {
+        for (int i = 0; i < inventory.Count; i++)
+        {
+            inventory[i] = null;
+            inventoryObjects[i] = null;
+        }
+    }
+
+    public void SetItemAt(int index, Item item)
+    {
+        if (index >= 0 && index < inventorySize)
+        {
+            inventory[index] = item;
+            inventoryObjects[index] = null;
+        }
+    }
 }
