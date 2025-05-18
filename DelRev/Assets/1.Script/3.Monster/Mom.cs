@@ -2,38 +2,53 @@ using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
 
-// Monster Follow route
+// Monster Follow route with chase & attack sounds and chase-sound cooldown
+[RequireComponent(typeof(NavMeshAgent))]
 public class Mom : MonoBehaviour
 {
     public Transform[] patrolPoints;
     private int currentPatrolIndex;
+
     private enum State { Patrol, Chase, Return, Alert }
     private State currentState;
+    private State previousState;                // 이전 프레임 상태 저장용
+
     private Vector3 lastPatrolPosition;
     private Transform playerTransform;
     private NavMeshAgent agent;
 
-    public Transform introTriggerPoint;      // 이벤트 발생 지점
-    public float introTriggerRadius = 0.5f;    // 플레이어가 근처에 오면 이벤트 발생
-    public float introApproachDistance = 3f; // 몬스터가 어느 정도까지 다가가는지
-    private bool hasDoneIntro = false;       // 한 번만 실행되게
+    [Header("Intro Settings")]
+    public Transform introTriggerPoint;
+    public float introTriggerRadius = 0.5f;
+    public float introApproachDistance = 3f;
+    private bool hasDoneIntro = false;
 
+    [Header("Combat Settings")]
     public float detectionRange = 3f;
     public float attackRange = 2f;
-    public float damageAmount = 30f;     // 💥 1초당 줄 데미지
-    public float damageInterval = 1f;    // ⏱️ 1초마다
+    public float damageAmount = 30f;     // 1초당 데미지
+    public float damageInterval = 1f;    // 1초마다
     private float damageTimer = 0f;
-
     private PlayerController playerController;
+
+    [Header("Sound Sources")]
+    [Tooltip("추격 시작 시 재생할 AudioSource")]
+    public AudioSource chaseSource;
+    [Tooltip("공격할 때마다 재생할 AudioSource")]
+    public AudioSource attackSource;
+
+    [Header("Chase Sound Cooldown")]
+    [Tooltip("추격 사운드 재생 후 재생되지 않도록 대기할 시간(초)")]
+    public float chaseSoundCooldown = 7f;
+    private float chaseSoundTimer = 0f;
 
     private bool isShiftPressed = false;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-
-        // 초기 상태는 Patrol이 아닌 대기 상태로 설정
         currentState = State.Patrol;
+        previousState = currentState;
 
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
@@ -42,43 +57,40 @@ public class Mom : MonoBehaviour
             playerController = player.GetComponent<PlayerController>();
         }
 
-        startintro(); // 플레이어가 introTriggerPoint 근처에 올 때까지 기다린 후 이벤트 실행
-    }
-
-    void startintro()
-    {
-        if (introTriggerPoint == null || hasDoneIntro) return;
-
-        float distance = Vector3.Distance(playerTransform.position, introTriggerPoint.position);
-        if (distance < introTriggerRadius)
-        {
-            hasDoneIntro = true; // 한번만 실행되도록 설정
-            StartCoroutine(IntroApproachThenReturn());
-        }
+        TryStartIntro();
     }
 
     void Update()
     {
-        if (playerTransform == null || playerController == null) return;
-        // Ctrl 키가 눌렸는지 확인
+        if (playerTransform == null || playerController == null)
+            return;
+
+        // chase-sound 쿨다운 타이머 감소
+        if (chaseSoundTimer > 0f)
+            chaseSoundTimer -= Time.deltaTime;
+
+        // 이전 상태 저장
+        previousState = currentState;
+
+        // Shift (Ctrl) 키 체크
         isShiftPressed = Input.GetKey(KeyCode.LeftControl);
 
         float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
 
+        // 상태 머신
         switch (currentState)
         {
             case State.Patrol:
-                if (isShiftPressed && distanceToPlayer > 2f)
+                if (!(isShiftPressed && distanceToPlayer > 2f))
                 {
-                    currentState = State.Patrol;
-                }
-                else if (distanceToPlayer < detectionRange && HasLineOfSight())
-                {
-                    currentState = State.Chase;
-                }
-                else if (!agent.pathPending && agent.remainingDistance < 5f)
-                {
-                    GoToNextPatrolPoint();
+                    if (distanceToPlayer < detectionRange && HasLineOfSight())
+                    {
+                        currentState = State.Chase;
+                    }
+                    else if (!agent.pathPending && agent.remainingDistance < 0.5f)
+                    {
+                        GoToNextPatrolPoint();
+                    }
                 }
                 break;
 
@@ -96,7 +108,7 @@ public class Mom : MonoBehaviour
                 break;
 
             case State.Return:
-                if (distanceToPlayer > 2f && !HasLineOfSight()) // 플레이어가 충분히 멀어지면
+                if (distanceToPlayer > 2f && !HasLineOfSight())
                 {
                     currentState = State.Patrol;
                     GoToNextPatrolPoint();
@@ -105,7 +117,7 @@ public class Mom : MonoBehaviour
                 {
                     currentState = State.Chase;
                 }
-                else if (!agent.pathPending && agent.remainingDistance < 5f)
+                else if (!agent.pathPending && agent.remainingDistance < 0.5f)
                 {
                     currentState = State.Patrol;
                     GoToNextPatrolPoint();
@@ -113,12 +125,20 @@ public class Mom : MonoBehaviour
                 break;
 
             case State.Alert:
-                // 위험 상태에선 무조건 플레이어 추격
                 agent.SetDestination(playerTransform.position);
                 break;
         }
 
-        // 📌 공격 범위 안이면 데미지 주기
+        // 상태 전이 감지 & 추격 시작 사운드 재생 (쿨다운 체크)
+        if (currentState == State.Chase 
+            && previousState != State.Chase 
+            && chaseSoundTimer <= 0f)
+        {
+            chaseSource?.Play();
+            chaseSoundTimer = chaseSoundCooldown;
+        }
+
+        // 공격 범위 내 데미지 + 공격 사운드
         if (distanceToPlayer <= attackRange)
         {
             damageTimer += Time.deltaTime;
@@ -126,14 +146,59 @@ public class Mom : MonoBehaviour
             {
                 damageTimer = 0f;
                 playerController.health -= damageAmount;
+                attackSource?.Play();
                 Debug.Log($"💥 Monster attacked! Player HP: {playerController.health}");
             }
         }
         else
         {
-            // 범위 벗어나면 타이머 초기화
             damageTimer = 0f;
         }
+    }
+
+    // 플레이어가 introTriggerPoint 근처에 오면 이벤트 시작
+    void TryStartIntro()
+    {
+        if (introTriggerPoint == null || hasDoneIntro) return;
+
+        float dist = Vector3.Distance(playerTransform.position, introTriggerPoint.position);
+        if (dist < introTriggerRadius)
+        {
+            hasDoneIntro = true;
+            StartCoroutine(IntroApproachThenReturn());
+        }
+    }
+
+    IEnumerator IntroApproachThenReturn()
+    {
+        currentState = State.Return;
+        Vector3 originalPos = transform.position;
+
+        // 플레이어 근처로 이동
+        Vector3 dir = (playerTransform.position - transform.position).normalized;
+        Vector3 targetPos = playerTransform.position + dir * introApproachDistance;
+        agent.SetDestination(targetPos);
+
+        while (Vector3.Distance(transform.position, targetPos) > 2f)
+        {
+            if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+                break;
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(1.5f);
+
+        // 원래 위치로 복귀
+        agent.SetDestination(originalPos);
+        while (Vector3.Distance(transform.position, originalPos) > 2f)
+        {
+            if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+                break;
+            yield return null;
+        }
+
+        currentState = State.Patrol;
+        GoToNextPatrolPoint();
     }
 
     public void OnDangerGaugeMaxed()
@@ -141,30 +206,16 @@ public class Mom : MonoBehaviour
         currentState = State.Alert;
         agent.speed = 5f;
         damageAmount = 150f;
-
         Debug.Log("⚠️ 위험 상태 진입! 속도 및 공격력 증가");
     }
 
     bool HasLineOfSight()
     {
         RaycastHit hit;
-        Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
-
-        if (Physics.Raycast(transform.position, directionToPlayer, out hit, detectionRange))
-        {
+        Vector3 dir = (playerTransform.position - transform.position).normalized;
+        if (Physics.Raycast(transform.position, dir, out hit, detectionRange))
             return hit.collider.CompareTag("Player");
-        }
         return false;
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, detectionRange);
-
-        // 💥 공격 범위 시각화 (stopping distance)
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, GetComponent<NavMeshAgent>().stoppingDistance);
     }
 
     void GoToNextPatrolPoint()
@@ -173,45 +224,12 @@ public class Mom : MonoBehaviour
         agent.SetDestination(patrolPoints[currentPatrolIndex].position);
         currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
     }
-    
-    IEnumerator IntroApproachThenReturn()
+
+    private void OnDrawGizmosSelected()
     {
-        currentState = State.Return; // 임시 상태로 이동 제어
-        Vector3 originalPosition = transform.position;
-
-        // 플레이어 근처로 이동
-        Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
-        Vector3 targetPos = playerTransform.position + directionToPlayer * introApproachDistance;
-        agent.SetDestination(targetPos);
-
-        // 플레이어 근처로 이동할 때까지 대기 (2f 근처까지 다가가면 멈추기)
-        while (Vector3.Distance(transform.position, targetPos) > 2f)
-        {
-            if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
-            {
-                break;
-            }
-            yield return null;
-        }
-
-        // 잠시 대기
-        yield return new WaitForSeconds(1.5f);
-
-        // 본래 위치로 복귀
-        agent.SetDestination(originalPosition);
-
-        // 원래 위치로 돌아갈 때까지 대기 (2f 이내로 돌아가면 멈추기)
-        while (Vector3.Distance(transform.position, originalPosition) > 2f)
-        {
-            if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
-            {
-                break;
-            }
-            yield return null;
-        }
-
-        // Patrol로 상태 변경 및 순찰 지점으로 이동
-        currentState = State.Patrol;
-        GoToNextPatrolPoint();
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, detectionRange);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 }
