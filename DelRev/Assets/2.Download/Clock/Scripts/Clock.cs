@@ -12,7 +12,7 @@ public class Clock : MonoBehaviour {
     public GameObject pointerHours;
     
     //-- time speed factor
-    public float clockSpeed = 48.0f;     // 1.0f = realtime, < 1.0f = slower, > 1.0f = faster
+    public float clockSpeed = 32.0f;     // 1.0f = realtime, < 1.0f = slower, > 1.0f = faster
 
     //-- internal vars
     float msecs=0;
