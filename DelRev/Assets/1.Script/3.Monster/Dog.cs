@@ -13,10 +13,14 @@ public class Dog : MonoBehaviour
 
     [Header("Detection & Attack")]
     public float detectionRange = 5f;
-    [Tooltip("플레이어에게 데미지를 줄 사거리")] 
+    [Tooltip("플레이어에게 데미지를 줄 사거리")]
     public float attackRange = 2f;
     public float damageAmount = 10f;
     public float damageInterval = 1f;
+
+    [Header("Audio")]
+    [Tooltip("Hierarchy에 있는 Sound 오브젝트의 AudioSource를 할당")]
+    public AudioSource attackSoundSource;
 
     private float waitTimer = 0f;
     private float damageTimer = 0f;
@@ -29,8 +33,11 @@ public class Dog : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        // NavMeshAgent의 StoppingDistance를 attackRange와 동일하게 설정
         agent.stoppingDistance = attackRange;
+
+        // attackSoundSource는 에디터에서 할당되어 있다고 가정
+        if (attackSoundSource == null)
+            Debug.LogWarning("⚠️ Attack Sound Source가 할당되지 않았습니다!");
 
         currentState = State.Patrol;
         GoToRandomPosition();
@@ -106,7 +113,7 @@ public class Dog : MonoBehaviour
                 break;
         }
 
-        // 공격 로직: agent.stoppingDistance (attackRange) 이내일 때
+        // 공격 로직
         if (distanceToPlayer <= agent.stoppingDistance)
         {
             damageTimer += Time.deltaTime;
@@ -114,6 +121,11 @@ public class Dog : MonoBehaviour
             {
                 damageTimer = 0f;
                 playerController.health -= damageAmount;
+
+                // Hierarchy에 있는 AudioSource로 소리 재생
+                if (attackSoundSource != null)
+                    attackSoundSource.PlayOneShot(attackSoundSource.clip);
+
                 Debug.Log($"💥 Dog attacked! Player HP: {playerController.health}");
             }
         }

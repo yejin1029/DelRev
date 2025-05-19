@@ -4683,12 +4683,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   walkSpeed: 2.5
-  jumpHeight: 0.5
+  jumpHeight: 0.8
   gravity: -9.81
   highSpeedMultiplier: 2
   slowSpeedMultiplier: 0.5
   maxStamina: 100
-  staminaDecreaseRate: 20
+  staminaDecreaseRate: 15
   staminaRecoveryRate: 10
   runKey: 304
   crouchKey: 306
@@ -11649,6 +11649,9 @@ MonoBehaviour:
   attackRange: 2
   damageAmount: 10
   damageInterval: 1
+  chaseSource: {fileID: 0}
+  attackSource: {fileID: 0}
+  chaseSoundCooldown: 7
 --- !u!1001 &1132605456
 PrefabInstance:
   m_ObjectHideFlags: 0
