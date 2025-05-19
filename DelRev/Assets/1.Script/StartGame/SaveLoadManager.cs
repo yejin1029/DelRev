@@ -1,33 +1,56 @@
 ﻿using UnityEngine;
 using System.IO;
 using System.Collections.Generic;
+using System.Collections;
 
 public class SaveLoadManager : MonoBehaviour
 {
   public PlayerController player;
   public Inventory inventory;
+  public Transform cameraTransform;
 
   private string savePath;
-
-  void Start()
-  {
-    // 이어하기 상태라면 자동으로 불러오기
-    if (PlayerPrefs.HasKey("SavedGame"))
-    {
-      LoadGame();
-    }
-  }
 
   void Awake()
   {
     savePath = Application.persistentDataPath + "/save.json";
+    Debug.Log("[SaveLoadManager] Awake");
 
-    // 연결이 안 되어 있으면 자동으로 찾아 연결
     if (player == null)
+    {
       player = FindObjectOfType<PlayerController>();
+    }
 
     if (inventory == null)
+    {
       inventory = FindObjectOfType<Inventory>();
+    }
+
+    if (cameraTransform == null && player != null)
+    {
+      cameraTransform = player.cameraTransform;
+    }
+  }
+
+  void Start()
+  {
+    Debug.Log("[SaveLoadManager] Start");
+
+    if (PlayerPrefs.HasKey("SavedGame"))
+    {
+      Debug.Log("[SaveLoadManager] 이어하기 감지됨 → LoadGame 호출");
+      StartCoroutine(DelayedLoad());
+    }
+    else
+    {
+      var spawn = GameObject.Find("PlayerSpawnPoint");
+      if (spawn != null && player != null)
+      {
+        player.controller.enabled = false;
+        player.transform.position = spawn.transform.position;
+        player.controller.enabled = true;
+      }
+    }
   }
 
   void Update()
@@ -38,18 +61,18 @@ public class SaveLoadManager : MonoBehaviour
 
   public void SaveGame()
   {
+    PlayerPrefs.SetInt("SavedGame", 1);
+    PlayerPrefs.Save();
+
     SaveData data = new SaveData();
 
-    // 플레이어 위치
     Vector3 pos = player.transform.position;
     data.playerPosition = new float[] { pos.x, pos.y, pos.z };
 
-    // 상태 정보
     data.health = player.health;
     data.stamina = player.stamina;
     data.coinCount = player.coinCount;
 
-    // 인벤토리 정보
     var items = inventory.GetInventoryItems();
     data.inventoryItemNames = new List<string>();
     foreach (var item in items)
@@ -59,7 +82,11 @@ public class SaveLoadManager : MonoBehaviour
 
     data.currentInventoryIndex = inventory.GetCurrentIndex();
 
-    // JSON 저장
+    Vector3 localPos = cameraTransform.localPosition;
+    Vector3 localRot = cameraTransform.localEulerAngles;
+    data.cameraLocalPosition = new float[] { localPos.x, localPos.y, localPos.z };
+    data.cameraLocalRotation = new float[] { localRot.x, localRot.y, localRot.z };
+
     string json = JsonUtility.ToJson(data, true);
     File.WriteAllText(savePath, json);
     Debug.Log($"게임 저장됨: {savePath}");
@@ -82,18 +109,28 @@ public class SaveLoadManager : MonoBehaviour
     string json = File.ReadAllText(savePath);
     SaveData data = JsonUtility.FromJson<SaveData>(json);
 
-    // 위치 이동
-    player.controller.enabled = false; // 위치 이동 전 충돌 방지
     Vector3 pos = new Vector3(data.playerPosition[0], data.playerPosition[1], data.playerPosition[2]);
-    player.transform.position = pos;
-    player.controller.enabled = true;
 
-    // 상태 정보 복원
+    if (pos.y < 1f)
+    {
+      var spawn = GameObject.Find("PlayerSpawnPoint");
+      if (spawn != null)
+      {
+        Debug.LogWarning("플레이어 위치가 너무 낮아 SpawnPoint로 보정");
+        pos = spawn.transform.position;
+      }
+      else
+      {
+        pos.y = 3f;
+      }
+    }
+
+    StartCoroutine(MovePlayerNextFrame(pos));
+
     player.health = data.health;
     player.stamina = data.stamina;
     player.coinCount = data.coinCount;
 
-    // 인벤토리 복원
     inventory.ClearInventory();
     for (int i = 0; i < data.inventoryItemNames.Count; i++)
     {
@@ -107,15 +144,52 @@ public class SaveLoadManager : MonoBehaviour
         }
       }
     }
-
     inventory.ChangeSelectedSlot(data.currentInventoryIndex);
+
+    if (cameraTransform != null && data.cameraLocalPosition != null && data.cameraLocalRotation != null)
+    {
+      Vector3 camLocalPos = new Vector3(
+          data.cameraLocalPosition[0],
+          data.cameraLocalPosition[1],
+          data.cameraLocalPosition[2]
+      );
+      cameraTransform.localPosition = camLocalPos;
+
+      Vector3 camLocalRot = new Vector3(
+          data.cameraLocalRotation[0],
+          data.cameraLocalRotation[1],
+          data.cameraLocalRotation[2]
+      );
+      cameraTransform.localEulerAngles = camLocalRot;
+    }
+
     Debug.Log("게임 불러오기 완료");
   }
 
   public void ResetSave()
   {
-    string path = Application.persistentDataPath + "/save.json";
-    if (File.Exists(path)) File.Delete(path);
+    if (File.Exists(savePath)) File.Delete(savePath);
     PlayerPrefs.DeleteKey("SavedGame");
+    Debug.Log("저장 데이터 초기화 완료");
+  }
+
+  private IEnumerator MovePlayerNextFrame(Vector3 targetPosition)
+  {
+    yield return null;
+    yield return null;
+
+    player.controller.enabled = false;
+    player.transform.position = targetPosition;
+    yield return null;
+    player.controller.enabled = true;
+
+    Debug.Log("플레이어 위치 이동 완료: " + targetPosition);
+  }
+
+  private IEnumerator DelayedLoad()
+  {
+    yield return null;
+    yield return null;
+    LoadGame();
   }
 }

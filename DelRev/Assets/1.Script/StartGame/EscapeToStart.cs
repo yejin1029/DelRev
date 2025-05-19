@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,8 +8,18 @@ public class EscapeToStart : MonoBehaviour
   {
     if (Input.GetKeyDown(KeyCode.Escape))
     {
-      FindObjectOfType<SaveLoadManager>()?.SaveGame(); // 자동 저장
-      SceneManager.LoadScene("StartScene");
+      StartCoroutine(SaveAndReturnToStart());
     }
+  }
+
+  private IEnumerator SaveAndReturnToStart()
+  {
+    var saveManager = FindObjectOfType<SaveLoadManager>();
+    if (saveManager != null)
+    {
+      saveManager.SaveGame();
+    }
+    yield return null;
+    SceneManager.LoadScene("StartScene");
   }
 }

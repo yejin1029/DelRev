@@ -27,6 +27,7 @@ public class StartMenu : MonoBehaviour
   {
     if (PlayerPrefs.HasKey("SavedGame"))
     {
+      Debug.Log("[StartMenu] 이어하기 선택됨 → PlayerTest 로드");
       SceneManager.LoadScene("PlayerTest");
     }
     else

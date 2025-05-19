@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 [Serializable]
 public class SaveData
@@ -9,6 +8,10 @@ public class SaveData
   public float health;
   public float stamina;
   public int coinCount;
+
   public List<string> inventoryItemNames;
   public int currentInventoryIndex;
+
+  public float[] cameraLocalPosition;
+  public float[] cameraLocalRotation;
 }
