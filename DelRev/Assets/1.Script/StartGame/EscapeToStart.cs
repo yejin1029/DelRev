@@ -6,7 +6,7 @@ public class EscapeToStart : MonoBehaviour
 {
   void Update()
   {
-    if (Input.GetKeyDown(KeyCode.Escape))
+    if (Input.GetKeyDown(KeyCode.F1))
     {
       StartCoroutine(SaveAndReturnToStart());
     }

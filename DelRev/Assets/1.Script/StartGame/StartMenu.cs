@@ -13,13 +13,18 @@ public class StartMenu : MonoBehaviour
 
   public void OnNewGame()
   {
-    // 기존 저장 데이터 완전히 초기화
-    SaveLoadManager resetter = FindObjectOfType<SaveLoadManager>();
-    resetter?.ResetSave();
+    // PlayerPrefs 키 삭제
+    PlayerPrefs.DeleteKey("SavedGame");
 
-    PlayerPrefs.SetInt("SavedGame", 1);
-    PlayerPrefs.Save();
+    // 저장된 json 파일도 삭제
+    string savePath = Application.persistentDataPath + "/save.json";
+    if (System.IO.File.Exists(savePath))
+    {
+      System.IO.File.Delete(savePath);
+      Debug.Log("[StartMenu] 이전 저장 파일 삭제됨");
+    }
 
+    // 새 게임 시작
     SceneManager.LoadScene("PlayerTest");
   }
 

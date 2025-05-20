@@ -14,7 +14,7 @@ public class Inventory : MonoBehaviour
     public List<Item> GetInventoryItems()
     {
         return inventory;
-      }
+    }
 
       public int GetCurrentIndex()
       {
@@ -26,7 +26,14 @@ public class Inventory : MonoBehaviour
           return inventorySize;
       }
 
-    void Start()
+  private InventoryUI inventoryUI;
+
+  void Awake()
+  {
+    inventoryUI = FindObjectOfType<InventoryUI>();
+  }
+
+  void Start()
     {
         // 고정 크기의 인벤토리 공간 초기화
         for (int i = 0; i < inventorySize; i++)
@@ -116,6 +123,7 @@ public class Inventory : MonoBehaviour
         }
 
         currentIndex = slotIndex;
+        inventoryUI?.UpdateSlotHighlight(currentIndex);
 
         if (inventory[currentIndex] != null)
         {
@@ -132,6 +140,8 @@ public class Inventory : MonoBehaviour
             inventory[i] = null;
             inventoryObjects[i] = null;
         }
+
+        inventoryUI?.UpdateInventoryUI();
     }
 
     public void SetItemAt(int index, Item item)
@@ -140,6 +150,8 @@ public class Inventory : MonoBehaviour
         {
             inventory[index] = item;
             inventoryObjects[index] = null;
+
+            inventoryUI?.UpdateInventoryUI();
         }
     }
 }

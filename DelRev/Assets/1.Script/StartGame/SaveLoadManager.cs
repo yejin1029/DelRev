@@ -26,23 +26,34 @@ public class SaveLoadManager : MonoBehaviour
       inventory = FindObjectOfType<Inventory>();
     }
 
-    if (cameraTransform == null && player != null)
+    if (cameraTransform == null || cameraTransform.gameObject == null)
     {
-      cameraTransform = player.cameraTransform;
+      var cam = Camera.main;
+      if (cam != null)
+      {
+        cameraTransform = cam.transform;
+        Debug.Log("[SaveLoadManager] cameraTransform 재설정 성공");
+      }
+      else
+      {
+        Debug.LogWarning("[SaveLoadManager] 유효한 Camera.main 없음");
+      }
     }
   }
 
   void Start()
   {
-    Debug.Log("[SaveLoadManager] Start");
+    string savePath = Application.persistentDataPath + "/save.json";
 
-    if (PlayerPrefs.HasKey("SavedGame"))
+    if (PlayerPrefs.HasKey("SavedGame") && File.Exists(savePath))
     {
-      Debug.Log("[SaveLoadManager] 이어하기 감지됨 → LoadGame 호출");
+      Debug.Log("[SaveLoadManager] 저장된 데이터 감지됨 → LoadGame 호출");
       StartCoroutine(DelayedLoad());
     }
     else
     {
+      Debug.Log("[SaveLoadManager] 새 게임 시작 → PlayerSpawnPoint로 이동");
+
       var spawn = GameObject.Find("PlayerSpawnPoint");
       if (spawn != null && player != null)
       {
@@ -67,7 +78,7 @@ public class SaveLoadManager : MonoBehaviour
     SaveData data = new SaveData();
 
     Vector3 pos = player.transform.position;
-    data.playerPosition = new float[] { pos.x, pos.y, pos.z };
+    data.playerPosition = new float[] { pos.x, 5, pos.z };
 
     data.health = player.health;
     data.stamina = player.stamina;
@@ -146,7 +157,7 @@ public class SaveLoadManager : MonoBehaviour
     }
     inventory.ChangeSelectedSlot(data.currentInventoryIndex);
 
-    if (cameraTransform != null && data.cameraLocalPosition != null && data.cameraLocalRotation != null)
+    if (cameraTransform != null && cameraTransform.gameObject != null && data.cameraLocalPosition != null && data.cameraLocalRotation != null)
     {
       Vector3 camLocalPos = new Vector3(
           data.cameraLocalPosition[0],
@@ -161,9 +172,26 @@ public class SaveLoadManager : MonoBehaviour
           data.cameraLocalRotation[2]
       );
       cameraTransform.localEulerAngles = camLocalRot;
+
+      Debug.Log("[SaveLoadManager] 카메라 복원 완료");
+    }
+    else
+    {
+      Debug.LogWarning("[SaveLoadManager] 카메라 복원 생략 - 유효하지 않음");
     }
 
-    Debug.Log("게임 불러오기 완료");
+    InventoryUI ui = FindObjectOfType<InventoryUI>();
+    if (ui != null)
+    {
+      ui.UpdateInventoryUI();
+      ui.UpdateSlotHighlight(inventory.GetCurrentIndex());
+      Debug.Log("[SaveLoadManager] 인벤토리 UI 강제 갱신 완료");
+    }
+
+    foreach (var item in inventory.GetInventoryItems())
+    {
+      Debug.Log($"[DEBUG] 인벤토리 아이템: {(item != null ? item.itemName : "비어있음")}");
+    }
   }
 
   public void ResetSave()

@@ -45,8 +45,8 @@ public class InventoryUI : MonoBehaviour
     UpdateSlotHighlight(inventory.GetCurrentIndex());
   }
 
-void UpdateInventoryUI()
-{
+  public void UpdateInventoryUI()
+  {
     var items = inventory.GetInventoryItems();
 
     for (int i = 0; i < slotImages.Count; i++)
@@ -64,10 +64,10 @@ void UpdateInventoryUI()
             slotImages[i].color = new Color(1, 1, 1, 0); // 투명 처리
         }
     }
-}
+  }
 
 
-  void UpdateSlotHighlight(int currentIndex)
+  public void UpdateSlotHighlight(int currentIndex)
   {
       for (int i = 0; i < slotImages.Count; i++)
       {
