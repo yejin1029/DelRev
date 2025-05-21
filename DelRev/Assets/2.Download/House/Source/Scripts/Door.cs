@@ -24,7 +24,7 @@ public class Door : MonoBehaviour {
 	public bool applyRotationFix = false;
 	public rotFixAxis rotationAxisFix;
 	public float doorOpenAngle = 90.0f;
-	[Range(1,15)] public float speed = 10.0f;
+	[Range(1,15)] public float speed = 8.0f;
 
 	public AudioClip doorOpenSound;
 	public AudioClip doorCloseSound;
@@ -85,6 +85,15 @@ public class Door : MonoBehaviour {
 			}
 		}
 	}
+
+	public void OpenDoorForMonster() {
+    if (!doorStatus) { // 문이 닫혀있을 때만 실행
+        StartCoroutine(this.moveDoor(doorOpen));
+        if (doorOpenSound != null) {
+            AudioSource.PlayClipAtPoint(doorOpenSound, this.transform.position);
+        }
+    }
+}
 
 	IEnumerator delayedCloseAudio(float delay){
 		yield return new WaitForSeconds (delay);

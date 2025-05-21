@@ -9,7 +9,7 @@ public class Mom : MonoBehaviour
     public Transform[] patrolPoints;
     private int currentPatrolIndex;
 
-    private enum State { Patrol, Chase, Return, Alert }
+    private enum State { None, Patrol, Chase, Return, Alert }
     private State currentState;
     private State previousState;                // 이전 프레임 상태 저장용
 
@@ -18,9 +18,11 @@ public class Mom : MonoBehaviour
     private NavMeshAgent agent;
 
     [Header("Intro Settings")]
-    public Transform introTriggerPoint;
-    public float introTriggerRadius = 0.5f;
-    public float introApproachDistance = 3f;
+    public Transform[] approachPoints; // 이동할 위치 배열
+    private float waitDistance = 1f; // 플레이어가 얼마나 가까이 와야 기다림이 끝나는지
+    private float checkInterval = 0.5f; // 플레이어 거리 체크 간격
+
+    public Transform lastPatrolPoint = null;
     private bool hasDoneIntro = false;
 
     [Header("Combat Settings")]
@@ -47,7 +49,7 @@ public class Mom : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        currentState = State.Patrol;
+        currentState = State.None;
         previousState = currentState;
 
         GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -57,11 +59,16 @@ public class Mom : MonoBehaviour
             playerController = player.GetComponent<PlayerController>();
         }
 
-        TryStartIntro();
+        StartCoroutine(IntroApproachThenReturn());
     }
 
     void Update()
     {
+        if (currentState == State.None)
+        {     
+            return;
+        }
+
         if (playerTransform == null || playerController == null)
             return;
 
@@ -130,8 +137,8 @@ public class Mom : MonoBehaviour
         }
 
         // 상태 전이 감지 & 추격 시작 사운드 재생 (쿨다운 체크)
-        if (currentState == State.Chase 
-            && previousState != State.Chase 
+        if (currentState == State.Chase
+            && previousState != State.Chase
             && chaseSoundTimer <= 0f)
         {
             chaseSource?.Play();
@@ -154,51 +161,6 @@ public class Mom : MonoBehaviour
         {
             damageTimer = 0f;
         }
-    }
-
-    // 플레이어가 introTriggerPoint 근처에 오면 이벤트 시작
-    void TryStartIntro()
-    {
-        if (introTriggerPoint == null || hasDoneIntro) return;
-
-        float dist = Vector3.Distance(playerTransform.position, introTriggerPoint.position);
-        if (dist < introTriggerRadius)
-        {
-            hasDoneIntro = true;
-            StartCoroutine(IntroApproachThenReturn());
-        }
-    }
-
-    IEnumerator IntroApproachThenReturn()
-    {
-        currentState = State.Return;
-        Vector3 originalPos = transform.position;
-
-        // 플레이어 근처로 이동
-        Vector3 dir = (playerTransform.position - transform.position).normalized;
-        Vector3 targetPos = playerTransform.position + dir * introApproachDistance;
-        agent.SetDestination(targetPos);
-
-        while (Vector3.Distance(transform.position, targetPos) > 2f)
-        {
-            if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
-                break;
-            yield return null;
-        }
-
-        yield return new WaitForSeconds(1.5f);
-
-        // 원래 위치로 복귀
-        agent.SetDestination(originalPos);
-        while (Vector3.Distance(transform.position, originalPos) > 2f)
-        {
-            if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
-                break;
-            yield return null;
-        }
-
-        currentState = State.Patrol;
-        GoToNextPatrolPoint();
     }
 
     public void OnDangerGaugeMaxed()
@@ -231,5 +193,64 @@ public class Mom : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, detectionRange);
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, attackRange);
+    }
+
+    //문 여는 코드
+    private void CheckForDoorAndInteract()
+    {
+        RaycastHit hit;
+        Vector3 forward = transform.forward;
+
+        // 문을 감지할 거리
+        float checkDistance = 3.0f;
+
+        if (Physics.Raycast(transform.position + Vector3.up * 0.5f, forward, out hit, checkDistance))
+        {
+            SuburbanHouse.Door door = hit.collider.GetComponent<SuburbanHouse.Door>();
+            if (door != null)
+            {
+                door.OpenDoorForMonster(); // 문 열기
+                Debug.Log("👹 엄마가 문을 열었어요!");
+            }
+        }
+    }
+        
+    IEnumerator IntroApproachThenReturn()
+    {
+        // 순차적으로 각 지점으로 이동하면서 플레이어를 기다림
+        for (int i = 0; i < approachPoints.Length; i++)
+        {
+            Vector3 point = approachPoints[i].position;
+            agent.SetDestination(point);
+
+            // 오브젝트가 해당 위치로 이동할 때까지 대기
+            while (Vector3.Distance(transform.position, point) > 1f)
+            {
+                CheckForDoorAndInteract();
+                if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+                    break;
+                yield return null;
+            }
+
+            // 플레이어가 해당 지점에 가까이 올 때까지 대기
+            while (Vector3.Distance(playerTransform.position, point) > waitDistance)
+            {
+                yield return new WaitForSeconds(checkInterval);
+            }
+
+            lastPatrolPoint = approachPoints[i];
+        }
+
+        // 마지막 지점 도달 + 플레이어도 근처에 있는 상태
+        if (lastPatrolPoint != null)
+        {
+            Vector3 point = lastPatrolPoint.position;
+            agent.SetDestination(point);
+        }
+
+        currentState = State.Patrol;
+        GoToNextPatrolPoint();
+
+        yield break;
     }
 }
