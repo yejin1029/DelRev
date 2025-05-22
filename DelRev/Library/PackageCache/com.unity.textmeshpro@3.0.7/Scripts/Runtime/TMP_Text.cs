@@ -6070,16 +6070,6 @@ namespace TMPro
                     m_Underline.character = TMP_FontAssetUtilities.GetCharacterFromFontAsset(0x5F, TMP_Settings.defaultFontAsset, true, m_FontStyleInternal, m_FontWeightInternal, out isUsingAlternativeTypeface, out tempFontAsset);
             }
             */
-
-            if (character != null)
-            {
-                m_Underline = new SpecialCharacter(character, 0);
-            }
-            else
-            {
-                if (!TMP_Settings.warningsDisabled)
-                    Debug.LogWarning("The character used for Underline is not available in font asset [" + fontAsset.name + "].", this);
-            }
         }
 
 
