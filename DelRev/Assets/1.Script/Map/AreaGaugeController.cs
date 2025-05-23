@@ -19,7 +19,8 @@ public class AreaGaugeController : MonoBehaviour
     public Mom targetMonster;
 
     [Header("Toggle Target (will blink at full gauge)")]
-    [Tooltip("게이지가 100이 되는 순간부터 1초마다 활성/비활성될 오브젝트")]
+    [Tooltip("게이지가 100이 되는 순간부터 1초마다 활성/비활성될 오브젝트\n" +
+             "에디터에서 지정하지 않으면 MainCanvas/Filter를 찾아 할당합니다.")]
     public GameObject toggleTarget;
 
     [Header("UI References")]
@@ -38,6 +39,32 @@ public class AreaGaugeController : MonoBehaviour
     {
         var col = GetComponent<Collider>();
         col.isTrigger = true;
+    }
+
+    void Awake()
+    {
+        // toggleTarget이 할당되지 않은 경우, MainCanvas/Filter를 찾아서 자동 할당
+        if (toggleTarget == null)
+        {
+            var mainCanvas = GameObject.Find("MainCanvas");
+            if (mainCanvas != null)
+            {
+                var filter = mainCanvas.transform.Find("Filter");
+                if (filter != null)
+                {
+                    toggleTarget = filter.gameObject;
+                    Debug.Log("AreaGaugeController: toggleTarget을 MainCanvas/Filter로 자동 할당했습니다.");
+                }
+                else
+                {
+                    Debug.LogWarning("AreaGaugeController: 'MainCanvas/Filter' 오브젝트를 찾을 수 없습니다.");
+                }
+            }
+            else
+            {
+                Debug.LogWarning("AreaGaugeController: 'MainCanvas' 오브젝트를 찾을 수 없습니다.");
+            }
+        }
     }
 
     void Update()
