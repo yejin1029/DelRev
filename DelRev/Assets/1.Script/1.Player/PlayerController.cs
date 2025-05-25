@@ -1,239 +1,267 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;  // 씬 전환용
 using System.Collections;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
-  [Header("Stats")]
-  public float health = 100f;
+    [Header("Stats")]
+    public float health = 100f;
 
-  [Header("Movement Settings")]
-  public float walkSpeed = 1f;
-  public float jumpHeight = 0.3f;
-  public float gravity = -9.81f;
+    [Header("Movement Settings")]
+    public float walkSpeed = 1f;
+    public float jumpHeight = 0.3f;
+    public float gravity = -9.81f;
 
-  [Tooltip("Shift 키 누를 때 몇 배 빨라질지")]
-  public float highSpeedMultiplier = 1.3f;
+    [Tooltip("Shift 키 누를 때 몇 배 빨라질지")]
+    public float highSpeedMultiplier = 1.3f;
 
-  [Tooltip("Ctrl 키 누를 때 몇 배 느려질지")]
-  public float slowSpeedMultiplier = 0.5f;
+    [Tooltip("Ctrl 키 누를 때 몇 배 느려질지")]
+    public float slowSpeedMultiplier = 0.5f;
 
-  [Header("Stamina Settings")]
-  public float maxStamina = 100f;
-  public float staminaDecreaseRate = 20f;
-  public float staminaRecoveryRate = 10f;
+    [Header("Stamina Settings")]
+    public float maxStamina = 100f;
+    public float staminaDecreaseRate = 20f;
+    public float staminaRecoveryRate = 10f;
 
-  [Header("Controls")]
-  public KeyCode runKey = KeyCode.LeftShift;
-  public KeyCode crouchKey = KeyCode.LeftControl;
-  public KeyCode jumpKey = KeyCode.Space;
+    [Header("Controls")]
+    public KeyCode runKey = KeyCode.LeftShift;
+    public KeyCode crouchKey = KeyCode.LeftControl;
+    public KeyCode jumpKey = KeyCode.Space;
 
-  [Header("Mouse Look")]
-  public float mouseSensitivity = 100f;
-  public Transform cameraTransform;
+    [Header("Mouse Look")]
+    public float mouseSensitivity = 100f;
+    public Transform cameraTransform;
 
-  [Header("Runtime Debug")]
-  public float stamina;
-  public float currentSpeed;
+    [Header("Runtime Debug")]
+    public float stamina;
+    public float currentSpeed;
 
-  [Header("Coin System")]
-  [Tooltip("플레이어가 획득한 코인(금액) 총합")]
-  public int coinCount = 0;
+    [Header("Coin System")]
+    [Tooltip("플레이어가 획득한 코인(금액) 총합")]
+    public int coinCount = 0;
 
-  [Header("Control Lock")]
-  public bool isLocked = false;
+    [Header("Control Lock")]
+    public bool isLocked = false;
 
-  // UI 관련 변수 추가 (예진)
-  [Header("UI References")]
-  public Image staminaImage;
-  public Sprite[] staminaSprites;
-  public Image healthFillImage;
-  public CoinUI coinUI;
+    // UI 관련 변수
+    [Header("UI References")]
+    public Image staminaImage;
+    public Sprite[] staminaSprites;
+    public Image healthFillImage;
+    public CoinUI coinUI;
 
-  private float xRotation = 0f;
-  public CharacterController controller;
-  private Vector3 velocity;
-  private bool isGrounded;
-  private bool isCrouching;
-  private bool isRunning;
-  private bool exhausted = false;
+    private float xRotation = 0f;
+    private CharacterController controller;
+    private Vector3 velocity;
+    private bool isGrounded;
+    private bool isCrouching;
+    private bool isRunning;
+    private bool exhausted = false;
 
-  // 체력 깜빡임 관련
-  private Color originalHealthColor;
-  private Coroutine healthFlashCoroutine;
+    // 체력 깜빡임
+    private Color originalHealthColor;
+    private Coroutine healthFlashCoroutine;
 
-  private void Start()
-  {
-    controller = GetComponent<CharacterController>();
-    stamina = maxStamina;
+    // 사망 플래그
+    private bool isDead = false;
 
-    if (healthFillImage != null)
-      originalHealthColor = healthFillImage.color;
-
-    Cursor.lockState = CursorLockMode.Locked;
-    Cursor.visible = false;
-  }
-
-  private void Update()
-  {
-    if (isLocked) return;
-
-    HandleMouseLook();
-    HandleMovement();
-    HandleStamina();
-    UpdateStaminaUI();
-    UpdateHealthUI();
-  }
-
-  void HandleMouseLook()
-  {
-    float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-    float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
-
-    xRotation -= mouseY;
-    xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-
-    if (cameraTransform != null)
-      cameraTransform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-
-    transform.Rotate(Vector3.up * mouseX);
-  }
-
-  void HandleMovement()
-  {
-    isGrounded = controller.isGrounded;
-    if (isGrounded && velocity.y < 0f)
-      velocity.y = -2f;
-
-    Vector3 move = transform.right * Input.GetAxis("Horizontal")
-                 + transform.forward * Input.GetAxis("Vertical");
-    move.Normalize();
-
-    currentSpeed = walkSpeed;
-    isCrouching = Input.GetKey(crouchKey);
-    if (isCrouching)
-      currentSpeed *= slowSpeedMultiplier;
-
-    bool canRun = Input.GetKey(runKey) && !isCrouching
-                  && move != Vector3.zero && !exhausted;
-    isRunning = canRun;
-    if (canRun)
-      currentSpeed *= highSpeedMultiplier;
-
-    controller.Move(move * currentSpeed * Time.deltaTime);
-
-    if (Input.GetKeyDown(jumpKey) && isGrounded)
-      velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
-
-    velocity.y += gravity * Time.deltaTime;
-    controller.Move(velocity * Time.deltaTime);
-  }
-
-  void HandleStamina()
-  {
-    if (isRunning)
+    private void Start()
     {
-      stamina -= staminaDecreaseRate * Time.deltaTime;
-      if (stamina <= 0f)
-      {
-        stamina = 0f;
-        exhausted = true;
-      }
-    }
-    else
-    {
-      stamina += staminaRecoveryRate * Time.deltaTime;
-      if (exhausted && stamina >= 20f)
-        exhausted = false;
-    }
-    stamina = Mathf.Clamp(stamina, 0f, maxStamina);
-  }
+        controller = GetComponent<CharacterController>();
+        stamina = maxStamina;
 
-  public void AddCoins(int amount)
-  {
-    coinCount += amount;
-    Debug.Log($"[PlayerController] AddCoins: +{amount}, Total = {coinCount}");
+        if (healthFillImage != null)
+            originalHealthColor = healthFillImage.color;
 
-    if (coinUI == null)
-      coinUI = FindObjectOfType<CoinUI>(); // 자동 참조
+        // Start 시점에 health가 0 이하라면 즉시 사망 처리
+        if (health <= 0f)
+        {
+            Die();
+            return;
+        }
 
-    if (coinUI != null)
-      coinUI.UpdateCoinText(coinCount);
-  }
-
-  private void OnTriggerEnter(Collider other)
-  {
-    if (other.CompareTag("Coin"))
-    {
-      AddCoins(1);
-      Destroy(other.gameObject);
-      return;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
-    if (other.CompareTag("Item"))
+    private void Update()
     {
-      var item = other.GetComponent<Item>();
-      if (item != null)
-      {
-        AddCoins(item.itemPrice);
-        Destroy(other.gameObject);
-      }
+        // Update 매 프레임에도 health가 0 이하라면 Die() 호출
+        if (!isDead && health <= 0f)
+        {
+            Die();
+            return;
+        }
+
+        if (isLocked || isDead) return;
+
+        HandleMouseLook();
+        HandleMovement();
+        HandleStamina();
+        UpdateStaminaUI();
+        UpdateHealthUI();
     }
-  }
 
-  public void TakeDamage(float amount)
-  {
-    health -= amount;
-    health = Mathf.Clamp(health, 0f, 100f);
-
-    UpdateHealthUI();
-    FlashHealthUI();
-  }
-
-  // 체력 닳을 시 UI 색 변화
-  void FlashHealthUI()
-  {
-    if (healthFillImage == null) return;
-
-    if (healthFlashCoroutine != null)
-      StopCoroutine(healthFlashCoroutine);
-
-    healthFlashCoroutine = StartCoroutine(FlashCoroutine());
-  }
-
-  IEnumerator FlashCoroutine()
-  {
-    if (healthFillImage != null)
+    void HandleMouseLook()
     {
-      // 마테리얼 제거
-      healthFillImage.material = null;
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
-      healthFillImage.color = Color.red;
-      yield return new WaitForSeconds(0.2f); // 깜빡이는 시간
-      healthFillImage.color = originalHealthColor;
+        xRotation -= mouseY;
+        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+
+        if (cameraTransform != null)
+            cameraTransform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+
+        transform.Rotate(Vector3.up * mouseX);
     }
-  }
 
-  // 스태미나 UI 업데이트
-  void UpdateStaminaUI()
-  {
-    if (staminaSprites == null || staminaSprites.Length == 0 || staminaImage == null)
-      return;
-
-    float staminaRatio = stamina / maxStamina;
-    int index = Mathf.Clamp(Mathf.FloorToInt(staminaRatio * (staminaSprites.Length - 1)), 0, staminaSprites.Length - 1);
-
-    staminaImage.sprite = staminaSprites[index];
-  }
-
-  // 체력 UI 업데이트
-  void UpdateHealthUI()
-  {
-    if (healthFillImage != null)
+    void HandleMovement()
     {
-      float healthRatio = health / 100f;
-      healthFillImage.fillAmount = Mathf.Clamp01(healthRatio);
+        isGrounded = controller.isGrounded;
+        if (isGrounded && velocity.y < 0f)
+            velocity.y = -2f;
+
+        Vector3 move = transform.right * Input.GetAxis("Horizontal")
+                     + transform.forward * Input.GetAxis("Vertical");
+        move.Normalize();
+
+        currentSpeed = walkSpeed;
+        isCrouching = Input.GetKey(crouchKey);
+        if (isCrouching)
+            currentSpeed *= slowSpeedMultiplier;
+
+        bool canRun = Input.GetKey(runKey) && !isCrouching
+                      && move != Vector3.zero && !exhausted;
+        isRunning = canRun;
+        if (canRun)
+            currentSpeed *= highSpeedMultiplier;
+
+        controller.Move(move * currentSpeed * Time.deltaTime);
+
+        if (Input.GetKeyDown(jumpKey) && isGrounded)
+            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+
+        velocity.y += gravity * Time.deltaTime;
+        controller.Move(velocity * Time.deltaTime);
     }
-  }
+
+    void HandleStamina()
+    {
+        if (isRunning)
+        {
+            stamina -= staminaDecreaseRate * Time.deltaTime;
+            if (stamina <= 0f)
+            {
+                stamina = 0f;
+                exhausted = true;
+            }
+        }
+        else
+        {
+            stamina += staminaRecoveryRate * Time.deltaTime;
+            if (exhausted && stamina >= 20f)
+                exhausted = false;
+        }
+        stamina = Mathf.Clamp(stamina, 0f, maxStamina);
+    }
+
+    public void AddCoins(int amount)
+    {
+        coinCount += amount;
+        Debug.Log($"[PlayerController] AddCoins: +{amount}, Total = {coinCount}");
+
+        if (coinUI == null)
+            coinUI = FindObjectOfType<CoinUI>();
+
+        if (coinUI != null)
+            coinUI.UpdateCoinText(coinCount);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Coin"))
+        {
+            AddCoins(1);
+            Destroy(other.gameObject);
+            return;
+        }
+
+        if (other.CompareTag("Item"))
+        {
+            var item = other.GetComponent<Item>();
+            if (item != null)
+            {
+                AddCoins(item.itemPrice);
+                Destroy(other.gameObject);
+            }
+        }
+    }
+
+    public void TakeDamage(float amount)
+    {
+        if (isDead) return;
+
+        health -= amount;
+        health = Mathf.Clamp(health, 0f, 100f);
+
+        UpdateHealthUI();
+        FlashHealthUI();
+
+        if (health <= 0f)
+            Die();
+    }
+
+    private void Die()
+    {
+        if (isDead) return;
+        isDead = true;
+
+        Debug.Log("[PlayerController] Player died. Loading GameOver scene...");
+        isLocked = true;
+        SceneManager.LoadScene("GameOver");
+    }
+
+    void FlashHealthUI()
+    {
+        if (healthFillImage == null) return;
+
+        if (healthFlashCoroutine != null)
+            StopCoroutine(healthFlashCoroutine);
+
+        healthFlashCoroutine = StartCoroutine(FlashCoroutine());
+    }
+
+    IEnumerator FlashCoroutine()
+    {
+        healthFillImage.material = null;
+        healthFillImage.color = Color.red;
+        yield return new WaitForSeconds(0.2f);
+        healthFillImage.color = originalHealthColor;
+    }
+
+    void UpdateStaminaUI()
+    {
+        if (staminaSprites == null || staminaSprites.Length == 0 || staminaImage == null)
+            return;
+
+        float staminaRatio = stamina / maxStamina;
+        int index = Mathf.Clamp(
+            Mathf.FloorToInt(staminaRatio * (staminaSprites.Length - 1)),
+            0, staminaSprites.Length - 1
+        );
+
+        staminaImage.sprite = staminaSprites[index];
+    }
+
+    void UpdateHealthUI()
+    {
+        if (healthFillImage != null)
+        {
+            float healthRatio = health / 100f;
+            healthFillImage.fillAmount = Mathf.Clamp01(healthRatio);
+        }
+    }
 }
