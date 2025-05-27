@@ -1,15 +1,12 @@
-// SceneChanger.cs
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class SceneChanger : MonoBehaviour
 {
     [Header("씬 이름 설정")]
-    public string sceneMoveName  = "Scene_move";
+    public string sceneMoveName = "Scene_move";
     public string playerTestName = "PlayerTest";
-
-    [Header("트레일러 주변 반경(보호 영역)")]
-    public float keepRadius = 5f;
 
     void Update()
     {
@@ -21,19 +18,36 @@ public class SceneChanger : MonoBehaviour
 
     public void ChangeScene(string targetScene)
     {
+        StartCoroutine(DelayedSceneChange(targetScene));
+    }
+
+    IEnumerator DelayedSceneChange(string targetScene)
+    {
         CleanUpLooseItems();
+        yield return null;
         SceneManager.LoadScene(targetScene);
     }
 
     public void CleanUpLooseItems()
     {
-        // 1) 씬 안의 현재 트레일러 찾기
-        var trailerObj = GameObject.FindGameObjectWithTag("Car");
-        if (trailerObj == null)
+        GameObject[] allItems = GameObject.FindGameObjectsWithTag("Item");
+        int removed = 0;
+
+        foreach (GameObject item in allItems)
         {
-            Debug.LogWarning("CleanUpLooseItems: 트레일러(Car) 오브젝트를 찾을 수 없습니다.");
-            return;
+            Transform parent = item.transform.parent;
+
+            bool isInsideTrailer =
+                parent != null &&
+                (parent.CompareTag("Car") || parent.GetComponentInParent<CarTrigger>() != null);
+
+            if (!isInsideTrailer)
+            {
+                Destroy(item);
+                removed++;
+            }
         }
-        Vector3 trailerPos = trailerObj.transform.position;
+
+        Debug.Log($"🧹 트레일러 외부 아이템 {removed}개 제거 완료");
     }
 }

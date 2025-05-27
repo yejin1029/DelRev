@@ -1,29 +1,37 @@
 using UnityEngine;
+using System.Collections;
 
 [RequireComponent(typeof(SphereCollider))]
 public class CarTrigger : MonoBehaviour
 {
-    void Awake()
+    IEnumerator Awake()
     {
-        // 트레일러(차량) 자체를 영속 오브젝트로 만들어
-        // 씬 전환 시 파괴되지 않게 함
-        DontDestroyOnLoad(gameObject);
+        yield return null; // 한 프레임 대기: 기존 DontDestroy 트레일러 먼저 인식되도록
 
-        // SphereCollider를 트리거로 설정하고 반경 1로 지정
-        var col = GetComponent<SphereCollider>();
-        col.isTrigger = true;
-        col.radius    = 1f;
+        GameObject[] trailers = GameObject.FindGameObjectsWithTag("Car");
+
+        foreach (var t in trailers)
+        {
+            if (t != gameObject && t.scene.name == "DontDestroyOnLoad")
+            {
+                Debug.LogWarning($"🛑 중복 트레일러 감지 → {gameObject.name} 제거");
+                Destroy(gameObject); // 나는 씬에 새로 로드된 트레일러
+                yield break;
+            }
+        }
+
+        DontDestroyOnLoad(gameObject);
+        Debug.Log("✅ 최초 트레일러 DontDestroyOnLoad 적용 완료");
     }
 
     void OnTriggerEnter(Collider other)
     {
-        // Item 태그만 처리
         if (!other.CompareTag("Item")) return;
 
-        // 이미 자식이면 무시
         if (other.transform.parent == transform) return;
 
-        // CarTrigger의 자식으로 삼아 함께 이동·영속화
         other.transform.SetParent(transform);
+        DontDestroyOnLoad(other.gameObject); // ✅ 자식 아이템도 영속화
+        Debug.Log($"📦 아이템 '{other.name}' → 트레일러 자식화 + DontDestroy");
     }
 }
