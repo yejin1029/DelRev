@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class StartMenu : MonoBehaviour
 {
   public GameObject helpPanel;
-  public GameObject operatePanel; // OperatePanel 추가
+  public GameObject operatePanel;
 
   public void StartGame()
   {
@@ -17,7 +17,7 @@ public class StartMenu : MonoBehaviour
   public void ShowHelp()
   {
     helpPanel.SetActive(true);
-    operatePanel.SetActive(false); // 혹시 모르니 이 시점에 끄기
+    operatePanel.SetActive(false);
   }
 
   public void HideHelp()
