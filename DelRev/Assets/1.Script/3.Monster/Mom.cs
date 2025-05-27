@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
+using TMPro;
 
 // Monster Follow route with chase & attack sounds and chase-sound cooldown
 [RequireComponent(typeof(NavMeshAgent))]
@@ -8,6 +9,8 @@ public class Mom : MonoBehaviour
 {
     public Transform[] patrolPoints;
     private int currentPatrolIndex;
+
+    public GameObject[] introTexts;
 
     private enum State { None, Patrol, Chase, Return, Alert }
     private State currentState;
@@ -59,13 +62,17 @@ public class Mom : MonoBehaviour
             playerController = player.GetComponent<PlayerController>();
         }
 
+        // 모든 텍스트 비활성화
+        foreach (var t in introTexts)
+            t.SetActive(false);
+
         StartCoroutine(IntroApproachThenReturn());
     }
 
     void Update()
     {
         if (currentState == State.None)
-        {     
+        {
             return;
         }
 
@@ -214,7 +221,7 @@ public class Mom : MonoBehaviour
             }
         }
     }
-        
+
     IEnumerator IntroApproachThenReturn()
     {
         // 순차적으로 각 지점으로 이동하면서 플레이어를 기다림
@@ -222,6 +229,9 @@ public class Mom : MonoBehaviour
         {
             Vector3 point = approachPoints[i].position;
             agent.SetDestination(point);
+
+            // 텍스트 설정
+            SetIntroText(i);
 
             // 오브젝트가 해당 위치로 이동할 때까지 대기
             while (Vector3.Distance(transform.position, point) > 1f)
@@ -246,11 +256,24 @@ public class Mom : MonoBehaviour
         {
             Vector3 point = lastPatrolPoint.position;
             agent.SetDestination(point);
+            yield return new WaitForSeconds(2f);
+            // 마지막 지점이면 텍스트 끄고 종료
+            SetIntroText(-1); // 모두 끄기
         }
+
+        yield return new WaitForSeconds(1f); // 다음 지점 이동 전 살짝 대기
 
         currentState = State.Patrol;
         GoToNextPatrolPoint();
 
         yield break;
+    }
+
+    void SetIntroText(int index)
+    {
+        for (int i = 0; i < introTexts.Length; i++)
+        {
+            introTexts[i].SetActive(i == index);
+        }
     }
 }
