@@ -12,7 +12,7 @@ public class BlueEyeCat : MonoBehaviour
     public float detectionDistance = 10f;
     public float eyeContactTime = 2f;
     public float chaseSpeed = 2.0f;
-    public float attackDamage = 50f;
+    public float attackDamage = 30f;
     public float attackSpeed = 1.5f;
     public float closeDetectionDistance = 2f;
 
@@ -168,7 +168,6 @@ public class BlueEyeCat : MonoBehaviour
         if (pc != null)
         {
             pc.health -= attackDamage;
-            Debug.Log($"💥 Blue-eyed cat attacked! Player HP: {pc.health}");
             attackCooldownTimer = attackSpeed;
         }
     }

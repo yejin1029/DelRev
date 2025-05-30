@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
-using TMPro;
 
 // Monster Follow route with chase & attack sounds and chase-sound cooldown
 [RequireComponent(typeof(NavMeshAgent))]
@@ -62,9 +61,23 @@ public class Mom : MonoBehaviour
             playerController = player.GetComponent<PlayerController>();
         }
 
+        GameObject[] allTexts = FindObjectsOfType<GameObject>(true); // 비활성화 포함
+
+        foreach (GameObject obj in allTexts)
+        {
+            if (obj.name == "Mom_Text1") introTexts[0] = obj;
+            if (obj.name == "Mom_Text2") introTexts[1] = obj;
+            if (obj.name == "Mom_Text3") introTexts[2] = obj;
+        }
+
         // 모든 텍스트 비활성화
         foreach (var t in introTexts)
-            t.SetActive(false);
+        {
+            if (t != null)
+                t.SetActive(false);
+            else
+                Debug.LogWarning("Intro text not found. Check GameObject names (Text1, Text2, Text3).");
+        }
 
         StartCoroutine(IntroApproachThenReturn());
     }
@@ -161,7 +174,6 @@ public class Mom : MonoBehaviour
                 damageTimer = 0f;
                 playerController.health -= damageAmount;
                 attackSource?.Play();
-                Debug.Log($"💥 Monster attacked! Player HP: {playerController.health}");
             }
         }
         else
@@ -175,7 +187,6 @@ public class Mom : MonoBehaviour
         currentState = State.Alert;
         agent.speed = 5f;
         damageAmount = 150f;
-        Debug.Log("⚠️ 위험 상태 진입! 속도 및 공격력 증가");
     }
 
     bool HasLineOfSight()
@@ -217,7 +228,6 @@ public class Mom : MonoBehaviour
             if (door != null)
             {
                 door.OpenDoorForMonster(); // 문 열기
-                Debug.Log("👹 엄마가 문을 열었어요!");
             }
         }
     }
@@ -229,9 +239,6 @@ public class Mom : MonoBehaviour
         {
             Vector3 point = approachPoints[i].position;
             agent.SetDestination(point);
-
-            // 텍스트 설정
-            SetIntroText(i);
 
             // 오브젝트가 해당 위치로 이동할 때까지 대기
             while (Vector3.Distance(transform.position, point) > 1f)
@@ -247,6 +254,9 @@ public class Mom : MonoBehaviour
             {
                 yield return new WaitForSeconds(checkInterval);
             }
+
+            // 텍스트 설정
+            SetIntroText(i);
 
             lastPatrolPoint = approachPoints[i];
         }

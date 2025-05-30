@@ -49,7 +49,6 @@ public class Monster : MonoBehaviour
             {
                 damageTimer = 0f;
                 playerController.health -= damageAmount;
-                Debug.Log($"💥 Monster attacked! Player HP: {playerController.health}");
             }
         }
         else

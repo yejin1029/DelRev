@@ -3,132 +3,113 @@ using UnityEngine.AI;
 
 public class RedEyeCat : MonoBehaviour
 {
-    private enum State { Patrol, Chase, Return }
+    private enum State { Patrol, Aggressive }
     private State currentState = State.Patrol;
 
-    public float patrolRadius = 10f;
-    public float patrolWaitTime = 2f;
-    public float viewDistance = 5f;
-    public float viewAngle = 120f;
-    public float stareTimeThreshold = 2f;
+    public float patrolRadius = 5f;
+    public float waitTime = 2f;
+    public float detectionAngle = 30f;
+    public float detectionDistance = 10f;
+    public float eyeContactTime = 2f;
     public float chaseSpeed = 2.0f;
     public float attackDamage = 50f;
+    public float attackSpeed = 1.5f;
+    public float closeDetectionDistance = 2f;
 
     public Transform centerPoint;
+    public Transform player;
+    public Camera playerCamera;
 
-    private float patrolTimer = 0f;
-    private float stareTimer = 0f;
-    private float damageTimer = 0f;
-    private float damageInterval = 1f;
-
+    private float lookTimer;
+    private float attackCooldownTimer = 0f;
     private NavMeshAgent agent;
-    private Transform player;
-    private PlayerController playerController;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        player = GameObject.FindGameObjectWithTag("Player")?.transform;
-        playerController = player?.GetComponent<PlayerController>();
 
-        if (player == null || playerController == null)
-        {
-            Debug.LogError("❌ 플레이어 또는 PlayerController가 설정되지 않았습니다.");
-            enabled = false;
-            return;
-        }
+        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+        player = playerObj?.transform;
+        playerCamera = GameObject.FindGameObjectWithTag("MainCamera")?.GetComponent<Camera>();
 
-        GoToRandomPatrolPoint();
+        if (player == null)
+            Debug.LogError("❌ Player with 'Player' tag not found in the scene.");
+        if (playerCamera == null)
+            Debug.LogError("❌ Player's camera not found.");
+
+        GoToRandomPosition();
     }
 
     void Update()
     {
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-        bool hasLOS = HasLineOfSight();
+        bool hasLineOfSight = HasLineOfSight();
+        bool isLookingAtCat = IsPlayerLookingAtCat();
+        bool isWithinDetection = distanceToPlayer <= detectionDistance;
 
         switch (currentState)
         {
             case State.Patrol:
-                if (hasLOS)
+                if (isWithinDetection && isLookingAtCat && hasLineOfSight)
                 {
-                    agent.ResetPath();  // 즉시 정지
+                    transform.LookAt(player);
                     agent.isStopped = true;
-                    LookAtPlayer();
-                    stareTimer += Time.deltaTime;
+                    lookTimer += Time.deltaTime;
 
-                    if (stareTimer >= stareTimeThreshold)
+                    if (lookTimer >= eyeContactTime)
                     {
-                        currentState = State.Chase;
-                        agent.isStopped = false;
+                        currentState = State.Aggressive;
                         agent.speed = chaseSpeed;
-                        agent.SetDestination(player.position);  // 즉시 추격
-                        Debug.Log("🐾 RedEyeCat: 추격 시작!");
+                        agent.isStopped = false;
                     }
                 }
                 else
                 {
+                    lookTimer = 0f;
                     agent.isStopped = false;
-                    stareTimer = 0f;
-                    HandlePatrol();
-                }
-                break;
 
-            case State.Chase:
-                if (!hasLOS || distanceToPlayer > patrolRadius * 1.5f)
-                {
-                    currentState = State.Return;
-                    agent.speed = 1.5f;
-                    agent.SetDestination(centerPoint.position);
-                    stareTimer = 0f;
-                    Debug.Log("↩️ RedEyeCat: 돌아가는 중...");
-                }
-                else
-                {
-                    agent.SetDestination(player.position);
-                    LookAtPlayer();
-
-                    if (distanceToPlayer <= agent.stoppingDistance + 0.5f)
+                    if (!agent.pathPending && agent.remainingDistance < 1f)
                     {
-                        damageTimer += Time.deltaTime;
-                        if (damageTimer >= damageInterval)
-                        {
-                            damageTimer = 0f;
-                            playerController.health -= attackDamage;
-                            Debug.Log($"💥 RedEyeCat 공격! Player HP: {playerController.health}");
-                        }
-                    }
-                    else
-                    {
-                        damageTimer = 0f;
+                        GoToRandomPosition();
                     }
                 }
                 break;
 
-            case State.Return:
-                if (Vector3.Distance(transform.position, centerPoint.position) < 1.0f)
+            case State.Aggressive:
+                if (attackCooldownTimer > 0)
+                    attackCooldownTimer -= Time.deltaTime;
+
+                agent.SetDestination(player.position);
+
+                if (distanceToPlayer <= agent.stoppingDistance + 0.5f && attackCooldownTimer <= 0)
                 {
-                    currentState = State.Patrol;
-                    GoToRandomPatrolPoint();
-                    Debug.Log("🚶 RedEyeCat: 순찰로 복귀");
+                    AttackPlayer();
                 }
                 break;
         }
     }
 
-    void HandlePatrol()
+    bool HasLineOfSight()
     {
-        if (!agent.pathPending && agent.remainingDistance < 0.5f)
+        Vector3 direction = (player.position - transform.position).normalized;
+        Ray ray = new Ray(transform.position + Vector3.up * 0.5f, direction);
+        if (Physics.Raycast(ray, out RaycastHit hit, detectionDistance))
         {
-            patrolTimer += Time.deltaTime;
-            if (patrolTimer >= patrolWaitTime)
-            {
-                GoToRandomPatrolPoint();
-                patrolTimer = 0f;
-            }
+            return hit.collider.CompareTag("Player");
         }
+        return false;
     }
 
-    void GoToRandomPatrolPoint()
+    bool IsPlayerLookingAtCat()
+    {
+        Vector3 directionToCat = (transform.position - playerCamera.transform.position).normalized;
+        float angle = Vector3.Angle(playerCamera.transform.forward, directionToCat);
+        float distanceToCat = Vector3.Distance(playerCamera.transform.position, transform.position);
+
+        return (angle < detectionAngle && distanceToCat <= detectionDistance) || distanceToCat <= closeDetectionDistance;
+    }
+
+    void GoToRandomPosition()
     {
         Vector3 randomDirection = Random.insideUnitSphere * patrolRadius + centerPoint.position;
         if (NavMesh.SamplePosition(randomDirection, out NavMeshHit hit, patrolRadius, NavMesh.AllAreas))
@@ -137,45 +118,34 @@ public class RedEyeCat : MonoBehaviour
         }
     }
 
-    bool HasLineOfSight()
+    void AttackPlayer()
     {
-        Vector3 directionToPlayer = player.position - transform.position;
-        float distance = directionToPlayer.magnitude;
-
-        if (distance > viewDistance) return false;
-
-        float angle = Vector3.Angle(transform.forward, directionToPlayer.normalized);
-        if (angle > viewAngle / 2f) return false;
-
-        Vector3 rayOrigin = transform.position + Vector3.up * 1.2f; // 머리 높이로 보정
-        if (Physics.Raycast(rayOrigin, directionToPlayer.normalized, out RaycastHit hit, viewDistance))
+        PlayerController pc = player.GetComponent<PlayerController>();
+        if (pc != null)
         {
-            return hit.collider.CompareTag("Player");
+            pc.health -= attackDamage;
+            attackCooldownTimer = attackSpeed;
         }
-
-        return false;
-    }
-
-    void LookAtPlayer()
-    {
-        Vector3 directionToPlayer = player.position - transform.position;
-        directionToPlayer.y = 0f;
-        Quaternion lookRotation = Quaternion.LookRotation(directionToPlayer);
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
     }
 
     void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(centerPoint == null ? transform.position : centerPoint.position, patrolRadius);
+        if (centerPoint != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(centerPoint.position, patrolRadius);
+        }
 
-        Gizmos.color = Color.red;
-        Vector3 forward = transform.forward;
-        Quaternion leftRayRotation = Quaternion.AngleAxis(-viewAngle / 2, Vector3.up);
-        Quaternion rightRayRotation = Quaternion.AngleAxis(viewAngle / 2, Vector3.up);
-        Vector3 leftRayDirection = leftRayRotation * forward * viewDistance;
-        Vector3 rightRayDirection = rightRayRotation * forward * viewDistance;
-        Gizmos.DrawRay(transform.position, leftRayDirection);
-        Gizmos.DrawRay(transform.position, rightRayDirection);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, detectionDistance);
+
+        if (playerCamera != null)
+        {
+            Gizmos.color = Color.magenta;
+            Vector3 leftRay = Quaternion.Euler(0, -detectionAngle, 0) * playerCamera.transform.forward;
+            Vector3 rightRay = Quaternion.Euler(0, detectionAngle, 0) * playerCamera.transform.forward;
+            Gizmos.DrawRay(playerCamera.transform.position, leftRay * detectionDistance);
+            Gizmos.DrawRay(playerCamera.transform.position, rightRay * detectionDistance);
+        }
     }
 }

@@ -125,8 +125,6 @@ public class Dog : MonoBehaviour
                 // Hierarchy에 있는 AudioSource로 소리 재생
                 if (attackSoundSource != null)
                     attackSoundSource.PlayOneShot(attackSoundSource.clip);
-
-                Debug.Log($"💥 Dog attacked! Player HP: {playerController.health}");
             }
         }
         else
@@ -169,8 +167,6 @@ public class Dog : MonoBehaviour
                 return;
             }
         }
-
-        Debug.LogWarning("🐶 Dog couldn't find a valid random point on NavMesh!");
     }
 
     bool HasLineOfSight()
