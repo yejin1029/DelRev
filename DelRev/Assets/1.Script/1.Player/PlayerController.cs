@@ -67,6 +67,34 @@ public class PlayerController : MonoBehaviour
     // 사망 플래그
     private bool isDead = false;
 
+    private void Awake()
+    {
+        Debug.Log("[PlayerController] 초기화 중...");
+
+        // 체력 및 상태 초기화
+        health = 100f;
+        stamina = maxStamina;
+        isDead = false;
+        isLocked = false;
+        exhausted = false;
+
+        // 위치 초기화
+        Transform spawn = GameObject.FindWithTag("SpawnPoint")?.transform;
+        if (spawn != null)
+            transform.position = spawn.position;
+        else
+            transform.position = new Vector3(0, 1, 0); // 기본 위치
+
+        // 회전값 초기화
+        xRotation = 0f;
+        transform.rotation = Quaternion.identity;
+
+        // 커서 설정 (게임 시작용)
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+
     private void Start()
     {
         controller = GetComponent<CharacterController>();

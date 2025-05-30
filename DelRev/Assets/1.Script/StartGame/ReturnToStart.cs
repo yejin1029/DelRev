@@ -9,7 +9,7 @@ public class ReturnToStart : MonoBehaviour
   {
     if (Input.GetKeyDown(KeyCode.F1))
     {
-      SceneManager.LoadScene("StartScene");
+      SceneManager.LoadScene("GameStart");
     }
   }
 }
