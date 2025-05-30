@@ -5,8 +5,8 @@ using System.Collections;
 public class SceneChanger : MonoBehaviour
 {
     [Header("씬 이름 설정")]
-    public string sceneMoveName = "Scene_move";
-    public string playerTestName = "PlayerTest";
+    public string sceneMoveName = "FamilyHouse";
+    public string playerTestName = "Company";
 
     void Update()
     {

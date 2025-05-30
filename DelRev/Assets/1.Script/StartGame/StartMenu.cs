@@ -11,7 +11,7 @@ public class StartMenu : MonoBehaviour
   {
     Cursor.lockState = CursorLockMode.Locked;
     Cursor.visible = false;
-    SceneManager.LoadScene("PlayerTest");
+    SceneManager.LoadScene("Company");
   }
 
   public void ShowHelp()
