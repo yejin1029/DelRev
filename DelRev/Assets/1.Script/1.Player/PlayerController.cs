@@ -58,29 +58,6 @@ public class PlayerController : MonoBehaviour
     private Color originalHealthColor;
     private Coroutine healthFlashCoroutine;
 
-    private void Awake()
-    {
-        Debug.Log("[PlayerController] 초기화 중...");
-
-        health = 100f;
-        stamina = maxStamina;
-        isDead = false;
-        isLocked = false;
-        exhausted = false;
-
-        Transform spawn = GameObject.FindWithTag("SpawnPoint")?.transform;
-        if (spawn != null)
-            transform.position = spawn.position;
-        else
-            transform.position = new Vector3(0, 1, 0);
-
-        xRotation = 0f;
-        transform.rotation = Quaternion.identity;
-
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
-
     private void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -88,6 +65,10 @@ public class PlayerController : MonoBehaviour
 
         if (healthFillImage != null)
             originalHealthColor = healthFillImage.color;
+
+        Transform spawn = GameObject.FindWithTag("SpawnPoint")?.transform;
+        if (spawn != null)
+            transform.position = spawn.position;
 
         if (health <= 0f)
         {
