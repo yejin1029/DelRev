@@ -24,9 +24,13 @@ public class SceneChanger : MonoBehaviour
     IEnumerator DelayedSceneChange(string targetScene)
     {
         CleanUpLooseItems();
-        yield return null;
+
+        // CarTrigger에서 자식 아이템 등록이 끝날 시간을 줌
+        yield return new WaitForSeconds(0.1f); // or yield return null; yield return null;
+
         SceneManager.LoadScene(targetScene);
     }
+
 
     public void CleanUpLooseItems()
     {
@@ -41,6 +45,7 @@ public class SceneChanger : MonoBehaviour
                 parent != null &&
                 (parent.CompareTag("Car") || parent.GetComponentInParent<CarTrigger>() != null);
 
+            // ✅ Car에 붙어있거나 CarTrigger의 자식이면 보호
             if (!isInsideTrailer)
             {
                 Destroy(item);
@@ -50,4 +55,8 @@ public class SceneChanger : MonoBehaviour
 
         Debug.Log($"🧹 트레일러 외부 아이템 {removed}개 제거 완료");
     }
+
+
+    
+
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;  // 씬 전환용
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 [RequireComponent(typeof(CharacterController))]
@@ -13,11 +13,7 @@ public class PlayerController : MonoBehaviour
     public float walkSpeed = 1f;
     public float jumpHeight = 0.3f;
     public float gravity = -9.81f;
-
-    [Tooltip("Shift 키 누를 때 몇 배 빨라질지")]
     public float highSpeedMultiplier = 1.3f;
-
-    [Tooltip("Ctrl 키 누를 때 몇 배 느려질지")]
     public float slowSpeedMultiplier = 0.5f;
 
     [Header("Stamina Settings")]
@@ -39,13 +35,11 @@ public class PlayerController : MonoBehaviour
     public float currentSpeed;
 
     [Header("Coin System")]
-    [Tooltip("플레이어가 획득한 코인(금액) 총합")]
     public int coinCount = 0;
 
     [Header("Control Lock")]
     public bool isLocked = false;
 
-    // UI 관련 변수
     [Header("UI References")]
     public Image staminaImage;
     public Sprite[] staminaSprites;
@@ -59,41 +53,33 @@ public class PlayerController : MonoBehaviour
     private bool isCrouching;
     private bool isRunning;
     private bool exhausted = false;
+    private bool isDead = false;
 
-    // 체력 깜빡임
     private Color originalHealthColor;
     private Coroutine healthFlashCoroutine;
-
-    // 사망 플래그
-    private bool isDead = false;
 
     private void Awake()
     {
         Debug.Log("[PlayerController] 초기화 중...");
 
-        // 체력 및 상태 초기화
         health = 100f;
         stamina = maxStamina;
         isDead = false;
         isLocked = false;
         exhausted = false;
 
-        // 위치 초기화
         Transform spawn = GameObject.FindWithTag("SpawnPoint")?.transform;
         if (spawn != null)
             transform.position = spawn.position;
         else
-            transform.position = new Vector3(0, 1, 0); // 기본 위치
+            transform.position = new Vector3(0, 1, 0);
 
-        // 회전값 초기화
         xRotation = 0f;
         transform.rotation = Quaternion.identity;
 
-        // 커서 설정 (게임 시작용)
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
-
 
     private void Start()
     {
@@ -103,7 +89,6 @@ public class PlayerController : MonoBehaviour
         if (healthFillImage != null)
             originalHealthColor = healthFillImage.color;
 
-        // Start 시점에 health가 0 이하라면 즉시 사망 처리
         if (health <= 0f)
         {
             Die();
@@ -114,9 +99,37 @@ public class PlayerController : MonoBehaviour
         Cursor.visible = false;
     }
 
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        ResetStats();
+    }
+
+    public void ResetStats()
+    {
+        health = 100f;
+        stamina = maxStamina;
+        isDead = false;
+        isLocked = false;
+        exhausted = false;
+
+        UpdateHealthUI();
+        UpdateStaminaUI();
+
+        Debug.Log("[PlayerController] 씬 이동 감지 → 체력 및 스태미나 초기화");
+    }
+
     private void Update()
     {
-        // Update 매 프레임에도 health가 0 이하라면 Die() 호출
         if (!isDead && health <= 0f)
         {
             Die();
@@ -152,8 +165,8 @@ public class PlayerController : MonoBehaviour
         if (isGrounded && velocity.y < 0f)
             velocity.y = -2f;
 
-        Vector3 move = transform.right * Input.GetAxis("Horizontal")
-                     + transform.forward * Input.GetAxis("Vertical");
+        Vector3 move = transform.right * Input.GetAxis("Horizontal") +
+                       transform.forward * Input.GetAxis("Vertical");
         move.Normalize();
 
         currentSpeed = walkSpeed;
@@ -161,8 +174,7 @@ public class PlayerController : MonoBehaviour
         if (isCrouching)
             currentSpeed *= slowSpeedMultiplier;
 
-        bool canRun = Input.GetKey(runKey) && !isCrouching
-                      && move != Vector3.zero && !exhausted;
+        bool canRun = Input.GetKey(runKey) && !isCrouching && move != Vector3.zero && !exhausted;
         isRunning = canRun;
         if (canRun)
             currentSpeed *= highSpeedMultiplier;
