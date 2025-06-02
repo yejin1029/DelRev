@@ -21,8 +21,6 @@ public class Dog : MonoBehaviour
     [Header("Audio")]
     [Tooltip("Hierarchy에 있는 Sound 오브젝트의 AudioSource를 할당")]
     public AudioSource attackSoundSource;
-
-    private float waitTimer = 0f;
     private float damageTimer = 0f;
 
     private NavMeshAgent agent;
@@ -63,13 +61,12 @@ public class Dog : MonoBehaviour
                 {
                     currentState = State.Chase;
                 }
-                else if (!agent.pathPending && agent.remainingDistance < 0.1f)
+                else
                 {
-                    waitTimer += Time.deltaTime;
-                    if (waitTimer >= waitTime)
+                    // 경로가 거의 끝나갈 때, 다음 경로 설정
+                    if (!agent.pathPending && agent.remainingDistance < 1f)
                     {
                         GoToRandomPosition();
-                        waitTimer = 0f;
                     }
                 }
                 break;

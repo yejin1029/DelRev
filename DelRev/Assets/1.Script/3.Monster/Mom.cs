@@ -25,7 +25,6 @@ public class Mom : MonoBehaviour
     private float checkInterval = 0.5f; // 플레이어 거리 체크 간격
 
     public Transform lastPatrolPoint = null;
-    private bool hasDoneIntro = false;
 
     [Header("Combat Settings")]
     public float detectionRange = 3f;
@@ -152,6 +151,7 @@ public class Mom : MonoBehaviour
                 break;
 
             case State.Alert:
+                agent.speed = 6f; // 경고 상태에서 속도 증가
                 agent.SetDestination(playerTransform.position);
                 break;
         }
