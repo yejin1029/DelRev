@@ -9,6 +9,7 @@ public class CrossHair : MonoBehaviour
     public float rayDistance = 2f;
 
     public Texture2D crosshair;
+    public int crosshairFontSize = 20; // 텍스트 크기 조절 변수 (Inspector에서 설정 가능)
 
     int crossHairStatus = 0;
     string crosshairText = ""; // 표시할 텍스트 저장
@@ -34,7 +35,6 @@ public class CrossHair : MonoBehaviour
 
     void Update()
     {
-        // 시야 중심으로 레이 쏘기
         Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         RaycastHit hit;
 
@@ -72,7 +72,7 @@ public class CrossHair : MonoBehaviour
             // 네비게이션
             else if (hit.transform.CompareTag("Navigation"))
             {
-                if (!interactionLocked) // 화면 고정 상태에서는 표시 X
+                if (!interactionLocked)
                 {
                     crossHairStatus = 1;
                     crosshairText = "(E) 네비게이션 열기";
@@ -103,7 +103,6 @@ public class CrossHair : MonoBehaviour
         switch (crossHairStatus)
         {
             case 0:
-                // 기본 십자선 표시
                 if (crosshair != null)
                 {
                     Rect crosshairRect = new Rect(
@@ -117,9 +116,8 @@ public class CrossHair : MonoBehaviour
                 break;
 
             case 1:
-                // 텍스트 표시 (문, 차고, 아이템 등)
                 GUIStyle style = new GUIStyle(GUI.skin.label);
-                style.fontSize = 20;
+                style.fontSize = crosshairFontSize; // Inspector에서 조절 가능
                 style.fontStyle = FontStyle.Bold;
                 style.normal.textColor = Color.white;
                 style.alignment = TextAnchor.MiddleCenter;
