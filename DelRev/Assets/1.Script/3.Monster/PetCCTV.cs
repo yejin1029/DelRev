@@ -9,8 +9,6 @@ public class PetCCTV : MonoBehaviour
     public AudioSource warningAudio;
     public AudioSource songAudio;
     public GameObject dog;
-    public float detectionTimeThreshold = 3f;
-    private float detectionTimer = 0f;
     private bool hasTriggered = false;
 
     void Start()
@@ -33,19 +31,14 @@ public class PetCCTV : MonoBehaviour
 
     void DetectPlayer()
     {
-        if (IsPlayerInSight())
+        if (IsPlayerInSight() && !hasTriggered)
         {
-            detectionTimer += Time.deltaTime;
-
-            if (detectionTimer >= detectionTimeThreshold && !hasTriggered)
-            {
-                TriggerAlarm();
-                hasTriggered = true;
-            }
+            TriggerAlarm();
+            hasTriggered = true;
         }
-        else
+        else if (!IsPlayerInSight())
         {
-            detectionTimer = 0f;
+            hasTriggered = false; // 다시 시야에서 벗어나면 재탐지 가능
         }
     }
 

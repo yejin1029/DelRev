@@ -6,7 +6,7 @@ public class RedEyeCat : MonoBehaviour
     private enum State { Patrol, Aggressive }
     private State currentState = State.Patrol;
 
-    public float patrolRadius = 5f;
+    public float patrolRadius = 3f;
     public float waitTime = 2f;
     public float detectionAngle = 30f;
     public float detectionDistance = 10f;
@@ -27,6 +27,8 @@ public class RedEyeCat : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        
+        agent.stoppingDistance = 1.0f; 
 
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         player = playerObj?.transform;

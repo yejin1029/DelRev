@@ -6,7 +6,7 @@ public class BlueEyeCat : MonoBehaviour
     private enum State { Patrol, Aggressive, Return }
     private State currentState = State.Patrol;
 
-    public float patrolRadius = 5f;
+    public float patrolRadius = 2f;
     public float waitTime = 2f;
     public float detectionAngle = 30f;
     public float detectionDistance = 10f;
