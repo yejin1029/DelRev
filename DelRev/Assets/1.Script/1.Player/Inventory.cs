@@ -7,35 +7,35 @@ public class Inventory : MonoBehaviour
     private List<Item> inventory = new List<Item>();
     private List<GameObject> inventoryObjects = new List<GameObject>();
     private int inventorySize = 4;
-    private int currentIndex = 0; // 현재 선택된 인벤토리 슬롯
+    private int currentIndex = 0;
 
-    public bool isInputLocked = false; // 네비게이션 상호작용 중복 방지
+    public bool isInputLocked = false;
 
-    public List<Item> GetInventoryItems()
+    [Header("Audio")]
+    public AudioClip pickupSound;
+    public AudioClip dropSound;
+    [Range(0f, 1f)] public float pickupVolume = 0.2f;
+    [Range(0f, 1f)] public float dropVolume = 0.2f;
+
+    private AudioSource audioSource;
+    private InventoryUI inventoryUI;
+
+    void Awake()
     {
-        return inventory;
+        inventoryUI = FindObjectOfType<InventoryUI>();
+        audioSource = GetComponent<AudioSource>();
+
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+
+        // 기본 볼륨 설정
+        audioSource.volume = 1.0f; // PlayOneShot에서는 이건 무시됨
     }
 
-      public int GetCurrentIndex()
-      {
-          return currentIndex;
-      }
-
-      public int GetInventorySize()
-      {
-          return inventorySize;
-      }
-
-  private InventoryUI inventoryUI;
-
-  void Awake()
-  {
-    inventoryUI = FindObjectOfType<InventoryUI>();
-  }
-
-  void Start()
+    void Start()
     {
-        // 고정 크기의 인벤토리 공간 초기화
         for (int i = 0; i < inventorySize; i++)
         {
             inventory.Add(null);
@@ -45,22 +45,11 @@ public class Inventory : MonoBehaviour
 
     void Update()
     {
-        // 네비게이션 상호작용 중복 방지
         if (isInputLocked) return;
 
-        // 아이템 줍기 (E키)
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            TryPickupItem();
-        }
+        if (Input.GetKeyDown(KeyCode.E)) TryPickupItem();
+        if (Input.GetKeyDown(KeyCode.G)) DropItem();
 
-        // 아이템 버리기 (G키)
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            DropItem();
-        }
-
-        // 인벤토리 슬롯 변경 (1~4 키)
         if (Input.GetKeyDown(KeyCode.Alpha1)) ChangeSelectedSlot(0);
         if (Input.GetKeyDown(KeyCode.Alpha2)) ChangeSelectedSlot(1);
         if (Input.GetKeyDown(KeyCode.Alpha3)) ChangeSelectedSlot(2);
@@ -69,27 +58,24 @@ public class Inventory : MonoBehaviour
 
     void TryPickupItem()
     {
-        // 카메라 중심에서 정면으로 레이 발사
         Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, 4f)) // 줍기 가능한 거리
+        if (Physics.Raycast(ray, out hit, 4f))
         {
             GameObject hitObject = hit.collider.gameObject;
             Item item = hitObject.GetComponent<Item>();
 
             if (item != null)
             {
-                // 현재 슬롯이 비어 있어야만 아이템을 저장
                 if (inventory[currentIndex] == null)
                 {
                     inventory[currentIndex] = item;
                     inventoryObjects[currentIndex] = hitObject;
                     hitObject.SetActive(false);
 
-                }
-                else
-                {
+                    if (pickupSound != null && audioSource != null)
+                        audioSource.PlayOneShot(pickupSound, pickupVolume);
                 }
             }
         }
@@ -109,28 +95,18 @@ public class Inventory : MonoBehaviour
             droppedObject.transform.position = dropPosition;
             droppedObject.SetActive(true);
 
-        }
-        else
-        {
+            if (dropSound != null && audioSource != null)
+                audioSource.PlayOneShot(dropSound, dropVolume);
         }
     }
 
     public void ChangeSelectedSlot(int slotIndex)
     {
         if (slotIndex < 0 || slotIndex >= inventorySize)
-        {
             return;
-        }
 
         currentIndex = slotIndex;
         inventoryUI?.UpdateSlotHighlight(currentIndex);
-
-        if (inventory[currentIndex] != null)
-        {
-        }
-        else
-        {
-        }
     }
 
     public void ClearInventory()
@@ -150,8 +126,11 @@ public class Inventory : MonoBehaviour
         {
             inventory[index] = item;
             inventoryObjects[index] = null;
-
             inventoryUI?.UpdateInventoryUI();
         }
     }
+
+    public List<Item> GetInventoryItems() => inventory;
+    public int GetCurrentIndex() => currentIndex;
+    public int GetInventorySize() => inventorySize;
 }
