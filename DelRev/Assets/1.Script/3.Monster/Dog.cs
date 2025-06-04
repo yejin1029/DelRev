@@ -128,12 +128,6 @@ public class Dog : MonoBehaviour
                 {
                     GoToRandomPosition();
                     currentState = State.Patrol;
-
-                    if (PetCCTV != null)
-                    {
-                        Destroy(PetCCTV.gameObject);
-                        PetCCTV = null;
-                    }
                 }
                 break;
         }
