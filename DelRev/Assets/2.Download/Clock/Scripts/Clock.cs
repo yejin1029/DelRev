@@ -50,7 +50,7 @@ public class Clock : MonoBehaviour
         pointerHours.transform.localEulerAngles = new Vector3(0.0f, 0.0f, rotationHours);
 
         //-- ✅ 18:00이 되면 SafetyZone 설정
-        if (!safetyZoneUpdated && hour == 18 && minutes == 0 && seconds == 0)
+        if (hour == 18 && minutes == 0 && seconds == 0)
         {
             GameObject safetyZone = GameObject.Find("SafetyZone");
             if (safetyZone != null)
@@ -58,8 +58,8 @@ public class Clock : MonoBehaviour
                 AreaGaugeController controller = safetyZone.GetComponent<AreaGaugeController>();
                 if (controller != null)
                 {
-                    controller.fillSpeed = 5f;
-                    controller.drainSpeed = 0f;
+                    controller.fillSpeed = 10f;
+                    controller.drainSpeed = -10f;
                     Debug.Log("🟢 18:00 - SafetyZone 설정 완료!");
                     safetyZoneUpdated = true; // 한 번만 실행되도록
                 }

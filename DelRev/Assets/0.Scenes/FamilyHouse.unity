@@ -2110,6 +2110,7 @@ MonoBehaviour:
   - {fileID: 97363180}
   - {fileID: 1886858327}
   - {fileID: 70581030}
+  rotationSpeed: 10
 --- !u!195 &59035947
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -15389,7 +15390,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 1, z: 10}
+  m_Size: {x: 5, y: 1, z: 5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &450609587
 MonoBehaviour:
@@ -19272,7 +19273,7 @@ GameObject:
   - component: {fileID: 576516213}
   m_Layer: 0
   m_Name: Dog
-  m_TagString: Untagged
+  m_TagString: Dog
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19307,13 +19308,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   patrolAreas:
   - {fileID: 1174155843}
-  - {fileID: 450609586}
   waitTime: 2
-  detectionRange: 5
+  detectionRange: 2
   attackRange: 1
   damageAmount: 10
   damageInterval: 1
   attackSoundSource: {fileID: 359813895}
+  lostSightDelay: 2
 --- !u!195 &576516214
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -27862,6 +27863,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: house(petcam)_head
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f9ed21db047eb7344a50fe9c341d648a, type: 3}
+      propertyPath: m_TagString
+      value: PetCCTV
+      objectReference: {fileID: 0}
     - target: {fileID: 6317578925029434746, guid: f9ed21db047eb7344a50fe9c341d648a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -27908,7 +27913,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 36
-  viewDistance: 2
+  viewDistance: 5
   viewAngle: 120
   player: {fileID: 0}
   warningAudio: {fileID: 0}

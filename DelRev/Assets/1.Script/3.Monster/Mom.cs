@@ -45,6 +45,8 @@ public class Mom : MonoBehaviour
     [Tooltip("인트로 텍스트마다 재생할 사운드들 (Text1, Text2, Text3 순)")]
     public AudioSource[] introTextSounds;
 
+    [Header("Rotation")]
+    public float rotationSpeed = 10f; // 빠르게 회전
     private bool isShiftPressed = false;
 
     void Start()
@@ -81,25 +83,27 @@ public class Mom : MonoBehaviour
 
     void Update()
     {
-        if (currentState == State.None)
-            return;
+        if (currentState == State.None) return;
+        if (playerTransform == null || playerController == null) return;
 
-        if (playerTransform == null || playerController == null)
-            return;
+        // 빠른 회전 처리
+        RotateTowardsMovementDirection();
 
         if (chaseSoundTimer > 0f)
             chaseSoundTimer -= Time.deltaTime;
 
         previousState = currentState;
         isShiftPressed = Input.GetKey(KeyCode.LeftControl);
+
         float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
+        bool hasSight = HasLineOfSight(); // 호출 1회로 줄이기
 
         switch (currentState)
         {
             case State.Patrol:
                 if (!(isShiftPressed && distanceToPlayer > 2f))
                 {
-                    if (distanceToPlayer < detectionRange && HasLineOfSight())
+                    if (distanceToPlayer < detectionRange && hasSight)
                     {
                         currentState = State.Chase;
                     }
@@ -111,7 +115,7 @@ public class Mom : MonoBehaviour
                 break;
 
             case State.Chase:
-                if (distanceToPlayer > detectionRange || !HasLineOfSight())
+                if (!hasSight)
                 {
                     lastPatrolPosition = patrolPoints[currentPatrolIndex].position;
                     currentState = State.Return;
@@ -124,12 +128,12 @@ public class Mom : MonoBehaviour
                 break;
 
             case State.Return:
-                if (distanceToPlayer > 2f && !HasLineOfSight())
+                if (!hasSight)
                 {
                     currentState = State.Patrol;
                     GoToNextPatrolPoint();
                 }
-                else if (distanceToPlayer < detectionRange && HasLineOfSight())
+                else if (hasSight)
                 {
                     currentState = State.Chase;
                 }
@@ -141,19 +145,18 @@ public class Mom : MonoBehaviour
                 break;
 
             case State.Alert:
-                agent.speed = 6f;
                 agent.SetDestination(playerTransform.position);
                 break;
         }
 
-        if (currentState == State.Chase
-            && previousState != State.Chase
-            && chaseSoundTimer <= 0f)
+        // 추격 사운드 처리
+        if (currentState == State.Chase && previousState != State.Chase && chaseSoundTimer <= 0f)
         {
             chaseSource?.Play();
             chaseSoundTimer = chaseSoundCooldown;
         }
 
+        // 공격 처리
         if (distanceToPlayer <= attackRange)
         {
             damageTimer += Time.deltaTime;
@@ -173,7 +176,7 @@ public class Mom : MonoBehaviour
     public void OnDangerGaugeMaxed()
     {
         currentState = State.Alert;
-        agent.speed = 5f;
+        agent.speed = 12f;
         damageAmount = 150f;
     }
 
@@ -266,6 +269,17 @@ public class Mom : MonoBehaviour
             {
                 introTextSounds[i].Play();
             }
+        }
+    }
+
+// 회전 속도에 따라 이동 방향으로 회전
+    void RotateTowardsMovementDirection()
+    {
+        Vector3 velocity = agent.velocity;
+        if (velocity.sqrMagnitude > 0.1f)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(velocity.normalized);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
     }
 }

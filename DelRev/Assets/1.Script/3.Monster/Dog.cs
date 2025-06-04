@@ -14,7 +14,7 @@ public class Dog : MonoBehaviour
     [Header("Detection & Attack")]
     public float detectionRange = 5f;
     [Tooltip("플레이어에게 데미지를 줄 사거리")]
-    public float attackRange = 2f;
+    public float attackRange = 4f;
     public float damageAmount = 10f;
     public float damageInterval = 1f;
 
@@ -28,6 +28,10 @@ public class Dog : MonoBehaviour
     private Transform PetCCTV = null;
     private PlayerController playerController;
 
+    [SerializeField] private float lostSightDelay = 2f;
+    private float lostSightTimer = 0f;
+    private bool playerInSight = false;
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -39,6 +43,8 @@ public class Dog : MonoBehaviour
 
         currentState = State.Patrol;
         GoToRandomPosition();
+
+        agent.updateRotation = false;
 
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
@@ -54,37 +60,59 @@ public class Dog : MonoBehaviour
 
         float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
 
+        playerInSight = HasLineOfSight();
+
+        // 빠른 회전 처리
+        if (currentState == State.Chase || currentState == State.Patrol || distanceToPlayer <= attackRange)
+        {
+            Vector3 direction;
+
+            if (currentState == State.Chase && playerTransform != null)
+                direction = (playerTransform.position - transform.position).normalized;
+            else
+                direction = agent.velocity.normalized;
+
+            direction.y = 0;
+            if (direction.sqrMagnitude > 0.01f)
+            {
+                Quaternion lookRotation = Quaternion.LookRotation(direction);
+                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 10f);
+            }
+        }
+
         switch (currentState)
         {
             case State.Patrol:
-                if (distanceToPlayer < detectionRange && HasLineOfSight())
+                if (distanceToPlayer < detectionRange && playerInSight)
                 {
                     currentState = State.Chase;
                 }
+                else if (!agent.pathPending && agent.remainingDistance < 1f)
+                {
+                    GoToRandomPosition();
+                }
+                break;
+
+            case State.Chase:
+
+                if (playerInSight)
+                {
+                    lostSightTimer = 0f;
+                    agent.SetDestination(playerTransform.position);
+                }
                 else
                 {
-                    // 경로가 거의 끝나갈 때, 다음 경로 설정
-                    if (!agent.pathPending && agent.remainingDistance < 1f)
+                    lostSightTimer += Time.deltaTime;
+                    if (lostSightTimer >= lostSightDelay)
                     {
+                        currentState = State.Return;
                         GoToRandomPosition();
                     }
                 }
                 break;
 
-            case State.Chase:
-                if (distanceToPlayer > detectionRange || !HasLineOfSight())
-                {
-                    currentState = State.Return;
-                    GoToRandomPosition();
-                }
-                else
-                {
-                    agent.SetDestination(playerTransform.position);
-                }
-                break;
-
             case State.Return:
-                if (distanceToPlayer < detectionRange && HasLineOfSight())
+                if (distanceToPlayer < detectionRange && playerInSight)
                 {
                     currentState = State.Chase;
                 }
@@ -96,7 +124,7 @@ public class Dog : MonoBehaviour
                 break;
 
             case State.Called:
-                if (!agent.pathPending && agent.remainingDistance < 0.1f)
+                if (!agent.pathPending && agent.remainingDistance < 2f)
                 {
                     GoToRandomPosition();
                     currentState = State.Patrol;
@@ -128,21 +156,20 @@ public class Dog : MonoBehaviour
         {
             damageTimer = 0f;
         }
+
     }
 
     public void MoveToCCTV(Vector3 cctvPosition)
     {
-        if (PetCCTV != null)
-        {
-            Destroy(PetCCTV.gameObject);
-        }
+        Debug.Log("MoveToCCTV called with position: " + cctvPosition);
 
         PetCCTV = GameObject.FindGameObjectWithTag("PetCCTV").transform;
         PetCCTV.position = cctvPosition;
+
         agent.SetDestination(PetCCTV.position);
+        RotateTowards(PetCCTV.position); // ← 회전 추가
         currentState = State.Called;
     }
-
     void GoToRandomPosition()
     {
         if (patrolAreas == null || patrolAreas.Count == 0) return;
@@ -161,6 +188,10 @@ public class Dog : MonoBehaviour
             if (NavMesh.SamplePosition(randomPoint, out NavMeshHit hit, 2f, NavMesh.AllAreas))
             {
                 agent.SetDestination(hit.position);
+
+                // 회전 방향 지정
+                RotateTowards(hit.position);
+
                 return;
             }
         }
@@ -168,6 +199,9 @@ public class Dog : MonoBehaviour
 
     bool HasLineOfSight()
     {
+        Vector3 direction = playerTransform.position - transform.position;
+        float distance = direction.magnitude;
+
         RaycastHit hit;
         Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
 
@@ -175,6 +209,9 @@ public class Dog : MonoBehaviour
         {
             return hit.collider.CompareTag("Player");
         }
+
+        if (distance < 1.5f) return true;
+
         return false;
     }
 
@@ -197,6 +234,18 @@ public class Dog : MonoBehaviour
         {
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(transform.position, attackRange);
+        }
+    }
+    
+    void RotateTowards(Vector3 targetPosition)
+    {
+        Vector3 direction = (targetPosition - transform.position).normalized;
+        direction.y = 0f;
+
+        if (direction.sqrMagnitude > 0.01f)
+        {
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+            transform.rotation = lookRotation;
         }
     }
 }

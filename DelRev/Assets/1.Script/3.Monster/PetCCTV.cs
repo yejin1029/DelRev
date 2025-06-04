@@ -3,7 +3,7 @@ using UnityEngine;
 public class PetCCTV : MonoBehaviour
 {
     public float rotationSpeed = 360f / 15f; // 360도 / 15초
-    public float viewDistance = 3f;
+    public float viewDistance = 5f;
     public float viewAngle = 120f;
     public Transform player;
     public AudioSource warningAudio;
