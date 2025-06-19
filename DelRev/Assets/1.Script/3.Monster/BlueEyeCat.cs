@@ -9,9 +9,9 @@ public class BlueEyeCat : MonoBehaviour
     public float patrolRadius = 2f;
     public float waitTime = 2f;
     public float detectionAngle = 30f;
-    public float detectionDistance = 10f;
+    public float detectionDistance = 5f;
     public float eyeContactTime = 2f;
-    public float chaseSpeed = 2.0f;
+    public float chaseSpeed = 5.0f;
     public float attackDamage = 30f;
     public float attackSpeed = 1.5f;
     public float closeDetectionDistance = 2f;
@@ -24,7 +24,7 @@ public class BlueEyeCat : MonoBehaviour
     private float waitTimer;
     private float lookTimer;
     private bool eyeContactTriggered;
-    private float attackCooldownTimer = 0f;
+    private float attackCooldownTimer = 2f;
     private NavMeshAgent agent;
 
     void Start()

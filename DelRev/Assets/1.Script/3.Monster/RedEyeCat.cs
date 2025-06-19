@@ -9,10 +9,10 @@ public class RedEyeCat : MonoBehaviour
     public float patrolRadius = 3f;
     public float waitTime = 2f;
     public float detectionAngle = 30f;
-    public float detectionDistance = 10f;
+    public float detectionDistance = 5f;
     public float eyeContactTime = 2f;
-    public float chaseSpeed = 2.0f;
-    public float attackDamage = 50f;
+    public float chaseSpeed = 5.0f;
+    public float attackDamage = 30f;
     public float attackSpeed = 1.5f;
     public float closeDetectionDistance = 2f;
 
@@ -21,7 +21,7 @@ public class RedEyeCat : MonoBehaviour
     public Camera playerCamera;
 
     private float lookTimer;
-    private float attackCooldownTimer = 0f;
+    private float attackCooldownTimer = 2f;
     private NavMeshAgent agent;
 
     void Start()
