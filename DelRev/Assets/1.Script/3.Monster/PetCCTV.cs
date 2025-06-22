@@ -14,7 +14,6 @@ public class PetCCTV : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
-
         dog = GameObject.FindGameObjectWithTag("Dog");
     }
 
@@ -55,7 +54,19 @@ public class PetCCTV : MonoBehaviour
         if (angle > viewAngle / 2)
             return false;
 
-        // Optional: raycast check for obstacles
+        // Raycast to check for obstacles
+        Vector3 rayOrigin = transform.position + Vector3.up * 1.5f; // CCTV 눈높이 기준
+        Vector3 rayDirection = (player.position - rayOrigin).normalized;
+
+        if (Physics.Raycast(rayOrigin, rayDirection, out RaycastHit hit, viewDistance))
+        {
+            if (hit.transform != player)
+            {
+                // 장애물이 있음
+                return false;
+            }
+        }
+
         return true;
     }
 
@@ -69,7 +80,7 @@ public class PetCCTV : MonoBehaviour
             Dog dogScript = dog.GetComponent<Dog>();
             if (dogScript != null)
             {
-                dogScript.MoveToCCTV(transform.position); // CCTV 자신의 위치로 개를 호출
+                dogScript.MoveToCCTV(transform.position); // CCTV 위치로 개 이동
             }
         }
     }
