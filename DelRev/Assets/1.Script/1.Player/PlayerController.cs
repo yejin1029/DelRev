@@ -194,6 +194,10 @@ public class PlayerController : MonoBehaviour
         coinCount += amount;
         Debug.Log($"[PlayerController] AddCoins: +{amount}, Total = {coinCount}");
 
+        // MapTracker에 전달
+        if (MapTracker.Instance != null)
+            MapTracker.Instance.AddCoins(amount);
+
         if (coinUI == null)
             coinUI = FindObjectOfType<CoinUI>();
 
