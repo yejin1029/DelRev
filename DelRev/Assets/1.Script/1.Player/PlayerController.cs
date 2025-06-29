@@ -124,6 +124,20 @@ public class PlayerController : MonoBehaviour
         HandleStamina();
         UpdateStaminaUI();
         UpdateHealthUI();
+
+        // 저장 (F5)
+        if (Input.GetKeyDown(KeyCode.F5))
+        {
+            var inventory = FindObjectOfType<Inventory>();
+            SaveLoadManager.SaveGame(this, inventory);
+        }
+
+        // 불러오기 (F9)
+        if (Input.GetKeyDown(KeyCode.F9))
+        {
+            var inventory = FindObjectOfType<Inventory>();
+            SaveLoadManager.LoadGame(this, inventory);
+        }
     }
 
     void HandleMouseLook()
