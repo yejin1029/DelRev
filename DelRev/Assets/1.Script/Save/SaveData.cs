@@ -10,5 +10,6 @@ public class SaveData
     public int coinCount;
     public Vector3 playerPosition;
     public int currentDay;
+    public string sceneName;
     public List<string> inventoryItemNames = new List<string>();
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 public class SaveLoadManager : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class SaveLoadManager : MonoBehaviour
             coinCount = player.coinCount,
             playerPosition = player.transform.position,
             currentDay = MapTracker.Instance?.currentDay ?? 0,
+            sceneName = SceneManager.GetActiveScene().name,
             inventoryItemNames = new List<string>()
         };
 
