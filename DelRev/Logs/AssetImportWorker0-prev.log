@@ -1,23 +1,30 @@
+Unity Editor version:    2022.3.47f1 (88c277b85d21)
+Branch:                  2022.3/staging
+Build type:              Release
+Batch mode:              YES
+macOS version:           Version 13.6.7 (Build 22G720)
+Darwin version:          22.6.0
+Architecture:            arm64
+Running under Rosetta:   NO
+Available memory:        32768 MB
 Using pre-set license
-Built from '2022.3/staging' branch; Version is '2022.3.47f1 (88c277b85d21) revision 8962679'; Using compiler version '192829333'; Build Type 'Release'
-OS: 'Windows 11  (10.0.26100) 64bit Core' Language: 'ko' Physical Memory: 32380 MB
-BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 1
+Pro License: YES
 
 COMMAND LINE ARGUMENTS:
-C:\Program Files\Unity\Hub\Editor\2022.3.47f1\Editor\Unity.exe
+/Applications/Unity/Hub/Editor/2022.3.47f1/Unity.app/Contents/MacOS/Unity
 -adb2
 -batchMode
 -noUpm
 -name
 AssetImportWorker0
 -projectPath
-C:/Users/USER/Documents/GitHub/DelRev/DelRev
+/Users/jongha/Documents/GitHub/DelRev/DelRev
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-55007
-Successfully changed project path to: C:/Users/USER/Documents/GitHub/DelRev/DelRev
-C:/Users/USER/Documents/GitHub/DelRev/DelRev
+50750
+Successfully changed project path to: /Users/jongha/Documents/GitHub/DelRev/DelRev
+/Users/jongha/Documents/GitHub/DelRev/DelRev
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
     "memorysetup-bucket-allocator-granularity=16"
     "memorysetup-bucket-allocator-bucket-count=8"
@@ -49,71 +56,78 @@ C:/Users/USER/Documents/GitHub/DelRev/DelRev
     "memorysetup-temp-allocator-size-cloud-worker=32768"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Player connection [27284]  Target information:
+Player connection [8211079424]  Target information:
 
-Player connection [27284]  * "[IP] 172.31.75.195 [Port] 0 [Flags] 2 [Guid] 3236952865 [EditorId] 3236952865 [Version] 1048832 [Id] WindowsEditor(7,SAMSUNG) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+Player connection [8211079424]  * "[IP] 192.168.219.218 [Port] 0 [Flags] 2 [Guid] 2698716966 [EditorId] 2698716966 [Version] 1048832 [Id] OSXEditor(0,ijonghaui-MacBookPro.local) [Debug] 1 [PackageName] OSXEditor [ProjectName] Editor" 
 
-Player connection [27284] Host joined multi-casting on [225.0.0.222:54997]...
-Player connection [27284] Host joined alternative multi-casting on [225.0.0.222:34997]...
-[PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
-Refreshing native plugins compatible for Editor in 10.04 ms, found 3 plugins.
+Player connection [8211079424] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [8211079424] Host joined alternative multi-casting on [225.0.0.222:34997]...
+[PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+Refreshing native plugins compatible for Editor in 2.43 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2022.3.47f1 (88c277b85d21)
-[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2022.3.47f1/Editor/Data/Resources/UnitySubsystems
-[Subsystems] Discovering subsystems at path C:/Users/USER/Documents/GitHub/DelRev/DelRev/Assets
+[Subsystems] Discovering subsystems at path /Applications/Unity/Hub/Editor/2022.3.47f1/Unity.app/Contents/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path /Users/jongha/Documents/GitHub/DelRev/DelRev/Assets
 GfxDevice: creating device client; threaded=0; jobified=0
-Direct3D:
-    Version:  Direct3D 11.0 [level 11.1]
-    Renderer: Intel(R) Iris(R) Xe Graphics (ID=0x46a6)
-    Vendor:   Intel
-    VRAM:     16190 MB
-    Driver:   31.0.101.3616
+ preferred device: Apple M1 Max (high power)
+Metal devices available: 1
+0: Apple M1 Max (high power)
+Using device Apple M1 Max (high power)
+Initializing Metal device caps: Apple M1 Max
 Initialize mono
-Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2022.3.47f1/Editor/Data/Managed'
-Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2022.3.47f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
-Mono config path = 'C:/Program Files/Unity/Hub/Editor/2022.3.47f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56656
+Mono path[0] = '/Applications/Unity/Hub/Editor/2022.3.47f1/Unity.app/Contents/Managed'
+Mono path[1] = '/Applications/Unity/Hub/Editor/2022.3.47f1/Unity.app/Contents/MonoBleedingEdge/lib/mono/unityjit-macos'
+Mono config path = '/Applications/Unity/Hub/Editor/2022.3.47f1/Unity.app/Contents/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56463
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
-Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.47f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
-Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.47f1/Editor/Data/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll
-Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.47f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.010192 seconds.
-- Loaded All Assemblies, in  0.434 seconds
+Register platform support module: /Applications/Unity/Hub/Editor/2022.3.47f1/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
+Register platform support module: /Applications/Unity/Hub/Editor/2022.3.47f1/Unity.app/Contents/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll
+Register platform support module: /Applications/Unity/Hub/Editor/2022.3.47f1/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
+Register platform support module: /Applications/Unity/Hub/Editor/2022.3.47f1/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll
+Register platform support module: /Applications/Unity/Hub/Editor/2022.3.47f1/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.001884 seconds.
+- Loaded All Assemblies, in  0.214 seconds
 Native extension for WindowsStandalone target not found
+[usbmuxd] Start listen thread
+[usbmuxd] Listen thread started
+[usbmuxd] Send listen message
+Native extension for iOS target not found
+Native extension for Android target not found
+Android Extension - Scanning For ADB Devices 53 ms
 Native extension for OSXStandalone target not found
 Native extension for WebGL target not found
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.313 seconds
-Domain Reload Profiling: 745ms
-	BeginReloadAssembly (139ms)
+- Finished resetting the current domain, in  0.282 seconds
+Domain Reload Profiling: 496ms
+	BeginReloadAssembly (46ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (0ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (1ms)
-	RebuildCommonClasses (38ms)
-	RebuildNativeTypeToScriptingClass (10ms)
-	initialDomainReloadingComplete (71ms)
-	LoadAllAssembliesAndSetupDomain (174ms)
-		LoadAssemblies (136ms)
+		CreateAndSetChildDomain (0ms)
+	RebuildCommonClasses (26ms)
+	RebuildNativeTypeToScriptingClass (9ms)
+	initialDomainReloadingComplete (33ms)
+	LoadAllAssembliesAndSetupDomain (100ms)
+		LoadAssemblies (46ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (172ms)
-			TypeCache.Refresh (170ms)
-				TypeCache.ScanAssembly (154ms)
+		AnalyzeDomain (99ms)
+			TypeCache.Refresh (98ms)
+				TypeCache.ScanAssembly (90ms)
 			ScanForSourceGeneratedMonoScriptInfo (0ms)
-			ResolveRequiredComponents (1ms)
-	FinalizeReload (313ms)
+			ResolveRequiredComponents (0ms)
+	FinalizeReload (282ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (254ms)
+		SetupLoadedEditorAssemblies (251ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (18ms)
-			SetLoadedEditorAssemblies (7ms)
+			InitializePlatformSupportModulesInManaged (150ms)
+			SetLoadedEditorAssemblies (3ms)
 			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (2ms)
-			ProcessInitializeOnLoadAttributes (177ms)
-			ProcessInitializeOnLoadMethodAttributes (50ms)
+			BeforeProcessingInitializeOnLoad (1ms)
+			ProcessInitializeOnLoadAttributes (70ms)
+			ProcessInitializeOnLoadMethodAttributes (26ms)
 			AfterProcessingInitializeOnLoad (0ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
@@ -122,1529 +136,346 @@ Domain Reload Profiling: 745ms
 Worker process is ready to serve import requests
 Caller must complete domain reload
 Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  0.670 seconds
+- Loaded All Assemblies, in  0.340 seconds
 Native extension for WindowsStandalone target not found
+Native extension for iOS target not found
+Native extension for Android target not found
 Native extension for OSXStandalone target not found
 Native extension for WebGL target not found
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.607 seconds
-Domain Reload Profiling: 1274ms
-	BeginReloadAssembly (160ms)
+- Finished resetting the current domain, in  0.400 seconds
+Domain Reload Profiling: 740ms
+	BeginReloadAssembly (77ms)
 		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (6ms)
+		DisableScriptedObjects (3ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (23ms)
-	RebuildCommonClasses (36ms)
-	RebuildNativeTypeToScriptingClass (11ms)
-	initialDomainReloadingComplete (48ms)
-	LoadAllAssembliesAndSetupDomain (412ms)
-		LoadAssemblies (312ms)
+		CreateAndSetChildDomain (18ms)
+	RebuildCommonClasses (24ms)
+	RebuildNativeTypeToScriptingClass (8ms)
+	initialDomainReloadingComplete (25ms)
+	LoadAllAssembliesAndSetupDomain (206ms)
+		LoadAssemblies (124ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (189ms)
-			TypeCache.Refresh (162ms)
-				TypeCache.ScanAssembly (147ms)
-			ScanForSourceGeneratedMonoScriptInfo (19ms)
-			ResolveRequiredComponents (6ms)
-	FinalizeReload (607ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (471ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (13ms)
-			SetLoadedEditorAssemblies (4ms)
-			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (68ms)
-			ProcessInitializeOnLoadAttributes (357ms)
-			ProcessInitializeOnLoadMethodAttributes (21ms)
-			AfterProcessingInitializeOnLoad (7ms)
-			EditorAssembliesLoaded (0ms)
-		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (8ms)
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.18 seconds
-Refreshing native plugins compatible for Editor in 3.48 ms, found 3 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 3351 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 23 unused Assets / (344.5 KB). Loaded Objects now: 3834.
-Memory consumption went from 158.5 MB to 158.1 MB.
-Total: 3.783300 ms (FindLiveObjects: 0.225400 ms CreateObjectMapping: 0.111500 ms MarkObjects: 3.296600 ms  DeleteObjects: 0.148600 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:CustomObjectIndexerAttribute: 9a22284fe3817be447336de3de66b15e -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
-  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Import Request.
-  Time since last request: 12952.072487 seconds.
-  path: Assets/1.Script
-  artifactKey: Guid(864a1b39ea69a4e80902bb0bedab48e5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script using Guid(864a1b39ea69a4e80902bb0bedab48e5) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '3603ae1570df3c17301f0316f806363a') in 0.002914 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 6.815101 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: 'e295bfacb018257166004c072e572bed') in 0.000636 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Prepare
-Caller must complete domain reload
-Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  0.675 seconds
-Native extension for WindowsStandalone target not found
-Native extension for OSXStandalone target not found
-Native extension for WebGL target not found
-Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  1.299 seconds
-Domain Reload Profiling: 1971ms
-	BeginReloadAssembly (167ms)
-		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (6ms)
-		BackupInstance (0ms)
-		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (36ms)
-	RebuildCommonClasses (46ms)
-	RebuildNativeTypeToScriptingClass (14ms)
-	initialDomainReloadingComplete (42ms)
-	LoadAllAssembliesAndSetupDomain (402ms)
-		LoadAssemblies (449ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (38ms)
-			TypeCache.Refresh (11ms)
-				TypeCache.ScanAssembly (2ms)
-			ScanForSourceGeneratedMonoScriptInfo (14ms)
-			ResolveRequiredComponents (11ms)
-	FinalizeReload (1300ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (499ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (14ms)
-			SetLoadedEditorAssemblies (3ms)
-			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (72ms)
-			ProcessInitializeOnLoadAttributes (370ms)
-			ProcessInitializeOnLoadMethodAttributes (25ms)
-			AfterProcessingInitializeOnLoad (14ms)
-			EditorAssembliesLoaded (0ms)
-		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (26ms)
-Refreshing native plugins compatible for Editor in 3.10 ms, found 3 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 3298 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 18 unused Assets / (315.8 KB). Loaded Objects now: 3838.
-Memory consumption went from 145.4 MB to 145.1 MB.
-Total: 3.316600 ms (FindLiveObjects: 0.376000 ms CreateObjectMapping: 0.167200 ms MarkObjects: 2.654100 ms  DeleteObjects: 0.118100 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:CustomObjectIndexerAttribute: 9a22284fe3817be447336de3de66b15e -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
-  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:scripting/precompiled-assembly-types:Assembly-CSharp: 1cbf77ab357d14014a87100402e48622 -> 229ad69859924b9a349b20dc8fced441
-  custom:scripting/monoscript/fileName/SaveData.cs: 6ea96708ff04deb6cd5e87e532d278a1 -> 
-========================================================================
-Received Import Request.
-  Time since last request: 12.422482 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.001987 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:44.4291488Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:44.4291488Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.001112 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000785 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:44.4291488Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:44.4291488Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.018347 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000761 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:44.4291488Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:44.4291488Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.019946 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000643 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:44.4291488Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:44.4291488Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.020179 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000713 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:44.4291488Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:44.4291488Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.019437 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000598 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:44.4291488Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:44.4291488Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.023362 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000598 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:44.4291488Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:44.4291488Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.020876 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.001462 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:44.4291488Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:44.4291488Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.032644 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.002513 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:44.4291488Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:44.4291488Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.008140 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.001667 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:44.4291488Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:44.4291488Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.011277 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000565 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:44.4291488Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:44.4291488Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.025014 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.001271 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:44.4291488Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:44.4291488Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.021041 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000608 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:44.4291488Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:44.4291488Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.019530 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000600 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:44.4291488Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:44.4291488Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.019695 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000670 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:44.4291488Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:44.4291488Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.019767 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000754 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:44.4291488Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:44.4291488Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.017787 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000693 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:44.4291488Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:44.4291488Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.020117 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000668 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:44.4291488Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:44.4291488Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.018954 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000824 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:44.4291488Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:44.4291488Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.019043 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000622 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:44.4291488Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:44.4291488Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.019429 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.001119 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:44.4291488Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:44.4291488Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.000863 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.008928 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:44.4291488Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:44.4291488Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.010469 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.006137 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.016239 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.002465 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.017902 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.001319 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.018040 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.001318 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.017556 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000602 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.020435 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000590 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.018233 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.002956 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.002920 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000586 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.019800 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000649 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.019469 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000797 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.002695 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000865 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.020346 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.001040 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.002370 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.001818 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.020830 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.004950 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.011225 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.001600 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.018528 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.001077 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.020946 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000636 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.018311 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.001111 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.020030 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000650 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.020234 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000807 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.018747 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000934 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.002559 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000702 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.020252 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000616 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.020369 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.001101 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.018000 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.001003 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.019689 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000645 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.019694 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000663 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.020952 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000617 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.019447 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000678 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.019253 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000799 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.018606 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000733 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.002639 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000618 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.022157 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000809 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.018748 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000579 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.018713 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.001420 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.001761 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000999 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.018020 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000652 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.021986 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000679 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.018904 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000737 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.021738 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000648 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.019591 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000709 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.022963 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000618 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.020622 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.001849 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.002638 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000880 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.018221 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000623 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.018488 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000701 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.002978 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000926 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.019775 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000963 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.019910 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.001020 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.019200 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000977 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.019780 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000655 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.019570 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000942 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.020959 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000608 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.002897 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000567 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.018817 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000958 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.017789 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000866 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.019565 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.006125 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.011788 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.001177 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.021436 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000667 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.020325 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.001078 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.022171 seconds.
-  path: Assets/1.Script/Save/SaveData.cs
-  artifactKey: Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveData.cs using Guid(ab122357f1cc23f4ca0c11e4d1215bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '00000000000000000000000000000000') in 0.000624 seconds
-Import Error Code:(4)
-Message: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-  ERROR: Build asset version error: assets/1.script/save/savedata.cs in SourceAssetDB has modification time of '2025-06-29T17:48:33.1875423Z' while content on disk has modification time of '2025-06-29T17:48:46.8286361Z'
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Prepare
-Caller must complete domain reload
-Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  0.449 seconds
-Native extension for WindowsStandalone target not found
-Native extension for OSXStandalone target not found
-Native extension for WebGL target not found
-Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.911 seconds
-Domain Reload Profiling: 1358ms
-	BeginReloadAssembly (145ms)
-		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (5ms)
-		BackupInstance (0ms)
-		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (28ms)
-	RebuildCommonClasses (39ms)
-	RebuildNativeTypeToScriptingClass (12ms)
-	initialDomainReloadingComplete (32ms)
-	LoadAllAssembliesAndSetupDomain (218ms)
-		LoadAssemblies (272ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (26ms)
-			TypeCache.Refresh (12ms)
-				TypeCache.ScanAssembly (2ms)
+		AnalyzeDomain (116ms)
+			TypeCache.Refresh (104ms)
+				TypeCache.ScanAssembly (94ms)
 			ScanForSourceGeneratedMonoScriptInfo (7ms)
-			ResolveRequiredComponents (6ms)
-	FinalizeReload (912ms)
+			ResolveRequiredComponents (3ms)
+	FinalizeReload (400ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (464ms)
+		SetupLoadedEditorAssemblies (306ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (15ms)
-			SetLoadedEditorAssemblies (5ms)
+			InitializePlatformSupportModulesInManaged (17ms)
+			SetLoadedEditorAssemblies (2ms)
 			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (75ms)
-			ProcessInitializeOnLoadAttributes (336ms)
-			ProcessInitializeOnLoadMethodAttributes (25ms)
-			AfterProcessingInitializeOnLoad (9ms)
+			BeforeProcessingInitializeOnLoad (33ms)
+			ProcessInitializeOnLoadAttributes (239ms)
+			ProcessInitializeOnLoadMethodAttributes (12ms)
+			AfterProcessingInitializeOnLoad (1ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (9ms)
-Refreshing native plugins compatible for Editor in 5.15 ms, found 3 plugins.
+		AwakeInstancesAfterBackupRestoration (3ms)
+Launching external process: /Applications/Unity/Hub/Editor/2022.3.47f1/Unity.app/Contents/Tools/UnityShaderCompiler
+Launched and connected shader compiler UnityShaderCompiler after 0.05 seconds
+Refreshing native plugins compatible for Editor in 0.92 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 3298 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 18 unused Assets / (315.8 KB). Loaded Objects now: 3841.
-Memory consumption went from 145.5 MB to 145.2 MB.
-Total: 3.089000 ms (FindLiveObjects: 0.218000 ms CreateObjectMapping: 0.097100 ms MarkObjects: 2.682200 ms  DeleteObjects: 0.090100 ms)
+Unloading 3353 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 24 unused Assets / (380.8 KB). Loaded Objects now: 3838.
+Memory consumption went from 166.3 MB to 166.0 MB.
+Total: 2.397625 ms (FindLiveObjects: 0.115333 ms CreateObjectMapping: 0.043208 ms MarkObjects: 2.104042 ms  DeleteObjects: 0.134708 ms)
 
-Prepare: number of updated asset objects reloaded= 0
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
   custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
   custom:CustomObjectIndexerAttribute: 9a22284fe3817be447336de3de66b15e -> 
   custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
   custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
   custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
   custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
-  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:AudioImporter_EditorPlatform: 3918e3fc78b5a79bad01e8451be0beb8 -> 
+  custom:framework-osx-AVFoundation: e770b220cccbd017edd2c1fefb359320 -> 
   custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:scripting/precompiled-assembly-types:Assembly-CSharp: 3b9b960ec7cd7f77fde385064409196c -> 229ad69859924b9a349b20dc8fced441
-  custom:scripting/monoscript/fileName/SaveData.cs: e31e11b6590960540d10bc9605d88242 -> 
 ========================================================================
 Received Import Request.
-  Time since last request: 14.611009 seconds.
-  path: Assets/1.Script/Save/SaveLoadManager.cs
-  artifactKey: Guid(3b662aff55a4b174fa9b5a38412035c4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveLoadManager.cs using Guid(3b662aff55a4b174fa9b5a38412035c4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: 'b144ef6f8595fb85e07c602af882c9dc') in 0.002616 seconds
+  Time since last request: 8824.416129 seconds.
+  path: Assets/UI/Item/Boat.png
+  artifactKey: Guid(40942f7fde5c3f542880017f8fa42000) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/UI/Item/Boat.png using Guid(40942f7fde5c3f542880017f8fa42000) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+ -> (artifact id: '92073dea59982f1dc8f3a9206ad6e16b') in 0.087144 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Prepare
-Caller must complete domain reload
-Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  0.507 seconds
-Native extension for WindowsStandalone target not found
-Native extension for OSXStandalone target not found
-Native extension for WebGL target not found
-Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.946 seconds
-Domain Reload Profiling: 1450ms
-	BeginReloadAssembly (186ms)
-		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (5ms)
-		BackupInstance (0ms)
-		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (29ms)
-	RebuildCommonClasses (33ms)
-	RebuildNativeTypeToScriptingClass (10ms)
-	initialDomainReloadingComplete (31ms)
-	LoadAllAssembliesAndSetupDomain (243ms)
-		LoadAssemblies (332ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (29ms)
-			TypeCache.Refresh (11ms)
-				TypeCache.ScanAssembly (2ms)
-			ScanForSourceGeneratedMonoScriptInfo (9ms)
-			ResolveRequiredComponents (6ms)
-	FinalizeReload (947ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (434ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (13ms)
-			SetLoadedEditorAssemblies (4ms)
-			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (67ms)
-			ProcessInitializeOnLoadAttributes (318ms)
-			ProcessInitializeOnLoadMethodAttributes (25ms)
-			AfterProcessingInitializeOnLoad (7ms)
-			EditorAssembliesLoaded (0ms)
-		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (7ms)
-Refreshing native plugins compatible for Editor in 3.37 ms, found 3 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 3299 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 18 unused Assets / (315.8 KB). Loaded Objects now: 3845.
-Memory consumption went from 145.5 MB to 145.2 MB.
-Total: 3.252200 ms (FindLiveObjects: 0.330700 ms CreateObjectMapping: 0.190700 ms MarkObjects: 2.632300 ms  DeleteObjects: 0.097100 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:CustomObjectIndexerAttribute: 9a22284fe3817be447336de3de66b15e -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:scripting/monoscript/fileName/SaveLoadManager.cs: 1bc6270baa8c03f85e2c45b1a0d69465 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
-  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:scripting/precompiled-assembly-types:Assembly-CSharp: 60cce726947e3f3500cb75736b0ede9a -> 229ad69859924b9a349b20dc8fced441
-  custom:scripting/monoscript/fileName/SaveData.cs: e31e11b6590960540d10bc9605d88242 -> 
+Number of asset objects unloaded after import = 3
 ========================================================================
 Received Import Request.
-  Time since last request: 7.566638 seconds.
-  path: Assets/1.Script/Save/SaveLoadManager.cs
-  artifactKey: Guid(3b662aff55a4b174fa9b5a38412035c4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/Save/SaveLoadManager.cs using Guid(3b662aff55a4b174fa9b5a38412035c4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: 'ef9bcb1ddeaa9efae527e10d6a84ad07') in 0.001963 seconds
+  Time since last request: 0.000037 seconds.
+  path: Assets/UI/Item/Broom.png
+  artifactKey: Guid(095ac16583c5a064a9b62fd9b9cbb2d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/UI/Item/Broom.png using Guid(095ac16583c5a064a9b62fd9b9cbb2d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+ -> (artifact id: 'ca98abd3d8a16616a6e400c64570e8f3') in 0.005925 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Prepare
-Caller must complete domain reload
-Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  0.449 seconds
-Native extension for WindowsStandalone target not found
-Native extension for OSXStandalone target not found
-Native extension for WebGL target not found
-Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.843 seconds
-Domain Reload Profiling: 1289ms
-	BeginReloadAssembly (144ms)
-		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (5ms)
-		BackupInstance (0ms)
-		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (27ms)
-	RebuildCommonClasses (33ms)
-	RebuildNativeTypeToScriptingClass (11ms)
-	initialDomainReloadingComplete (28ms)
-	LoadAllAssembliesAndSetupDomain (229ms)
-		LoadAssemblies (281ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (29ms)
-			TypeCache.Refresh (12ms)
-				TypeCache.ScanAssembly (2ms)
-			ScanForSourceGeneratedMonoScriptInfo (7ms)
-			ResolveRequiredComponents (6ms)
-	FinalizeReload (843ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (377ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (14ms)
-			SetLoadedEditorAssemblies (3ms)
-			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (63ms)
-			ProcessInitializeOnLoadAttributes (270ms)
-			ProcessInitializeOnLoadMethodAttributes (19ms)
-			AfterProcessingInitializeOnLoad (7ms)
-			EditorAssembliesLoaded (0ms)
-		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (8ms)
-Refreshing native plugins compatible for Editor in 3.11 ms, found 3 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 3299 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 18 unused Assets / (315.8 KB). Loaded Objects now: 3848.
-Memory consumption went from 145.5 MB to 145.2 MB.
-Total: 3.415800 ms (FindLiveObjects: 0.322000 ms CreateObjectMapping: 0.457700 ms MarkObjects: 2.555100 ms  DeleteObjects: 0.080100 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:CustomObjectIndexerAttribute: 9a22284fe3817be447336de3de66b15e -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:scripting/monoscript/fileName/SaveLoadManager.cs: 1bc6270baa8c03f85e2c45b1a0d69465 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
-  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:scripting/precompiled-assembly-types:Assembly-CSharp: 60cce726947e3f3500cb75736b0ede9a -> 229ad69859924b9a349b20dc8fced441
-  custom:scripting/monoscript/fileName/SaveData.cs: e31e11b6590960540d10bc9605d88242 -> 
+Number of asset objects unloaded after import = 3
 ========================================================================
 Received Import Request.
-  Time since last request: 25.758364 seconds.
-  path: Assets/1.Script/1.Player
-  artifactKey: Guid(f3ad99aef7f5546658f30e2f1a320512) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/1.Player using Guid(f3ad99aef7f5546658f30e2f1a320512) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: '67302eddb428262b6e80632746232027') in 0.004009 seconds
+  Time since last request: 0.000044 seconds.
+  path: Assets/UI/Navigation/Screen.png
+  artifactKey: Guid(b84e302d72051ef42b86078affd931e4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/UI/Navigation/Screen.png using Guid(b84e302d72051ef42b86078affd931e4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+ -> (artifact id: '90afce61ab23ef781c671283815ce0bd') in 0.012975 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
+Number of asset objects unloaded after import = 3
 ========================================================================
 Received Import Request.
-  Time since last request: 2.799683 seconds.
-  path: Assets/1.Script/1.Player/PlayerController.cs
-  artifactKey: Guid(1b3a5308ec8444c21a168805f0804350) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/1.Player/PlayerController.cs using Guid(1b3a5308ec8444c21a168805f0804350) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: 'f5314508e2525afc6dcc37adae98b020') in 0.001365 seconds
+  Time since last request: 0.000066 seconds.
+  path: Assets/UI/GamePlay2/sp03.png
+  artifactKey: Guid(e86e34a9602234dcdb83b4e26a112d36) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/UI/GamePlay2/sp03.png using Guid(e86e34a9602234dcdb83b4e26a112d36) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+ -> (artifact id: '1b1563ed7d007bf05fb9d5ede02825fa') in 0.005505 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Prepare
-Caller must complete domain reload
-Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  0.483 seconds
-Native extension for WindowsStandalone target not found
-Native extension for OSXStandalone target not found
-Native extension for WebGL target not found
-Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.898 seconds
-Domain Reload Profiling: 1379ms
-	BeginReloadAssembly (141ms)
-		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (5ms)
-		BackupInstance (0ms)
-		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (26ms)
-	RebuildCommonClasses (33ms)
-	RebuildNativeTypeToScriptingClass (10ms)
-	initialDomainReloadingComplete (29ms)
-	LoadAllAssembliesAndSetupDomain (267ms)
-		LoadAssemblies (314ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (31ms)
-			TypeCache.Refresh (14ms)
-				TypeCache.ScanAssembly (2ms)
-			ScanForSourceGeneratedMonoScriptInfo (8ms)
-			ResolveRequiredComponents (7ms)
-	FinalizeReload (899ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (431ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (23ms)
-			SetLoadedEditorAssemblies (3ms)
-			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (87ms)
-			ProcessInitializeOnLoadAttributes (291ms)
-			ProcessInitializeOnLoadMethodAttributes (19ms)
-			AfterProcessingInitializeOnLoad (6ms)
-			EditorAssembliesLoaded (0ms)
-		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (7ms)
-Refreshing native plugins compatible for Editor in 2.91 ms, found 3 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 3299 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 18 unused Assets / (315.9 KB). Loaded Objects now: 3851.
-Memory consumption went from 145.5 MB to 145.2 MB.
-Total: 2.855700 ms (FindLiveObjects: 0.223400 ms CreateObjectMapping: 0.100000 ms MarkObjects: 2.445500 ms  DeleteObjects: 0.085700 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:CustomObjectIndexerAttribute: 9a22284fe3817be447336de3de66b15e -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:scripting/monoscript/fileName/SaveLoadManager.cs: 1bc6270baa8c03f85e2c45b1a0d69465 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
-  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:scripting/precompiled-assembly-types:Assembly-CSharp: 60cce726947e3f3500cb75736b0ede9a -> 229ad69859924b9a349b20dc8fced441
-  custom:scripting/monoscript/fileName/SaveData.cs: e31e11b6590960540d10bc9605d88242 -> 
-========================================================================
-Received Prepare
-Caller must complete domain reload
-Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  0.418 seconds
-Native extension for WindowsStandalone target not found
-Native extension for OSXStandalone target not found
-Native extension for WebGL target not found
-Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.944 seconds
-Domain Reload Profiling: 1359ms
-	BeginReloadAssembly (141ms)
-		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (6ms)
-		BackupInstance (0ms)
-		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (27ms)
-	RebuildCommonClasses (31ms)
-	RebuildNativeTypeToScriptingClass (10ms)
-	initialDomainReloadingComplete (29ms)
-	LoadAllAssembliesAndSetupDomain (204ms)
-		LoadAssemblies (264ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (16ms)
-			TypeCache.Refresh (6ms)
-				TypeCache.ScanAssembly (0ms)
-			ScanForSourceGeneratedMonoScriptInfo (0ms)
-			ResolveRequiredComponents (6ms)
-	FinalizeReload (944ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (490ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (15ms)
-			SetLoadedEditorAssemblies (4ms)
-			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (78ms)
-			ProcessInitializeOnLoadAttributes (360ms)
-			ProcessInitializeOnLoadMethodAttributes (24ms)
-			AfterProcessingInitializeOnLoad (8ms)
-			EditorAssembliesLoaded (0ms)
-		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (10ms)
-Refreshing native plugins compatible for Editor in 3.19 ms, found 3 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 3300 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 18 unused Assets / (315.9 KB). Loaded Objects now: 3854.
-Memory consumption went from 145.8 MB to 145.5 MB.
-Total: 5.191300 ms (FindLiveObjects: 0.336600 ms CreateObjectMapping: 0.154600 ms MarkObjects: 4.528400 ms  DeleteObjects: 0.170100 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:CustomObjectIndexerAttribute: 9a22284fe3817be447336de3de66b15e -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:scripting/monoscript/fileName/SaveLoadManager.cs: 1bc6270baa8c03f85e2c45b1a0d69465 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
-  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:scripting/precompiled-assembly-types:Assembly-CSharp: 60cce726947e3f3500cb75736b0ede9a -> 229ad69859924b9a349b20dc8fced441
-  custom:scripting/monoscript/fileName/SaveData.cs: e31e11b6590960540d10bc9605d88242 -> 
+Number of asset objects unloaded after import = 3
 ========================================================================
 Received Import Request.
-  Time since last request: 43.392068 seconds.
-  path: Assets/1.Script/1.Player/PlayerController.cs
-  artifactKey: Guid(1b3a5308ec8444c21a168805f0804350) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/1.Script/1.Player/PlayerController.cs using Guid(1b3a5308ec8444c21a168805f0804350) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
- -> (artifact id: 'e0cd229f2faf9e52ca082efbc54393b4') in 0.002037 seconds
+  Time since last request: 0.000120 seconds.
+  path: Assets/UI/Item/Car.png
+  artifactKey: Guid(48b95a2b9b5d7014faf016e3f9cec467) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/UI/Item/Car.png using Guid(48b95a2b9b5d7014faf016e3f9cec467) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+ -> (artifact id: 'cf6ce08c53c3105ccae3597e1d3cac1c') in 0.006067 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000066 seconds.
+  path: Assets/UI/GamePlay2/sp00.png
+  artifactKey: Guid(4437cc73f00c64340a298f73258cc112) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/UI/GamePlay2/sp00.png using Guid(4437cc73f00c64340a298f73258cc112) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+ -> (artifact id: '4447eb8cabab39e570ca6151126cd466') in 0.008326 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000106 seconds.
+  path: Assets/UI/GamePlay2/sp07.png
+  artifactKey: Guid(14b93875eff594c6a87f5e0c75ccd007) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/UI/GamePlay2/sp07.png using Guid(14b93875eff594c6a87f5e0c75ccd007) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+ -> (artifact id: 'cdf5ad09eef998d6169e4e121b45f801') in 0.005022 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000092 seconds.
+  path: Assets/UI/GamePlay2/sp01.png
+  artifactKey: Guid(de49e6a4a00014379813b9b648caca3d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/UI/GamePlay2/sp01.png using Guid(de49e6a4a00014379813b9b648caca3d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+ -> (artifact id: 'f0138fcb6e6c042bc8cf101b7bc2ac99') in 0.005235 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000134 seconds.
+  path: Assets/UI/Navigation/Circle.png
+  artifactKey: Guid(44845db1b63d86d49b0b600433f98b48) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/UI/Navigation/Circle.png using Guid(44845db1b63d86d49b0b600433f98b48) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+ -> (artifact id: '4709c8b510cb294bf66dfdc68edf43bd') in 0.014224 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000132 seconds.
+  path: Assets/UI/GamePlay2/Inventory.png
+  artifactKey: Guid(6744f97dfc3d4204daf9fad58d18e3ca) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/UI/GamePlay2/Inventory.png using Guid(6744f97dfc3d4204daf9fad58d18e3ca) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+ -> (artifact id: 'd57304aecfc4c0902586c3673ddaf28b') in 0.005876 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000074 seconds.
+  path: Assets/UI/Navigation/MapImage.png
+  artifactKey: Guid(b0b8d7b2cdf0bc745886171764bb3407) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/UI/Navigation/MapImage.png using Guid(b0b8d7b2cdf0bc745886171764bb3407) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+ -> (artifact id: '3e3b9255aa06df4d18315a097324e68c') in 0.007357 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000064 seconds.
+  path: Assets/UI/Item/Monkey.png
+  artifactKey: Guid(5db924c0b638bea4690f26e50f94cedd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/UI/Item/Monkey.png using Guid(5db924c0b638bea4690f26e50f94cedd) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+ -> (artifact id: 'c2684cedd647258ba8dbbbb4fd17ec32') in 0.012578 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000097 seconds.
+  path: Assets/UI/Item/Bear.png
+  artifactKey: Guid(d89052d9ebbf8bb4f9e40298957ddb78) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/UI/Item/Bear.png using Guid(d89052d9ebbf8bb4f9e40298957ddb78) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+ -> (artifact id: '5e1db4c97c0822484286d18b4acc4293') in 0.005529 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000100 seconds.
+  path: Assets/UI/GamePlay2/sp08.png
+  artifactKey: Guid(f59896ba1e5544f10acf5d4f1a1a5dda) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/UI/GamePlay2/sp08.png using Guid(f59896ba1e5544f10acf5d4f1a1a5dda) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+ -> (artifact id: '2f36e96797ce6e01395c782a473ce67d') in 0.005235 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000065 seconds.
+  path: Assets/UI/GamePlay2/hpFull.png
+  artifactKey: Guid(f4f201ae180ae414693337d9cd263594) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/UI/GamePlay2/hpFull.png using Guid(f4f201ae180ae414693337d9cd263594) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+ -> (artifact id: 'f0d00267ef2787452ab515f69201dcc1') in 0.009328 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000069 seconds.
+  path: Assets/UI/Item/Banana.png
+  artifactKey: Guid(d158041ad57620649b20aba1d1b346a1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/UI/Item/Banana.png using Guid(d158041ad57620649b20aba1d1b346a1) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+ -> (artifact id: 'd469b04c2a746b801e573f211bfeb4ce') in 0.006736 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000061 seconds.
+  path: Assets/UI/Item/Apple.png
+  artifactKey: Guid(ce1e837abab9f224797d191790fe324a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/UI/Item/Apple.png using Guid(ce1e837abab9f224797d191790fe324a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+ -> (artifact id: '7d0e5ee61172c37d3b337324f6ea0e96') in 0.010505 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000066 seconds.
+  path: Assets/UI/Navigation/StoreButton.png
+  artifactKey: Guid(1f01ad30a0934b248be2e50695853e81) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/UI/Navigation/StoreButton.png using Guid(1f01ad30a0934b248be2e50695853e81) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+ -> (artifact id: 'a11305d53314ed5e47bbd2b25bebe653') in 0.006004 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000090 seconds.
+  path: Assets/UI/Item/Catball.png
+  artifactKey: Guid(46f09ddf14ceac549b2f6729174c214f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/UI/Item/Catball.png using Guid(46f09ddf14ceac549b2f6729174c214f) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+ -> (artifact id: 'a17d41c05980212695a9c1d19a4515de') in 0.005765 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000054 seconds.
+  path: Assets/UI/Item/Key.png
+  artifactKey: Guid(4df967bf2f157c649b0c84e147ba0137) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/UI/Item/Key.png using Guid(4df967bf2f157c649b0c84e147ba0137) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+ -> (artifact id: '1a1c2e1e52f4071a948c45b972fdcfa9') in 0.010255 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000066 seconds.
+  path: Assets/UI/Item/Bag.png
+  artifactKey: Guid(baa94884ceea920439ee9fd9eb924ded) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/UI/Item/Bag.png using Guid(baa94884ceea920439ee9fd9eb924ded) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+ -> (artifact id: '4f3fc252cb0fd6af8ccf7fe3d12475a6') in 0.004803 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000065 seconds.
+  path: Assets/UI/Item/Bible.png
+  artifactKey: Guid(0c8dadce8ea6df6479a15076f5eb22f1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/UI/Item/Bible.png using Guid(0c8dadce8ea6df6479a15076f5eb22f1) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+ -> (artifact id: 'a3b2c43fbdc880142d87c0457834b4d2') in 0.005270 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000063 seconds.
+  path: Assets/UI/Item/Dice.png
+  artifactKey: Guid(25ac898a114c79d4d877a22a2bcdf860) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/UI/Item/Dice.png using Guid(25ac898a114c79d4d877a22a2bcdf860) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+ -> (artifact id: 'da1f675d2420c321f8ed4bd1ed20aee1') in 0.012494 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000053 seconds.
+  path: Assets/UI/logo_white.png
+  artifactKey: Guid(ef8eb2d34b8a85b4893757c24a78786c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/UI/logo_white.png using Guid(ef8eb2d34b8a85b4893757c24a78786c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+ -> (artifact id: '6bd9d582b782071ece3ce29178fd2f04') in 0.005761 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000061 seconds.
+  path: Assets/UI/Item/Book.png
+  artifactKey: Guid(5d2e864d17c284d4babd04612b25b997) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/UI/Item/Book.png using Guid(5d2e864d17c284d4babd04612b25b997) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+ -> (artifact id: '6be4f5415a4a9543bc04879b171988b3') in 0.007658 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000054 seconds.
+  path: Assets/2.Download/House/Source/Textures/UI/crosshair.png
+  artifactKey: Guid(5b9f45dfb91ef0447992ee3305fc0773) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/2.Download/House/Source/Textures/UI/crosshair.png using Guid(5b9f45dfb91ef0447992ee3305fc0773) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+ -> (artifact id: '533d9b79d82a781efe8f52fc3761effd') in 0.006612 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000050 seconds.
+  path: Assets/UI/Navigation/MapButton.png
+  artifactKey: Guid(1a805c81c14b9c745a703f7ff772d16b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/UI/Navigation/MapButton.png using Guid(1a805c81c14b9c745a703f7ff772d16b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+ -> (artifact id: '87b6f3bcc0d56684c050c56c9bfece95') in 0.005166 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000086 seconds.
+  path: Assets/UI/GamePlay2/hpEmpty.png
+  artifactKey: Guid(972fd2d443d904bee9bd14b3b6594539) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/UI/GamePlay2/hpEmpty.png using Guid(972fd2d443d904bee9bd14b3b6594539) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 10 workers.
+ -> (artifact id: '9092d3fb585f2743245d96472487575c') in 0.005108 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3

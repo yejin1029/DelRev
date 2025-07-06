@@ -16,6 +16,9 @@ public class PlayerController : MonoBehaviour
     public float highSpeedMultiplier = 1.3f;
     public float slowSpeedMultiplier = 0.5f;
 
+    // 인벤토리 아이템 효과로 변경되는 추가 속도 배율
+    [HideInInspector] public float inventorySpeedMultiplier = 1f;
+
     [Header("Stamina Settings")]
     public float maxStamina = 100f;
     public float staminaDecreaseRate = 20f;
@@ -103,10 +106,11 @@ public class PlayerController : MonoBehaviour
         isLocked = false;
         exhausted = false;
 
+        // 인벤토리 버프 초기화
+        inventorySpeedMultiplier = 1f;
+
         UpdateHealthUI();
         UpdateStaminaUI();
-
-        Debug.Log("[PlayerController] 씬 이동 감지 → 체력 및 스태미나 초기화");
     }
 
     private void Update()
@@ -122,20 +126,21 @@ public class PlayerController : MonoBehaviour
         HandleMouseLook();
         HandleMovement();
         HandleStamina();
+
         UpdateStaminaUI();
         UpdateHealthUI();
 
         // 저장 (F5)
         if (Input.GetKeyDown(KeyCode.F5))
         {
-            var inventory = FindObjectOfType<Inventory>();
+            var inventory = Inventory.Instance;
             SaveLoadManager.SaveGame(this, inventory);
         }
 
         // 불러오기 (F9)
         if (Input.GetKeyDown(KeyCode.F9))
         {
-            var inventory = FindObjectOfType<Inventory>();
+            var inventory = Inventory.Instance;
             SaveLoadManager.LoadGame(this, inventory);
         }
     }
@@ -164,7 +169,9 @@ public class PlayerController : MonoBehaviour
                        transform.forward * Input.GetAxis("Vertical");
         move.Normalize();
 
-        currentSpeed = walkSpeed;
+        // ★ 기본 속도를 walkSpeed * inventorySpeedMultiplier 로 계산
+        currentSpeed = walkSpeed * inventorySpeedMultiplier;
+
         isCrouching = Input.GetKey(crouchKey);
         if (isCrouching)
             currentSpeed *= slowSpeedMultiplier;
@@ -206,9 +213,6 @@ public class PlayerController : MonoBehaviour
     public void AddCoins(int amount)
     {
         coinCount += amount;
-        Debug.Log($"[PlayerController] AddCoins: +{amount}, Total = {coinCount}");
-
-        // MapTracker에 전달
         if (MapTracker.Instance != null)
             MapTracker.Instance.AddCoins(amount);
 
@@ -257,8 +261,6 @@ public class PlayerController : MonoBehaviour
     {
         if (isDead) return;
         isDead = true;
-
-        Debug.Log("[PlayerController] Player died. Loading GameOver scene...");
         isLocked = true;
         SceneManager.LoadScene("GameOver");
     }
@@ -266,10 +268,8 @@ public class PlayerController : MonoBehaviour
     void FlashHealthUI()
     {
         if (healthFillImage == null) return;
-
         if (healthFlashCoroutine != null)
             StopCoroutine(healthFlashCoroutine);
-
         healthFlashCoroutine = StartCoroutine(FlashCoroutine());
     }
 
@@ -286,21 +286,21 @@ public class PlayerController : MonoBehaviour
         if (staminaSprites == null || staminaSprites.Length == 0 || staminaImage == null)
             return;
 
-        float staminaRatio = stamina / maxStamina;
-        int index = Mathf.Clamp(
-            Mathf.FloorToInt(staminaRatio * (staminaSprites.Length - 1)),
+        float ratio = stamina / maxStamina;
+        int idx = Mathf.Clamp(
+            Mathf.FloorToInt(ratio * (staminaSprites.Length - 1)),
             0, staminaSprites.Length - 1
         );
 
-        staminaImage.sprite = staminaSprites[index];
+        staminaImage.sprite = staminaSprites[idx];
     }
 
     void UpdateHealthUI()
     {
         if (healthFillImage != null)
         {
-            float healthRatio = health / 100f;
-            healthFillImage.fillAmount = Mathf.Clamp01(healthRatio);
+            float ratio = health / 100f;
+            healthFillImage.fillAmount = Mathf.Clamp01(ratio);
         }
     }
 }

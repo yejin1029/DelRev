@@ -1,96 +1,83 @@
+// InventoryUI.cs
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
-  [Header("UI 슬롯 설정")]
-  public List<Image> slotImages;
+    public static InventoryUI Instance { get; private set; }
 
-  private Inventory inventory;
+    [Header("UI 슬롯 설정")]
+    public List<Image> slotImages;
 
-  void Start()
-  {
-    inventory = FindObjectOfType<Inventory>();
-    if (inventory == null)
+    void Awake()
     {
-      Debug.LogError("Inventory 컴포넌트를 찾을 수 없습니다.");
-      return;
+        if (Instance == null)
+        {
+            Instance = this;
+            transform.SetParent(null);
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
-    UpdateInventoryUI();
-    UpdateSlotHighlight(inventory.GetCurrentIndex());
-  }
-
-  void Update()
-  {
-    if (Input.GetKeyDown(KeyCode.Alpha1)) inventory.ChangeSelectedSlot(0);
-    if (Input.GetKeyDown(KeyCode.Alpha2)) inventory.ChangeSelectedSlot(1);
-    if (Input.GetKeyDown(KeyCode.Alpha3)) inventory.ChangeSelectedSlot(2);
-    if (Input.GetKeyDown(KeyCode.Alpha4)) inventory.ChangeSelectedSlot(3);
-
-    float scroll = Input.GetAxis("Mouse ScrollWheel");
-    if (scroll > 0f)
+    void Update()
     {
-      int nextIndex = (inventory.GetCurrentIndex() + 1) % inventory.GetInventorySize();
-      inventory.ChangeSelectedSlot(nextIndex);
-    }
-    else if (scroll < 0f)
-    {
-      int prevIndex = (inventory.GetCurrentIndex() - 1 + inventory.GetInventorySize()) % inventory.GetInventorySize();
-      inventory.ChangeSelectedSlot(prevIndex);
+        var inv = Inventory.Instance;
+        if (inv == null) return;
+
+        if (Input.GetKeyDown(KeyCode.Alpha1)) inv.ChangeSelectedSlot(0);
+        if (Input.GetKeyDown(KeyCode.Alpha2)) inv.ChangeSelectedSlot(1);
+        if (Input.GetKeyDown(KeyCode.Alpha3)) inv.ChangeSelectedSlot(2);
+        if (Input.GetKeyDown(KeyCode.Alpha4)) inv.ChangeSelectedSlot(3);
+
+        float scroll = Input.GetAxis("Mouse ScrollWheel");
+        if (scroll > 0f)
+            inv.ChangeSelectedSlot((inv.GetCurrentIndex() + 1) % inv.GetInventorySize());
+        else if (scroll < 0f)
+            inv.ChangeSelectedSlot((inv.GetCurrentIndex() - 1 + inv.GetInventorySize()) % inv.GetInventorySize());
+
+        UpdateInventoryUI();
+        UpdateSlotHighlight(inv.GetCurrentIndex());
     }
 
-    UpdateInventoryUI();
-    UpdateSlotHighlight(inventory.GetCurrentIndex());
-  }
-
-  public void UpdateInventoryUI()
-  {
-    var items = inventory.GetInventoryItems();
-    int count = Mathf.Min(slotImages.Count, items.Count);
-
-    for (int i = 0; i < count; i++)
+    public void UpdateInventoryUI()
     {
-      if (slotImages[i] == null) continue;
+        var inv   = Inventory.Instance;
+        var items = inv.GetInventoryItems();
+        int cnt   = Mathf.Min(slotImages.Count, items.Count);
 
-      if (items[i] != null)
-      {
-        slotImages[i].sprite = items[i].itemImage;
-        slotImages[i].color = Color.white;
-      }
-      else
-      {
-        slotImages[i].sprite = null;
-        slotImages[i].color = new Color(1, 1, 1, 0);
-      }
+        for (int i = 0; i < cnt; i++)
+        {
+            if (items[i] != null)
+            {
+                slotImages[i].sprite = items[i].itemImage;
+                slotImages[i].color  = Color.white;
+            }
+            else
+            {
+                slotImages[i].sprite = null;
+                slotImages[i].color  = new Color(1f,1f,1f,0f);
+            }
+        }
+
+        for (int i = cnt; i < slotImages.Count; i++)
+        {
+            slotImages[i].sprite = null;
+            slotImages[i].color  = new Color(1f,1f,1f,0f);
+        }
     }
 
-    // 남은 슬롯은 비우기
-    for (int i = count; i < slotImages.Count; i++)
+    public void UpdateSlotHighlight(int currentIndex)
     {
-      if (slotImages[i] == null) continue;
-
-      slotImages[i].sprite = null;
-      slotImages[i].color = new Color(1, 1, 1, 0);
+        for (int i = 0; i < slotImages.Count; i++)
+        {
+            var bg = slotImages[i].transform.parent?.GetComponent<Image>();
+            if (bg != null)
+                bg.color = (i == currentIndex) ? Color.yellow : Color.white;
+        }
     }
-  }
-
-  public void UpdateSlotHighlight(int currentIndex)
-  {
-    if (currentIndex < 0 || currentIndex >= slotImages.Count)
-      return;
-
-    for (int i = 0; i < slotImages.Count; i++)
-    {
-      if (slotImages[i] == null || slotImages[i].transform == null || slotImages[i].transform.parent == null)
-        continue;
-
-      Image parent = slotImages[i].transform.parent.GetComponent<Image>();
-      if (parent != null)
-      {
-        parent.color = (i == currentIndex) ? Color.yellow : Color.white;
-      }
-    }
-  }
 }
