@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class NavigationButtonSelector : MonoBehaviour
@@ -37,14 +33,13 @@ public class NavigationButtonSelector : MonoBehaviour
 
     if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
     {
-      if (selectedIndex == 0)
+      if (selectedIndex == 0) // 왼쪽 버튼
       {
-        panelManager.ShowMapPanel(); // ← 왼쪽 버튼 클릭 시 맵 패널로 전환
+        panelManager.ShowMapPanel(); // 맵 패널로 전환
       }
-      else
+      else if (selectedIndex == 1) // 오른쪽 버튼
       {
-        Debug.Log("오른쪽 버튼 선택됨");
-        // 다른 처리 있으면 여기에 추가
+        panelManager.ShowStorePanel(); // 상점 패널로 전환
       }
     }
   }

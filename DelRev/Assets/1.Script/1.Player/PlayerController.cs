@@ -49,6 +49,8 @@ public class PlayerController : MonoBehaviour
     public Image healthFillImage;
     public CoinUI coinUI;
 
+    public static PlayerController Instance { get; private set; } // 아이템 구매를 위한 싱글톤 인스턴스
+
     private float xRotation = 0f;
     private CharacterController controller;
     private Vector3 velocity;
@@ -81,6 +83,14 @@ public class PlayerController : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+    }
+
+    void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject); // 중복 방지
     }
 
     private void OnEnable()

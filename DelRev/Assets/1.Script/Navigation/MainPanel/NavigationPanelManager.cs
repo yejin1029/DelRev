@@ -6,6 +6,7 @@ public class NavigationPanelManager : MonoBehaviour
 {
     public GameObject mainPanel;
     public GameObject mapPanel;
+    public GameObject storePanel;
 
     public NavigationButtonSelector mainSelector;
     public MapLocationSelector mapSelector;
@@ -20,6 +21,7 @@ public class NavigationPanelManager : MonoBehaviour
     {
         mainPanel.SetActive(true);
         mapPanel.SetActive(false);
+        storePanel.SetActive(false);
 
         if (activateSelector)
         {
@@ -41,6 +43,13 @@ public class NavigationPanelManager : MonoBehaviour
         mapSelector.ActivateSelection();
         mainSelector.DeactivateSelection();
     }
+
+    public void ShowStorePanel()
+{
+    mainPanel.SetActive(false);
+    mapPanel.SetActive(false);
+    storePanel.SetActive(true);
+}
 
     public bool IsMainPanelActive()
     {
