@@ -16,8 +16,8 @@ public class PlayerController : MonoBehaviour
     public float highSpeedMultiplier = 1.3f;
     public float slowSpeedMultiplier = 0.5f;
 
-    // 인벤토리 아이템 효과로 변경되는 추가 속도 배율
-    [HideInInspector] public float inventorySpeedMultiplier = 1f;
+    // SpeedBoostItem 효과 플래그
+    [HideInInspector] public bool isSpeedItemActive = false;
 
     [Header("Stamina Settings")]
     public float maxStamina = 100f;
@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
     public Image healthFillImage;
     public CoinUI coinUI;
 
-    public static PlayerController Instance { get; private set; } // 아이템 구매를 위한 싱글톤 인스턴스
+    public static PlayerController Instance { get; private set; }
 
     private float xRotation = 0f;
     private CharacterController controller;
@@ -62,6 +62,14 @@ public class PlayerController : MonoBehaviour
 
     private Color originalHealthColor;
     private Coroutine healthFlashCoroutine;
+
+    private void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
+    }
 
     private void Start()
     {
@@ -83,14 +91,6 @@ public class PlayerController : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-    }
-
-    void Awake()
-    {
-        if (Instance == null)
-            Instance = this;
-        else
-            Destroy(gameObject); // 중복 방지
     }
 
     private void OnEnable()
@@ -116,8 +116,8 @@ public class PlayerController : MonoBehaviour
         isLocked = false;
         exhausted = false;
 
-        // 인벤토리 버프 초기화
-        inventorySpeedMultiplier = 1f;
+        // SpeedBoostItem 플래그 초기화
+        isSpeedItemActive = false;
 
         UpdateHealthUI();
         UpdateStaminaUI();
@@ -140,14 +140,12 @@ public class PlayerController : MonoBehaviour
         UpdateStaminaUI();
         UpdateHealthUI();
 
-        // 저장 (F5)
         if (Input.GetKeyDown(KeyCode.F5))
         {
             var inventory = Inventory.Instance;
             SaveLoadManager.SaveGame(this, inventory);
         }
 
-        // 불러오기 (F9)
         if (Input.GetKeyDown(KeyCode.F9))
         {
             var inventory = Inventory.Instance;
@@ -179,17 +177,24 @@ public class PlayerController : MonoBehaviour
                        transform.forward * Input.GetAxis("Vertical");
         move.Normalize();
 
-        // ★ 기본 속도를 walkSpeed * inventorySpeedMultiplier 로 계산
-        currentSpeed = walkSpeed * inventorySpeedMultiplier;
+        // **아이템 소지 시 속도 고정**
+        if (isSpeedItemActive)
+        {
+            currentSpeed = 5f;
+        }
+        else
+        {
+            // 기존 속도 로직
+            currentSpeed = walkSpeed;
+            isCrouching = Input.GetKey(crouchKey);
+            if (isCrouching)
+                currentSpeed *= slowSpeedMultiplier;
 
-        isCrouching = Input.GetKey(crouchKey);
-        if (isCrouching)
-            currentSpeed *= slowSpeedMultiplier;
-
-        bool canRun = Input.GetKey(runKey) && !isCrouching && move != Vector3.zero && !exhausted;
-        isRunning = canRun;
-        if (canRun)
-            currentSpeed *= highSpeedMultiplier;
+            bool canRun = Input.GetKey(runKey) && !isCrouching && move != Vector3.zero && !exhausted;
+            isRunning = canRun;
+            if (canRun)
+                currentSpeed *= highSpeedMultiplier;
+        }
 
         controller.Move(move * currentSpeed * Time.deltaTime);
 
