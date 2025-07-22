@@ -17,9 +17,13 @@ public class CoinUI : MonoBehaviour
 
 void Update()
 {
-    if (MapTracker.Instance != null && player != null)
+    if (player == null)
+        return;
+
+    int currentCoins = player.coinCount;
+
+    if (MapTracker.Instance != null)
     {
-        int currentCoins = MapTracker.Instance.totalCoinCount;
         int day = MapTracker.Instance.currentDay;
 
         if (dayText != null)

@@ -238,6 +238,19 @@ public class PlayerController : MonoBehaviour
             coinUI.UpdateCoinText(coinCount);
     }
 
+    public void SubtractCoins(int amount)
+    {
+        coinCount -= amount;
+        if (coinCount < 0)
+            coinCount = 0;
+
+        if (coinUI == null)
+            coinUI = FindObjectOfType<CoinUI>();
+
+        if (coinUI != null)
+            coinUI.UpdateCoinText(coinCount);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Coin"))
