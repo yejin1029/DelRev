@@ -6,9 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class SaveLoadManager : MonoBehaviour
 {
-    private static string savePath => Path.Combine(Application.persistentDataPath, "save.json");
+    public static string GetSavePath(int slot) =>
+        Path.Combine(Application.persistentDataPath, $"save_slot_{slot}.json");
 
-    public static void SaveGame(PlayerController player, Inventory inventory)
+    public static void SaveGame(PlayerController player, Inventory inventory, int slot)
     {
         SaveData data = new SaveData
         {
@@ -27,19 +28,20 @@ public class SaveLoadManager : MonoBehaviour
         }
 
         string json = JsonUtility.ToJson(data, true);
-        File.WriteAllText(savePath, json);
-        Debug.Log($"게임 저장 완료: {savePath}");
+        File.WriteAllText(GetSavePath(slot), json);
+        Debug.Log($"게임 저장 완료 - 슬롯 {slot}: {GetSavePath(slot)}");
     }
 
-    public static void LoadGame(PlayerController player, Inventory inventory)
+    public static void LoadGame(PlayerController player, Inventory inventory, int slot)
     {
-        if (!File.Exists(savePath))
+        string path = GetSavePath(slot);
+        if (!File.Exists(path))
         {
-            Debug.LogWarning("저장 파일이 없습니다.");
+            Debug.LogWarning($"슬롯 {slot}에 저장된 파일이 없습니다.");
             return;
         }
 
-        string json = File.ReadAllText(savePath);
+        string json = File.ReadAllText(path);
         SaveData data = JsonUtility.FromJson<SaveData>(json);
 
         player.health = data.health;
@@ -56,14 +58,14 @@ public class SaveLoadManager : MonoBehaviour
                 GameObject prefab = Resources.Load<GameObject>($"Items/{itemName}");
                 if (prefab != null)
                 {
-                    GameObject newItem = Instantiate(prefab);
+                    GameObject newItem = UnityEngine.Object.Instantiate(prefab);
                     Item itemComp = newItem.GetComponent<Item>();
                     inventory.SetItemAt(i, itemComp);
-                    newItem.SetActive(false); // 인벤토리에만 있고 월드에 안 보이게
+                    newItem.SetActive(false);
                 }
             }
         }
 
-        Debug.Log($"게임 로드 완료: {savePath}");
+        Debug.Log($"게임 로드 완료 - 슬롯 {slot}: {path}");
     }
 }
