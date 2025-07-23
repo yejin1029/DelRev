@@ -23,7 +23,7 @@ public class StoreItemUI : MonoBehaviour
     public void SetSelected(bool isSelected)
     {
         if (outlineImage != null)
-            outlineImage.color = isSelected ? Color.yellow : Color.clear;
+            outlineImage.gameObject.SetActive(isSelected);
     }
 
     public void OnBuy()
@@ -35,7 +35,6 @@ public class StoreItemUI : MonoBehaviour
 
         if (player.coinCount < price)
         {
-            Debug.Log("코인이 부족합니다!");
             WarningUI.Instance?.ShowWarning("코인이 부족합니다!");
             return;
         }
@@ -44,34 +43,42 @@ public class StoreItemUI : MonoBehaviour
         bool hasSpace = items.Exists(item => item == null);
         if (!hasSpace)
         {
-            Debug.Log("인벤토리가 가득 찼습니다!");
-            WarningUI.Instance?.ShowWarning("인벤토리가 가득 찼습니다!");
+            WarningUI.Instance?.ShowWarning("인벤토리를 비워주세요!");
             return;
         }
 
         // 코인 차감
         player.SubtractCoins(price);
 
-        // 아이템 인스턴스 생성 및 인벤토리에 추가
-        var itemPrefab = Resources.Load<GameObject>($"Items/{itemName}");
-        if (itemPrefab != null)
+        // 아이템 프리팹 불러오기
+        GameObject prefab = Resources.Load<GameObject>($"StoreItems/{itemName}");
+        if (prefab == null)
         {
-            GameObject newItem = GameObject.Instantiate(itemPrefab);
-            var itemComponent = newItem.GetComponent<Item>();
-            if (itemComponent != null)
+            Debug.LogError($"프리팹 Items/{itemName} 을(를) 찾을 수 없습니다.");
+            return;
+        }
+
+        // 실제 인벤토리용 아이템 생성
+        GameObject newItem = Instantiate(prefab);
+        Item itemComponent = newItem.GetComponent<Item>();
+
+        if (itemComponent == null)
+        {
+            Debug.LogError("프리팹에 Item 컴포넌트가 없습니다.");
+            return;
+        }
+
+        // 빈 슬롯에 아이템 넣기
+        for (int i = 0; i < items.Count; i++)
+        {
+            if (items[i] == null)
             {
-                for (int i = 0; i < items.Count; i++)
-                {
-                    if (items[i] == null)
-                    {
-                        inventory.SetItemAt(i, itemComponent);
-                        break;
-                    }
-                }
+                inventory.SetItemAt(i, itemComponent);
+                break;
             }
         }
 
-        Debug.Log($"{itemName} 구매 완료!");
+        Debug.Log($"{itemName} 구매 완료 및 인벤토리 등록!");
     }
 }
 
