@@ -23009,6 +23009,57 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1950664765
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1950664767}
+  - component: {fileID: 1950664766}
+  m_Layer: 0
+  m_Name: Maptracker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1950664766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1950664765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: feb472524864545088bbb2f37581ebd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map1Count: 0
+  otherMapCount: 0
+  totalCoinCount: 0
+  currentDay: 0
+  isRestartingFromGameOver: 0
+  checkDays: 0400000007000000090000000b0000000d000000
+  coinRequirements: 050000000a0000000f0000001400000019000000
+--- !u!4 &1950664767
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1950664765}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.43388793, y: 3.2015178, z: 0.95907485}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1960153133
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26088,6 +26139,7 @@ SceneRoots:
   - {fileID: 1402733638}
   - {fileID: 748957091}
   - {fileID: 1574128905}
+  - {fileID: 1950664767}
   - {fileID: 1631031827}
   - {fileID: 939015148}
   - {fileID: 1523960330}
