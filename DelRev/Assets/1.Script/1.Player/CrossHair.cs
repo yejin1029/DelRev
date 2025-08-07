@@ -15,7 +15,7 @@ public class CrossHair : MonoBehaviour
     string crosshairText = ""; // 표시할 텍스트 저장
 
     public bool isAimingAtNavigation = false; // 네비게이션 조준 여부
-    public bool interactionLocked = false; // 네비게이션 화면 열린 여부
+    public bool interactionLocked = false;    // 네비게이션 화면 열린 여부
 
     void Start()
     {
@@ -42,7 +42,7 @@ public class CrossHair : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, rayDistance))
         {
-            // 문
+            // 문 (Door)
             if (hit.transform.GetComponent<Door>())
             {
                 crossHairStatus = 1;
@@ -52,7 +52,17 @@ public class CrossHair : MonoBehaviour
                     hit.transform.GetComponent<Door>().InteractWithThisDoor();
                 }
             }
-            // 차고 문
+            // ✅ 스페셜 도어 (SpecialDoor)
+            else if (hit.transform.GetComponent<SpecialDoor>())
+            {
+                crossHairStatus = 1;
+                crosshairText = "(E) 문 열기";
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    hit.transform.GetComponent<SpecialDoor>().InteractWithThisDoor();
+                }
+            }
+            // 차고 문 (GarageDoor)
             else if (hit.transform.GetComponent<GarageDoor>())
             {
                 crossHairStatus = 1;
@@ -62,7 +72,7 @@ public class CrossHair : MonoBehaviour
                     hit.transform.GetComponent<GarageDoor>().ToggleDoor();
                 }
             }
-            // 아이템
+            // 아이템 (Item)
             else if (hit.transform.GetComponent<Item>())
             {
                 Item item = hit.transform.GetComponent<Item>();
@@ -117,7 +127,7 @@ public class CrossHair : MonoBehaviour
 
             case 1:
                 GUIStyle style = new GUIStyle(GUI.skin.label);
-                style.fontSize = crosshairFontSize; // Inspector에서 조절 가능
+                style.fontSize = crosshairFontSize;
                 style.fontStyle = FontStyle.Bold;
                 style.normal.textColor = Color.white;
                 style.alignment = TextAnchor.MiddleCenter;
