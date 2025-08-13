@@ -94,6 +94,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    // 기본: 바닥에 떨어뜨림
     void DropItem()
     {
         if (inventory[currentIndex] == null) return;
@@ -116,6 +117,30 @@ public class Inventory : MonoBehaviour
 
         if (dropSound != null)
             audioSource.PlayOneShot(dropSound, dropVolume);
+
+        InventoryUI.Instance?.UpdateInventoryUI();
+        InventoryUI.Instance?.UpdateSlotHighlight(currentIndex);
+    }
+
+    // 🔑 사용 후 즉시 소멸(드랍 없음) — 열쇠 등 일회성 아이템용
+    public void RemoveCurrentItemWithoutDrop()
+    {
+        if (inventory[currentIndex] == null) return;
+
+        // 효과 해제
+        var itemToRemove = inventory[currentIndex];
+        if (itemToRemove is IInventoryEffect effectRemove)
+        {
+            var player = FindObjectOfType<PlayerController>();
+            effectRemove.OnRemove(player);
+        }
+
+        GameObject go = inventoryObjects[currentIndex];
+
+        inventory[currentIndex]        = null;
+        inventoryObjects[currentIndex] = null;
+
+        if (go != null) Destroy(go);
 
         InventoryUI.Instance?.UpdateInventoryUI();
         InventoryUI.Instance?.UpdateSlotHighlight(currentIndex);
