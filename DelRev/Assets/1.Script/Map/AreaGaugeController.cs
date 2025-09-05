@@ -8,15 +8,18 @@ public class AreaGaugeController : MonoBehaviour
     [Header("Gauge Settings (0~100)")]
     [Tooltip("1초당 게이지가 채워지는 속도")]
     public float fillSpeed = 20f;
+
     [Tooltip("1초당 게이지가 감소하는 속도")]
     public float drainSpeed = 10f;
+
     [Range(0f, 100f)]
     [SerializeField]
     private float currentGauge = 0f;
 
     [Header("Danger Callback")]
-    [Tooltip("게이지가 100이 되면 이 몬스터의 위험 상태를 호출합니다")]
-    public Mom targetMonster;
+    [Tooltip("게이지가 100이 되면 호출할 몬스터 (IDangerTarget 필요)")]
+    [SerializeField] private MonoBehaviour targetMonsterBehaviour; // Inspector에서 드래그
+    private IDangerTarget targetMonster;
 
     [Header("Toggle Target (will blink at full gauge)")]
     [Tooltip("게이지가 100이 되는 순간부터 1초마다 활성/비활성될 오브젝트\n" +
@@ -30,6 +33,10 @@ public class AreaGaugeController : MonoBehaviour
     public AudioSource onFillStartSource;
     public AudioSource onFullGaugeSource;
 
+    // --- SafetyZone 글로벌 상태 ---
+    public static bool PlayerInSafetyZone = false;
+
+    // 내부 상태
     private bool hasEnteredOnce = false;
     private bool isInside = false;
     private bool hasTriggeredDanger = false;
@@ -43,7 +50,21 @@ public class AreaGaugeController : MonoBehaviour
 
     void Awake()
     {
-        // toggleTarget이 할당되지 않은 경우, MainCanvas/Filter를 찾아서 자동 할당
+        // Inspector에서 드래그된 Behaviour를 IDangerTarget으로 변환
+        if (targetMonsterBehaviour != null)
+        {
+            targetMonster = targetMonsterBehaviour as IDangerTarget;
+            if (targetMonster == null)
+            {
+                Debug.LogError("AreaGaugeController: 드래그된 객체가 IDangerTarget을 구현하지 않았습니다!");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("AreaGaugeController: targetMonsterBehaviour가 설정되지 않았습니다. Inspector에서 몬스터를 연결하세요!");
+        }
+
+        // toggleTarget 자동 할당
         if (toggleTarget == null)
         {
             var mainCanvas = GameObject.Find("MainCanvas");
@@ -55,14 +76,6 @@ public class AreaGaugeController : MonoBehaviour
                     toggleTarget = filter.gameObject;
                     Debug.Log("AreaGaugeController: toggleTarget을 MainCanvas/Filter로 자동 할당했습니다.");
                 }
-                else
-                {
-                    Debug.LogWarning("AreaGaugeController: 'MainCanvas/Filter' 오브젝트를 찾을 수 없습니다.");
-                }
-            }
-            else
-            {
-                Debug.LogWarning("AreaGaugeController: 'MainCanvas' 오브젝트를 찾을 수 없습니다.");
             }
         }
     }
@@ -74,12 +87,14 @@ public class AreaGaugeController : MonoBehaviour
 
         if (isInside)
         {
+            // 세이프티존 안 → 게이지 감소
             currentGauge -= drainSpeed * Time.deltaTime;
             if (onFillStartSource != null && onFillStartSource.isPlaying)
                 onFillStartSource.Stop();
         }
         else
         {
+            // 세이프티존 밖 → 게이지 증가
             currentGauge += fillSpeed * Time.deltaTime;
             if (onFillStartSource != null && !onFillStartSource.isPlaying)
                 onFillStartSource.Play();
@@ -93,7 +108,7 @@ public class AreaGaugeController : MonoBehaviour
         else
             UpdateGaugeUI();
 
-        // 게이지 100 도달 시 한 번만 실행
+        // 게이지 100 도달 시 Danger 발동
         if (!hasTriggeredDanger && currentGauge >= 100f)
         {
             hasTriggeredDanger = true;
@@ -102,15 +117,18 @@ public class AreaGaugeController : MonoBehaviour
                 onFullGaugeSource.Play();
 
             if (targetMonster != null)
+            {
+                Debug.Log("AreaGaugeController: DangerGauge Max → " + targetMonster);
                 targetMonster.OnDangerGaugeMaxed();
+            }
             else
-                Debug.LogWarning("AreaGaugeController: targetMonster가 할당되지 않았습니다!");
+            {
+                Debug.LogWarning("AreaGaugeController: targetMonster가 연결되지 않아 Danger 호출 실패!");
+            }
 
-            // 토글 코루틴 시작
+            // 화면 토글 효과
             if (toggleTarget != null)
                 toggleCoroutine = StartCoroutine(ToggleTargetEverySecond());
-            else
-                Debug.LogWarning("AreaGaugeController: toggleTarget을 할당해주세요!");
         }
     }
 
@@ -119,13 +137,11 @@ public class AreaGaugeController : MonoBehaviour
         if (!other.CompareTag("Player")) return;
 
         if (!hasEnteredOnce)
-        {
             hasEnteredOnce = true;
-            Debug.Log("첫 진입: 게이지 로직 활성화 (현재 " + currentGauge + ")");
-        }
 
         isInside = true;
-        Debug.Log("영역 진입: 게이지 감소 시작");
+        PlayerInSafetyZone = true; // 전역 표시
+        Debug.Log("AreaGaugeController: Player SafetyZone 진입 → 게이지 감소 시작");
     }
 
     void OnTriggerExit(Collider other)
@@ -133,7 +149,8 @@ public class AreaGaugeController : MonoBehaviour
         if (!other.CompareTag("Player") || !hasEnteredOnce) return;
 
         isInside = false;
-        Debug.Log("영역 이탈: 게이지 채우기 시작");
+        PlayerInSafetyZone = false; // 전역 표시
+        Debug.Log("AreaGaugeController: Player SafetyZone 이탈 → 게이지 증가 시작");
     }
 
     void UpdateGaugeUI()
@@ -151,9 +168,6 @@ public class AreaGaugeController : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// 외부에서 원할 때 토글 중단
-    /// </summary>
     public void StopToggling()
     {
         if (toggleCoroutine != null)

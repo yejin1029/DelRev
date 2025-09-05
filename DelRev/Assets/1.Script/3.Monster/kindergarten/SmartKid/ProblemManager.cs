@@ -3,33 +3,52 @@ using UnityEngine;
 public class ProblemManager : MonoBehaviour
 {
     public static ProblemManager Instance;
-    private GameObject player;
-    private int answer;
+
+    private MathProblemUI ui;
+    private SmartKidAI currentKid;
+    private GameObject currentPlayer;
 
     void Awake()
     {
-        Instance = this;
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+
+        ui = FindObjectOfType<MathProblemUI>(true);
+        if (ui != null)
+        {
+            ui.gameObject.SetActive(false);
+            Debug.Log("[ProblemManager] MathProblemUI 찾음 → 시작 시 숨김");
+        }
     }
 
-    public void StartProblem(GameObject playerObj)
+    public void StartProblem(GameObject player, SmartKidAI kid)
     {
-        player = playerObj;
-        int a = Random.Range(10, 100);
-        int b = Random.Range(10, 100);
-        answer = a + b;
-        MathProblemUI.Instance.ShowProblem($"{a} + {b} = ?", answer, OnAnswerSubmitted);
+        currentPlayer = player;
+        currentKid = kid;
+
+        if (ui != null)
+        {
+            ui.gameObject.SetActive(true);
+            ui.ShowNewProblem(OnSolved);
+            Debug.Log("[ProblemManager] 문제 출제 시작!");
+        }
     }
 
-    void OnAnswerSubmitted(bool isCorrect)
+    private void OnSolved()
     {
-        if (isCorrect)
+        if (ui != null)
         {
-            SmartKidAI smartKid = FindObjectOfType<SmartKidAI>();
-            smartKid.ReleasePlayer();
+            ui.gameObject.SetActive(false);
+            Debug.Log("[ProblemManager] 문제 해결 → UI 닫음");
         }
-        else
+
+        if (currentKid != null)
         {
-            // 문제 계속 시도
+            currentKid.ReleasePlayer();
+            currentKid = null;
+            Debug.Log("[ProblemManager] SmartKid 해방");
         }
+
+        currentPlayer = null;
     }
 }

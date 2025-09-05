@@ -3,7 +3,7 @@ using UnityEngine.AI;
 using System.Collections;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class Mom : MonoBehaviour
+public class Mom : MonoBehaviour, IDangerTarget
 {
     public Transform[] patrolPoints;
     private int currentPatrolIndex;
@@ -86,7 +86,6 @@ public class Mom : MonoBehaviour
         if (currentState == State.None) return;
         if (playerTransform == null || playerController == null) return;
 
-        // 빠른 회전 처리
         RotateTowardsMovementDirection();
 
         if (chaseSoundTimer > 0f)
@@ -96,7 +95,7 @@ public class Mom : MonoBehaviour
         isShiftPressed = Input.GetKey(KeyCode.LeftControl);
 
         float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
-        bool hasSight = HasLineOfSight(); // 호출 1회로 줄이기
+        bool hasSight = HasLineOfSight();
 
         switch (currentState)
         {
@@ -149,14 +148,12 @@ public class Mom : MonoBehaviour
                 break;
         }
 
-        // 추격 사운드 처리
         if (currentState == State.Chase && previousState != State.Chase && chaseSoundTimer <= 0f)
         {
             chaseSource?.Play();
             chaseSoundTimer = chaseSoundCooldown;
         }
 
-        // 공격 처리
         if (distanceToPlayer <= attackRange)
         {
             damageTimer += Time.deltaTime;
@@ -173,8 +170,10 @@ public class Mom : MonoBehaviour
         }
     }
 
+    // -------- IDangerTarget 구현 --------
     public void OnDangerGaugeMaxed()
     {
+        Debug.Log("Mom: Danger 게이지 최대 → Alert 상태 전환!");
         currentState = State.Alert;
         agent.speed = 12f;
         damageAmount = 150f;
@@ -264,7 +263,6 @@ public class Mom : MonoBehaviour
             bool isActive = (i == index);
             introTexts[i].SetActive(isActive);
 
-            // 텍스트 활성화 시 사운드 재생
             if (isActive && introTextSounds != null && i < introTextSounds.Length && introTextSounds[i] != null)
             {
                 introTextSounds[i].Play();
@@ -272,7 +270,6 @@ public class Mom : MonoBehaviour
         }
     }
 
-// 회전 속도에 따라 이동 방향으로 회전
     void RotateTowardsMovementDirection()
     {
         Vector3 velocity = agent.velocity;
