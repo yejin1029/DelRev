@@ -8,22 +8,31 @@ public class StartMenu : MonoBehaviour
     public GameObject helpPanel;
     public GameObject operatePanel;
 
-    private const int MaxSlots = 10;
-
     public void StartNewGameInSlot(int slot)
     {
         string path = GetSavePath(slot);
         if (File.Exists(path))
         {
-            File.Delete(path); // 기존 슬롯 삭제
+            File.Delete(path);
             Debug.Log($"슬롯 {slot}의 기존 저장 삭제됨");
         }
+
+        PlayerPrefs.SetInt("last_slot", slot);
+        PlayerPrefs.Save();
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         SceneManager.LoadScene("Company");
     }
 
+    // “이어하기” 버튼 연결
+    public void ContinueLast()
+    {
+        int slot = PlayerPrefs.GetInt("last_slot", 1);
+        LoadGameFromSlot(slot);
+    }
+
+    // 슬롯 명시 로드(슬롯 버튼이 따로 있을 경우)
     public void LoadGameFromSlot(int slot)
     {
         string path = GetSavePath(slot);
@@ -71,41 +80,5 @@ public class StartMenu : MonoBehaviour
     private string GetSavePath(int slot)
     {
         return Path.Combine(Application.persistentDataPath, $"save_slot_{slot}.json");
-    }
-
-    public void ShowHelp()
-    {
-        helpPanel.SetActive(true);
-        operatePanel.SetActive(false);
-    }
-
-    public void HideHelp()
-    {
-        helpPanel.SetActive(false);
-    }
-
-    public void ShowOperate()
-    {
-        helpPanel.SetActive(false);
-        operatePanel.SetActive(true);
-    }
-
-    public void HideOperate()
-    {
-        operatePanel.SetActive(false);
-        helpPanel.SetActive(true);
-    }
-
-    void Update()
-    {
-        if (helpPanel.activeSelf && Input.GetKeyDown(KeyCode.Escape))
-        {
-            HideHelp();
-        }
-
-        if (operatePanel.activeSelf && Input.GetKeyDown(KeyCode.Escape))
-        {
-            HideOperate();
-        }
     }
 }

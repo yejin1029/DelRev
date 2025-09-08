@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
@@ -11,6 +10,15 @@ public class SaveLoadManager : MonoBehaviour
 
     public static void SaveGame(PlayerController player, Inventory inventory, int slot)
     {
+        // --- 인벤토리 4칸만 저장 ---
+        var names = new List<string>(4);
+        var items = inventory.GetInventoryItems(); // 기존 프로젝트 메서드 사용
+        for (int i = 0; i < 4; i++)
+        {
+            var item = (items != null && i < items.Count) ? items[i] : null;
+            names.Add(item != null ? item.itemName : null);
+        }
+
         SaveData data = new SaveData
         {
             health = player.health,
@@ -19,16 +27,22 @@ public class SaveLoadManager : MonoBehaviour
             playerPosition = player.transform.position,
             currentDay = MapTracker.Instance?.currentDay ?? 0,
             sceneName = SceneManager.GetActiveScene().name,
-            inventoryItemNames = new List<string>()
+            inventoryItemNames = names
         };
 
-        foreach (var item in inventory.GetInventoryItems())
-        {
-            data.inventoryItemNames.Add(item != null ? item.itemName : null);
-        }
-
         string json = JsonUtility.ToJson(data, true);
-        File.WriteAllText(GetSavePath(slot), json);
+
+        // 원자적 저장
+        string path = GetSavePath(slot);
+        string tmp = path + ".tmp";
+        File.WriteAllText(tmp, json);
+        if (File.Exists(path)) File.Delete(path);
+        File.Move(tmp, path);
+
+        // 이어하기용 슬롯 기록
+        PlayerPrefs.SetInt("last_slot", slot);
+        PlayerPrefs.Save();
+
         Debug.Log($"게임 저장 완료 - 슬롯 {slot}: {GetSavePath(slot)}");
     }
 
@@ -48,11 +62,15 @@ public class SaveLoadManager : MonoBehaviour
         player.stamina = data.stamina;
         player.coinCount = data.coinCount;
         player.transform.position = data.playerPosition;
-        MapTracker.Instance.currentDay = data.currentDay;
 
-        for (int i = 0; i < data.inventoryItemNames.Count; i++)
+        if (MapTracker.Instance != null)
+            MapTracker.Instance.currentDay = data.currentDay;
+
+        // --- 인벤토리 4칸만 복원 ---
+        var names = data.inventoryItemNames ?? new List<string>();
+        for (int i = 0; i < 4; i++)
         {
-            string itemName = data.inventoryItemNames[i];
+            string itemName = (i < names.Count) ? names[i] : null;
             if (!string.IsNullOrEmpty(itemName))
             {
                 GameObject prefab = Resources.Load<GameObject>($"Items/{itemName}");
@@ -63,8 +81,20 @@ public class SaveLoadManager : MonoBehaviour
                     inventory.SetItemAt(i, itemComp);
                     newItem.SetActive(false);
                 }
+                else
+                {
+                    // 리소스가 없으면 해당 칸 비워두기
+                    inventory.SetItemAt(i, null);
+                }
+            }
+            else
+            {
+                inventory.SetItemAt(i, null);
             }
         }
+
+        PlayerPrefs.SetInt("last_slot", slot);
+        PlayerPrefs.Save();
 
         Debug.Log($"게임 로드 완료 - 슬롯 {slot}: {path}");
     }
