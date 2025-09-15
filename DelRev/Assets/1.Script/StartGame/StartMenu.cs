@@ -1,84 +1,119 @@
-﻿using UnityEngine;
+﻿using System.IO;
+using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Collections;
-using System.IO;
+using UnityEngine.EventSystems;
 
 public class StartMenu : MonoBehaviour
 {
+    [Header("Panels")]
     public GameObject helpPanel;
     public GameObject operatePanel;
 
+
+    [Header("Settings")]
+    public string firstGameSceneName = "Company"; // 새 게임 시작 씬
+    public int defaultSlot = 1; // 기본 슬롯(단일 슬롯 운용)
+
+    // ==== 버튼용 공개 메서드 ====
+
+    // 새 게임(저장 무시하고 무조건 처음부터)
+    public void StartNewGame()
+    {
+        StartNewGameInSlot(defaultSlot);
+    }
+
     public void StartNewGameInSlot(int slot)
     {
-        string path = GetSavePath(slot);
+        string path = SaveLoadManager.GetSavePath(slot);
         if (File.Exists(path))
-        {
-            File.Delete(path);
-            Debug.Log($"슬롯 {slot}의 기존 저장 삭제됨");
-        }
+            File.Delete(path); // 저장 파기
 
+        // 새 게임 플래그
         PlayerPrefs.SetInt("last_slot", slot);
+        PlayerPrefs.SetInt("__NEW_GAME__", 1);
         PlayerPrefs.Save();
 
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        SceneManager.LoadScene("Company");
+        // 살아있는 DDOL 모두 제거 (UI/싱글톤 포함)
+        GlobalState.KillAllDontDestroyOnLoad();
+
+        // 첫 게임 씬으로 진입
+        SceneManager.LoadScene(firstGameSceneName, LoadSceneMode.Single);
+        Debug.Log($"[StartMenu] 새 게임 시작 - 슬롯 {slot} (저장 삭제 & DDOL 정리)");
     }
 
-    // “이어하기” 버튼 연결
+    // 이어하기(저장 없으면 동작하지 않음)
+    public void Continue()
+    {
+        int slot = PlayerPrefs.GetInt("last_slot", defaultSlot);
+        if (!SaveLoadManager.HasSave(slot))
+        {
+            Debug.LogWarning("이어하기 불가: 저장 파일이 없습니다.");
+            return;
+        }
+        ContinueLast();
+    }
+
+
+    // 가장 최근 슬롯으로 이어하기(씬 이동 + 데이터 주입)
     public void ContinueLast()
     {
-        int slot = PlayerPrefs.GetInt("last_slot", 1);
-        LoadGameFromSlot(slot);
-    }
-
-    // 슬롯 명시 로드(슬롯 버튼이 따로 있을 경우)
-    public void LoadGameFromSlot(int slot)
-    {
-        string path = GetSavePath(slot);
+        int slot = PlayerPrefs.GetInt("last_slot", defaultSlot);
+        string path = SaveLoadManager.GetSavePath(slot);
         if (!File.Exists(path))
         {
-            Debug.LogWarning($"슬롯 {slot}에 저장된 파일이 없습니다!");
+            Debug.LogWarning("ContinueLast 실패: 저장 파일이 없습니다.");
             return;
         }
 
-        string json = File.ReadAllText(path);
-        SaveData data = JsonUtility.FromJson<SaveData>(json);
+        // 새 게임 플래그 해제(안전)
+        PlayerPrefs.SetInt("__NEW_GAME__", 0);
+        PlayerPrefs.Save();
 
-        string sceneToLoad = string.IsNullOrEmpty(data.sceneName) ? "Company" : data.sceneName;
-        StartCoroutine(LoadAndMoveScene(sceneToLoad, slot));
+        // 실제 이어하기 시퀀스 실행
+        ContinueLoader.Begin(slot);
     }
 
-    private IEnumerator LoadAndMoveScene(string sceneName, int slot)
+    // --- 도움말 열기 ---
+    public void OpenHelpPanel()
     {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
-        while (!asyncLoad.isDone) yield return null;
-
-        PlayerController player = null;
-        Inventory inventory = null;
-
-        float timeout = 3f;
-        while ((player == null || inventory == null) && timeout > 0f)
+        if (helpPanel == null)
         {
-            player = GameObject.FindGameObjectWithTag("Player")?.GetComponent<PlayerController>();
-            inventory = FindObjectOfType<Inventory>();
-            timeout -= Time.deltaTime;
-            yield return null;
+            Debug.LogWarning("HelpPanel이 연결되지 않았습니다.");
+            return;
         }
 
-        if (player != null && inventory != null)
+        // 패널 표시/숨김
+        helpPanel.SetActive(true);
+        if (operatePanel != null) operatePanel.SetActive(false);
+
+        // EventSystem이 없으면 생성 (키보드/패드 네비게이션 대비)
+        if (EventSystem.current == null)
         {
-            SaveLoadManager.LoadGame(player, inventory, slot);
-            Debug.Log($"📂 슬롯 {slot}에서 게임 불러오기 완료: {sceneName}");
-        }
-        else
-        {
-            Debug.LogWarning("❌ Player 또는 Inventory를 찾지 못했습니다.");
+            var es = new GameObject("EventSystem");
+            es.AddComponent<EventSystem>();
+            es.AddComponent<StandaloneInputModule>();
         }
     }
 
-    private string GetSavePath(int slot)
+    // --- 도움말 닫기(닫기 버튼에 연결) ---
+    public void OpenOperatePanel()
     {
-        return Path.Combine(Application.persistentDataPath, $"save_slot_{slot}.json");
+        if (helpPanel != null) helpPanel.SetActive(false);
+        if (operatePanel != null) operatePanel.SetActive(true);
+    }
+
+    public void ClosePanel()
+    {
+        if (helpPanel != null) helpPanel.SetActive(false);
+        if (operatePanel != null) operatePanel.SetActive(false);
+    }
+
+    // (선택) ESC로 닫기 원하시면 Update에 추가
+    void Update()
+    {
+        if (helpPanel != null && helpPanel.activeSelf && Input.GetKeyDown(KeyCode.Escape))
+        {
+            ClosePanel();
+        }
     }
 }
