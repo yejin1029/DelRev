@@ -98,7 +98,6 @@ public class Security_A : MonoBehaviour
         {
             currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
             agent.SetDestination(patrolPoints[currentPatrolIndex].position);
-            Debug.Log($"[Security_A] 순찰 포인트 이동: {patrolPoints[currentPatrolIndex].name}");
         }
     }
 }
