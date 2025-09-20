@@ -26,10 +26,12 @@ public class FactoryManager : MonoBehaviour, IDangerTarget
     [SerializeField] private float chaseSpeed = 5f;
     [SerializeField] private float alertSpeed = 7f;
 
+    // 로그 주기 관리
+    private float nextLogTime = 0f;
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        // 안전하게 세팅
         agent.stoppingDistance = 0f;
         agent.autoBraking = false;
 
@@ -85,7 +87,13 @@ public class FactoryManager : MonoBehaviour, IDangerTarget
     {
         if (patrolPoints.Length == 0) return;
         agent.SetDestination(patrolPoints[currentPatrolIndex].position);
-        Debug.Log($"[FactoryManager] 순찰 포인트 이동: {patrolPoints[currentPatrolIndex].name}");
+
+        if (Time.time >= nextLogTime)
+        {
+            Debug.Log($"[FactoryManager] 순찰 포인트 이동: {patrolPoints[currentPatrolIndex].name}");
+            nextLogTime = Time.time + 5f;
+        }
+
         currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
     }
 
@@ -102,7 +110,12 @@ public class FactoryManager : MonoBehaviour, IDangerTarget
             {
                 damageTimer = 0f;
                 playerController.health -= 40f;
-                Debug.Log("[FactoryManager] 공격! (데미지 40)");
+
+                if (Time.time >= nextLogTime)
+                {
+                    Debug.Log("[FactoryManager] 공격! (데미지 40)");
+                    nextLogTime = Time.time + 5f;
+                }
             }
         }
         else
@@ -124,7 +137,12 @@ public class FactoryManager : MonoBehaviour, IDangerTarget
             {
                 damageTimer = 0f;
                 playerController.health -= 120f;
-                Debug.Log("[FactoryManager] ALERT 공격! (데미지 120)");
+
+                if (Time.time >= nextLogTime)
+                {
+                    Debug.Log("[FactoryManager] ALERT 공격! (데미지 120)");
+                    nextLogTime = Time.time + 5f;
+                }
             }
         }
         else
@@ -150,11 +168,20 @@ public class FactoryManager : MonoBehaviour, IDangerTarget
         if (NavMesh.SamplePosition(playerTransform.position, out hit, 50f, NavMesh.AllAreas))
         {
             bool pathFound = agent.SetDestination(hit.position);
-            Debug.Log($"{prefix} 경로 설정: {pathFound}, 목적지 = {hit.position}");
+
+            if (Time.time >= nextLogTime)
+            {
+                Debug.Log($"{prefix} 경로 설정: {pathFound}, 목적지 = {hit.position}");
+                nextLogTime = Time.time + 5f;
+            }
         }
         else
         {
-            Debug.LogWarning($"{prefix} 플레이어 근처 NavMesh를 찾지 못함!");
+            if (Time.time >= nextLogTime)
+            {
+                Debug.LogWarning($"{prefix} 플레이어 근처 NavMesh를 찾지 못함!");
+                nextLogTime = Time.time + 5f;
+            }
         }
     }
 
@@ -179,7 +206,11 @@ public class FactoryManager : MonoBehaviour, IDangerTarget
             SuburbanHouse.Door door = hit.collider.GetComponent<SuburbanHouse.Door>();
             if (door != null)
             {
-                Debug.Log("[FactoryManager] 문 발견 → 열기 시도");
+                if (Time.time >= nextLogTime)
+                {
+                    Debug.Log("[FactoryManager] 문 발견 → 열기 시도");
+                    nextLogTime = Time.time + 5f;
+                }
                 door.OpenDoorForMonster();
             }
         }

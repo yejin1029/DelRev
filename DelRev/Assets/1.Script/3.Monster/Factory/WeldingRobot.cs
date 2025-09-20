@@ -39,6 +39,7 @@ public class WeldingRobot : MonoBehaviour
     public Collider flameHitbox; // BoxCollider 권장 (isTrigger = true)
 
     bool isSpraying;
+    float nextLogTime = 0f; // 로그 간격 관리용
 
     void Start()
     {
@@ -76,14 +77,14 @@ public class WeldingRobot : MonoBehaviour
             Vector3 dir = toPlayer.normalized;
             if (Physics.Raycast(origin, dir, out RaycastHit hit, detectionRadius + 1f, visibilityMask, QueryTriggerInteraction.Ignore))
             {
-                // 첫 맞춘 것이 Player면 LOS 통과, 그 외(벽/지형 등)면 실패
+                // 첫 맞춘 것이 Player면 LOS 통과
                 hasLOS = hit.collider.GetComponentInParent<PlayerController>() != null;
             }
         }
 
         bool shouldSpray = inRange && inFOV && hasLOS;
 
-        // 제자리 회전(선택)
+        // 제자리 회전
         if (rotateTowardTarget && (inRange || isSpraying))
         {
             Vector3 flat = toPlayer; flat.y = 0f;
@@ -98,10 +99,12 @@ public class WeldingRobot : MonoBehaviour
         if (shouldSpray && !isSpraying) StartSpray();
         else if (!shouldSpray && isSpraying) StopSpray();
 
-        // 분사 중일 때, 히트박스가 OnTriggerStay로 대미지 처리
-        // (여기서는 별도 처리 없음)
-
-        Debug.Log($"range:{inRange}, fov:{inFOV}, los:{hasLOS}, should:{shouldSpray}");
+        // 로그 (5초마다 한 번만 출력)
+        if (Time.time >= nextLogTime)
+        {
+            Debug.Log($"range:{inRange}, fov:{inFOV}, los:{hasLOS}, should:{shouldSpray}");
+            nextLogTime = Time.time + 5f;
+        }
     }
 
     void StartSpray()
@@ -119,7 +122,6 @@ public class WeldingRobot : MonoBehaviour
         if (flameVFX != null) flameVFX.Stop(true, ParticleSystemStopBehavior.StopEmitting);
     }
 
-    // 파티클 파라미터를 public 슬라이더로 제어
     void ApplyVFXParams()
     {
         if (flameVFX == null) return;
@@ -131,11 +133,9 @@ public class WeldingRobot : MonoBehaviour
         emission.rateOverTime = emissionRate;
 
         var shape = flameVFX.shape;
-        // 반폭을 파티클 원뿔/원 형태에 맞춰 대략 반영
         shape.radius = Mathf.Max(0.05f, flameHalfWidth);
     }
 
-    // BoxCollider 히트박스 크기 자동 세팅(노즐 정면 Z+ 기준)
     void ApplyHitboxSize()
     {
         if (flameHitbox == null) return;
@@ -153,7 +153,7 @@ public class WeldingRobot : MonoBehaviour
     {
         flameRange = Mathf.Max(0.1f, flameRange);
         flameHalfWidth = Mathf.Max(0.05f, flameHalfWidth);
-        detectionRadius = Mathf.Max(flameRange, detectionRadius); // 실수 방지
+        detectionRadius = Mathf.Max(flameRange, detectionRadius);
         ApplyHitboxSize();
         ApplyVFXParams();
     }
@@ -166,7 +166,7 @@ public class WeldingRobot : MonoBehaviour
         Gizmos.color = new Color(1f, 0.5f, 0f, 0.2f);
         Gizmos.DrawWireSphere(transform.position, detectionRadius);
 
-        // FOV 시각화
+        // FOV
         Vector3 left  = Quaternion.Euler(0, -viewAngle, 0) * refT.forward;
         Vector3 right = Quaternion.Euler(0, +viewAngle, 0) * refT.forward;
         Gizmos.DrawLine(refT.position, refT.position + left  * detectionRadius);

@@ -96,7 +96,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: e99e831b8dbffae45b1da15e3ac4ed4e, type: 2}
+  m_LightingDataAsset: {fileID: 112000000, guid: 89db7e524f86b4301a5464991dbec916, type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: 5ae3e6d9b0c79b74b846d74b667bc7ba, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -50742,7 +50742,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   detectionRadius: 6
   viewAngle: 45
-  obstacleMask:
+  visibilityMask:
     serializedVersion: 2
     m_Bits: 4294967295
   rotateTowardTarget: 1
@@ -55972,6 +55972,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 349f76cb3e227464f8011fccdfd8b209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damagePerSecond: 15
 --- !u!1001 &1383695627
 PrefabInstance:
   m_ObjectHideFlags: 0
