@@ -36132,14 +36132,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 972808124}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1382103826}
+  m_Children: []
   m_Father: {fileID: 1237117465}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!199 &972808126
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -36222,14 +36221,14 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 972808124}
   serializedVersion: 8
-  lengthInSec: 1
+  lengthInSec: 2
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -36404,7 +36403,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.8867924, g: 0, b: 0, a: 1}
+      maxColor: {r: 1, g: 0, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -36468,7 +36467,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -50721,7 +50720,7 @@ Transform:
   m_GameObject: {fileID: 1237117460}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -60.6, y: 1.1666822, z: 43.57}
+  m_LocalPosition: {x: -57.06, y: 1.1666822, z: 43.57}
   m_LocalScale: {x: 0.7, y: 1, z: 0.51}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -50740,21 +50739,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb081935f096e284287de6c5612e76af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRadius: 6
+  detectionRadius: 15
   viewAngle: 45
   visibilityMask:
     serializedVersion: 2
     m_Bits: 4294967295
   rotateTowardTarget: 1
   turnSpeed: 240
-  damagePerSecond: 15
-  flameRange: 4
-  flameHalfWidth: 0.6
-  spraySpeed: 8
-  emissionRate: 120
+  damagePerSecond: 30
+  fireRate: 2
+  projectileSpeed: 10
+  projectileRadius: 0.4
+  maxRange: 15
+  overlapDpsDivider: 3
   nozzle: {fileID: 972808125}
-  flameVFX: {fileID: 972808127}
-  flameHitbox: {fileID: 1382103827}
 --- !u!1001 &1238345269
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -55906,73 +55904,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4000012093006816, guid: dd9a03a16f506fc4f8425ffe0ece5663, type: 3}
   m_PrefabInstance: {fileID: 793167364}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1382103825
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1382103826}
-  - component: {fileID: 1382103827}
-  - component: {fileID: 1382103828}
-  m_Layer: 0
-  m_Name: FlameHitbox
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1382103826
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1382103825}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 8, y: 8, z: 8}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 972808125}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1382103827
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1382103825}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.2, y: 0.72, z: 4}
-  m_Center: {x: 0, y: 0.5, z: 2}
---- !u!114 &1382103828
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1382103825}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 349f76cb3e227464f8011fccdfd8b209, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damagePerSecond: 15
 --- !u!1001 &1383695627
 PrefabInstance:
   m_ObjectHideFlags: 0

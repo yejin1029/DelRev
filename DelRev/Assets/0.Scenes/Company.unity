@@ -2777,14 +2777,14 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 2
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 1191839104}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
+  m_VertexColorAlwaysGammaSpace: 1
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -21073,6 +21073,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemUIs:
   - {fileID: 1872693051}
+  - {fileID: 908638871}
 --- !u!1001 &1492698714
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27987,6 +27988,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 215441393307987769, guid: 03c0b235b73434222b47f2344f5ddd57, type: 3}
+      propertyPath: itemName
+      value: Clock
+      objectReference: {fileID: 0}
+    - target: {fileID: 215441393307987769, guid: 03c0b235b73434222b47f2344f5ddd57, type: 3}
+      propertyPath: itemImage
+      value: 
+      objectReference: {fileID: 21300000, guid: efdcbbfab4dc86c49aec481a81fca6d4, type: 3}
     - target: {fileID: 1988706066120127892, guid: 03c0b235b73434222b47f2344f5ddd57, type: 3}
       propertyPath: m_LocalPosition.x
       value: -9.85
@@ -28031,6 +28040,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Clock
       objectReference: {fileID: 0}
+    - target: {fileID: 3795721791257284342, guid: 03c0b235b73434222b47f2344f5ddd57, type: 3}
+      propertyPath: m_TagString
+      value: Item
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -28072,10 +28085,10 @@ SceneRoots:
   - {fileID: 149736373}
   - {fileID: 524868519}
   - {fileID: 1941865847}
+  - {fileID: 4016420672345182685}
   - {fileID: 4237169952863480087}
   - {fileID: 646246630}
   - {fileID: 50306586}
-  - {fileID: 4016420672345182685}
   - {fileID: 1846469321}
   - {fileID: 1262224786}
   - {fileID: 1408524326}

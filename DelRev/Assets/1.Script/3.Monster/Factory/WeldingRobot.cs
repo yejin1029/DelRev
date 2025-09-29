@@ -3,51 +3,39 @@ using UnityEngine;
 public class WeldingRobot : MonoBehaviour
 {
     [Header("Detection")]
-    [Tooltip("플레이어를 감지할 최대 반경")]
-    public float detectionRadius = 6f;
-    [Tooltip("정면 기준 공격 가능한 좌우 각도(도 단위)")]
-    public float viewAngle = 45f;
-    [Tooltip("장애물 레이어(시야 판정용)")]
-    public LayerMask visibilityMask = ~0; // Everything
+    public float detectionRadius = 8f;
+    public float viewAngle = 60f;
+    [Tooltip("시야 판정에 포함할 레이어(플레이어 + 장애물 모두 포함)")]
+    public LayerMask visibilityMask = ~0; // Everything 권장
 
     [Header("Rotation")]
-    [Tooltip("플레이어를 향해 회전할지 여부(자리 이동 없음)")]
     public bool rotateTowardTarget = true;
-    [Tooltip("회전 속도(도/초)")]
     public float turnSpeed = 240f;
 
-    [Header("Attack (Gameplay)")]
-    [Tooltip("초당 대미지(DPS)")]
-    public float damagePerSecond = 15f;
-    [Tooltip("불길 사거리 (히트박스/가시효과 길이)")]
-    public float flameRange = 4f;
-    [Tooltip("불길 반폭(가로 폭 절반, 히트박스/가시효과 폭)")]
-    public float flameHalfWidth = 0.6f;
-
-    [Header("Attack (VFX Tuning)")]
-    [Tooltip("분사 속도(파티클 속도/간접적으로 길이와 사세 조절)")]
-    public float spraySpeed = 8f;
-    [Tooltip("분사 입자량(초당 방출량)")]
-    public float emissionRate = 120f;
+    [Header("Attack")]
+    [Tooltip("플레이어가 불줄기에 닿아 있을 때 기대 총 DPS")]
+    public float damagePerSecond = 16f;
+    [Tooltip("초당 발사 개수(값이 높을수록 연속 분사 느낌)")]
+    public float fireRate = 12f;
+    [Tooltip("프로젝트타일 이동 속도")]
+    public float projectileSpeed = 10f;
+    [Tooltip("프로젝트타일 반지름(히트 폭)")]
+    public float projectileRadius = 0.4f;
+    [Tooltip("최대 비행 거리")]
+    public float maxRange = 7f;
+    [Tooltip("겹침 보정(여러 발이 겹칠 때 총합 DPS가 과해지지 않도록)")]
+    public float overlapDpsDivider = 3f;
 
     [Header("References")]
-    [Tooltip("노즐 기준(정면 Z+ 방향)")]
+    [Tooltip("노즐(없으면 본체 기준), Z+가 발사 방향")]
     public Transform nozzle;
-    [Tooltip("불꽃 파티클(선택)")]
-    public ParticleSystem flameVFX;
-    [Tooltip("분사 히트박스(Trigger Collider)")]
-    public Collider flameHitbox; // BoxCollider 권장 (isTrigger = true)
 
     bool isSpraying;
-    float nextLogTime = 0f; // 로그 간격 관리용
+    float fireTimer;
 
     void Start()
     {
-        if (flameHitbox != null) flameHitbox.enabled = false;
-        if (flameVFX != null) flameVFX.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-
-        ApplyHitboxSize();
-        ApplyVFXParams();
+        if (nozzle == null) nozzle = transform;
     }
 
     void Update()
@@ -55,129 +43,110 @@ public class WeldingRobot : MonoBehaviour
         var player = PlayerController.Instance;
         if (player == null) return;
 
-        // 1) 거리 체크
-        Vector3 toPlayer = (player.transform.position + Vector3.up * 0.9f) - (nozzle ? nozzle.position : transform.position);
+        Transform refT = nozzle != null ? nozzle : transform;
+        Vector3 playerAimPos = player.transform.position + Vector3.up * 0.9f;
+        Vector3 toPlayer = playerAimPos - refT.position;
+
         float dist = toPlayer.magnitude;
         bool inRange = dist <= detectionRadius;
 
-        // 2) 시야 각(FOV) 체크
         bool inFOV = false;
         if (inRange)
         {
-            Transform refT = nozzle != null ? nozzle : transform;
             float angle = Vector3.Angle(refT.forward, toPlayer);
             inFOV = angle <= viewAngle;
         }
 
-        // 3) 시야 막힘(LOS) 체크
         bool hasLOS = false;
         if (inRange && inFOV)
         {
-            Vector3 origin = nozzle ? nozzle.position : transform.position;
-            Vector3 dir = toPlayer.normalized;
-            if (Physics.Raycast(origin, dir, out RaycastHit hit, detectionRadius + 1f, visibilityMask, QueryTriggerInteraction.Ignore))
-            {
-                // 첫 맞춘 것이 Player면 LOS 통과
-                hasLOS = hit.collider.GetComponentInParent<PlayerController>() != null;
-            }
+            hasLOS = HasLineOfSight(refT, player.transform);
         }
 
         bool shouldSpray = inRange && inFOV && hasLOS;
 
-        // 제자리 회전
         if (rotateTowardTarget && (inRange || isSpraying))
         {
             Vector3 flat = toPlayer; flat.y = 0f;
-            if (flat.sqrMagnitude > 0.001f)
+            if (flat.sqrMagnitude > 0.0001f)
             {
                 Quaternion targetRot = Quaternion.LookRotation(flat.normalized, Vector3.up);
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRot, turnSpeed * Time.deltaTime);
             }
         }
 
-        // 분사 토글
-        if (shouldSpray && !isSpraying) StartSpray();
-        else if (!shouldSpray && isSpraying) StopSpray();
-
-        // 로그 (5초마다 한 번만 출력)
-        if (Time.time >= nextLogTime)
+        if (shouldSpray)
         {
-            Debug.Log($"range:{inRange}, fov:{inFOV}, los:{hasLOS}, should:{shouldSpray}");
-            nextLogTime = Time.time + 5f;
+            if (!isSpraying)
+            {
+                isSpraying = true;
+                fireTimer = 0f;
+            }
+
+            fireTimer += Time.deltaTime;
+            float interval = 1f / Mathf.Max(0.01f, fireRate);
+            while (fireTimer >= interval)
+            {
+                fireTimer -= interval;
+
+                // 스냅샷 조준(발사 시점의 플레이어 위치)
+                Vector3 targetPoint = player.transform.position + Vector3.up * 0.9f;
+                Vector3 dir = (targetPoint - refT.position).normalized;
+                FireOne(refT.position, dir);
+            }
+        }
+        else
+        {
+            if (isSpraying) isSpraying = false;
         }
     }
 
-    void StartSpray()
+    void FireOne(Vector3 origin, Vector3 dir)
     {
-        Debug.Log("분사 시작");
-        isSpraying = true;
-        if (flameHitbox != null) flameHitbox.enabled = true;
-        if (flameVFX != null) flameVFX.Play();
+        // 프리팹 없이 코드로 즉석 생성
+        GameObject go = new GameObject("FlameProjectile");
+        go.transform.SetPositionAndRotation(origin, Quaternion.LookRotation(dir, Vector3.up));
+        var proj = go.AddComponent<FlameProjectile>();
+
+        // 파라미터 전달
+        proj.Initialize(
+            speed: projectileSpeed,
+            lifeDistance: maxRange,
+            radius: projectileRadius,
+            dps: damagePerSecond / Mathf.Max(1f, overlapDpsDivider)
+        );
     }
 
-    void StopSpray()
+    // === LOS 유틸 ===
+    bool HasLineOfSight(Transform originTf, Transform targetTf)
     {
-        isSpraying = false;
-        if (flameHitbox != null) flameHitbox.enabled = false;
-        if (flameVFX != null) flameVFX.Stop(true, ParticleSystemStopBehavior.StopEmitting);
-    }
+        Vector3 origin = originTf.position;
+        Vector3 target = targetTf.position + Vector3.up * 0.9f;
+        Vector3 dir    = (target - origin).normalized;
+        float   dist   = Vector3.Distance(origin, target);
+        origin += dir * 0.02f; // 자기 콜라이더 내부 시작 보정
 
-    void ApplyVFXParams()
-    {
-        if (flameVFX == null) return;
+        var hits = Physics.RaycastAll(origin, dir, dist, visibilityMask, QueryTriggerInteraction.Ignore);
+        System.Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
 
-        var main = flameVFX.main;
-        main.startSpeed = spraySpeed;
-
-        var emission = flameVFX.emission;
-        emission.rateOverTime = emissionRate;
-
-        var shape = flameVFX.shape;
-        shape.radius = Mathf.Max(0.05f, flameHalfWidth);
-    }
-
-    void ApplyHitboxSize()
-    {
-        if (flameHitbox == null) return;
-
-        var box = flameHitbox as BoxCollider;
-        if (box != null)
+        foreach (var h in hits)
         {
-            box.isTrigger = true;
-            box.center = new Vector3(0f, 0.5f, flameRange * 0.5f);
-            box.size   = new Vector3(flameHalfWidth * 2f, flameHalfWidth * 1.2f, flameRange);
+            if (h.collider.transform.IsChildOf(transform)) continue; // 자기 자신 무시
+            return h.collider.GetComponentInParent<PlayerController>() != null;
         }
-    }
-
-    void OnValidate()
-    {
-        flameRange = Mathf.Max(0.1f, flameRange);
-        flameHalfWidth = Mathf.Max(0.05f, flameHalfWidth);
-        detectionRadius = Mathf.Max(flameRange, detectionRadius);
-        ApplyHitboxSize();
-        ApplyVFXParams();
+        return true; // 히트가 없으면 막힘 없음으로 간주
     }
 
     void OnDrawGizmosSelected()
     {
         Transform refT = nozzle != null ? nozzle : transform;
 
-        // 감지 반경
-        Gizmos.color = new Color(1f, 0.5f, 0f, 0.2f);
+        Gizmos.color = new Color(1f, 0.6f, 0f, 0.25f);
         Gizmos.DrawWireSphere(transform.position, detectionRadius);
 
-        // FOV
         Vector3 left  = Quaternion.Euler(0, -viewAngle, 0) * refT.forward;
         Vector3 right = Quaternion.Euler(0, +viewAngle, 0) * refT.forward;
         Gizmos.DrawLine(refT.position, refT.position + left  * detectionRadius);
         Gizmos.DrawLine(refT.position, refT.position + right * detectionRadius);
-
-        // 불길 히트박스
-        Gizmos.color = new Color(1f, 0.2f, 0f, 0.25f);
-        Matrix4x4 m = Gizmos.matrix;
-        Gizmos.matrix = refT.localToWorldMatrix;
-        Gizmos.DrawWireCube(new Vector3(0, 0.5f, flameRange * 0.5f),
-                            new Vector3(flameHalfWidth * 2f, flameHalfWidth * 1.2f, flameRange));
-        Gizmos.matrix = m;
     }
 }
