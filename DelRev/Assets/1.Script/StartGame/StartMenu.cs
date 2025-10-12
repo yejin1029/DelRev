@@ -9,7 +9,6 @@ public class StartMenu : MonoBehaviour
     public GameObject helpPanel;
     public GameObject operatePanel;
 
-
     [Header("Settings")]
     public string firstGameSceneName = "Company"; // 새 게임 시작 씬
     public int defaultSlot = 1; // 기본 슬롯(단일 슬롯 운용)
@@ -36,8 +35,10 @@ public class StartMenu : MonoBehaviour
         // 살아있는 DDOL 모두 제거 (UI/싱글톤 포함)
         GlobalState.KillAllDontDestroyOnLoad();
 
-        // 첫 게임 씬으로 진입
-        SceneManager.LoadScene(firstGameSceneName, LoadSceneMode.Single);
+        // 첫 게임 씬으로 진입 (로딩씬 경유)
+        // SceneManager.LoadScene(firstGameSceneName, LoadSceneMode.Single);
+        SceneLoader.Load(firstGameSceneName);   // ← 변경: 로딩씬 → 대상 씬(비동기)
+
         Debug.Log($"[StartMenu] 새 게임 시작 - 슬롯 {slot} (저장 삭제 & DDOL 정리)");
     }
 
@@ -52,7 +53,6 @@ public class StartMenu : MonoBehaviour
         }
         ContinueLast();
     }
-
 
     // 가장 최근 슬롯으로 이어하기(씬 이동 + 데이터 주입)
     public void ContinueLast()
@@ -70,6 +70,9 @@ public class StartMenu : MonoBehaviour
         PlayerPrefs.Save();
 
         // 실제 이어하기 시퀀스 실행
+        // (참고) ContinueLoader 내부에서 씬 전환이 있다면
+        // SceneManager.LoadScene(...) 대신 SceneLoader.Load(...)를 쓰도록 한 줄만 바꾸면,
+        // 이어하기도 동일한 로딩 UX를 사용할 수 있어.
         ContinueLoader.Begin(slot);
     }
 
