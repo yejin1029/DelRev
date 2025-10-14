@@ -22,12 +22,17 @@ public class Teacher : MonoBehaviour
     private PlayerController playerController;
 
     public Animator animator;
+    public float speedDampTime = 0.1f; // 전환 부드럽게
+
     public GameObject forwardViewIndicator; // Optional 시각화용
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
         playerController = player?.GetComponent<PlayerController>();
+
+        if (animator == null) animator = GetComponent<Animator>();
+        if (animator) animator.applyRootMotion = false; // 에이전트가 이동 담당
 
         if (isPatrolTeacher)
         {
@@ -39,6 +44,9 @@ public class Teacher : MonoBehaviour
 
     void Update()
     {
+        // 매 프레임 애니메이터 갱신
+        UpdateAnimatorByMovement();
+
         if (isPatrolTeacher)
         {
             HandlePatrolling();
@@ -61,6 +69,29 @@ public class Teacher : MonoBehaviour
         {
             attackTimer = 0f;
         }
+    }
+
+
+    // 이동/정지 상태를 애니메이터에 전달
+    void UpdateAnimatorByMovement()
+    {
+        if (animator == null) return;
+
+        float speed = 0f;
+
+        if (isPatrolTeacher && agent != null)
+        {
+            // NavMeshAgent 실제 속도(m/s)
+            speed = agent.velocity.magnitude;
+        }
+        else
+        {
+            // 비순찰 모드: 제자리에서 회전만 하므로 이동속도 0
+            // (회전도 달리기 모션 쓰고 싶다면 여기서 회전 각속도로 대체 가능)
+            speed = 0f;
+        }
+
+        animator.SetFloat("Speed", speed, speedDampTime, Time.deltaTime);
     }
 
     void RotateView()

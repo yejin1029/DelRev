@@ -12,6 +12,10 @@ public class Director : MonoBehaviour, IDangerTarget
     private Transform playerTransform;
     private PlayerController playerController;
 
+    // Animator 참조
+    private Animator animator;
+
+
     [Header("Guide (Greeting) Settings")]
     public Transform[] guidePoints;
     private int currentGuideIndex = 0;
@@ -37,12 +41,17 @@ public class Director : MonoBehaviour, IDangerTarget
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
+
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
             playerTransform = player.transform;
             playerController = player.GetComponent<PlayerController>();
         }
+
+        // 루트모션을 쓰지 않을 때(권장): NavMeshAgent가 이동을 담당
+        if (animator) animator.applyRootMotion = false;
 
         currentState = State.Greeting;
         Debug.Log("[Director] 초기 상태: Greeting");
@@ -51,6 +60,9 @@ public class Director : MonoBehaviour, IDangerTarget
 
     void Update()
     {
+        // 항상 현재 속도를 Animator에 전달 ('가만히/이동중' 전환의 핵심)
+        UpdateAnimatorByAgent();
+
         if (playerTransform == null || playerController == null) return;
 
         float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
@@ -69,6 +81,17 @@ public class Director : MonoBehaviour, IDangerTarget
                 AlertUpdate(distanceToPlayer);
                 break;
         }
+    }
+
+    
+    // NavMeshAgent -> Animator
+    void UpdateAnimatorByAgent()
+    {
+        if (!animator || !agent) return;
+
+        float speed = agent.velocity.magnitude; // m/s
+        // 튐 방지용 댐핑(부드럽게 전환)
+        animator.SetFloat("Speed", speed, 0.1f, Time.deltaTime);
     }
 
     // -------- Greeting (환영) --------
