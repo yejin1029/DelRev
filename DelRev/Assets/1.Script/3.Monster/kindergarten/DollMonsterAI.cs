@@ -26,6 +26,11 @@ public class DollMonsterAI : MonoBehaviour
     public float patrolSpeed = 2f;
     public float chaseSpeed = 3f;
 
+    // 애니메이터 참조 & 댐핑
+    [Header("Animation")]
+    public Animator animator;
+    public float speedDampTime = 0.1f;
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -35,6 +40,9 @@ public class DollMonsterAI : MonoBehaviour
             playerTransform = player.transform;
             playerController = player.GetComponent<PlayerController>();
         }
+
+        if (animator == null) animator = GetComponent<Animator>();
+        if (animator) animator.applyRootMotion = false; // NavMeshAgent가 이동 담당
 
         currentState = State.Patrol;
         if (patrolPoints.Length > 0)
@@ -46,6 +54,9 @@ public class DollMonsterAI : MonoBehaviour
     void Update()
     {
         if (playerTransform == null || playerController == null) return;
+
+        // 매 프레임 애니메이터 갱신
+        UpdateAnimatorByAgent();
 
         float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
         bool isPlayerCrouching = Input.GetKey(playerController.crouchKey);
@@ -60,6 +71,20 @@ public class DollMonsterAI : MonoBehaviour
                 ChaseUpdate(distanceToPlayer, isPlayerCrouching);
                 break;
         }
+    }
+
+    // NavMeshAgent → Animator.Speed
+    void UpdateAnimatorByAgent()
+    {
+        if (animator == null || agent == null) return;
+
+        // 실제 이동속도(m/s)
+        float speed = agent.velocity.magnitude;
+
+        // 정지 판정이 애매하게 흔들리면 아래 한 줄 추가해도 됨:
+        // if (!agent.hasPath || agent.remainingDistance <= 0.05f) speed = 0f;
+
+        animator.SetFloat("Speed", speed, speedDampTime, Time.deltaTime);
     }
 
     // -------- Patrol (순찰) --------
