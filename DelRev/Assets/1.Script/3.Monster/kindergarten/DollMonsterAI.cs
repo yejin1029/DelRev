@@ -26,14 +26,18 @@ public class DollMonsterAI : MonoBehaviour
     public float patrolSpeed = 2f;
     public float chaseSpeed = 3f;
 
-    // 애니메이터 참조 & 댐핑
     [Header("Animation")]
     public Animator animator;
     public float speedDampTime = 0.1f;
 
+    [Header("Sound Settings (AudioSource 직접 지정)")]
+    public AudioSource detectSoundSource;  // 🔊 쳐다봤을 때(발견 시)
+    public AudioSource attackSoundSource;  // 🔊 공격할 때
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
@@ -42,20 +46,17 @@ public class DollMonsterAI : MonoBehaviour
         }
 
         if (animator == null) animator = GetComponent<Animator>();
-        if (animator) animator.applyRootMotion = false; // NavMeshAgent가 이동 담당
+        if (animator) animator.applyRootMotion = false;
 
         currentState = State.Patrol;
         if (patrolPoints.Length > 0)
-        {
             GoToNextPatrolPoint();
-        }
     }
 
     void Update()
     {
         if (playerTransform == null || playerController == null) return;
 
-        // 매 프레임 애니메이터 갱신
         UpdateAnimatorByAgent();
 
         float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
@@ -66,28 +67,19 @@ public class DollMonsterAI : MonoBehaviour
             case State.Patrol:
                 PatrolUpdate(distanceToPlayer, isPlayerCrouching);
                 break;
-
             case State.Chase:
                 ChaseUpdate(distanceToPlayer, isPlayerCrouching);
                 break;
         }
     }
 
-    // NavMeshAgent → Animator.Speed
     void UpdateAnimatorByAgent()
     {
         if (animator == null || agent == null) return;
-
-        // 실제 이동속도(m/s)
         float speed = agent.velocity.magnitude;
-
-        // 정지 판정이 애매하게 흔들리면 아래 한 줄 추가해도 됨:
-        // if (!agent.hasPath || agent.remainingDistance <= 0.05f) speed = 0f;
-
         animator.SetFloat("Speed", speed, speedDampTime, Time.deltaTime);
     }
 
-    // -------- Patrol (순찰) --------
     void PatrolUpdate(float distanceToPlayer, bool isPlayerCrouching)
     {
         agent.speed = patrolSpeed;
@@ -95,11 +87,14 @@ public class DollMonsterAI : MonoBehaviour
         if (!agent.pathPending && agent.remainingDistance < 0.5f && patrolPoints.Length > 0)
             GoToNextPatrolPoint();
 
-        // 플레이어 발견 → 추격 시작
         if (distanceToPlayer < detectionRange && !isPlayerCrouching)
         {
             currentState = State.Chase;
             Debug.Log("[DollMonster] 플레이어 발견 → Chase 시작");
+
+            // 🔊 발견 사운드
+            if (detectSoundSource && !detectSoundSource.isPlaying)
+                detectSoundSource.Play();
         }
 
         CheckForDoorAndInteract();
@@ -112,10 +107,8 @@ public class DollMonsterAI : MonoBehaviour
         currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
     }
 
-    // -------- Chase (추격) --------
     void ChaseUpdate(float distanceToPlayer, bool isPlayerCrouching)
     {
-        // 웅크리거나 탐지 범위 밖 → 다시 순찰
         if (isPlayerCrouching || distanceToPlayer > detectionRange)
         {
             currentState = State.Patrol;
@@ -125,11 +118,9 @@ public class DollMonsterAI : MonoBehaviour
             return;
         }
 
-        // 추격
         agent.speed = chaseSpeed;
         agent.SetDestination(playerTransform.position);
 
-        // 공격
         if (distanceToPlayer <= attackRange)
         {
             damageTimer += Time.deltaTime;
@@ -147,18 +138,21 @@ public class DollMonsterAI : MonoBehaviour
         CheckForDoorAndInteract();
     }
 
-    // -------- 공격 --------
     void AttackPlayer()
     {
         Debug.Log("[DollMonster] 플레이어 공격!");
+
         if (playerController != null)
         {
             playerController.TakeDamage(attackDamage);
             Debug.Log($"[DollMonster] 플레이어 {attackDamage} 피해 입음. 남은 체력: {playerController.health}");
+
+            // 🔊 공격 사운드
+            if (attackSoundSource)
+                attackSoundSource.Play();
         }
     }
 
-    // -------- 문 열기 --------
     private void CheckForDoorAndInteract()
     {
         RaycastHit hit;

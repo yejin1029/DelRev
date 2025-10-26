@@ -11,10 +11,7 @@ public class Director : MonoBehaviour, IDangerTarget
     private NavMeshAgent agent;
     private Transform playerTransform;
     private PlayerController playerController;
-
-    // Animator 참조
     private Animator animator;
-
 
     [Header("Guide (Greeting) Settings")]
     public Transform[] guidePoints;
@@ -25,7 +22,7 @@ public class Director : MonoBehaviour, IDangerTarget
     private int currentPatrolIndex = 0;
 
     [Header("Safety Zone Settings")]
-    public Transform safetyExitPoint;   // point(4)로 지정
+    public Transform safetyExitPoint;
 
     [Header("Combat Settings")]
     public float detectionRange = 5f;
@@ -37,6 +34,11 @@ public class Director : MonoBehaviour, IDangerTarget
     public float patrolSpeed = 3.5f;
     public float chaseSpeed = 2f;
     public float alertSpeed = 6f;
+
+    [Header("Sound Settings (AudioSource 직접 지정)")]
+    public AudioSource chaseSoundSource;   // 🔊 추격 사운드
+    public AudioSource alertSoundSource;   // 🔊 경계 사운드
+    public AudioSource attackSoundSource;  // 🔊 공격 사운드
 
     void Start()
     {
@@ -50,17 +52,14 @@ public class Director : MonoBehaviour, IDangerTarget
             playerController = player.GetComponent<PlayerController>();
         }
 
-        // 루트모션을 쓰지 않을 때(권장): NavMeshAgent가 이동을 담당
         if (animator) animator.applyRootMotion = false;
 
         currentState = State.Greeting;
-        Debug.Log("[Director] 초기 상태: Greeting");
         StartCoroutine(GreetingRoutine());
     }
 
     void Update()
     {
-        // 항상 현재 속도를 Animator에 전달 ('가만히/이동중' 전환의 핵심)
         UpdateAnimatorByAgent();
 
         if (playerTransform == null || playerController == null) return;
@@ -72,29 +71,22 @@ public class Director : MonoBehaviour, IDangerTarget
             case State.Patrol:
                 PatrolUpdate(distanceToPlayer);
                 break;
-
             case State.Chase:
                 ChaseUpdate(distanceToPlayer);
                 break;
-
             case State.Alert:
                 AlertUpdate(distanceToPlayer);
                 break;
         }
     }
 
-    
-    // NavMeshAgent -> Animator
     void UpdateAnimatorByAgent()
     {
         if (!animator || !agent) return;
-
-        float speed = agent.velocity.magnitude; // m/s
-        // 튐 방지용 댐핑(부드럽게 전환)
+        float speed = agent.velocity.magnitude;
         animator.SetFloat("Speed", speed, 0.1f, Time.deltaTime);
     }
 
-    // -------- Greeting (환영) --------
     IEnumerator GreetingRoutine()
     {
         agent.speed = patrolSpeed;
@@ -116,11 +108,9 @@ public class Director : MonoBehaviour, IDangerTarget
         }
 
         currentState = State.Patrol;
-        Debug.Log("[Director] Greeting 끝 → Patrol 시작");
         GoToNextPatrolPoint();
     }
 
-    // -------- Patrol (순찰) --------
     void PatrolUpdate(float distanceToPlayer)
     {
         agent.speed = patrolSpeed;
@@ -133,6 +123,9 @@ public class Director : MonoBehaviour, IDangerTarget
         {
             currentState = State.Chase;
             Debug.Log("[Director] 플레이어 발견 → Chase 시작");
+
+            if (chaseSoundSource && !chaseSoundSource.isPlaying)
+                chaseSoundSource.Play();
         }
     }
 
@@ -140,34 +133,26 @@ public class Director : MonoBehaviour, IDangerTarget
     {
         if (patrolPoints.Length == 0) return;
         agent.SetDestination(patrolPoints[currentPatrolIndex].position);
-        Debug.Log($"[Director] 순찰 포인트 이동: {patrolPoints[currentPatrolIndex].name}");
         currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
     }
 
-    // -------- Chase (추격) --------
     void ChaseUpdate(float distanceToPlayer)
     {
-        // 🔹 Player가 SafetyZone 안에 있으면 point(4)로 강제 이동 (Alert 아닐 때)
         if (AreaGaugeController.PlayerInSafetyZone && currentState != State.Alert)
         {
             if (safetyExitPoint != null)
             {
-                Debug.Log("[Director] Player SafetyZone 감지 → point(4)로 강제 이동");
-                currentState = State.Patrol;        // 상태를 Patrol로 전환
-                agent.speed = alertSpeed;           // 빠르게 이동
+                currentState = State.Patrol;
+                agent.speed = alertSpeed;
                 agent.SetDestination(safetyExitPoint.position);
-                currentPatrolIndex = 4;             // 이후 순찰 이어가기
-
-                // 🔹 즉시 Patrol 로직 실행
+                currentPatrolIndex = 4;
                 PatrolUpdate(distanceToPlayer);
             }
-            return; // 플레이어 추적 금지
+            return;
         }
 
-        // 🔹 SafetyZone 밖일 때만 추격
         agent.speed = chaseSpeed;
         agent.SetDestination(playerTransform.position);
-        Debug.Log("[Director] 플레이어 추격 중...");
 
         if (distanceToPlayer <= attackRange)
         {
@@ -176,7 +161,9 @@ public class Director : MonoBehaviour, IDangerTarget
             {
                 damageTimer = 0f;
                 playerController.health -= 40f;
-                Debug.Log("[Director] 플레이어 공격! (데미지 40)");
+
+                if (attackSoundSource)
+                    attackSoundSource.Play();
             }
         }
         else
@@ -185,14 +172,12 @@ public class Director : MonoBehaviour, IDangerTarget
         }
     }
 
-    // -------- Alert (경계) --------
     void AlertUpdate(float distanceToPlayer)
     {
         CheckForDoorAndInteract();
 
         agent.speed = alertSpeed;
         agent.SetDestination(playerTransform.position);
-        Debug.Log("[Director] ALERT 모드: SafetyZone 무시 추격");
 
         if (distanceToPlayer <= attackRange)
         {
@@ -201,7 +186,9 @@ public class Director : MonoBehaviour, IDangerTarget
             {
                 damageTimer = 0f;
                 playerController.health -= 120f;
-                Debug.Log("[Director] ALERT 공격! (데미지 120)");
+
+                if (attackSoundSource)
+                    attackSoundSource.Play();
             }
         }
         else
@@ -210,32 +197,15 @@ public class Director : MonoBehaviour, IDangerTarget
         }
     }
 
-    // -------- SafetyZone 트리거 (이제 전역 상태만 사용) --------
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("SafetyZone"))
-        {
-            Debug.Log("[Director] SafetyZone 트리거 감지 (무시하고 전역 상태만 사용)");
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("SafetyZone"))
-        {
-            Debug.Log("[Director] SafetyZone 트리거 이탈 (무시하고 전역 상태만 사용)");
-        }
-    }
-
-    // -------- DangerGauge 연동 --------
     public void OnDangerGaugeMaxed()
     {
         currentState = State.Alert;
         agent.speed = alertSpeed;
-        Debug.Log("[Director] DangerGauge 100 → ALERT 모드 전환!");
+
+        if (alertSoundSource && !alertSoundSource.isPlaying)
+            alertSoundSource.Play();
     }
 
-    // -------- Util --------
     bool HasLineOfSight()
     {
         RaycastHit hit;
@@ -255,10 +225,7 @@ public class Director : MonoBehaviour, IDangerTarget
         {
             SuburbanHouse.Door door = hit.collider.GetComponent<SuburbanHouse.Door>();
             if (door != null)
-            {
-                Debug.Log("[Director] 문 발견 → 열기 시도");
                 door.OpenDoorForMonster();
-            }
         }
     }
 }

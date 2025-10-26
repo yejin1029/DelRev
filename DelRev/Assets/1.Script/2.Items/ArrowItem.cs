@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,20 +18,28 @@ public class ItemSequenceController : MonoBehaviour
     [Tooltip("Bob speed, cycles per second")]
     public float bobSpeed = 1f;
 
+    [Header("Canvas Effects")]
+    [Tooltip("첫 번째 화살표 먹었을 때 2초간 표시할 오브젝트")]
+    public GameObject firstArrowEffect;
+    [Tooltip("마지막 화살표 먹었을 때 2초간 표시할 오브젝트")]
+    public GameObject lastArrowEffect;
+    [Tooltip("이펙트가 켜져 있을 시간(초)")]
+    public float effectDuration = 2f;
+
     private int currentIndex = 0;
     private Vector3[] originalPositions;
     private Transform playerTransform;
 
     void Start()
     {
-        // Find player by tag
+        // 플레이어 찾기
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null)
             playerTransform = playerObj.transform;
         else
             Debug.LogWarning("ItemSequenceController: 'Player' 태그의 오브젝트를 찾을 수 없습니다.");
 
-        // Store original positions and deactivate all except the first
+        // 원래 위치 저장 및 첫 번째 아이템만 활성화
         originalPositions = new Vector3[items.Count];
         for (int i = 0; i < items.Count; i++)
         {
@@ -40,35 +49,57 @@ public class ItemSequenceController : MonoBehaviour
                 items[i].SetActive(i == currentIndex);
             }
         }
+
+        // 효과 오브젝트 초기 비활성화
+        if (firstArrowEffect != null)
+            firstArrowEffect.SetActive(false);
+        if (lastArrowEffect != null)
+            lastArrowEffect.SetActive(false);
     }
 
     void Update()
     {
-        float t = Time.time;
-        // Bob the active item
-        if (currentIndex < items.Count)
-        {
-            GameObject item = items[currentIndex];
-            if (item != null && item.activeSelf)
-            {
-                Vector3 pos = originalPositions[currentIndex];
-                pos.y += Mathf.Sin(t * bobSpeed) * bobAmount;
-                item.transform.position = pos;
+        if (currentIndex >= items.Count) return;
 
-                // Distance-based activation
-                if (playerTransform != null)
+        float t = Time.time;
+
+        GameObject item = items[currentIndex];
+        if (item != null && item.activeSelf)
+        {
+            Vector3 pos = originalPositions[currentIndex];
+            pos.y += Mathf.Sin(t * bobSpeed) * bobAmount;
+            item.transform.position = pos;
+
+            // 플레이어 거리 계산
+            if (playerTransform != null)
+            {
+                float dist = Vector3.Distance(playerTransform.position, pos);
+                if (dist <= activationDistance)
                 {
-                    float dist = Vector3.Distance(playerTransform.position, pos);
-                    if (dist <= activationDistance)
-                    {
-                        // Deactivate current and move to next
-                        item.SetActive(false);
-                        currentIndex++;
-                        if (currentIndex < items.Count && items[currentIndex] != null)
-                            items[currentIndex].SetActive(true);
-                    }
+                    // 현재 아이템 비활성화
+                    item.SetActive(false);
+
+                    // 🔹 첫 번째 화살표 먹었을 때 효과 표시
+                    if (currentIndex == 0 && firstArrowEffect != null)
+                        StartCoroutine(ShowEffect(firstArrowEffect));
+
+                    // 🔹 마지막 화살표 먹었을 때 효과 표시
+                    if (currentIndex == items.Count - 1 && lastArrowEffect != null)
+                        StartCoroutine(ShowEffect(lastArrowEffect));
+
+                    // 다음 아이템 활성화
+                    currentIndex++;
+                    if (currentIndex < items.Count && items[currentIndex] != null)
+                        items[currentIndex].SetActive(true);
                 }
             }
         }
+    }
+
+    IEnumerator ShowEffect(GameObject effectObj)
+    {
+        effectObj.SetActive(true);
+        yield return new WaitForSeconds(effectDuration);
+        effectObj.SetActive(false);
     }
 }
