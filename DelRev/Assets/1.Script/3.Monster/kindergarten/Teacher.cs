@@ -1,156 +1,302 @@
 using UnityEngine;
 using UnityEngine.AI;
 
+[RequireComponent(typeof(NavMeshAgent))]
 public class Teacher : MonoBehaviour
 {
+    [Header("Behavior Type")]
     public bool isPatrolTeacher = false;
-    public Transform[] patrolPoints; // 순찰용 포인트
-    private int currentPointIndex;
+    public Transform[] patrolPoints;
+    private int currentPointIndex = 0;
 
-    public float rotationInterval = 3f;
-    private float rotationTimer = 0f;
-    private bool facingForward = true;
+    [Header("View Settings")]
+    public float viewAngle = 60f;          // 제자리 교사 시야각
+    public float viewDistance = 5f;        // 감지 거리
+    public float loseSightDistance = 7f;   // 추격 중 플레이어를 잃는 거리
 
+    [Header("Combat Settings")]
     public float attackDamage = 50f;
-    public float detectionDistance = 5f;
     public float attackInterval = 1f;
+    public float stopDistance = 1.2f;
     private float attackTimer = 0f;
+    private bool hasAttackedOnce = false;
 
+    [Header("Movement Settings")]
     public float moveSpeed = 1.1f;
     private NavMeshAgent agent;
     private Transform player;
     private PlayerController playerController;
 
-    public Animator animator;
-    public float speedDampTime = 0.1f; // 전환 부드럽게
+    [Header("Rotation Settings (for stationary teacher)")]
+    public float rotationInterval = 3f;
+    private float rotationTimer = 0f;
+    private bool isRotating = false;
+    private Quaternion targetRotation;
 
-    public GameObject forwardViewIndicator; // Optional 시각화용
+    [Header("Animation")]
+    public Animator animator;
+    public float speedDampTime = 0.1f;
+
+    [Header("Audio")]
+    public AudioSource detectionAudio;
+    public AudioSource attackAudio;
+
+    // 내부 상태
+    private bool hasPlayedDetectionSound = false;
+    private bool isChasingPlayer = false;
+    private Vector3 startPosition;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
         playerController = player?.GetComponent<PlayerController>();
 
-        if (animator == null) animator = GetComponent<Animator>();
-        if (animator) animator.applyRootMotion = false; // 에이전트가 이동 담당
+        agent = GetComponent<NavMeshAgent>();
+        agent.speed = moveSpeed;
+
+        if (animator == null)
+            animator = GetComponent<Animator>();
+
+        if (animator)
+            animator.applyRootMotion = false;
+
+        // 교사의 시작 위치 저장 (복귀용)
+        startPosition = transform.position;
 
         if (isPatrolTeacher)
         {
-            agent = GetComponent<NavMeshAgent>();
-            agent.speed = moveSpeed;
-            GoToNextPatrol();
+            GoToNextPatrolPoint();
         }
     }
 
     void Update()
     {
-        // 매 프레임 애니메이터 갱신
         UpdateAnimatorByMovement();
 
         if (isPatrolTeacher)
         {
             HandlePatrolling();
-            return;
-        }
-
-        RotateView();
-
-        if (facingForward && IsPlayerInClassroom())
-        {
-            attackTimer += Time.deltaTime;
-            if (attackTimer >= attackInterval)
-            {
-                attackTimer = 0f;
-                playerController?.TakeDamage(attackDamage);
-                Debug.Log("교사가 공격했습니다.");
-            }
         }
         else
         {
-            attackTimer = 0f;
+            HandleStationaryChase();
         }
     }
 
-
-    // 이동/정지 상태를 애니메이터에 전달
+    // 🎞️ 애니메이터 속도 갱신
     void UpdateAnimatorByMovement()
     {
         if (animator == null) return;
-
-        float speed = 0f;
-
-        if (isPatrolTeacher && agent != null)
-        {
-            // NavMeshAgent 실제 속도(m/s)
-            speed = agent.velocity.magnitude;
-        }
-        else
-        {
-            // 비순찰 모드: 제자리에서 회전만 하므로 이동속도 0
-            // (회전도 달리기 모션 쓰고 싶다면 여기서 회전 각속도로 대체 가능)
-            speed = 0f;
-        }
-
+        float speed = (agent != null) ? agent.velocity.magnitude : 0f;
         animator.SetFloat("Speed", speed, speedDampTime, Time.deltaTime);
     }
 
-    void RotateView()
+    // 🧍 제자리 교사 + 추격/복귀 AI
+    void HandleStationaryChase()
     {
-        rotationTimer += Time.deltaTime;
-        if (rotationTimer >= rotationInterval)
-        {
-            rotationTimer = 0f;
-            facingForward = !facingForward;
-            transform.Rotate(0, 180f, 0); // 앞/뒤로 전환
+        if (player == null || playerController == null || agent == null)
+            return;
 
-            if (forwardViewIndicator != null)
-                forwardViewIndicator.SetActive(facingForward);
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
+        // 플레이어 감지 시 추격 시작
+        if (!isChasingPlayer && IsPlayerInFrontRange())
+        {
+            isChasingPlayer = true;
+            if (detectionAudio && !detectionAudio.isPlaying)
+                detectionAudio.Play();
+        }
+
+        // 추격 상태
+        if (isChasingPlayer)
+        {
+            agent.isStopped = false;
+            agent.SetDestination(player.position);
+            CheckForDoorAndInteract();
+
+            // 공격 거리 도달 시
+            if (distanceToPlayer <= stopDistance + 0.1f)
+            {
+                agent.isStopped = true;
+
+                // 도달 즉시 첫 공격
+                if (!hasAttackedOnce)
+                {
+                    hasAttackedOnce = true;
+                    attackTimer = 0f;
+                    playerController.TakeDamage(attackDamage);
+                    if (attackAudio) attackAudio.Play();
+                    Debug.Log($"{gameObject.name} performed first attack on player (stationary).");
+                }
+
+                // 이후 주기 공격
+                attackTimer += Time.deltaTime;
+                if (attackTimer >= attackInterval)
+                {
+                    attackTimer = 0f;
+                    playerController.TakeDamage(attackDamage);
+                    if (attackAudio) attackAudio.Play();
+                }
+            }
+            else
+            {
+                attackTimer = 0f;
+                hasAttackedOnce = false;
+            }
+
+            // 플레이어가 너무 멀어지면 복귀
+            if (distanceToPlayer > loseSightDistance)
+            {
+                isChasingPlayer = false;
+                agent.SetDestination(startPosition);
+                hasAttackedOnce = false;
+                attackTimer = 0f;
+            }
+        }
+        else
+        {
+            // 복귀 또는 대기 상태
+            float distanceToStart = Vector3.Distance(transform.position, startPosition);
+
+            if (distanceToStart > 0.5f)
+            {
+                agent.isStopped = false;
+                agent.SetDestination(startPosition);
+            }
+            else
+            {
+                agent.isStopped = true;
+                RotateSmoothly();
+            }
         }
     }
 
-    bool IsPlayerInClassroom()
+    // 🌀 제자리 회전
+    void RotateSmoothly()
+    {
+        rotationTimer += Time.deltaTime;
+        if (!isRotating && rotationTimer >= rotationInterval)
+        {
+            rotationTimer = 0f;
+            isRotating = true;
+            targetRotation = Quaternion.Euler(0, transform.eulerAngles.y + 180f, 0);
+        }
+
+        if (isRotating)
+        {
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 90f * Time.deltaTime);
+            if (Quaternion.Angle(transform.rotation, targetRotation) < 0.1f)
+                isRotating = false;
+        }
+    }
+
+    // 🚶 순찰 교사
+    void HandlePatrolling()
+    {
+        if (player == null || agent == null || playerController == null)
+            return;
+
+        float distance = Vector3.Distance(transform.position, player.position);
+
+        if (IsPlayerInFrontRange())
+        {
+            if (!hasPlayedDetectionSound && detectionAudio != null)
+            {
+                detectionAudio.Play();
+                hasPlayedDetectionSound = true;
+            }
+
+            // 플레이어 방향 회전
+            Vector3 lookDir = player.position - transform.position;
+            lookDir.y = 0;
+            if (lookDir.sqrMagnitude > 0.01f)
+                transform.rotation = Quaternion.LookRotation(lookDir);
+
+            // 공격 거리 도달 시
+            if (distance <= stopDistance + 0.1f)
+            {
+                agent.isStopped = true;
+
+                // 도착 즉시 첫 공격
+                if (!hasAttackedOnce)
+                {
+                    hasAttackedOnce = true;
+                    attackTimer = 0f;
+                    playerController.TakeDamage(attackDamage);
+                    if (attackAudio != null) attackAudio.Play();
+                    Debug.Log($"{gameObject.name} performed first attack (patrolling).");
+                }
+
+                // 이후 주기 공격
+                attackTimer += Time.deltaTime;
+                if (attackTimer >= attackInterval)
+                {
+                    attackTimer = 0f;
+                    playerController.TakeDamage(attackDamage);
+                    if (attackAudio != null) attackAudio.Play();
+                }
+            }
+            else
+            {
+                // 아직 멀면 추격
+                agent.isStopped = false;
+                agent.SetDestination(player.position);
+                CheckForDoorAndInteract();
+                attackTimer = 0f;
+                hasAttackedOnce = false;
+            }
+        }
+        else
+        {
+            hasPlayedDetectionSound = false;
+
+            // 순찰 포인트 도착 시 다음 포인트로 이동
+            if (!agent.pathPending && agent.remainingDistance < 0.5f)
+                GoToNextPatrolPoint();
+        }
+    }
+
+    // 👀 시야 판정: 제자리 교사는 각도+거리, 순찰 교사는 거리만
+    bool IsPlayerInFrontRange()
     {
         if (player == null) return false;
 
-        float distance = Vector3.Distance(transform.position, player.position);
-        return distance < 3f && player.GetComponent<Rigidbody>().velocity.magnitude > 0.1f;
+        Vector3 dirToPlayer = player.position - transform.position;
+        dirToPlayer.y = 0f;
+
+        float distance = dirToPlayer.magnitude;
+        float angle = Vector3.Angle(transform.forward, dirToPlayer.normalized);
+
+        if (isPatrolTeacher)
+            return distance <= viewDistance; // 순찰 교사는 거리만 체크
+        else
+            return (distance <= viewDistance && angle <= viewAngle / 2f);
     }
 
-    void HandlePatrolling()
+    // 🚪 문 열기 (Director 방식)
+    private void CheckForDoorAndInteract()
     {
-        if (player == null || agent == null) return;
+        RaycastHit hit;
+        Vector3 origin = transform.position + Vector3.up * 0.5f;
+        Vector3 forward = transform.forward;
+        float checkDistance = 2.0f;
 
-        float distToPlayer = Vector3.Distance(transform.position, player.position);
-        if (distToPlayer <= detectionDistance)
+        if (Physics.Raycast(origin, forward, out hit, checkDistance))
         {
-            agent.SetDestination(player.position);
-        }
-        else
-        {
-            if (!agent.pathPending && agent.remainingDistance < 0.5f)
+            SuburbanHouse.Door door = hit.collider.GetComponent<SuburbanHouse.Door>();
+            if (door != null)
             {
-                GoToNextPatrol();
+                door.OpenDoorForMonster();
+                Debug.Log($"{gameObject.name} opened a door.");
             }
-        }
-
-        if (distToPlayer <= 1.5f)
-        {
-            attackTimer += Time.deltaTime;
-            if (attackTimer >= attackInterval)
-            {
-                attackTimer = 0f;
-                playerController?.TakeDamage(attackDamage);
-            }
-        }
-        else
-        {
-            attackTimer = 0f;
         }
     }
 
-    void GoToNextPatrol()
+    // 🗺️ 순찰 포인트 순환
+    void GoToNextPatrolPoint()
     {
-        if (patrolPoints.Length == 0) return;
+        if (patrolPoints == null || patrolPoints.Length == 0) return;
+        agent.isStopped = false;
         agent.SetDestination(patrolPoints[currentPointIndex].position);
         currentPointIndex = (currentPointIndex + 1) % patrolPoints.Length;
     }
@@ -158,15 +304,25 @@ public class Teacher : MonoBehaviour
     public void SetAsPatrollingTeacher()
     {
         isPatrolTeacher = true;
-        agent = GetComponent<NavMeshAgent>();
+        if (agent == null)
+            agent = GetComponent<NavMeshAgent>();
+
         agent.speed = moveSpeed;
-        GoToNextPatrol();
+        GoToNextPatrolPoint();
         Debug.Log($"{gameObject.name} is now Patrol Teacher.");
     }
 
+    // 🎨 디버그 시야 시각화
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, detectionDistance);
+        Gizmos.DrawWireSphere(transform.position, viewDistance);
+
+        Vector3 leftBoundary = Quaternion.Euler(0, -viewAngle / 2f, 0) * transform.forward;
+        Vector3 rightBoundary = Quaternion.Euler(0, viewAngle / 2f, 0) * transform.forward;
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawRay(transform.position, leftBoundary * viewDistance);
+        Gizmos.DrawRay(transform.position, rightBoundary * viewDistance);
     }
 }
