@@ -26,6 +26,30 @@ public static class SceneLoader
         if (Time.timeScale == 0f) Time.timeScale = 1f;
 
         NextSceneName = targetScene;
-        SceneManager.LoadScene(LOADING_SCENE_NAME, LoadSceneMode.Single);
+        SceneManager.LoadScene(LOADING_SCENE_NAME, LoadSceneMode.Additive);
+    }
+
+    // 로딩씬에서 최종 씬 교체를 요청할 때 호출
+    public static void ActivateNextScene()
+    {
+        if (string.IsNullOrEmpty(NextSceneName))
+        {
+            Debug.LogError("[SceneLoader] NextSceneName이 비어 있음");
+            return;
+        }
+
+        SceneManager.LoadSceneAsync(NextSceneName, LoadSceneMode.Additive).completed += (op) =>
+        {
+            // 로딩 완료되면 기존 로딩씬 제거
+            Scene loadingScene = SceneManager.GetSceneByName(LOADING_SCENE_NAME);
+            if (loadingScene.IsValid())
+            {
+                SceneManager.UnloadSceneAsync(loadingScene);
+            }
+
+            // 새 씬을 활성 씬으로 설정
+            Scene newScene = SceneManager.GetSceneByName(NextSceneName);
+            SceneManager.SetActiveScene(newScene);
+        };
     }
 }

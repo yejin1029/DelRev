@@ -31,14 +31,20 @@ void Update()
 
         int required = 0;
 
-        // 가장 가까운 '미래' 요구일 찾기
-        for (int i = 0; i < MapTracker.Instance.checkDays.Count; i++)
-        {
-            if (day < MapTracker.Instance.checkDays[i])
+            // 가장 가까운 '미래' 요구일 찾기
+            for (int i = 0; i < MapTracker.Instance.checkDays.Count; i++)
             {
-                required = MapTracker.Instance.coinRequirements[i];
-                break;
+                if (day < MapTracker.Instance.checkDays[i])
+                {
+                    required = MapTracker.Instance.coinRequirements[i];
+                    break;
+                }
             }
+        
+        // 만약 현재 day가 checkDays보다 크면 마지막 요구량 유지
+        if (required == 0 && MapTracker.Instance.coinRequirements.Count > 0)
+        {
+            required = MapTracker.Instance.coinRequirements[MapTracker.Instance.coinRequirements.Count - 1];
         }
 
         coinText.text = $"{currentCoins}/{required} Coins";

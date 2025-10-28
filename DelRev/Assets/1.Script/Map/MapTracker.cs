@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
 
+[DefaultExecutionOrder(-1000)] // MapTracker를 가장 먼저 초기화
 public class MapTracker : MonoBehaviour
 {
     public static MapTracker Instance;
@@ -17,6 +19,12 @@ public class MapTracker : MonoBehaviour
     public List<int> checkDays = new List<int> { 4, 7, 9, 11, 13 };
     public List<int> coinRequirements = new List<int> { 5, 10, 15, 20, 25 };
 
+    // Company에 들어왔을 때 알림: (isReturning, day)
+    public static event Action<bool, int> CompanyEntered;
+    
+    // "Company 떠났다가 다시 들어왔는지" 추적
+    private bool leftCompanySinceLastVisit = false;
+    
     private void Awake()
     {
         if (Instance == null)
@@ -36,7 +44,7 @@ public class MapTracker : MonoBehaviour
         Debug.Log($"[MapTracker] 코인 +{amount}, 총 보유 코인: {totalCoinCount}");
     }
 
-    private void OnEnable()
+    private void Start()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
@@ -48,60 +56,62 @@ public class MapTracker : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        string sceneName = scene.name;
+        if (scene.name == "LoadingScene")
+            return;
+
+        // SceneLoader를 거치든 아니든 안전하게 이름 결정
+        string sceneName = string.IsNullOrEmpty(SceneLoader.NextSceneName) ? scene.name : SceneLoader.NextSceneName;
+        bool isCompany = sceneName.Contains("Company");
+        Debug.Log($"[MapTracker] 씬 로드됨: {sceneName}");
 
         if (sceneName == "GameStart" || sceneName == "GameOver")
             return;
 
         if (isRestartingFromGameOver)
         {
-            if (sceneName == "Company")
+            if (isCompany)
             {
                 map1Count = 1;
                 otherMapCount = 0;
                 currentDay = 0;
                 totalCoinCount = 0;
-                Debug.Log("[MapTracker] GameOver 복귀 → Company 카운트 1로 설정");
+                leftCompanySinceLastVisit = false;
             }
-
             isRestartingFromGameOver = false;
             return;
         }
 
-        int prevMap1 = map1Count;
-        int prevOther = otherMapCount;
-
-        if (sceneName == "Company")
-            map1Count++;
-        else
-            otherMapCount++;
-
-        if (map1Count == otherMapCount && prevMap1 != prevOther)
+        // 첫 Company 진입 → Day 1
+        if (isCompany && currentDay == 0)
         {
-            currentDay++;
-            Debug.Log($"📅 Day advanced! 현재 {currentDay}일차");
-
-            // 💥 코인 요구 검증
-            int index = checkDays.IndexOf(currentDay);
-            if (index != -1 && index < coinRequirements.Count)
-            {
-                int required = coinRequirements[index];
-                if (totalCoinCount < required)
-                {
-                    var player = GameObject.FindGameObjectWithTag("Player");
-                    if (player != null)
-                    {
-                        var controller = player.GetComponent<PlayerController>();
-                        if (controller != null)
-                        {
-                            controller.TakeDamage(200f);
-                            Debug.LogWarning($"[MapTracker] {currentDay}일차에 {required}코인 미달 → -200 데미지!");
-                        }
-                    }
-                }
-            }
+            currentDay = 1;
+            map1Count++;
+            leftCompanySinceLastVisit = false;
+            CompanyEntered?.Invoke(false, currentDay);
+            Debug.Log("[MapTracker] 첫 Company 진입 → Day 1 & 이벤트 발송");
+            return;
         }
 
-        Debug.Log($"Company: {map1Count} / Other: {otherMapCount} / Day: {currentDay}");
+        // 돌아왔는지/떠났는지에 따라 날짜 및 플래그 처리
+        if (isCompany)
+        {
+            map1Count++;
+
+            bool isReturning = leftCompanySinceLastVisit; // 직전에 ‘다른 맵’을 다녀왔는가
+            if (isReturning)
+            {
+                currentDay++;
+                leftCompanySinceLastVisit = false;
+                Debug.Log($"📅 Company 복귀 → Day {currentDay}");
+            }
+
+            // Company 진입 사실을 확실히 알림(메시지/튜토리얼/UI는 여기 구독)
+            CompanyEntered?.Invoke(isReturning, currentDay);
+        }
+        else
+        {
+            otherMapCount++;
+            leftCompanySinceLastVisit = true; // Company를 떠남
+        }
     }
 }
