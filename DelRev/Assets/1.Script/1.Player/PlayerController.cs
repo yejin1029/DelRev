@@ -16,7 +16,6 @@ public class PlayerController : MonoBehaviour
     public float highSpeedMultiplier = 1.3f;
     public float slowSpeedMultiplier = 0.5f;
 
-    // SpeedBoostItem 효과 플래그
     [HideInInspector] public bool isSpeedItemActive = false;
 
     [Header("Stamina Settings")]
@@ -115,8 +114,6 @@ public class PlayerController : MonoBehaviour
         isDead = false;
         isLocked = false;
         exhausted = false;
-
-        // SpeedBoostItem 플래그 초기화
         isSpeedItemActive = false;
 
         UpdateHealthUI();
@@ -165,14 +162,12 @@ public class PlayerController : MonoBehaviour
                        transform.forward * Input.GetAxis("Vertical");
         move.Normalize();
 
-        // **아이템 소지 시 속도 고정**
         if (isSpeedItemActive)
         {
             currentSpeed = 5f;
         }
         else
         {
-            // 기존 속도 로직
             currentSpeed = walkSpeed;
             isCrouching = Input.GetKey(crouchKey);
             if (isCrouching)
@@ -268,6 +263,10 @@ public class PlayerController : MonoBehaviour
 
         UpdateHealthUI();
         FlashHealthUI();
+
+        // 🔥 Damage.cs와 연동
+        if (Damage.Instance != null)
+            Damage.Instance.TriggerDamageEffect(amount);
 
         if (health <= 0f)
             Die();
