@@ -33,6 +33,17 @@ public class Teacher : MonoBehaviour
     private bool isRotating = false;
     private Quaternion targetRotation;
 
+    [Header("Boundary Settings")]
+    public bool useLeash = true;
+    public float leashRadius = 8f;
+
+    [Tooltip("에이전트가 이동할 수 있는 NavMesh Area 마스크 (예: Indoor만).")]
+    public int areaMask = ~0; // 기본: 전부 허용 (Navigation 창에서 Indoor만 체크 권장)
+
+    [Header("Door Interaction")]
+    public bool allowDoorInteraction = true;
+    public LayerMask doorLayer = ~0; // 문이 있는 레이어만 체크하도록 설정 권장
+
     [Header("Animation")]
     public Animator animator;
     public float speedDampTime = 0.1f;
@@ -40,6 +51,7 @@ public class Teacher : MonoBehaviour
     [Header("Audio")]
     public AudioSource detectionAudio;
     public AudioSource attackAudio;
+
 
     // 내부 상태
     private bool hasPlayedDetectionSound = false;
@@ -53,6 +65,8 @@ public class Teacher : MonoBehaviour
 
         agent = GetComponent<NavMeshAgent>();
         agent.speed = moveSpeed;
+        agent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
+        agent.autoTraverseOffMeshLink = false; // 쓸데없는 링크(난간/외부) 타지 않게
 
         if (animator == null)
             animator = GetComponent<Animator>();
@@ -73,14 +87,8 @@ public class Teacher : MonoBehaviour
     {
         UpdateAnimatorByMovement();
 
-        if (isPatrolTeacher)
-        {
-            HandlePatrolling();
-        }
-        else
-        {
-            HandleStationaryChase();
-        }
+        if (isPatrolTeacher) HandlePatrolling();
+        else HandleStationaryChase();
     }
 
     // 🎞️ 애니메이터 속도 갱신
@@ -91,6 +99,29 @@ public class Teacher : MonoBehaviour
         animator.SetFloat("Speed", speed, speedDampTime, Time.deltaTime);
     }
 
+    // 안전 목적지 설정: Leash + areaMask + NavMesh 샘플링
+    bool TrySetDestination(Vector3 target)
+    {
+        Vector3 clamped = target;
+
+        if (useLeash)
+        {
+            Vector3 to = target - startPosition;
+            to.y = 0f;
+            float dist = to.magnitude;
+            if (dist > leashRadius)
+                clamped = startPosition + to.normalized * leashRadius;
+        }
+
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(clamped, out hit, 1.0f, areaMask))
+        {
+            agent.isStopped = false;
+            return agent.SetDestination(hit.position);
+        }
+        return false;
+    }
+
     // 🧍 제자리 교사 + 추격/복귀 AI
     void HandleStationaryChase()
     {
@@ -99,12 +130,22 @@ public class Teacher : MonoBehaviour
 
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-        // 플레이어 감지 시 추격 시작
-        if (!isChasingPlayer && IsPlayerInFrontRange())
+        // 감지 전: 절대 이동 금지
+        if (!isChasingPlayer)
         {
-            isChasingPlayer = true;
-            if (detectionAudio && !detectionAudio.isPlaying)
-                detectionAudio.Play();
+            if (IsPlayerInFrontRange())
+            {
+                isChasingPlayer = true;
+                if (detectionAudio && !detectionAudio.isPlaying) detectionAudio.Play();
+            }
+            else
+            {
+                // 제자리 회전만
+                agent.isStopped = true;
+                agent.ResetPath();
+                RotateSmoothly();
+                return;
+            }
         }
 
         // 추격 상태
