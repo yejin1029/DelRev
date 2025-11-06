@@ -26,7 +26,12 @@ public class FactoryManager : MonoBehaviour, IDangerTarget
     [SerializeField] private float chaseSpeed = 5f;
     [SerializeField] private float alertSpeed = 7f;
 
-    // 로그 주기 관리
+    [Header("Audio Sources")]
+    [Tooltip("추격 시작 시 재생할 오디오 소스")]
+    public AudioSource chaseAudio;
+    [Tooltip("공격 시 재생할 오디오 소스")]
+    public AudioSource attackAudio;
+
     private float nextLogTime = 0f;
 
     void Start()
@@ -35,11 +40,16 @@ public class FactoryManager : MonoBehaviour, IDangerTarget
         agent.stoppingDistance = 0f;
         agent.autoBraking = false;
 
+        // 플레이어 찾기
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
             playerTransform = player.transform;
             playerController = player.GetComponent<PlayerController>();
+        }
+        else
+        {
+            Debug.LogWarning("[FactoryManager] Player를 찾을 수 없습니다!");
         }
 
         currentState = State.Patrol;
@@ -76,10 +86,16 @@ public class FactoryManager : MonoBehaviour, IDangerTarget
         if (!agent.pathPending && agent.remainingDistance < 0.5f)
             GoToNextPatrolPoint();
 
+        // 플레이어 감지 시 추격 전환
         if (distanceToPlayer < detectionRange)
         {
             currentState = State.Chase;
-            Debug.Log("[FactoryManager] 플레이어 감지 → 무조건 추격 시작");
+
+            // 🎧 추격 시작 사운드
+            if (chaseAudio != null && !chaseAudio.isPlaying)
+                chaseAudio.Play();
+
+            Debug.Log("[FactoryManager] 플레이어 감지 → 추격 시작");
         }
     }
 
@@ -97,7 +113,7 @@ public class FactoryManager : MonoBehaviour, IDangerTarget
         currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
     }
 
-    // -------- Chase (무조건 추격 모드) --------
+    // -------- Chase --------
     void ChaseUpdate(float distanceToPlayer)
     {
         agent.speed = chaseSpeed;
@@ -109,7 +125,13 @@ public class FactoryManager : MonoBehaviour, IDangerTarget
             if (damageTimer >= damageInterval)
             {
                 damageTimer = 0f;
-                playerController.health -= 40f;
+
+                // ✅ 공식 대미지 처리
+                playerController.TakeDamage(40f);
+
+                // 🎧 공격 사운드
+                if (attackAudio != null)
+                    attackAudio.Play();
 
                 if (Time.time >= nextLogTime)
                 {
@@ -124,7 +146,7 @@ public class FactoryManager : MonoBehaviour, IDangerTarget
         }
     }
 
-    // -------- Alert (게이지 Max → 강화된 추격) --------
+    // -------- Alert --------
     void AlertUpdate(float distanceToPlayer)
     {
         agent.speed = alertSpeed;
@@ -136,7 +158,13 @@ public class FactoryManager : MonoBehaviour, IDangerTarget
             if (damageTimer >= damageInterval)
             {
                 damageTimer = 0f;
-                playerController.health -= 120f;
+
+                // ✅ 공식 대미지 처리
+                playerController.TakeDamage(120f);
+
+                // 🎧 공격 사운드
+                if (attackAudio != null)
+                    attackAudio.Play();
 
                 if (Time.time >= nextLogTime)
                 {
@@ -159,7 +187,7 @@ public class FactoryManager : MonoBehaviour, IDangerTarget
         Debug.Log("[FactoryManager] DangerGauge 100 → ALERT 모드 전환!");
     }
 
-    // -------- 목적지 갱신 + 디버그 --------
+    // -------- 목적지 갱신 --------
     private void UpdateDestination(string prefix)
     {
         if (playerTransform == null) return;
@@ -183,16 +211,6 @@ public class FactoryManager : MonoBehaviour, IDangerTarget
                 nextLogTime = Time.time + 5f;
             }
         }
-    }
-
-    // -------- Util --------
-    bool HasLineOfSight()
-    {
-        RaycastHit hit;
-        Vector3 dir = (playerTransform.position - transform.position).normalized;
-        if (Physics.Raycast(transform.position, dir, out hit, detectionRange))
-            return hit.collider.CompareTag("Player");
-        return false;
     }
 
     private void CheckForDoorAndInteract()

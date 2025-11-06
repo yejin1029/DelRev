@@ -1,61 +1,83 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class Trap : MonoBehaviour
 {
     [Header("Trap Settings")]
-    public float disableDuration = 5f;        // 이동 불가 시간
+    public float disableDuration = 1f;        // 이동 불가 시간
     public float activationDistance = 1f;     // 발동 거리
+    public AudioClip trapSound;               // 덫 소리 (선택)
 
     private Transform playerTransform;
     private bool isTriggered = false;
+    private AudioSource audioSource;
+
+    // 👇 SubCanvas/Black 이미지 참조
+    private GameObject blackImageObj;
 
     void Start()
     {
+        // 오디오소스 자동 세팅
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
+
         // Player 찾기
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null)
-        {
             playerTransform = playerObj.transform;
-        }
+
+        // SubCanvas 안의 "Black" 이미지 찾기
+        blackImageObj = GameObject.Find("Black");
+        if (blackImageObj != null)
+            blackImageObj.SetActive(false); // 시작 시 꺼두기
         else
-        {
-            Debug.LogWarning("Trap: 'Player' 태그의 오브젝트를 찾을 수 없습니다.");
-        }
+            Debug.LogWarning("Trap: 'Black' 이미지 오브젝트를 찾을 수 없습니다.");
     }
 
     void Update()
     {
         if (isTriggered || playerTransform == null) return;
 
-        // 거리 계산
         float dist = Vector3.Distance(playerTransform.position, transform.position);
         if (dist <= activationDistance)
         {
-            // PlayerController 가져오기 (자식까지 포함)
             PlayerController player = playerTransform.GetComponentInChildren<PlayerController>();
             if (player != null)
             {
-                Debug.Log("[Trap] 플레이어가 덫 밟음 → " + disableDuration + "초간 이동 불가");
+                isTriggered = true;
+
+                if (trapSound != null)
+                    audioSource.PlayOneShot(trapSound);
+
                 StartCoroutine(DisableMovement(player));
-                isTriggered = true; // 중복 실행 방지
+                StartCoroutine(BlinkBlack()); // 👈 깜빡이기 시작
             }
         }
     }
 
     private IEnumerator DisableMovement(PlayerController player)
     {
-        // 이동 막기
         player.enabled = false;
-
-        // 대기
         yield return new WaitForSeconds(disableDuration);
-
-        // 이동 복구
         player.enabled = true;
-        Debug.Log("[Trap] 플레이어 이동 가능");
-
-        // Trap 파괴 (코루틴 끝난 후 → 안전)
         Destroy(gameObject);
+    }
+
+    private IEnumerator BlinkBlack()
+    {
+        if (blackImageObj == null) yield break;
+
+        int blinkCount = 10;       // 깜빡 횟수
+        float blinkInterval = 0.1f; // 한 번 깜빡일 때 시간 (초)
+
+        for (int i = 0; i < blinkCount; i++)
+        {
+            blackImageObj.SetActive(true);
+            yield return new WaitForSeconds(blinkInterval);
+            blackImageObj.SetActive(false);
+            yield return new WaitForSeconds(blinkInterval);
+        }
     }
 }

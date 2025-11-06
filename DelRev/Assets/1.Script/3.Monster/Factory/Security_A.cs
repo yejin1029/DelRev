@@ -31,6 +31,14 @@ public class Security_A : MonoBehaviour
     private Transform playerTransform;
     private PlayerController playerController;
 
+    [Header("Audio Sources")]
+    [Tooltip("플레이어를 발견했을 때 재생할 소리 (경보음 등)")]
+    public AudioSource detectAudio;
+    [Tooltip("공격 시 재생할 소리")]
+    public AudioSource attackAudio;
+
+    private bool isChasing = false; // 추격 중 여부 체크용
+
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -58,9 +66,17 @@ public class Security_A : MonoBehaviour
 
         if (distanceToPlayer <= detectionRange)
         {
-            // 플레이어 발견 → 추적
+            // 플레이어 발견 → 추격 시작
             agent.speed = chaseSpeed;
             agent.SetDestination(playerTransform.position);
+
+            // 🎧 추격 사운드 (최초 감지 시 한 번만 재생)
+            if (!isChasing)
+            {
+                isChasing = true;
+                if (detectAudio != null && !detectAudio.isPlaying)
+                    detectAudio.Play();
+            }
 
             // 공격 범위 안에 들어왔을 때
             if (distanceToPlayer <= attackRange)
@@ -71,19 +87,27 @@ public class Security_A : MonoBehaviour
                     damageTimer = 0f;
                     if (playerController != null)
                     {
-                        playerController.health -= damageAmount;
+                        playerController.TakeDamage(damageAmount); // ✅ 정식 대미지 처리
+
+                        // 🎧 공격 사운드
+                        if (attackAudio != null)
+                            attackAudio.Play();
+
                         Debug.Log($"[Security_A] 플레이어 공격! 피해량: {damageAmount}");
                     }
                 }
             }
             else
             {
-                damageTimer = 0f; // 범위 벗어나면 공격 쿨 초기화
+                damageTimer = 0f; // 범위 벗어나면 쿨 초기화
             }
         }
         else
         {
-            // 플레이어가 detectionRange 밖으로 벗어나면 → 다시 순찰
+            // 감지 범위 밖 → 순찰 모드 복귀
+            if (isChasing)
+                isChasing = false;
+
             Patrol();
         }
     }
