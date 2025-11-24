@@ -59,7 +59,7 @@
     <UnityVersion>2022.3.47f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="C:\Users\USER\.vscode\extensions\visualstudiotoolsforunity.vstuc-1.1.3\Analyzers\Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="C:\Users\USER\.vscode\extensions\visualstudiotoolsforunity.vstuc-1.2.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.47f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.47f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
@@ -87,6 +87,7 @@
     <Compile Include="Assets\2.Download\Kindergarten Interior\PostProcessing\Utilities\CustomMotionTexture\ExampleWheelController.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />
     <Compile Include="Assets\ViapixGames\Common Scripts\Viapix_UI_PlayerHP.cs" />
+    <Compile Include="Assets\1.Script\UI\ItemDeliveryNotifier.cs" />
     <Compile Include="Assets\1.Script\3.Monster\FamilyHouse\Dog.cs" />
     <Compile Include="Assets\1.Script\3.Monster\Kindergarten\TeacherManager.cs" />
     <Compile Include="Assets\1.Script\2.Items\RandomItemSpawner.cs" />
@@ -103,7 +104,7 @@
     <Compile Include="Assets\2.Download\Kindergarten Interior\PostProcessing\Runtime\Models\ColorGradingModel.cs" />
     <Compile Include="Assets\1.Script\Save\ContinueLoader.cs" />
     <Compile Include="Assets\2.Download\Kindergarten Interior\PostProcessing\Runtime\Components\EyeAdaptationComponent.cs" />
-    <Compile Include="Assets\1.Script\NearbyItemUI.cs" />
+    <Compile Include="Assets\1.Script\UI\NearbyItemUI.cs" />
     <Compile Include="Assets\1.Script\Map\MapTracker.cs" />
     <Compile Include="Assets\1.Script\Map\CarTrigger.cs" />
     <Compile Include="Assets\1.Script\3.Monster\laboratory\CCTV.cs" />
@@ -145,6 +146,7 @@
     <Compile Include="Assets\1.Script\Save\NewGameInitializer.cs" />
     <Compile Include="Assets\2.Download\Kindergarten Interior\PostProcessing\Runtime\Models\AntialiasingModel.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_DigitValidator.cs" />
+    <Compile Include="Assets\1.Script\Navigation\MainPanel\DayManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_FrameRateCounter.cs" />
     <Compile Include="Assets\2.Download\Kindergarten Interior\PostProcessing\Runtime\Utils\RenderTextureFactory.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextConsoleSimulator.cs" />
@@ -167,6 +169,8 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
     <Compile Include="Assets\1.Script\1.Player\PlayerController.cs" />
     <Compile Include="Assets\1.Script\Navigation\StorePanel\StorePanelSelector.cs" />
+    <Compile Include="Assets\1.Script\Bootstrapper.cs" />
+    <Compile Include="Assets\1.Script\UI\SafeZoneStatusUI.cs" />
     <Compile Include="Assets\1.Script\1.Player\GameOverControl.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
     <Compile Include="Assets\1.Script\Map\DontDestroyOnLoadObject.cs" />
@@ -185,7 +189,6 @@
     <Compile Include="Assets\1.Script\3.Monster\FamilyHouse\Mom.cs" />
     <Compile Include="Assets\VLights\Scripts\VLight\VLightManager.cs" />
     <Compile Include="Assets\2.Download\Kindergarten Interior\PostProcessing\Runtime\Components\GrainComponent.cs" />
-    <Compile Include="Assets\1.Script\Message\MessageUI.cs" />
     <Compile Include="Assets\2.Download\Kindergarten Interior\PostProcessing\Runtime\PostProcessingContext.cs" />
     <Compile Include="Assets\1.Script\Navigation\MapPanel\MapLocationSelector.cs" />
     <Compile Include="Assets\1.Script\Settings\WindowModeToggle.cs" />
@@ -196,6 +199,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshProFloatingText.cs" />
     <Compile Include="Assets\1.Script\Navigation\MainPanel\CoinUI.cs" />
     <Compile Include="Assets\1.Script\Map\RedOverlay.cs" />
+    <Compile Include="Assets\1.Script\Navigation\MainPanel\DayUI.cs" />
     <Compile Include="Assets\1.Script\Save\SaveLoadUI.cs" />
     <Compile Include="Assets\2.Download\Kindergarten Interior\PostProcessing\Runtime\Components\FxaaComponent.cs" />
     <Compile Include="Assets\1.Script\Save\SaveLoadManager.cs" />
@@ -203,6 +207,7 @@
     <Compile Include="Assets\2.Download\Kindergarten Interior\PostProcessing\Runtime\Models\BuiltinDebugViewsModel.cs" />
     <Compile Include="Assets\1.Script\Navigation\MainPanel\NavigationPanelManager.cs" />
     <Compile Include="Assets\1.Script\2.Items\Item.cs" />
+    <Compile Include="Assets\1.Script\UI\MessageUI.cs" />
     <Compile Include="Assets\2.Download\Kindergarten Interior\PostProcessing\Runtime\Components\VignetteComponent.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
     <Compile Include="Assets\2.Download\Kindergarten Interior\PostProcessing\Runtime\Models\ChromaticAberrationModel.cs" />
@@ -221,7 +226,6 @@
     <Compile Include="Assets\1.Script\3.Monster\Kindergarten\SmartKid\SmartKidAI.cs" />
     <Compile Include="Assets\1.Script\Settings\VolumeBoot.cs" />
     <Compile Include="Assets\2.Download\Kindergarten Interior\PostProcessing\Runtime\Attributes\TrackballGroupAttribute.cs" />
-    <Compile Include="Assets\1.Script\Message\ItemDeliveryNotifier.cs" />
     <Compile Include="Assets\2.Download\Kindergarten Interior\PostProcessing\Runtime\Components\MotionBlurComponent.cs" />
     <Compile Include="Assets\2.Download\Kindergarten Interior\PostProcessing\Runtime\Components\FogComponent.cs" />
     <Compile Include="Assets\VLights\Scripts\Util\VLightShaderUtil.cs" />

@@ -32,12 +32,17 @@ public class StartMenu : MonoBehaviour
         PlayerPrefs.SetInt("__NEW_GAME__", 1);
         PlayerPrefs.Save();
 
-        // 살아있는 DDOL 모두 제거 (UI/싱글톤 포함)
-        GlobalState.KillAllDontDestroyOnLoad();
+        // 싱글톤 재초기화 (새 ___Singletons + MapTracker 생성)
+        Bootstrapper.EnsureAfterNewGame();
 
-        // 첫 게임 씬으로 진입 (로딩씬 경유)
-        // SceneManager.LoadScene(firstGameSceneName, LoadSceneMode.Single);
-        SceneLoader.Load(firstGameSceneName);   // ← 변경: 로딩씬 → 대상 씬(비동기)
+        // 🔹 새 게임 시작 전에 DayManager 리셋
+        if (DayManager.Instance != null)
+        {
+            DayManager.Instance.ResetForNewGame();
+        }
+
+        // 첫 게임 씬으로 이동
+        SceneLoader.Load(firstGameSceneName);
 
         Debug.Log($"[StartMenu] 새 게임 시작 - 슬롯 {slot} (저장 삭제 & DDOL 정리)");
     }

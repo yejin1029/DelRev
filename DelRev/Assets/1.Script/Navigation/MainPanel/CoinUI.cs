@@ -5,54 +5,69 @@ public class CoinUI : MonoBehaviour
 {
     public PlayerController player;
     public TextMeshProUGUI coinText;
-    public TextMeshProUGUI dayText;
 
-    void Start()
+    private int currentDay = 0;
+
+    private void Awake()
     {
         if (player == null)
             player = FindObjectOfType<PlayerController>();
-
-        UpdateCoinText(player.coinCount);
     }
 
-void Update()
-{
-    if (player == null)
-        return;
-
-    int currentCoins = player.coinCount;
-
-    if (MapTracker.Instance != null)
+    private void Start()
     {
-        int day = MapTracker.Instance.currentDay;
+        // 시작 시 코인 한 번 맞춰두기
+        RefreshCoinText();
+    }
 
-        if (dayText != null)
-            dayText.text = $"Day {day}";
+    // 매 프레임 제일 마지막에 내가 최종값으로 덮어쓰기 (다른 스크립트가 써도 이게 이김)
+    private void LateUpdate()
+    {
+        RefreshCoinText();
+    }
+
+    private void RefreshCoinText()
+    {
+        if (coinText == null)
+            return;
+
+        int currentCoins = 0;
+        if (player != null)
+            currentCoins = player.coinCount;
 
         int required = 0;
+        var tracker = MapTracker.Instance;
 
-            // 가장 가까운 '미래' 요구일 찾기
-            for (int i = 0; i < MapTracker.Instance.checkDays.Count; i++)
+        if (tracker != null &&
+            tracker.checkDays != null &&
+            tracker.coinRequirements != null &&
+            tracker.checkDays.Count > 0 &&
+            tracker.coinRequirements.Count > 0)
+        {
+            var days = tracker.checkDays;
+            var reqs = tracker.coinRequirements;
+
+            for (int i = 0; i < days.Count; i++)
             {
-                if (day < MapTracker.Instance.checkDays[i])
+                if (currentDay < days[i])
                 {
-                    required = MapTracker.Instance.coinRequirements[i];
+                    int idx = Mathf.Clamp(i, 0, reqs.Count - 1);
+                    required = reqs[idx];
                     break;
                 }
             }
-        
-        // 만약 현재 day가 checkDays보다 크면 마지막 요구량 유지
-        if (required == 0 && MapTracker.Instance.coinRequirements.Count > 0)
-        {
-            required = MapTracker.Instance.coinRequirements[MapTracker.Instance.coinRequirements.Count - 1];
+
+            if (required == 0)
+                required = reqs[reqs.Count - 1];
         }
 
         coinText.text = $"{currentCoins}/{required} Coins";
     }
-}
 
     public void UpdateCoinText(int coinCount)
     {
-        // 이 메서드는 필요 없을 수 있지만, 남겨둬도 무방합니다.
+        // PlayerController에서 호출하지만,
+        // 실제 갱신은 RefreshCoinText에서 처리
+        RefreshCoinText();
     }
 }

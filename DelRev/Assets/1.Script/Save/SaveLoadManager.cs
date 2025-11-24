@@ -11,7 +11,9 @@ public class SaveLoadManager : MonoBehaviour
     {
         "Items",
         "HouseItems",
-        "StoreItems"
+        "StoreItems",
+        "KindergartenItems",
+        "FactoryItems",
         // 필요 시 "Prefabs/Items" 등 추가
     };
 

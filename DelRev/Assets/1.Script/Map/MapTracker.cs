@@ -11,7 +11,24 @@ public class MapTracker : MonoBehaviour
     public int map1Count = 0;
     public int otherMapCount = 0;
     public int totalCoinCount = 0;
-    public int currentDay = 0;
+    public int _currentDay = 0;
+    public int currentDay
+    {
+        get => _currentDay;
+        set
+        {
+            _currentDay = value;
+
+            // 디버깅용 로그
+            if (value == 0)
+            {
+                Debug.Log(
+                    "[MapTracker] currentDay가 0으로 설정됨!\n" +
+                    System.Environment.StackTrace
+                );
+            }
+        }
+    }
 
     public bool isRestartingFromGameOver = false;
 
@@ -31,6 +48,11 @@ public class MapTracker : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+
+            // 씬 로드 이벤트 구독 (중복 방지)
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+            SceneManager.sceneLoaded += OnSceneLoaded;
+            Debug.Log($"[MapTracker] Awake - Instance 할당, id = {GetInstanceID()}");
         }
         else
         {
@@ -38,24 +60,33 @@ public class MapTracker : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        // 내가 현재 싱글톤이라면, 파괴 시 참조도 같이 비워준다.
+        if (Instance == this)
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+            Instance = null;
+            Debug.Log("[MapTracker] OnDestroy - sceneLoaded 구독 해제 & Instance null");
+        }
+    } 
+
     public void AddCoins(int amount)
     {
         totalCoinCount += amount;
         Debug.Log($"[MapTracker] 코인 +{amount}, 총 보유 코인: {totalCoinCount}");
     }
 
-    private void Start()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    private void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        // 🔸 혹시라도 다른 MapTracker가 남아있다면, 
+        // 현재 Instance가 아닌 애는 로직을 아예 무시하게 만들기
+        if (Instance != this)
+        {
+            Debug.Log($"[MapTracker] OnSceneLoaded 무시(id={GetInstanceID()}), 현재 Instance id={Instance?.GetInstanceID()}");
+            return;
+        }
+
         if (scene.name == "LoadingScene")
             return;
 

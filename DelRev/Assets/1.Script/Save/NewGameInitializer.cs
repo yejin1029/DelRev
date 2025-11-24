@@ -12,7 +12,7 @@ public class NewGameInitializer : MonoBehaviour
         {
             player.health = 100f;
             player.stamina = player.maxStamina;
-            player.coinCount = 0; // ★ 코인도 초기화
+            player.coinCount = 0; // 코인도 초기화
             player.isSpeedItemActive = false;
 
             // 스폰 포인트 이동(있을 경우)
@@ -36,9 +36,6 @@ public class NewGameInitializer : MonoBehaviour
             // 4칸 전부 비우기
             for (int i = 0; i < 4; i++) inv.SetItemAt(i, null);
         }
-
-        // 맵/일자 초기화 (사용 중일 경우)
-        try { if (MapTracker.Instance != null) MapTracker.Instance.currentDay = 0; } catch {}
 
         PlayerPrefs.SetInt("__NEW_GAME__", 0);
         PlayerPrefs.Save();
