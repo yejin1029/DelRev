@@ -1,20 +1,20 @@
 using System;
+using System.Collections;   // ← 이것 추가!
 using UnityEngine;
+
 
 [RequireComponent(typeof(AudioSource))]
 public class TurretSentinel : MonoBehaviour
 {
-    // 포탑 위치를 전달하도록 이벤트 의미를 명확화
     public static event Action<Vector3> GlobalAlertTurretPos;
 
     [Header("Rotate")]
-    public float yawDegreesPerSecond = 72f;  // 5초에 1바퀴
+    public float yawDegreesPerSecond = 72f;
 
     [Header("FOV")]
     public float viewRadius = 8f;
     [Range(0f, 360f)] public float viewAngle = 120f;
     public Transform eye;
-    public LayerMask obstructionMask;
 
     [Header("Detection")]
     public float requiredDetectTime = 0.5f;
@@ -22,14 +22,18 @@ public class TurretSentinel : MonoBehaviour
 
     [Header("Audio")]
     public AudioClip alertSfx;
-    [Range(0f, 1f)] public float alertVolume = 0.8f;
+    public float alertVolume = 0.8f;
+    public float burstDelay = 0.1f;  // 4번 사이 딜레이
+    public float restTime = 1f;      // 4번 끝난 뒤 쉬는 시간
 
-    float _timer;
-    float _lastAlertTime = -999f;
+    float _detectTimer = 0f;
+    float _lastAlertSent = -999f;
+
     AudioSource _audio;
-
     Transform _player;
-    PlayerController _playerCtrl;
+
+    bool _inAlertState = false;
+    Coroutine _alertLoop;
 
     void Awake()
     {
@@ -38,88 +42,88 @@ public class TurretSentinel : MonoBehaviour
 
     void Start()
     {
+        _player = PlayerController.Instance?.transform;
         if (eye == null) eye = transform;
-        if (PlayerController.Instance != null)
-        {
-            _playerCtrl = PlayerController.Instance;
-            _player = _playerCtrl.transform;
-        }
-        else
-        {
-            var pc = FindObjectOfType<PlayerController>();
-            if (pc != null) { _playerCtrl = pc; _player = pc.transform; }
-        }
     }
 
     void Update()
     {
-        // 1) 회전
-        transform.Rotate(Vector3.up, yawDegreesPerSecond * Time.deltaTime, Space.Self);
+        transform.Rotate(Vector3.up, yawDegreesPerSecond * Time.deltaTime);
 
-        // 2) 감시
         if (_player == null) return;
 
         bool inSight = IsPlayerInSight();
 
         if (inSight)
         {
-            _timer += Time.deltaTime;
+            _detectTimer += Time.deltaTime;
 
-            if (_timer >= requiredDetectTime && Time.time - _lastAlertTime >= alertCooldown)
+            if (_detectTimer >= requiredDetectTime)
             {
-                _lastAlertTime = Time.time;
+                if (!_inAlertState)
+                {
+                    _inAlertState = true;
+                    _alertLoop = StartCoroutine(AlertBurstLoop());
+                }
 
-                // 경고음
-                if (alertSfx != null)
-                    _audio.PlayOneShot(alertSfx, alertVolume);
-
-                Debug.Log("포탑: 플레이어 감지 성공");
-
-                // 포탑 '현재 위치'를 방송
-                GlobalAlertTurretPos?.Invoke(transform.position);
+                // 쿨다운 이벤트
+                if (Time.time - _lastAlertSent >= alertCooldown)
+                {
+                    _lastAlertSent = Time.time;
+                    GlobalAlertTurretPos?.Invoke(transform.position);
+                }
             }
         }
         else
         {
-            _timer = 0f;
+            ExitAlertState();
+        }
+    }
+
+    IEnumerator AlertBurstLoop()
+    {
+        while (true) // 발견 상태일 동안 반복
+        {
+            // 🔥 4번 연속 재생
+            for (int i = 0; i < 4; i++)
+            {
+                if (alertSfx != null)
+                    _audio.PlayOneShot(alertSfx, alertVolume);
+
+                yield return new WaitForSeconds(burstDelay);
+            }
+
+            // 🔥 1초 휴식
+            yield return new WaitForSeconds(restTime);
+        }
+    }
+
+    void ExitAlertState()
+    {
+        if (_inAlertState)
+        {
+            _inAlertState = false;
+            _detectTimer = 0f;
+
+            if (_alertLoop != null)
+                StopCoroutine(_alertLoop);
         }
     }
 
     bool IsPlayerInSight()
     {
         Vector3 origin = eye.position;
-        Vector3 toPlayer = (_player.position - origin);
-        float dist = toPlayer.magnitude;
-        if (dist > viewRadius) return false;
+        Vector3 toPlayer = _player.position - origin;
 
-        Vector3 dir = toPlayer.normalized;
-        float angle = Vector3.Angle(eye.forward, dir);
-        if (angle > viewAngle * 0.5f) return false;
+        if (toPlayer.magnitude > viewRadius) return false;
+        if (Vector3.Angle(eye.forward, toPlayer.normalized) > viewAngle * 0.5f) return false;
 
-        if (Physics.Raycast(origin, dir, out RaycastHit hit, viewRadius, ~0, QueryTriggerInteraction.Ignore))
+        if (Physics.Raycast(origin, toPlayer.normalized, out RaycastHit hit, viewRadius))
         {
             if (hit.transform == _player || hit.transform.IsChildOf(_player))
                 return true;
-
-            if (((1 << hit.collider.gameObject.layer) & obstructionMask) != 0)
-                return false;
-
-            return false;
         }
+
         return false;
-    }
-
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawWireSphere(eye ? eye.position : transform.position, viewRadius);
-
-        Vector3 pos = eye ? eye.position : transform.position;
-        Vector3 fwd = eye ? eye.forward : transform.forward;
-        Vector3 left = Quaternion.Euler(0, -viewAngle * 0.5f, 0) * fwd;
-        Vector3 right = Quaternion.Euler(0,  viewAngle * 0.5f, 0) * fwd;
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawLine(pos, pos + left * viewRadius);
-        Gizmos.DrawLine(pos, pos + right * viewRadius);
     }
 }

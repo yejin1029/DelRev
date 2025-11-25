@@ -23,8 +23,10 @@ public class WeldingRobot : MonoBehaviour
 
     [Header("References")]
     public Transform nozzle;
-    [Tooltip("🔥 발사 이펙트 프리팹 (예: VFX_Fire_01_Big)")]
     public GameObject firePrefab;
+
+    [Header("Audio")]
+    public AudioSource hitSound;   // 🔊 플레이어가 데미지 받을 때 재생할 소리
 
     bool isSpraying;
     float fireTimer;
@@ -81,6 +83,7 @@ public class WeldingRobot : MonoBehaviour
 
             fireTimer += Time.deltaTime;
             float interval = 1f / Mathf.Max(0.01f, fireRate);
+
             while (fireTimer >= interval)
             {
                 fireTimer -= interval;
@@ -99,17 +102,28 @@ public class WeldingRobot : MonoBehaviour
     {
         GameObject go = new GameObject("FlameProjectile");
         go.transform.SetPositionAndRotation(origin, Quaternion.LookRotation(dir, Vector3.up));
+
         var proj = go.AddComponent<FlameProjectile>();
 
-        // 🔥 핵심: 불 프리팹 연결
         proj.fireVFXPrefab = firePrefab;
 
+        // 🔥 플레이어 피격 시 WeldingRobot에게 알려주기 위한 콜백 등록
+        proj.onHitPlayer = OnHitPlayer;
+
+        // 불 속성 초기화
         proj.Initialize(
             speed: projectileSpeed,
             lifeDistance: maxRange,
             radius: projectileRadius,
             dps: damagePerSecond / Mathf.Max(1f, overlapDpsDivider)
         );
+    }
+
+    // 🔥 플레이어가 데미지 받을 때 WeldingRobot 소리 재생하는 함수
+    public void OnHitPlayer()
+    {
+        if (hitSound != null)
+            hitSound.Play();
     }
 
     bool HasLineOfSight(Transform originTf, Transform targetTf)

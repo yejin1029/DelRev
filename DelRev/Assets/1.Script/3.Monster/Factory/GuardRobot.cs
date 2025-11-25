@@ -2,12 +2,14 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(AudioSource))]
 public class GuardRobot : MonoBehaviour
 {
     [Header("Refs")]
     public Transform eye;
     public LayerMask obstructionMask;
     NavMeshAgent _agent;
+    AudioSource _audio;  // 🔊 추가됨
 
     Transform _player;
     PlayerController _playerCtrl;
@@ -18,14 +20,11 @@ public class GuardRobot : MonoBehaviour
     public float stopDistance = 2f;
 
     [Header("Patrol Area")]
-    [Tooltip("포탑 위치를 중심으로 순찰할 반경")]
     public float patrolRadius = 6f;
-    [Tooltip("순찰 지점에 거의 도달했다고 보려는 거리")]
     public float waypointTolerance = 0.5f;
-    [Tooltip("새 웨이포인트를 시도할 최대 반복(내비 샘플 실패 대비)")]
     public int patrolSampleTries = 12;
 
-    [Header("Detection (자체 시야)")]
+    [Header("Detection")]
     public float detectRadius = 6f;
     [Range(0f, 360f)] public float detectAngle = 110f;
 
@@ -34,14 +33,18 @@ public class GuardRobot : MonoBehaviour
     public float attackDamage = 20f;
     public float attackInterval = 1.0f;
 
+    [Header("Combat Audio")]
+    public AudioClip attackSfx;        // 🔊 공격 소리
+    [Range(0f, 1f)] public float attackVolume = 0.8f;
+
     [Header("Return / Idle")]
-    public Transform homePoint;  // 호출 전 대기 위치(없으면 시작 위치)
+    public Transform homePoint;
 
     enum State { Idle, MovingToTurret, Patrolling, Chasing }
     State _state = State.Idle;
 
     Vector3 _spawnPos;
-    Vector3 _patrolCenter;   // 포탑 위치
+    Vector3 _patrolCenter;
     Vector3 _currentPatrolTarget;
     float _nextAttackTime;
 
@@ -49,6 +52,7 @@ public class GuardRobot : MonoBehaviour
     {
         TurretSentinel.GlobalAlertTurretPos += OnTurretAlert;
     }
+
     void OnDisable()
     {
         TurretSentinel.GlobalAlertTurretPos -= OnTurretAlert;
@@ -57,6 +61,7 @@ public class GuardRobot : MonoBehaviour
     void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
+        _audio = GetComponent<AudioSource>();  // 🔊 초기화
         _spawnPos = transform.position;
     }
 
@@ -82,12 +87,10 @@ public class GuardRobot : MonoBehaviour
         switch (_state)
         {
             case State.Idle:
-                // 호출 없이는 공격/추적하지 않음
                 if (!IsMoving()) MoveTo(Home());
                 break;
 
             case State.MovingToTurret:
-                // 도착하면 순찰 시작
                 if (!IsMoving()) ToPatrol();
                 TryDetectAndChase();
                 break;
@@ -109,7 +112,6 @@ public class GuardRobot : MonoBehaviour
                     if (dist <= attackRange)
                         TryAttack();
 
-                    // 플레이어를 잃어버리면(가림막/각도/거리) 순찰로 복귀
                     if (!CanSeePlayer())
                         ToPatrol();
                 }
@@ -122,6 +124,7 @@ public class GuardRobot : MonoBehaviour
     }
 
     // ====== 상태 전이 ======
+
     void OnTurretAlert(Vector3 turretPos)
     {
         _patrolCenter = turretPos;
@@ -151,7 +154,8 @@ public class GuardRobot : MonoBehaviour
         _agent.speed = chaseSpeed;
     }
 
-    // ====== 동작 유틸 ======
+    // ====== 시야 / 공격 ======
+
     void TryDetectAndChase()
     {
         if (_player == null) return;
@@ -192,13 +196,18 @@ public class GuardRobot : MonoBehaviour
         if (Time.time >= _nextAttackTime)
         {
             _nextAttackTime = Time.time + attackInterval;
-            _playerCtrl.TakeDamage(attackDamage); // 플레이어 체력 감소
+
+            // 🔥 플레이어 체력 감소
+            _playerCtrl.TakeDamage(attackDamage);
+
+            // 🔊 공격음 재생
+            if (attackSfx != null)
+                _audio.PlayOneShot(attackSfx, attackVolume);
         }
     }
 
     void SetNextPatrolPoint()
     {
-        // 포탑 알림을 받은 뒤에만 순찰 중심 사용
         Vector3 center = (_state == State.Patrolling || _state == State.MovingToTurret) ? _patrolCenter : Home();
         if (TryGetRandomPointOnNavmesh(center, patrolRadius, out Vector3 point))
         {
@@ -207,15 +216,11 @@ public class GuardRobot : MonoBehaviour
         }
         else
         {
-            // 샘플 실패 시 홈으로 복귀
             MoveTo(Home());
         }
     }
 
-    Vector3 Home()
-    {
-        return homePoint ? homePoint.position : _spawnPos;
-    }
+    Vector3 Home() => homePoint ? homePoint.position : _spawnPos;
 
     void MoveTo(Vector3 pos)
     {
@@ -223,18 +228,16 @@ public class GuardRobot : MonoBehaviour
         _agent.SetDestination(pos);
     }
 
-    bool IsMoving()
-    {
-        return _agent.pathPending || _agent.remainingDistance > stopDistance;
-    }
+    bool IsMoving() => _agent.pathPending || _agent.remainingDistance > stopDistance;
 
     bool TryGetRandomPointOnNavmesh(Vector3 center, float radius, out Vector3 result)
     {
         for (int i = 0; i < patrolSampleTries; i++)
         {
             Vector2 rnd = Random.insideUnitCircle * radius;
-            Vector3 sample = new Vector3(center.x + rnd.x, center.y + 2f, center.z + rnd.y); // 약간 위에서 드롭
-            if (Physics.Raycast(sample, Vector3.down, out RaycastHit hit, 10f, ~0, QueryTriggerInteraction.Ignore))
+            Vector3 sample = new Vector3(center.x + rnd.x, center.y + 2f, center.z + rnd.y);
+
+            if (Physics.Raycast(sample, Vector3.down, out RaycastHit hit, 10f))
             {
                 Vector3 candidate = hit.point;
                 if (NavMesh.SamplePosition(candidate, out NavMeshHit navHit, 1.5f, NavMesh.AllAreas))

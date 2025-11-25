@@ -11,16 +11,23 @@ public class Security_B : MonoBehaviour
     private int currentPatrolIndex = 0;
 
     [Header("Detection Settings")]
-    public float detectionRange = 7f;    // 플레이어 탐지 범위
-    public float blindDuration = 3f;     // 시야 마비 시간
+    public float detectionRange = 7f;      // 플레이어 탐지 범위
+    public float blindDuration = 3f;       // 시야 마비 시간
+    public float blindCooldown = 7f;       // 눈뽕 쿨다운
+    private float lastBlindTime = -999f;
+
+    [Tooltip("시야를 막는 레이어(벽/지형 등)")]
+    public LayerMask obstacleMask;
 
     [Header("Flashlight Settings")]
-    public Light flashLight;             // 손전등 (Spotlight)
+    public Light flashLight;               // SpotLight
     public float flashlightIntensity = 5f;
 
+    [Header("Audio")]
+    public AudioSource blindSound;         // 눈뽕 효과음
+
     [Header("UI Settings")]
-    [Tooltip("플래시 효과를 띄울 오버레이 이미지 (SubCanvas 안 Image)")]
-    public Image flashOverlay;           // 화면에 깔릴 이미지 (흰색 Image)
+    public Image flashOverlay;             // 화면 밝아지는 효과
 
     private NavMeshAgent agent;
     private Transform playerTransform;
@@ -40,12 +47,11 @@ public class Security_B : MonoBehaviour
         }
 
         if (flashLight != null)
-            flashLight.enabled = false; // 기본 꺼짐
+            flashLight.enabled = false;
 
         if (flashOverlay != null)
-            flashOverlay.enabled = false; // 기본 비활성화
+            flashOverlay.enabled = false;
 
-        // 순찰 시작
         if (patrolPoints.Length > 0)
             agent.SetDestination(patrolPoints[currentPatrolIndex].position);
     }
@@ -56,11 +62,15 @@ public class Security_B : MonoBehaviour
 
         float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
 
+        // 플레이어가 범위 안 + 쿨다운 끝남 + 눈뽕 중 아님 + 시야 확보됨 → 발동
         if (distanceToPlayer <= detectionRange)
         {
-            // 플레이어 발견 → 눈뽕 시도
-            if (!isBlinding)
+            if (!isBlinding &&
+                Time.time - lastBlindTime >= blindCooldown &&
+                CanSeePlayer())
+            {
                 StartCoroutine(BlindPlayer());
+            }
         }
         else
         {
@@ -68,60 +78,89 @@ public class Security_B : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 경비병이 플레이어를 직접 볼 수 있는가? (벽으로 가려지면 false)
+    /// </summary>
+    private bool CanSeePlayer()
+    {
+        if (playerTransform == null) return false;
+
+        Vector3 origin = transform.position + Vector3.up * 1.6f; // 경비병 눈 위치
+        Vector3 target = playerTransform.position + Vector3.up * 1.6f;
+        Vector3 dir = target - origin;
+        float dist = dir.magnitude;
+
+        // 레이캐스트로 장애물 체크
+        if (Physics.Raycast(origin, dir.normalized, out RaycastHit hit, dist, obstacleMask))
+        {
+            // 플레이어 말고 다른게 맞으면 장애물
+            return false;
+        }
+
+        return true;
+    }
+
     private IEnumerator BlindPlayer()
     {
         isBlinding = true;
 
-        // 손전등 켜기
+        // 🔊 효과음 재생
+        if (blindSound != null)
+            blindSound.Play();
+
+        // 손전등 ON
         if (flashLight != null)
             flashLight.enabled = true;
 
-        // 플레이어 시야 오버레이 켜기
+        // 오버레이 밝아짐
         if (flashOverlay != null)
         {
             flashOverlay.enabled = true;
-            flashOverlay.color = new Color(1f, 1f, 1f, 0f); // 투명에서 시작
-            // 점점 밝아지는 효과
+            flashOverlay.color = new Color(1, 1, 1, 0);
+
             float t = 0f;
             while (t < 1f)
             {
                 t += Time.deltaTime * 4f;
-                flashOverlay.color = new Color(1f, 1f, 1f, Mathf.Lerp(0f, 0.8f, t));
+                float a = Mathf.Lerp(0f, 0.8f, t);
+                flashOverlay.color = new Color(1f, 1f, 1f, a);
                 yield return null;
             }
         }
 
-        // 플레이어 이동 불가
+        // 플레이어 조작 불가
         if (playerController != null)
             playerController.enabled = false;
 
-        Debug.Log("[Security_B] 플레이어 눈뽕! 시야 마비 시작");
-
         yield return new WaitForSeconds(blindDuration);
 
-        // 손전등 끄기
+        // 손전등 OFF
         if (flashLight != null)
             flashLight.enabled = false;
 
-        // 플레이어 복구
+        // 플레이어 조작 복구
         if (playerController != null)
             playerController.enabled = true;
 
-        // 오버레이 점점 사라지기
+        // 오버레이 서서히 사라짐
         if (flashOverlay != null)
         {
             float t = 0f;
-            Color start = flashOverlay.color;
+            float startA = flashOverlay.color.a;
+
             while (t < 1f)
             {
                 t += Time.deltaTime * 2f;
-                flashOverlay.color = new Color(1f, 1f, 1f, Mathf.Lerp(start.a, 0f, t));
+                float a = Mathf.Lerp(startA, 0f, t);
+                flashOverlay.color = new Color(1f, 1f, 1f, a);
                 yield return null;
             }
+
             flashOverlay.enabled = false;
         }
 
-        Debug.Log("[Security_B] 시야 마비 해제");
+        // 쿨다운 시작
+        lastBlindTime = Time.time;
 
         isBlinding = false;
     }
