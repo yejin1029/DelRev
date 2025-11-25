@@ -9,6 +9,10 @@ public class Trap : MonoBehaviour
     public float activationDistance = 1f;     // 발동 거리
     public AudioClip trapSound;               // 덫 소리 (선택)
 
+    [Header("Animation")]
+    public Animator animator;
+    public string activateTrigger = "Activate"; // AC 파라미터 이름
+
     private Transform playerTransform;
     private bool isTriggered = false;
     private AudioSource audioSource;
@@ -22,6 +26,9 @@ public class Trap : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null)
             audioSource = gameObject.AddComponent<AudioSource>();
+
+        // 애니메이터 자동 할당
+        if (animator == null) animator = GetComponent<Animator>();
 
         // Player 찾기
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
@@ -51,8 +58,13 @@ public class Trap : MonoBehaviour
                 if (trapSound != null)
                     audioSource.PlayOneShot(trapSound);
 
+                // 발동 애니메이션 트리거
+                if (animator != null)
+                    animator.SetTrigger(activateTrigger);
+
+                // UI 깜빡이기 & 플레이어 잠금
                 StartCoroutine(DisableMovement(player));
-                StartCoroutine(BlinkBlack()); // 👈 깜빡이기 시작
+                StartCoroutine(BlinkBlackFor(disableDuration)); // ← 지속 시간을 덫 지속시간에 맞춤
             }
         }
     }
@@ -62,22 +74,27 @@ public class Trap : MonoBehaviour
         player.enabled = false;
         yield return new WaitForSeconds(disableDuration);
         player.enabled = true;
+
         Destroy(gameObject);
     }
 
-    private IEnumerator BlinkBlack()
+    // 깜빡임을 덫 지속시간과 동기화
+    private IEnumerator BlinkBlackFor(float duration)
     {
         if (blackImageObj == null) yield break;
 
-        int blinkCount = 10;       // 깜빡 횟수
-        float blinkInterval = 0.1f; // 한 번 깜빡일 때 시간 (초)
+        float t = 0f;
+        float interval = 0.1f; // 한 번 on/off 주기
+        bool on = false;
 
-        for (int i = 0; i < blinkCount; i++)
+        while (t < duration)
         {
-            blackImageObj.SetActive(true);
-            yield return new WaitForSeconds(blinkInterval);
-            blackImageObj.SetActive(false);
-            yield return new WaitForSeconds(blinkInterval);
+            on = !on;
+            blackImageObj.SetActive(on);
+            yield return new WaitForSeconds(interval);
+            t += interval;
         }
+
+        blackImageObj.SetActive(false);
     }
 }

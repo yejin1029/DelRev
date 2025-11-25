@@ -29,6 +29,10 @@ public class Security_B : MonoBehaviour
     [Header("UI Settings")]
     public Image flashOverlay;             // 화면 밝아지는 효과
 
+    [Header("Animation")]
+    public Animator animator;
+    public float speedDampTime = 0.1f; // 전환 부드럽게
+
     private NavMeshAgent agent;
     private Transform playerTransform;
     private PlayerController playerController;
@@ -38,6 +42,9 @@ public class Security_B : MonoBehaviour
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+
+        if (animator == null) animator = GetComponent<Animator>();
+        if (animator) animator.applyRootMotion = false; // 이동은 에이전트 담당
 
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
@@ -58,6 +65,8 @@ public class Security_B : MonoBehaviour
 
     private void Update()
     {
+        UpdateAnimatorByAgent();
+
         if (playerTransform == null) return;
 
         float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
@@ -76,6 +85,19 @@ public class Security_B : MonoBehaviour
         {
             Patrol();
         }
+    }
+
+    // NavMeshAgent → Animator.Speed
+    private void UpdateAnimatorByAgent()
+    {
+        if (animator == null || agent == null) return;
+
+        float speed = agent.velocity.magnitude; // 실제 이동 속도(m/s)
+
+        // 정지 판정이 살짝 떨리면 하드 클램프(선택):
+        // if (!agent.hasPath || agent.remainingDistance <= 0.05f) speed = 0f;
+
+        animator.SetFloat("Speed", speed, speedDampTime, Time.deltaTime);
     }
 
     /// <summary>

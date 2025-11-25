@@ -37,11 +37,18 @@ public class Security_A : MonoBehaviour
     [Tooltip("공격 시 재생할 소리")]
     public AudioSource attackAudio;
 
+    [Header("Animation")]
+    public Animator animator;
+    public float speedDampTime = 0.1f; // 전환 부드럽게
+
     private bool isChasing = false; // 추격 중 여부 체크용
 
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+
+        if (animator == null) animator = GetComponent<Animator>();
+        if (animator) animator.applyRootMotion = false; // 이동은 에이전트가 담당
 
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
@@ -60,6 +67,8 @@ public class Security_A : MonoBehaviour
 
     private void Update()
     {
+        UpdateAnimatorByAgent();
+
         if (playerTransform == null) return;
 
         float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
@@ -110,6 +119,19 @@ public class Security_A : MonoBehaviour
 
             Patrol();
         }
+    }
+
+    // NavMeshAgent 속도를 Animator로 전달
+    private void UpdateAnimatorByAgent()
+    {
+        if (animator == null || agent == null) return;
+
+        float speed = agent.velocity.magnitude; // 실제 이동 속도(m/s)
+
+        // 멈춤 판정이 흔들리면 하드 클램프(선택):
+        // if (!agent.hasPath || agent.remainingDistance <= 0.05f) speed = 0f;
+
+        animator.SetFloat("Speed", speed, speedDampTime, Time.deltaTime);
     }
 
     private void Patrol()

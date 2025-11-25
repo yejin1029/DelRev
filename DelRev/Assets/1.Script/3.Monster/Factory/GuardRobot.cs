@@ -40,6 +40,10 @@ public class GuardRobot : MonoBehaviour
     [Header("Return / Idle")]
     public Transform homePoint;
 
+    [Header("Animation")]
+    public Animator animator;
+    public float speedDampTime = 0.1f;
+
     enum State { Idle, MovingToTurret, Patrolling, Chasing }
     State _state = State.Idle;
 
@@ -62,6 +66,10 @@ public class GuardRobot : MonoBehaviour
     {
         _agent = GetComponent<NavMeshAgent>();
         _audio = GetComponent<AudioSource>();  // 🔊 초기화
+
+        if (animator == null) animator = GetComponent<Animator>();
+        if (animator) animator.applyRootMotion = false; // 이동은 에이전트 담당
+
         _spawnPos = transform.position;
     }
 
@@ -84,6 +92,8 @@ public class GuardRobot : MonoBehaviour
 
     void Update()
     {
+        UpdateAnimatorByAgent();
+
         switch (_state)
         {
             case State.Idle:
@@ -121,6 +131,19 @@ public class GuardRobot : MonoBehaviour
                 }
                 break;
         }
+    }
+
+    // 에이전트 속도를 Animator로
+    void UpdateAnimatorByAgent()
+    {
+        if (animator == null || _agent == null) return;
+
+        float speed = _agent.velocity.magnitude;
+
+        // 멈췄는데 살짝 흔들리면 하드 클램프(선택):
+        // if (!_agent.hasPath || _agent.remainingDistance <= 0.05f) speed = 0f;
+
+        animator.SetFloat("Speed", speed, speedDampTime, Time.deltaTime);
     }
 
     // ====== 상태 전이 ======

@@ -32,6 +32,10 @@ public class FactoryManager : MonoBehaviour, IDangerTarget
     [Tooltip("공격 시 재생할 오디오 소스")]
     public AudioSource attackAudio;
 
+    [Header("Animation")]
+    public Animator animator;
+    public float speedDampTime = 0.1f;
+
     private float nextLogTime = 0f;
 
     void Start()
@@ -39,6 +43,9 @@ public class FactoryManager : MonoBehaviour, IDangerTarget
         agent = GetComponent<NavMeshAgent>();
         agent.stoppingDistance = 0f;
         agent.autoBraking = false;
+
+        if (animator == null) animator = GetComponent<Animator>();
+        if (animator) animator.applyRootMotion = false; // 이동은 NavMeshAgent가 담당
 
         // 플레이어 찾기
         GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -61,6 +68,8 @@ public class FactoryManager : MonoBehaviour, IDangerTarget
     {
         if (playerTransform == null || playerController == null) return;
 
+        UpdateAnimatorByAgent();
+
         float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
 
         switch (currentState)
@@ -75,6 +84,19 @@ public class FactoryManager : MonoBehaviour, IDangerTarget
                 AlertUpdate(distanceToPlayer);
                 break;
         }
+    }
+
+    // NavMeshAgent → Animator.Speed
+    void UpdateAnimatorByAgent()
+    {
+        if (animator == null || agent == null) return;
+
+        float speed = agent.velocity.magnitude; // 실제 이동 속도(m/s)
+
+        // 정지 판정 떨림이 있으면 하드 클램프(선택):
+        // if (!agent.hasPath || agent.remainingDistance <= 0.05f) speed = 0f;
+
+        animator.SetFloat("Speed", speed, speedDampTime, Time.deltaTime);
     }
 
     // -------- Patrol (순찰) --------
