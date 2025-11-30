@@ -16,8 +16,18 @@ public class PauseMenu : MonoBehaviour
     public string startSceneName = "GameStart";
     public int saveSlot = 1;              // 슬롯 고정
 
+    [Header("Button Sound")]
+    [Tooltip("모든 버튼을 클릭할 때 재생할 사운드 클립")]
+    public AudioClip clickSound;
+    [Range(0f, 1f)]
+    [Tooltip("버튼 클릭 사운드 볼륨")]
+    public float clickVolume = 1f;
+
     bool isOpen = false;
     float cachedFixedDeltaTime;
+
+    // 내부에서 쓸 오디오소스
+    private AudioSource _audioSource;
 
     void Awake()
     {
@@ -35,6 +45,14 @@ public class PauseMenu : MonoBehaviour
 
         // 4) 패널 비활성화 시작
         if (panel != null) panel.SetActive(false);
+
+        // 5) 클릭 사운드용 AudioSource 준비
+        _audioSource = GetComponent<AudioSource>();
+        if (_audioSource == null)
+            _audioSource = gameObject.AddComponent<AudioSource>();
+
+        _audioSource.playOnAwake = false;
+        _audioSource.spatialBlend = 0f; // 2D 사운드(메뉴니까 공간감 X)
     }
 
     void Update()
@@ -74,10 +92,19 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
+    // 공통 클릭 사운드 재생
+    void PlayClickSound()
+    {
+        if (clickSound == null || _audioSource == null) return;
+        _audioSource.PlayOneShot(clickSound, clickVolume);
+    }
+
     // === 버튼 핸들러 ===
 
     public void OnClickSave()
     {
+        PlayClickSound(); // 🔊 버튼 누를 때마다 공통 재생
+
         if (player == null)    player    = FindObjectOfType<PlayerController>();
         if (inventory == null) inventory = FindObjectOfType<Inventory>();
 
@@ -96,12 +123,16 @@ public class PauseMenu : MonoBehaviour
 
     public void OnClickResume()
     {
+        PlayClickSound(); // 🔊 재개 버튼 클릭
+
         if (!isOpen) return;
         ToggleMenu();
     }
 
     public void OnClickExitToStart()
     {
+        PlayClickSound(); // 🔊 나가기 버튼 클릭
+
         // 시간/커서 원복
         Time.timeScale = 1f;
         Time.fixedDeltaTime = cachedFixedDeltaTime;

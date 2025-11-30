@@ -26,6 +26,13 @@ public class ItemSequenceController : MonoBehaviour
     [Tooltip("이펙트가 켜져 있을 시간(초)")]
     public float effectDuration = 2f;
 
+    [Header("Sound")]
+    [Tooltip("화살표를 먹을 때 재생할 사운드 클립")]
+    public AudioClip pickSound;
+    [Range(0f, 1f)]
+    [Tooltip("픽업 사운드 볼륨 (0~1)")]
+    public float pickVolume = 1f;
+
     private int currentIndex = 0;
     private Vector3[] originalPositions;
     private Transform playerTransform;
@@ -76,6 +83,13 @@ public class ItemSequenceController : MonoBehaviour
                 float dist = Vector3.Distance(playerTransform.position, pos);
                 if (dist <= activationDistance)
                 {
+                    // 🔊 사운드 재생
+                    if (pickSound != null)
+                    {
+                        // 아이템 위치 기준 3D 사운드
+                        AudioSource.PlayClipAtPoint(pickSound, item.transform.position, pickVolume);
+                    }
+
                     // 현재 아이템 비활성화
                     item.SetActive(false);
 

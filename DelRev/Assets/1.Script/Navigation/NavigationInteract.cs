@@ -4,88 +4,100 @@ using UnityEngine;
 
 public class NavigationInteract : MonoBehaviour
 {
-  public GameObject navigationUI;
-  public Camera mainCamera;
-  public Camera navigationCamera;
+    [Header("UI & Camera")]
+    public GameObject navigationUI;
+    public Camera mainCamera;
+    public Camera navigationCamera;
 
-  public PlayerController playerController;
-  public Inventory inventory;
-  public CrossHair crossHair;
-  public GameObject crossHairUI;
+    [Header("Player Control")]
+    public PlayerController playerController;
+    public Inventory inventory;
+    public CrossHair crossHair;
+    public GameObject crossHairUI;
 
-  public NavigationButtonSelector buttonSelector;
-  public NavigationPanelManager panelManager;
+    [Header("Navigation")]
+    public NavigationButtonSelector buttonSelector;
+    public NavigationPanelManager panelManager;
 
-  private bool isInteracting = false;
+    [Header("Sound")]
+    public AudioSource audioSource;          // 재생할 AudioSource
+    public AudioClip enterNavigationSound;   // 네비게이션 진입 시 재생할 사운드
 
-  void Start()
-  {
-    navigationCamera.enabled = false;
-  }
+    private bool isInteracting = false;
 
-  void Update()
-  {
-    if (!isInteracting && Input.GetKeyDown(KeyCode.E) && crossHair.isAimingAtNavigation)
+    void Start()
     {
-      StartInteraction();
+        navigationCamera.enabled = false;
     }
-    else if (isInteracting && Input.GetKeyDown(KeyCode.Escape))
+
+    void Update()
     {
-      if (panelManager.IsMainPanelActive())
-      {
-        EndInteraction();
-      }
+        if (!isInteracting && Input.GetKeyDown(KeyCode.E) && crossHair.isAimingAtNavigation)
+        {
+            StartInteraction();
+        }
+        else if (isInteracting && Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (panelManager.IsMainPanelActive())
+            {
+                EndInteraction();
+            }
+        }
     }
-  }
 
-  void StartInteraction()
-  {
-    isInteracting = true;
+    void StartInteraction()
+    {
+        isInteracting = true;
 
-    // 카메라 전환
-    mainCamera.enabled = false;
-    navigationCamera.enabled = true;
+        // 🔊 네비게이션 진입 소리 재생
+        if (audioSource != null && enterNavigationSound != null)
+        {
+            audioSource.PlayOneShot(enterNavigationSound);
+        }
 
-    // UI, 커서, 조작
-    navigationUI.SetActive(true);
-    playerController.isLocked = true;
+        // 카메라 전환
+        mainCamera.enabled = false;
+        navigationCamera.enabled = true;
 
-    Cursor.lockState = CursorLockMode.None;
-    Cursor.visible = true;
+        // UI 활성화 / 입력 락
+        navigationUI.SetActive(true);
+        playerController.isLocked = true;
 
-    inventory.isInputLocked = true;
-    crossHair.interactionLocked = true;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
 
-    // 조준점 숨김
-    if (crossHairUI != null)
-      crossHairUI.SetActive(false);
+        inventory.isInputLocked = true;
+        crossHair.interactionLocked = true;
 
-    panelManager.ShowMainPanel(true);
-  }
+        // 조준점 숨기기
+        if (crossHairUI != null)
+            crossHairUI.SetActive(false);
 
-  void EndInteraction()
-  {
-    isInteracting = false;
+        panelManager.ShowMainPanel(true);
+    }
 
-    // 카메라 복원
-    mainCamera.enabled = true;
-    navigationCamera.enabled = false;
+    void EndInteraction()
+    {
+        isInteracting = false;
 
-    // UI, 조작 복원
-    // navigationUI.SetActive(false);
-    playerController.isLocked = false;
+        // 카메라 복구
+        mainCamera.enabled = true;
+        navigationCamera.enabled = false;
 
-    Cursor.lockState = CursorLockMode.Locked;
-    Cursor.visible = false;
+        // UI 복구 / 입력 복원
+        // navigationUI.SetActive(false);
+        playerController.isLocked = false;
 
-    inventory.isInputLocked = false;
-    crossHair.interactionLocked = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
 
-    // 조준점 다시 표시
-    if (crossHairUI != null)
-      crossHairUI.SetActive(true);
+        inventory.isInputLocked = false;
+        crossHair.interactionLocked = false;
 
-    buttonSelector.DeactivateSelection();
-  }
+        // 조준점 복원
+        if (crossHairUI != null)
+            crossHairUI.SetActive(true);
+
+        buttonSelector.DeactivateSelection();
+    }
 }
-
