@@ -89,10 +89,10 @@ PrefabInstance:
       addedObject: {fileID: 3560104052817208898}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e6e8b05482ade4040a96b74fb953559a, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7252054558973532327}
+      addedObject: {fileID: 3925416753840810502}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e6e8b05482ade4040a96b74fb953559a, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3925416753840810502}
+      addedObject: {fileID: -6948083325667572166}
   m_SourcePrefab: {fileID: 100100000, guid: e6e8b05482ade4040a96b74fb953559a, type: 3}
 --- !u!1 &2587188303556239470 stripped
 GameObject:
@@ -120,22 +120,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.05, y: 0.05, z: 0.05}
   m_Center: {x: 0, y: -0.02, z: -0.005}
---- !u!114 &7252054558973532327
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2587188303556239470}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cea847739d7f2944297b680c28928212, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemName: "\uC5F4\uC1E0"
-  itemImage: {fileID: 21300000, guid: 63449b5ed60eb3a40bae0c6430d9cfff, type: 3}
-  defaultColor: {r: 0, g: 0, b: 0, a: 0}
-  itemPrice: 1
 --- !u!54 &3925416753840810502
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -163,3 +147,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-6948083325667572166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2587188303556239470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a7460c3f27c247968a90702b76e2efb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemName: "\uC5F4\uC1E0"
+  itemImage: {fileID: 21300000, guid: 63449b5ed60eb3a40bae0c6430d9cfff, type: 3}
+  defaultColor: {r: 0, g: 0, b: 0, a: 0}
+  itemPrice: 1
+  doorID: 

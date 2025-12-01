@@ -112,10 +112,13 @@ PrefabInstance:
       addedObject: {fileID: 325351693916224115}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: af26deda45a0afa4a9f1c4521a12b959, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5710398277833223014}
+      addedObject: {fileID: 1717337705306596384}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: af26deda45a0afa4a9f1c4521a12b959, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1717337705306596384}
+      addedObject: {fileID: -1295656684897480916}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: af26deda45a0afa4a9f1c4521a12b959, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 856015759988816324}
   m_SourcePrefab: {fileID: 100100000, guid: af26deda45a0afa4a9f1c4521a12b959, type: 3}
 --- !u!1 &4635675837641900273 stripped
 GameObject:
@@ -185,22 +188,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.001, y: 0.001, z: 0.001}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5710398277833223014
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4635675837641900273}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cea847739d7f2944297b680c28928212, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemName: "\uC5F4\uC1E0"
-  itemImage: {fileID: 21300000, guid: c0d9feedd14e01d41ab73eea1bf4a925, type: 3}
-  defaultColor: {r: 0, g: 0, b: 0, a: 0}
-  itemPrice: 1
 --- !u!54 &1717337705306596384
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -228,3 +215,28 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!33 &-1295656684897480916
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4635675837641900273}
+  m_Mesh: {fileID: 0}
+--- !u!114 &856015759988816324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4635675837641900273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a7460c3f27c247968a90702b76e2efb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemName: "\uC5F4\uC1E0"
+  itemImage: {fileID: 21300000, guid: aac10c194c36bec46baa4cd5f8bc3b9e, type: 3}
+  defaultColor: {r: 0, g: 0, b: 0, a: 0}
+  itemPrice: 1
+  doorID: 

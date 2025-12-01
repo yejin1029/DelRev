@@ -89,10 +89,10 @@ PrefabInstance:
       addedObject: {fileID: 19050033816702442}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: be8dac66a7613c44d8c75f042e4885e5, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8797863203470925874}
+      addedObject: {fileID: 7812856308594373329}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: be8dac66a7613c44d8c75f042e4885e5, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7812856308594373329}
+      addedObject: {fileID: 5827014733528448376}
   m_SourcePrefab: {fileID: 100100000, guid: be8dac66a7613c44d8c75f042e4885e5, type: 3}
 --- !u!1 &3333022355571849790 stripped
 GameObject:
@@ -120,22 +120,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.027706383, y: 0.0772925, z: 0.0047061886}
   m_Center: {x: 0.000000001961214, y: -0.03260822, z: -0.000000032288}
---- !u!114 &8797863203470925874
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3333022355571849790}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cea847739d7f2944297b680c28928212, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemName: "\uC5F4\uC1E0"
-  itemImage: {fileID: 21300000, guid: 85316518c9a7103468f32caee4c5baa4, type: 3}
-  defaultColor: {r: 0, g: 0, b: 0, a: 0}
-  itemPrice: 1
 --- !u!54 &7812856308594373329
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -163,3 +147,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &5827014733528448376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3333022355571849790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a7460c3f27c247968a90702b76e2efb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemName: "\uC5F4\uC1E0"
+  itemImage: {fileID: 21300000, guid: 85316518c9a7103468f32caee4c5baa4, type: 3}
+  defaultColor: {r: 0, g: 0, b: 0, a: 0}
+  itemPrice: 1
+  doorID: 
