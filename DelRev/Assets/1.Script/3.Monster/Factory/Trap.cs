@@ -17,8 +17,9 @@ public class Trap : MonoBehaviour
     private bool isTriggered = false;
     private AudioSource audioSource;
 
-    // 👇 SubCanvas/Black 이미지 참조
-    private GameObject blackImageObj;
+    [Header("UI (Screen Flash)")]
+    [SerializeField] private GameObject blackImageObj;
+    [SerializeField] private float blinkInterval = 0.1f; // 깜빡 주기
 
     void Start()
     {
@@ -35,12 +36,35 @@ public class Trap : MonoBehaviour
         if (playerObj != null)
             playerTransform = playerObj.transform;
 
-        // SubCanvas 안의 "Black" 이미지 찾기
-        blackImageObj = GameObject.Find("Black");
+        // ★ 인스펙터에서 비어있으면, 비활성 포함 검색으로 보강
+        if (blackImageObj == null)
+        {
+            // 경로로 먼저 시도
+            var byPath = GameObject.Find("SubCanvas/Black") ?? GameObject.Find("Black");
+            if (byPath != null) blackImageObj = byPath;
+            else
+            {
+                // 비활성 포함 검색 (Unity 2021↑은 Resources.FindObjectsOfTypeAll 사용)
+                foreach (var img in Resources.FindObjectsOfTypeAll<Image>())
+                {
+                    if (img.gameObject.name == "Black")
+                    {
+                        blackImageObj = img.gameObject;
+                        break;
+                    }
+                }
+            }
+        }
+
         if (blackImageObj != null)
-            blackImageObj.SetActive(false); // 시작 시 꺼두기
+        {
+            // 시작은 꺼둠
+            blackImageObj.SetActive(false);
+        }
         else
-            Debug.LogWarning("Trap: 'Black' 이미지 오브젝트를 찾을 수 없습니다.");
+        {
+            Debug.LogWarning("Trap: 'Black' UI 오브젝트를 찾을 수 없습니다. 인스펙터에 직접 할당하세요.");
+        }
     }
 
     void Update()
@@ -64,7 +88,7 @@ public class Trap : MonoBehaviour
 
                 // UI 깜빡이기 & 플레이어 잠금
                 StartCoroutine(DisableMovement(player));
-                StartCoroutine(BlinkBlackFor(disableDuration)); // ← 지속 시간을 덫 지속시간에 맞춤
+                StartCoroutine(BlinkBlackFor(disableDuration)); // 깜빡임 시작
             }
         }
     }
@@ -83,18 +107,19 @@ public class Trap : MonoBehaviour
     {
         if (blackImageObj == null) yield break;
 
-        float t = 0f;
-        float interval = 0.1f; // 한 번 on/off 주기
+        float elapsed = 0f;
         bool on = false;
 
-        while (t < duration)
+        // WaitForSecondsRealtime 사용: 타임스케일 0이어도 정확히 진행
+        while (elapsed < duration)
         {
             on = !on;
             blackImageObj.SetActive(on);
-            yield return new WaitForSeconds(interval);
-            t += interval;
+            yield return new WaitForSecondsRealtime(blinkInterval);
+            elapsed += blinkInterval;
         }
 
+        // 종료 시 확실히 끄기
         blackImageObj.SetActive(false);
     }
 }

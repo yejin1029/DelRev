@@ -26766,6 +26766,8 @@ MonoBehaviour:
   trapSound: {fileID: 8300000, guid: 3102957b9b1004b959f25eee40444f54, type: 3}
   animator: {fileID: 1982049015}
   activateTrigger: Activate
+  blackImageObj: {fileID: 782876762}
+  blinkInterval: 0.1
 --- !u!65 &619450505
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -56111,7 +56113,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1237117460}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: -0, y: -0.9985602, z: -0, w: 0.053642284}
   m_LocalPosition: {x: 7.087, y: 1.186, z: -22.81}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -56119,7 +56121,7 @@ Transform:
   - {fileID: 972808125}
   - {fileID: 29238110}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -173.85, z: 0}
 --- !u!114 &1237117466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70287,6 +70289,8 @@ MonoBehaviour:
   trapSound: {fileID: 8300000, guid: 3102957b9b1004b959f25eee40444f54, type: 3}
   animator: {fileID: 108516783}
   activateTrigger: Activate
+  blackImageObj: {fileID: 782876762}
+  blinkInterval: 0.1
 --- !u!65 &1627732287
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -73693,6 +73697,8 @@ MonoBehaviour:
   inventory: {fileID: 748759513}
   startSceneName: GameStart
   saveSlot: 1
+  clickSound: {fileID: 0}
+  clickVolume: 1
 --- !u!114 &1747983792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87680,6 +87686,8 @@ MonoBehaviour:
   trapSound: {fileID: 8300000, guid: 3102957b9b1004b959f25eee40444f54, type: 3}
   animator: {fileID: 1488360637}
   activateTrigger: Activate
+  blackImageObj: {fileID: 782876762}
+  blinkInterval: 0.1
 --- !u!65 &2088381210
 BoxCollider:
   m_ObjectHideFlags: 0

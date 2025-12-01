@@ -143,10 +143,12 @@ public class MapLocationSelector : MonoBehaviour
                 if (dir == Vector2.left) return 2;
                 if (dir == Vector2.down) return 4;
                 break;
+            /* 연구소 생기면 추가
             case 4:
                 if (dir == Vector2.up) return 3;
                 if (dir == Vector2.left) return 2;
                 break;
+            */
         }
         return selectedIndex;
     }
