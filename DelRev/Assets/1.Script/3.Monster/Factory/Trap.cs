@@ -36,7 +36,7 @@ public class Trap : MonoBehaviour
         if (playerObj != null)
             playerTransform = playerObj.transform;
 
-        // ★ 인스펙터에서 비어있으면, 비활성 포함 검색으로 보강
+        // 인스펙터에서 비어있으면, 비활성 포함 검색으로 보강
         if (blackImageObj == null)
         {
             // 경로로 먼저 시도
@@ -74,52 +74,65 @@ public class Trap : MonoBehaviour
         float dist = Vector3.Distance(playerTransform.position, transform.position);
         if (dist <= activationDistance)
         {
-            PlayerController player = playerTransform.GetComponentInChildren<PlayerController>();
-            if (player != null)
-            {
-                isTriggered = true;
+            var player = playerTransform.GetComponentInChildren<PlayerController>();
+            if (player == null) return;
 
-                if (trapSound != null)
-                    audioSource.PlayOneShot(trapSound);
+            isTriggered = true;
 
-                // 발동 애니메이션 트리거
-                if (animator != null)
-                    animator.SetTrigger(activateTrigger);
+            if (trapSound != null) audioSource.PlayOneShot(trapSound);
+            if (animator != null) animator.SetTrigger(activateTrigger);
 
-                // UI 깜빡이기 & 플레이어 잠금
-                StartCoroutine(DisableMovement(player));
-                StartCoroutine(BlinkBlackFor(disableDuration)); // 깜빡임 시작
-            }
+            // 하나의 코루틴에서 모든 시퀀스 보장
+            StartCoroutine(TrapSequence(player));
         }
     }
 
-    private IEnumerator DisableMovement(PlayerController player)
+    // 깜빡임 + 이동제한 + 정리까지 한 번에
+    private IEnumerator TrapSequence(PlayerController player)
     {
+        // 1) 플레이어 이동 제한
         player.enabled = false;
-        yield return new WaitForSeconds(disableDuration);
+
+        // 2) disableDuration 동안 깜빡임 (Realtime)
+        if (blackImageObj != null)
+        {
+            float elapsed = 0f;
+            bool on = false;
+
+            while (elapsed < disableDuration)
+            {
+                on = !on;
+                blackImageObj.SetActive(on);
+
+                float step = Mathf.Min(blinkInterval, disableDuration - elapsed);
+                yield return new WaitForSecondsRealtime(step);
+                elapsed += step;
+            }
+
+            // 3) 반드시 끄기
+            blackImageObj.SetActive(false);
+        }
+        else
+        {
+            // UI가 없더라도 시간은 보장
+            yield return new WaitForSecondsRealtime(disableDuration);
+        }
+
+        // 4) 플레이어 복구
         player.enabled = true;
 
+        // 5) 마지막에 덫 파괴 (여기서 코루틴 종료되어도 이미 Black은 꺼짐)
         Destroy(gameObject);
     }
 
-    // 깜빡임을 덫 지속시간과 동기화
-    private IEnumerator BlinkBlackFor(float duration)
+    // 안전장치: 오브젝트가 중도 파괴/비활성화돼도 화면을 꺼둔다
+    private void OnDisable()
     {
-        if (blackImageObj == null) yield break;
+        if (blackImageObj != null) blackImageObj.SetActive(false);
+    }
 
-        float elapsed = 0f;
-        bool on = false;
-
-        // WaitForSecondsRealtime 사용: 타임스케일 0이어도 정확히 진행
-        while (elapsed < duration)
-        {
-            on = !on;
-            blackImageObj.SetActive(on);
-            yield return new WaitForSecondsRealtime(blinkInterval);
-            elapsed += blinkInterval;
-        }
-
-        // 종료 시 확실히 끄기
-        blackImageObj.SetActive(false);
+    private void OnDestroy()
+    {
+        if (blackImageObj != null) blackImageObj.SetActive(false);
     }
 }

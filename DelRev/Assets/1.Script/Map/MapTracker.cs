@@ -33,7 +33,7 @@ public class MapTracker : MonoBehaviour
     public bool isRestartingFromGameOver = false;
 
     // 🔹 외부에서 설정할 요일과 코인 요구량
-    public List<int> checkDays = new List<int> { 4, 7, 9, 11, 13 };
+    public List<int> checkDays = new List<int> { 4, 7, 10, 13, 16 };
     public List<int> coinRequirements = new List<int> { 5, 10, 15, 20, 25 };
 
     // Company에 들어왔을 때 알림: (isReturning, day)
