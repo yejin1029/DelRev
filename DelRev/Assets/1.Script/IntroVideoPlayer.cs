@@ -16,6 +16,15 @@ public class IntroVideoPlayer : MonoBehaviour
         videoPlayer.Play();
     }
 
+    private void Update()
+    {
+        // ESC 키 누르면 스킵
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Skip();
+        }
+    }
+
     private void OnDestroy()
     {
         if (videoPlayer != null)
