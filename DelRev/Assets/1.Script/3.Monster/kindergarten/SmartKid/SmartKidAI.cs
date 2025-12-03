@@ -13,9 +13,17 @@ public class SmartKidAI : MonoBehaviour
 
     private float lastProblemTime = -999f; // 🔹 마지막 문제 낸 시간 저장
 
+    [Header("Animation")]
+    public Animator animator;
+    public float speedDampTime = 0.1f; // 부드러운 전환
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+
+        if (animator == null) animator = GetComponent<Animator>();
+        if (animator) animator.applyRootMotion = false;
+
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
 
         GoToRandomPoint();
@@ -23,6 +31,8 @@ public class SmartKidAI : MonoBehaviour
 
     void Update()
     {
+        UpdateAnimatorByAgent();
+
         if (isPlayerLocked || player == null) return;
 
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
@@ -42,6 +52,17 @@ public class SmartKidAI : MonoBehaviour
         {
             GoToRandomPoint();
         }
+    }
+
+        void UpdateAnimatorByAgent()
+    {
+        if (animator == null || agent == null) return;
+
+        float speed = agent.velocity.magnitude; // 실제 이동 속도(m/s)
+        // 정지 떨림 방지(선택): 경로 없음/거의 도착 시 0 고정
+        if (!agent.hasPath || agent.remainingDistance <= 0.05f) speed = 0f;
+
+        animator.SetFloat("Speed", speed, speedDampTime, Time.deltaTime);
     }
 
     void GoToRandomPoint()

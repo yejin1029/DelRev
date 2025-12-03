@@ -59,14 +59,14 @@
     <UnityVersion>2022.3.47f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="C:\Users\doyeon\.vscode\extensions\visualstudiotoolsforunity.vstuc-1.2.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="C:\Users\USER\.vscode\extensions\visualstudiotoolsforunity.vstuc-1.2.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.47f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.47f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\VLights\Scripts\VLight\VLightHelper.cs" />
-    <Compile Include="Assets\1.Script\3.Monster\kindergarten\SmartKid\ProblemManager.cs" />
     <Compile Include="Assets\1.Script\1.Player\Damage.cs" />
+    <Compile Include="Assets\1.Script\3.Monster\Kindergarten\DollMonsterAI.cs" />
     <Compile Include="Assets\1.Script\3.Monster\FamilyHouse\PetCCTV.cs" />
     <Compile Include="Assets\1.Script\StartGame\StartMenu.cs" />
     <Compile Include="Assets\1.Script\3.Monster\Monster.cs" />
@@ -74,13 +74,14 @@
     <Compile Include="Assets\1.Script\Settings\DisplayBoot.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />
     <Compile Include="Assets\2.Download\Kindergarten Interior\PostProcessing\Runtime\Components\DitheringComponent.cs" />
-    <Compile Include="Assets\1.Script\3.Monster\kindergarten\SmartKid\SmartKidAI.cs" />
     <Compile Include="Assets\1.Script\Navigation\StorePanel\StorePanelController.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
     <Compile Include="Assets\ViapixGames\Common Scripts\Viapix_PlayerHP.cs" />
+    <Compile Include="Assets\1.Script\3.Monster\Kindergarten\Director.cs" />
     <Compile Include="Assets\1.Script\Map\KeyDoor.cs" />
     <Compile Include="Assets\2.Download\Kindergarten Interior\PostProcessing\Runtime\Models\BloomModel.cs" />
     <Compile Include="Assets\1.Script\1.Player\FootstepController.cs" />
+    <Compile Include="Assets\1.Script\3.Monster\Kindergarten\SmartKid\ProblemManager.cs" />
     <Compile Include="Assets\1.Script\3.Monster\laboratory\SecurityGuard.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_ExampleScript_01.cs" />
     <Compile Include="Assets\1.Script\UI\ItemDeliveryNotifier.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />
     <Compile Include="Assets\ViapixGames\Common Scripts\Viapix_UI_PlayerHP.cs" />
     <Compile Include="Assets\1.Script\3.Monster\FamilyHouse\Dog.cs" />
+    <Compile Include="Assets\1.Script\3.Monster\Kindergarten\TeacherManager.cs" />
     <Compile Include="Assets\1.Script\2.Items\RandomItemSpawner.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
     <Compile Include="Assets\1.Script\Navigation\StorePanel\StoreItemUI.cs" />
@@ -103,7 +105,6 @@
     <Compile Include="Assets\1.Script\Save\ContinueLoader.cs" />
     <Compile Include="Assets\1.Script\UI\NearbyItemUI.cs" />
     <Compile Include="Assets\2.Download\Kindergarten Interior\PostProcessing\Runtime\Components\EyeAdaptationComponent.cs" />
-    <Compile Include="Assets\1.Script\3.Monster\kindergarten\SmartKid\MathProblemUI.cs" />
     <Compile Include="Assets\1.Script\Map\MapTracker.cs" />
     <Compile Include="Assets\1.Script\Map\CarTrigger.cs" />
     <Compile Include="Assets\1.Script\3.Monster\laboratory\CCTV.cs" />
@@ -111,10 +112,10 @@
     <Compile Include="Assets\1.Script\StartGame\StartSceneManager.cs" />
     <Compile Include="Assets\2.Download\Kindergarten Interior\PostProcessing\Runtime\Attributes\TrackballAttribute.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
+    <Compile Include="Assets\1.Script\3.Monster\Kindergarten\Teacher.cs" />
     <Compile Include="Assets\1.Script\3.Monster\FamilyHouse\RedEyeCat.cs" />
     <Compile Include="Assets\2.Download\House\Source\Scripts\Interactions.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
-    <Compile Include="Assets\1.Script\3.Monster\kindergarten\TeacherManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SimpleScript.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />
     <Compile Include="Assets\1.Script\Settings\URPBrightnessManager.cs" />
@@ -151,7 +152,6 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextConsoleSimulator.cs" />
     <Compile Include="Assets\1.Script\2.Items\IInventoryEffect.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TeleType.cs" />
-    <Compile Include="Assets\1.Script\3.Monster\kindergarten\DollMonsterAI.cs" />
     <Compile Include="Assets\2.Download\Kindergarten Interior\PostProcessing\Runtime\Utils\MaterialFactory.cs" />
     <Compile Include="Assets\1.Script\Settings\URPBrightnessSlider.cs" />
     <Compile Include="Assets\1.Script\3.Monster\FamilyHouse\BlueEyeCat.cs" />
@@ -163,7 +163,6 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
     <Compile Include="Assets\1.Script\StartGame\GlobalState.cs" />
-    <Compile Include="Assets\1.Script\3.Monster\kindergarten\Teacher.cs" />
     <Compile Include="Assets\2.Download\Kindergarten Interior\PostProcessing\Runtime\Models\DepthOfFieldModel.cs" />
     <Compile Include="Assets\VLights\Scripts\Util\VLightGeometryUtil.cs" />
     <Compile Include="Assets\2.Download\Kindergarten Interior\PostProcessing\Runtime\Models\UserLutModel.cs" />
@@ -179,6 +178,7 @@
     <Compile Include="Assets\1.Script\Navigation\StorePanel\WarningUI.cs" />
     <Compile Include="Assets\2.Download\Clock\Scripts\Clock.cs" />
     <Compile Include="Assets\1.Script\3.Monster\laboratory\Researcher.cs" />
+    <Compile Include="Assets\1.Script\3.Monster\Kindergarten\SmartKid\PlayerInputBlocker.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs" />
     <Compile Include="Assets\1.Script\3.Monster\Factory\FlameProjectile.cs" />
     <Compile Include="Assets\2.Download\Kindergarten Interior\PostProcessing\Runtime\Models\MotionBlurModel.cs" />
@@ -212,8 +212,8 @@
     <Compile Include="Assets\2.Download\Kindergarten Interior\PostProcessing\Runtime\Components\VignetteComponent.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
     <Compile Include="Assets\2.Download\Kindergarten Interior\PostProcessing\Runtime\Models\ChromaticAberrationModel.cs" />
+    <Compile Include="Assets\1.Script\3.Monster\Kindergarten\SmartKid\MathProblemUI.cs" />
     <Compile Include="Assets\1.Script\3.Monster\Factory\Trap.cs" />
-    <Compile Include="Assets\1.Script\3.Monster\kindergarten\SmartKid\PlayerInputBlocker.cs" />
     <Compile Include="Assets\1.Script\2.Items\KeyItem.cs" />
     <Compile Include="Assets\2.Download\Kindergarten Interior\PostProcessing\Runtime\Components\ScreenSpaceReflectionComponent.cs" />
     <Compile Include="Assets\1.Script\3.Monster\IDangerTarget.cs" />
@@ -222,9 +222,9 @@
     <Compile Include="Assets\1.Script\Navigation\MainPanel\NavigationButtonSelector.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
     <Compile Include="Assets\2.Download\Kindergarten Interior\PostProcessing\Runtime\PostProcessingBehaviour.cs" />
-    <Compile Include="Assets\1.Script\3.Monster\kindergarten\Director.cs" />
     <Compile Include="Assets\2.Download\Kindergarten Interior\PostProcessing\Runtime\Models\GrainModel.cs" />
     <Compile Include="Assets\2.Download\Kindergarten Interior\PostProcessing\Runtime\Utils\ColorGradingCurve.cs" />
+    <Compile Include="Assets\1.Script\3.Monster\Kindergarten\SmartKid\SmartKidAI.cs" />
     <Compile Include="Assets\1.Script\Settings\VolumeBoot.cs" />
     <Compile Include="Assets\2.Download\Kindergarten Interior\PostProcessing\Runtime\Attributes\TrackballGroupAttribute.cs" />
     <Compile Include="Assets\2.Download\Kindergarten Interior\PostProcessing\Runtime\Components\MotionBlurComponent.cs" />
@@ -691,23 +691,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.47f1\Editor\Data\PlaybackEngines\iOSSupport\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions.Common">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.47f1\Editor\Data\PlaybackEngines\iOSSupport\UnityEditor.iOS.Extensions.Common.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Android.Types">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.47f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Types.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Android.Gradle">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.47f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Gradle.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Android.GradleProject">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.47f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.GradleProject.dll</HintPath>
+      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.47f1\Editor\Data\PlaybackEngines\MacStandaloneSupport\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="netstandard">
