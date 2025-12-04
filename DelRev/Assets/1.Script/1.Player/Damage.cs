@@ -15,18 +15,22 @@ public class Damage : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip damageSound;
     [Range(0f, 1f)] public float soundVolume = 0.6f;
-    public float soundCooldown = 0.3f; // 사운드 쿨타임 (초)
+    public float soundCooldown = 0.3f;
     private float lastSoundTime = -1f;
 
     [Header("UI Flash Effect")]
     public CanvasGroup redFlashCanvas;
-    public float transitionSpeed = 2f;   // 체력 변화 시 서서히 반영 속도
-    public float maxHealthAlpha = 0.7f;  // 체력 0일 때 최대 붉은 정도
-    public float minHealthAlpha = 0.0f;  // 체력 100일 때 투명
+    public float transitionSpeed = 2f;
+    public float maxHealthAlpha = 0.7f;
+    public float minHealthAlpha = 0.0f;
 
     private Vector3 originalCamPos;
     private Coroutine shakeCoroutine;
     private float targetAlpha = 0f;
+
+    // 🔥 체력 감소 감지를 위한 변수
+    private float previousHealth = 100f;
+
 
     private void Awake()
     {
@@ -66,16 +70,34 @@ public class Damage : MonoBehaviour
 
         if (redFlashCanvas != null)
             redFlashCanvas.alpha = 0f;
+
+        // 플레이어 체력 초기값 가져오기
+        if (PlayerController.Instance != null)
+            previousHealth = PlayerController.Instance.health;
     }
 
     private void Update()
     {
-        // 체력 비례로 붉은 정도 실시간 반영 (회복 시 서서히 희미해짐)
+        // 🔴 체력 비례 화면 붉은 효과
         if (PlayerController.Instance != null && redFlashCanvas != null)
         {
             float healthRatio = PlayerController.Instance.health / 100f;
             targetAlpha = Mathf.Lerp(maxHealthAlpha, minHealthAlpha, healthRatio);
             redFlashCanvas.alpha = Mathf.Lerp(redFlashCanvas.alpha, targetAlpha, Time.deltaTime * transitionSpeed);
+        }
+
+        // 🔥 체력 감소 자동 감지 → 카메라 흔들림 실행
+        if (PlayerController.Instance != null)
+        {
+            float currentHealth = PlayerController.Instance.health;
+
+            if (currentHealth < previousHealth)
+            {
+                float lostAmount = previousHealth - currentHealth;
+                TriggerDamageEffect(lostAmount);
+            }
+
+            previousHealth = currentHealth;
         }
     }
 
@@ -99,20 +121,24 @@ public class Damage : MonoBehaviour
             if (canvasObj != null)
                 redFlashCanvas = canvasObj.GetComponent<CanvasGroup>();
         }
+
+        // 씬이 바뀌면 체력 초기화
+        if (PlayerController.Instance != null)
+            previousHealth = PlayerController.Instance.health;
     }
 
     public void TriggerDamageEffect(float damageAmount)
     {
         if (cameraTransform == null) return;
 
-        // 🔊 사운드 (쿨타임 체크)
+        // 🔊 쿨타임 체크 후 데미지 사운드 재생
         if (damageSound != null && Time.time - lastSoundTime >= soundCooldown)
         {
             audioSource.PlayOneShot(damageSound, soundVolume);
             lastSoundTime = Time.time;
         }
 
-        // 📸 카메라 흔들림
+        // 📸 데미지 강도 비례 카메라 흔들림
         float shakeMagnitude = Mathf.Lerp(0.05f, 0.2f, damageAmount / 100f);
         StartShake(defaultDuration, shakeMagnitude);
     }
@@ -121,18 +147,21 @@ public class Damage : MonoBehaviour
     {
         if (shakeCoroutine != null)
             StopCoroutine(shakeCoroutine);
+
         shakeCoroutine = StartCoroutine(ShakeRoutine(duration, magnitude));
     }
 
     private IEnumerator ShakeRoutine(float duration, float magnitude)
     {
         float elapsed = 0f;
+
         while (elapsed < duration)
         {
             if (cameraTransform == null) yield break;
 
             float x = Random.Range(-1f, 1f) * magnitude;
             float y = Random.Range(-1f, 1f) * magnitude;
+
             cameraTransform.localPosition = originalCamPos + new Vector3(x, y, 0);
 
             elapsed += Time.deltaTime;
