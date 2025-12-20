@@ -312,15 +312,41 @@ File > Build Settings > 플랫폼 선택 > Build
 
 <table>
   <tr>
-    <td align="center">
-      <strong>이름</strong><br/>
-      <em>역할</em>
+    <td align="center" width="200">
+      <a href="https://github.com/yejin1029">
+        <img src="https://github.com/yejin1029.png" width="90" alt="USERNAME1"/>
+      </a>
+      <br />
+      <b>권예진</b>
+      <br />
+      Client Dev<br />UI/UX Design
     </td>
-  </tr>
-  <tr>
-    <td align="center">
-      <strong>hitori839</strong><br/>
-      <em>Lead Developer & Project Owner</em>
+    <td align="center" width="200">
+      <a href="https://github.com/doyeon112">
+        <img src="https://github.com/doyeon112.png" width="90" alt="USERNAME2"/>
+      </a>
+      <br />
+      <b>김도연</b>
+      <br />
+      3D Graphic Design
+    </td>
+    <td align="center" width="200">
+      <a href="https://github.com/hitori839">
+        <img src="https://github.com/hitori839.png" width="90" alt="USERNAME3"/>
+      </a>
+      <br />
+      <b>김도현</b>
+      <br />
+      Client Dev
+    </td>
+    <td align="center" width="200">
+      <a href="https://github.com/LeeBellHa">
+        <img src="https://github.com/LeeBellHa.png" width="90" alt="USERNAME3"/>
+      </a>
+      <br />
+      <b>이종하</b>
+      <br />
+      Client Dev<br/>Sound Design
     </td>
   </tr>
 </table>
