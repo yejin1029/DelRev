@@ -308,7 +308,7 @@ File > Build Settings > 플랫폼 선택 > Build
 
 ---
 
-## 🤝 개발팀
+## 🤝 개발-팀
 
 <table>
   <tr>
@@ -319,7 +319,7 @@ File > Build Settings > 플랫폼 선택 > Build
       <br />
       <b>권예진</b>
       <br />
-      Client Dev<br />UI/UX Design
+      Client Developer<br />UI/UX Designer
     </td>
     <td align="center" width="200">
       <a href="https://github.com/doyeon112">
@@ -328,7 +328,7 @@ File > Build Settings > 플랫폼 선택 > Build
       <br />
       <b>김도연</b>
       <br />
-      3D Graphic Design
+      Graphic Designer<br/>
     </td>
     <td align="center" width="200">
       <a href="https://github.com/hitori839">
@@ -337,7 +337,7 @@ File > Build Settings > 플랫폼 선택 > Build
       <br />
       <b>김도현</b>
       <br />
-      Client Dev
+      Client Developer<br/>
     </td>
     <td align="center" width="200">
       <a href="https://github.com/LeeBellHa">
@@ -346,7 +346,7 @@ File > Build Settings > 플랫폼 선택 > Build
       <br />
       <b>이종하</b>
       <br />
-      Client Dev<br/>Sound Design
+      Client Developer<br/>Sound Design
     </td>
   </tr>
 </table>
@@ -424,7 +424,5 @@ A PARTICULAR PURPOSE AND NONINFRINGEMENT.
 <div align="center">
 
 **Made with ❤️ using Unity**
-
-⭐ 프로젝트가 도움이 되었다면 별표를 눌러주세요!
 
 </div>
