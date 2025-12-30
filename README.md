@@ -371,7 +371,7 @@ File > Build Settings > 플랫폼 선택 > Build
 - **주관:** 단국대학교 G-RISE 사업단  
 - **선정:** 총 75팀 중 6팀 선정(대상, 우수, 장려)
 
-<img src="award_1.jpg" alt="2025 RIEF-FESTA Award" width="400"/>
+<img src="award_2.jpg" alt="2025 RIEF-FESTA Award" width="400"/>
 
 ---
 
@@ -381,7 +381,7 @@ File > Build Settings > 플랫폼 선택 > Build
 - **주관:** 단국대학교 SW중심대학사업단  
 - **선정:** 총 100팀 중 15팀 선정(대상, 최우수, 우수, 장려)
 
-<img src="award_2.png" alt="2025 SW Capstone Festival Award" width="400"/>
+<img src="award_1.png" alt="2025 SW Capstone Festival Award" width="400"/>
 
 ---
 
