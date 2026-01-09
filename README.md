@@ -9,7 +9,7 @@
 [![License](https://img.shields.io/badge/License-MIT-blue)](LICENSE)
 [![Status](https://img.shields.io/badge/Status-In%20Development-orange)]()
 
-[게임 소개](#-게임-소개) • [주요-기능](#-주요-기능) • [설치-및-실행](#-설치-및-실행) • [프로젝트-구조](#-프로젝트-구조) • [개발-팀](#-개발-팀)
+[게임 소개](#-게임-소개) • [주요-기능](#-주요-기능) • [설치-및-실행](#-설치-및-실행) • [프로젝트-구조](#-프로젝트-구조) • [개발-팀](#-개발-팀) • [수상-내역](#-수상-내역)
 
 </div>
 
@@ -364,7 +364,7 @@ File > Build Settings > 플랫폼 선택 > Build
 
 ---
 
-## 🏆 수상 내역
+## 🏆 수상-내역
 
 ### 🥉 2025 RIEF-FESTA 캡스톤디자인 경진대회 (G7 부문)
 - **수상:** 장려상  
@@ -381,7 +381,8 @@ File > Build Settings > 플랫폼 선택 > Build
 - **주관:** 단국대학교 SW중심대학사업단  
 - **선정:** 총 100팀 중 15팀 선정(대상, 최우수, 우수, 장려)
 
-<img src="award_1.jpg" alt="2025 SW Capstone Festival Award" width="400"/>
+<img width="400" alt="image" src="https://github.com/user-attachments/assets/a8d59ae1-ed84-4938-833a-7758892d9dc4" />
+
 
 ---
 
