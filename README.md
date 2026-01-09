@@ -9,7 +9,7 @@
 [![License](https://img.shields.io/badge/License-MIT-blue)](LICENSE)
 [![Status](https://img.shields.io/badge/Status-In%20Development-orange)]()
 
-[게임 소개](#-게임-소개) • [주요-기능](#-주요-기능) • [설치-및-실행](#-설치-및-실행) • [프로젝트-구조](#-프로젝트-구조) • [개발-팀](#-개발-팀) • [수상-내역](#-수상-내역역)
+[게임 소개](#-게임-소개) • [주요-기능](#-주요-기능) • [설치-및-실행](#-설치-및-실행) • [프로젝트-구조](#-프로젝트-구조) • [개발-팀](#-개발-팀) • [수상-내역](#-수상-내역)
 
 </div>
 
@@ -381,7 +381,7 @@ File > Build Settings > 플랫폼 선택 > Build
 - **주관:** 단국대학교 SW중심대학사업단  
 - **선정:** 총 100팀 중 15팀 선정(대상, 최우수, 우수, 장려)
 
-<img width="595" height="787" alt="image" src="https://github.com/user-attachments/assets/e9d611f9-701f-4d3a-a31e-3974e8ce6cf0" />
+<img width="400" alt="image" src="https://github.com/user-attachments/assets/e9d611f9-701f-4d3a-a31e-3974e8ce6cf0" />
 
 
 ---
