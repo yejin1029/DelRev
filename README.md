@@ -19,7 +19,7 @@
 | 2 | 👥 [개발 팀](#2) |
 | 3 | ✨ [주요 기능](#3) |
 | 4 | 🛠️ [기술 스택](#4) |
-| 5 | 🎮 [게임 시연](#5) |
+| 5 | 🎮 [게임 화면 및 데모](#5) |
 | 6 | 📁 [프로젝트 구조](#6) |
 | 7 | 🕹️ [설치 및 실행](#7) |
 | 8 | 🏆 [수상 내역](#8) |
@@ -123,23 +123,25 @@ flowchart LR
 - **탐지 메커닉**: 시야각·거리·상황 요소를 활용한 플레이어 인식 로직
 
 <details>
-  <summary><b> 가정집 맵 몬스터 </b></summary>
+  <summary><b> 🏠 가정집 맵 몬스터 </b></summary>
 
   <img width="600" alt="image" src="https://github.com/user-attachments/assets/0c556ea6-794e-4ca1-97c1-7449149580e4" />
 </details>
 
 <details>
-  <summary><b> 유치원 맵 몬스터 </b></summary>
+  <summary><b> 👶 유치원 맵 몬스터 </b></summary>
 
   <img width="600" alt="image" src="https://github.com/user-attachments/assets/910298ee-351e-4e98-9673-e7b480b5e512" />
 </details>
 
 <details>
-  <summary><b> 공장 맵 몬스터 </b></summary>
+  <summary><b> 🏭 공장 맵 몬스터 </b></summary>
 
   <img width="600" alt="image" src="https://github.com/user-attachments/assets/c322e8e2-5d1b-4fec-bef2-c8698be0edcf" />
   <img width="600" alt="image" src="https://github.com/user-attachments/assets/10354c7f-c2f4-4954-9db9-159d35bbd73d" />
 </details>
+
+<br/>
 
 ### 💾 게임 진행 및 상태 관리 
 - **세이브/로드 시스템**: 게임 진행 상황 저장 및 불러오기
@@ -180,7 +182,7 @@ flowchart LR
 ---
 
 <a id="5"></a>
-## 5️⃣ 🎮 게임 시연
+## 5️⃣ 🎮 게임 화면 및 데모
 
 ### 🎥 데모 영상
 🔗 [DelRev_9cut.mov](https://drive.google.com/file/d/1LsHE2zvid1eV_s81filG7HnpXB0DrP9F/view?usp=sharing)
@@ -407,9 +409,11 @@ File > Build Settings > 플랫폼 선택 > Build
 - **주관:** 단국대학교 G-RISE 사업단  
 - **선정:** 총 75팀 중 6팀 선정(대상, 우수, 장려)
 
-<img src="award_2.jpeg" alt="2025 RIEF-FESTA Award" width="350"/>
+<details>
+  <summary> <b><i>상장 펼쳐보기</i></b> </summary>
 
----
+  <img src="award_2.jpeg" alt="2025 RIEF-FESTA Award" width="350"/>
+</details>
 
 ### 🥉 2025 단국대학교 SW중심대학 캡스톤 페스티벌
 - **수상:** 장려상  
@@ -417,7 +421,11 @@ File > Build Settings > 플랫폼 선택 > Build
 - **주관:** 단국대학교 SW중심대학사업단  
 - **선정:** 총 100팀 중 15팀 선정(대상, 최우수, 우수, 장려)
 
-<img width="350" alt="image" src="https://github.com/user-attachments/assets/a8d59ae1-ed84-4938-833a-7758892d9dc4" />
+<details>
+  <summary> <b><i>상장 펼쳐보기</i></b> </summary>
+
+  <img width="350" alt="image" src="https://github.com/user-attachments/assets/a8d59ae1-ed84-4938-833a-7758892d9dc4" />
+</details>
 
 ---
 
@@ -434,9 +442,13 @@ File > Build Settings > 플랫폼 선택 > Build
 - 오브젝트 풀링 적용 예정
 - 메모리 최적화 작업 진행 중
 
-이 프로젝트는 **MIT License** 하에 배포됩니다.
+<br/>
 
-```
+ 이 프로젝트는 <b>MIT License</b> 하에 배포됩니다.
+<details>
+  <summary> <i>상세 보기</i> </summary>
+
+  ```
 MIT License
 
 Copyright (c) 2024 hitori839
@@ -455,11 +467,15 @@ THE SOFTWARE IS PROVIDED "AS IS", BASIS OF ANY KIND, EXPRESS OR IMPLIED,
 INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR
 A PARTICULAR PURPOSE AND NONINFRINGEMENT.
 ```
+</details>
+
+<br/>
 
 - **Unity 공식 문서**: https://docs.unity.com
 - **URP 문서**: https://docs.unity.com/Manual/universal-render-pipeline
 - **NavMesh 튜토리얼**: https://docs.unity.com/Manual/nav-mesh
 
+<br/>
 
 <div align="center">
 
