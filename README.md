@@ -11,31 +11,34 @@
 
 </div>
 
----
 
-|순번 (🔗)|항목|
+## 📚 목차
+|순번|항목|
 |:---:|:-------------------:|
-| [1️](#1)| 🎬 프로젝트 개요 |
-| [2](#2) | 🤝 개발 팀 |
-| [3](#3) | ✨ 주요 기능 |
-| [4](#4) | 🛠️ 기술 스택 |
-| [5](#5) | 🎮 데모 영상 |
-| [6](#6) | 📁 프로젝트 구조 |
-| [7](#7) | 🕹️ 설치 및 실행 |
-| [8](#8) | 🏆 수상 내역 |
+| 1️ | 📌 [프로젝트 개요](#1) |
+| 2 | 👥 [개발 팀](#2) |
+| 3 | ✨ [주요 기능](#3) |
+| 4 | 🛠️ [기술 스택](#4) |
+| 5 | 🎮 [게임 시연](#5) |
+| 6 | 📁 [프로젝트 구조](#6) |
+| 7 | 🕹️ [설치 및 실행](#7) |
+| 8 | 🏆 [수상 내역](#8) |
+| 9 | 📜 [개선사항 및 라이센스](#9) |
 
 ---
 
 <a id="1"></a>
-## 1️⃣ 🎬 프로젝트 개요
+## 1️⃣ 📌 프로젝트 개요
 
 **DelRev**는 플레이어가 다양한 환경(회사, 공장, 유치원, 가족 주택 등)에서 고유한 AI를 가진 몬스터들로부터 도망치며 생존해야 하는 풀-3D 스텔스 서바이벌 게임입니다.
 
-각 스테이지는 독특한 배경과 특화된 AI 몬스터들을 특징으로 하며, 플레이어의 스테미나 관리, 아이템 수집, 스텔스 전술이 필수적입니다.
+플레이어는 **체력/스테미나**뿐 아니라, 게임의 핵심 자원인 **위험게이지**를 관리하며 은신과 이동 전략을 세워야 합니다.  
+각 스테이지는 독특한 배경과 특화된 AI 몬스터들을 특징으로 하며, **위험게이지를 낮게 유지하기 위한 스텔스 전술**, 아이템 수집, 상황 판단이 생존의 핵심입니다.
 
-- **개발 기간:** 약 6개월  
+- **개발 기간:** 2025.03-2025.11
 - **개발 엔진:** Unity 2022.3.47f1  
-- **개발 언어:** C#  
+- **개발 언어:** C#
+- **플랫폼**: PC (Windows/macOS)
 
 <details>
   <summary> 📊 상세 통계 </summary>
@@ -51,7 +54,7 @@
 ---
 
 <a id="2"></a>
-## 2️⃣ 🤝 개발 팀
+## 2️⃣ 👥 개발 팀
 
 | 이름 | 권예진 | 김도연 | 김도현 | 이종하 |
 |:---:|:---:|:---:|:---:|:---:|
@@ -63,33 +66,82 @@
 <a id="3"></a>
 ## 3️⃣ ✨ 주요 기능
 
-### 🎮 게임플레이 시스
+### 🎮 게임플레이 시스템 
+
+```mermaid
+flowchart LR
+    A["회사 맵<br/>Day N"] --> B["트레일러<br/>아이템 여부"]
+    B -->|YES| C["아이템 제출"]
+    B -->|NO| D["맵 선택 및 이동<br/>가정집 / 유치원 / 공장"]
+    C --> D
+    D --> E["아이템 수집<br/>/위험 게이지 관리<br/>/방해자 회피"]
+    E --> F["트레일러에<br/>아이템 적재"]
+    F --> G["회사<br/>귀환"]
+    G --> H["Day N+1 <br/>증가"]
+    H --> A
+```
 - **멀티 스테이지 구성**: 5개의 고유한 배경(회사, 공장, 유치원, 가족 주택, 기타) 기반 진행
+  
 - **스텔스 메커닉**: 조명/음성/거리 감지에 의해 몬스터가 플레이어를 탐지하는 은신 플레이
-- **스테미나 시스템**: 달리기·숨기기 등 행동에 따라 소모/회복되는 자원 관리
-- **생존 시스템**: 
+- **생존 시스템**  
   - 체력 관리(피해/회복)
   - 코인 수집 및 자원 운영
-  - 회복 아이템 사용
+  - 회복/버프 아이템 사용(상황 대응)
+
+- **핵심 자원 관리(게임 핵심 요소)**
+  - **체력/스테미나**: 달리기·숨기기 등 행동에 따라 소모/회복되는 생존 자원
+    
+  - **인벤토리 제한**: 아이템 **최대 4개 소지**로 선택과 집중 유도
+  - **위험게이지**: 플레이어의 ‘노출/리스크’를 나타내는 핵심 자원  
+    - 특정 조건에서 **위험게이지가 증가/감소**하며, 임계치 도달 시 **치명적 페널티(게임오버급 이벤트)** 발생
+      ```mermaid
+        flowchart LR
+          A["플레이어 위치 체크"] --> B{"업무장소 내부"}
+          B -->|YES| C["위험게이지 감소"]
+          B -->|NO| D["위험게이지 증가"]
+          D --> E{"위험게이지 = 100"}
+          E -->|YES| F["최종 방해자에 의한 즉사"]
+          E -->|NO| G["일반 상태"]
+        ```
+
+  - **요구일**: 코인 요구 조건을 검사하는 **마감 일자(데드라인)**
+    - **일차**(Day)를 기준으로 특정 시점마다 **요구 코인량**이 미달 시 게임 오버 발생
+      ```mermaid
+        flowchart LR
+          A["회사 복귀"] --> B["Day + 1"]
+          B --> C{"Day < checkDays"}
+          C -->|YES| D["정상 진행"]
+          C -->|NO| E["요구 코인량 확인"]
+          E --> F{"보유 코인 ≥ 요구 코인"}
+          F -->|YES| G["정상 진행"]
+          F -->|NO| H["게임 오버"]
+        ```
 
 ### 🤖 AI 몬스터 시스템
 - **스테이지별 고유 몬스터**: 각 스테이지에 맞춘 개성 있는 몬스터와 패턴 설계
 - **다양한 행동 유형**: 패트롤/추적/공격/특수 행동 등 상황 기반 행동 변화
 - **탐지 메커닉**: 시야각·거리·상황 요소를 활용한 플레이어 인식 로직
 
-| 몬스터 | 특징 | 스테이지 |
-|:--------:|:------:|:--------:|
-| **Security A/B** | 경비원 AI, NavMesh 패트롤 | 회사 |
-| **Turret Sentinel** | 감시탑, 범위 공격 | 공장 |
-| **Welding Robot** | 용접 로봇, 추적 및 공격 | 공장 |
-| **Drone Patrol** | 드론, 상공 감시 | 공장 |
-| **SmartKid** | 지능형 아이, 수학 문제 출제 AI | 유치원 |
-| **Teacher** | 선생님, 아이들 관리 | 유치원 |
-| **Director** | 원장, 고급 패턴 | 유치원 |
-| **Doll Monster** | 인형 몬스터, 특수 행동 | 유치원 |
-| **Dog** | 개, 냄새 추적 | 가족 주택 |
+<details>
+  <summary><b> 가정집 맵 몬스터 </b></summary>
 
-### 💾 게임 진행 및 상태 관
+  <img width="600" alt="image" src="https://github.com/user-attachments/assets/0c556ea6-794e-4ca1-97c1-7449149580e4" />
+</details>
+
+<details>
+  <summary><b> 유치원 맵 몬스터 </b></summary>
+
+  <img width="600" alt="image" src="https://github.com/user-attachments/assets/910298ee-351e-4e98-9673-e7b480b5e512" />
+</details>
+
+<details>
+  <summary><b> 공장 맵 몬스터 </b></summary>
+
+  <img width="600" alt="image" src="https://github.com/user-attachments/assets/c322e8e2-5d1b-4fec-bef2-c8698be0edcf" />
+  <img width="600" alt="image" src="https://github.com/user-attachments/assets/10354c7f-c2f4-4954-9db9-159d35bbd73d" />
+</details>
+
+### 💾 게임 진행 및 상태 관리 
 - **세이브/로드 시스템**: 게임 진행 상황 저장 및 불러오기
 - **글로벌 상태 관**: 씬 전환에서도 게임 상태가 유지되는 진행 구조
 - **로딩 씬**: 자연스러운 씬 전환 및 플레이 흐름 개선
@@ -109,9 +161,7 @@
 <a id="4"></a>
 ## 4️⃣ 🛠️ 기술 스택
 
-### 엔진 & 프레임워크
-- **Unity Engine** 2022.3.47f1 (LTS)
-- **C# 9.0**
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/35620f70-42bf-498d-845d-03f7c0f64fb0" />
 
 ### 주요 패키지
 | 패키지 | 버전 | 목적 |
@@ -130,7 +180,26 @@
 ---
 
 <a id="5"></a>
-## 5️⃣ 🎮 게임 데모 영상
+## 5️⃣ 🎮 게임 시연
+
+### 🎥 데모 영상
+🔗 [DelRev_9cut.mov](https://drive.google.com/file/d/1LsHE2zvid1eV_s81filG7HnpXB0DrP9F/view?usp=sharing)
+
+### 🎨 UI/UX
+<img width="600" alt="image" src="https://github.com/user-attachments/assets/497e1859-3dc1-4bf4-a430-496c6fabe979" />
+
+### 🚛 맵 이동 및 진행 시스템
+<img width="600" alt="image" src="https://github.com/user-attachments/assets/63909271-503e-4965-ba0f-3505167461ed" />
+<img width="600" alt="image" src="https://github.com/user-attachments/assets/7e4e1261-447f-4b59-95b6-0b2dd28578f8" />
+
+### 🏪 아이템 구매 시스템
+<img width="600" alt="image" src="https://github.com/user-attachments/assets/a5cdc3b3-d7d5-4b86-afa7-f77a9630820d" />
+
+### 🔑 문 상호작용 시스템 
+<img width="600" alt="image" src="https://github.com/user-attachments/assets/6889c3eb-9383-440d-b88b-ff68c12e1c9f" />
+
+### ⚙️ 설정창 시스템 
+<img width="600" alt="image" src="https://github.com/user-attachments/assets/3e7eee99-10a9-4d6c-91cf-319f5fc3b3c7" />
 
 
 ---
@@ -352,7 +421,8 @@ File > Build Settings > 플랫폼 선택 > Build
 
 ---
 
-## 🐛 알려진 문제 및 개선사항
+<a id="9"></a>
+## 9️⃣ 📜 개선사항 및 라이센스
 
 ### 현재 개발 중인 기능
 - [ ] 추가 난이도 레벨 (Easy, Normal, Hard)
@@ -363,10 +433,6 @@ File > Build Settings > 플랫폼 선택 > Build
 ### 최적화 계획
 - 오브젝트 풀링 적용 예정
 - 메모리 최적화 작업 진행 중
-
----
-
-## 📝 라이선스 및 추가 리소스
 
 이 프로젝트는 **MIT License** 하에 배포됩니다.
 
@@ -394,7 +460,6 @@ A PARTICULAR PURPOSE AND NONINFRINGEMENT.
 - **URP 문서**: https://docs.unity.com/Manual/universal-render-pipeline
 - **NavMesh 튜토리얼**: https://docs.unity.com/Manual/nav-mesh
 
----
 
 <div align="center">
 
