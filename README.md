@@ -9,40 +9,76 @@
 [![License](https://img.shields.io/badge/License-MIT-blue)](LICENSE)
 [![Status](https://img.shields.io/badge/Status-In%20Development-orange)]()
 
-[게임 소개](#-게임-소개) • [주요-기능](#-주요-기능) • [설치-및-실행](#-설치-및-실행) • [프로젝트-구조](#-프로젝트-구조) • [개발-팀](#-개발-팀) • [수상-내역](#-수상-내역)
-
 </div>
 
 ---
 
-## 🎬 게임 소개
+|순번 (🔗)|항목|
+|:---:|:-------------------:|
+| [1️](#1)| 🎬 프로젝트 개요 |
+| [2](#2) | 🤝 개발 팀 |
+| [3](#3) | ✨ 주요 기능 |
+| [4](#4) | 🛠️ 기술 스택 |
+| [5](#5) | 🎮 데모 영상 |
+| [6](#6) | 📁 프로젝트 구조 |
+| [7](#7) | 🕹️ 설치 및 실행 |
+| [8](#8) | 🏆 수상 내역 |
+
+---
+
+<a id="1"></a>
+## 1️⃣ 🎬 프로젝트 개요
 
 **DelRev**는 플레이어가 다양한 환경(회사, 공장, 유치원, 가족 주택 등)에서 고유한 AI를 가진 몬스터들로부터 도망치며 생존해야 하는 풀-3D 스텔스 서바이벌 게임입니다.
 
 각 스테이지는 독특한 배경과 특화된 AI 몬스터들을 특징으로 하며, 플레이어의 스테미나 관리, 아이템 수집, 스텔스 전술이 필수적입니다.
 
-**개발 기간:** 약 6개월  
-**개발 엔진:** Unity 2022.3.47f1  
-**개발 언어:** C#  
+- **개발 기간:** 약 6개월  
+- **개발 엔진:** Unity 2022.3.47f1  
+- **개발 언어:** C#  
+
+<details>
+  <summary> 📊 상세 통계 </summary>
+  
+  - **총 C# 스크립트**: 200+ 파일
+  - **게임 씬**: 8개
+  - **구현된 몬스터 AI**: 10+ 유형
+  - **아이템 종류**: 회복, 속도부스트, 코인 등
+  - **코드 라인**: 10,000+ 라인
+
+</details>
 
 ---
 
-## ✨ 주요-기능
+<a id="2"></a>
+## 2️⃣ 🤝 개발 팀
 
-### 🎮 게임플레이
-- **멀티 스테이지**: 5개의 고유한 배경(회사, 공장, 유치원, 가족 주택, 기타)
-- **스텔스 메커닉**: 조명, 음성, 거리 감지를 통한 몬스터 탐지 시스템
-- **스테미나 시스템**: 달리기와 숨기기 시 스테미나 소모 및 회복 메커닉
+| 이름 | 권예진 | 김도연 | 김도현 | 이종하 |
+|:---:|:---:|:---:|:---:|:---:|
+|역할| Client Dev<br/> UI/UX Design | Graphic Design | Client Dev | Client Dev <br/> Sound Design |
+| Github | <a href="https://github.com/yejin1029"><img src="https://github.com/yejin1029.png" width="100" alt="GitHub Profile" /></a> | <a href="https://github.com/doyeon112"><img src="https://github.com/doyeon112.png" width="100" alt="GitHub Profile" /></a> | <a href="https://github.com/hitori839"><img src="https://github.com/hitori839.png" width="100" alt="GitHub Profile" /></a> | <a href="https://github.com/bell-ha"><img src="https://github.com/bell-ha.png" width="100" alt="GitHub Profile" /></a> |
+
+---
+
+<a id="3"></a>
+## 3️⃣ ✨ 주요 기능
+
+### 🎮 게임플레이 시스
+- **멀티 스테이지 구성**: 5개의 고유한 배경(회사, 공장, 유치원, 가족 주택, 기타) 기반 진행
+- **스텔스 메커닉**: 조명/음성/거리 감지에 의해 몬스터가 플레이어를 탐지하는 은신 플레이
+- **스테미나 시스템**: 달리기·숨기기 등 행동에 따라 소모/회복되는 자원 관리
 - **생존 시스템**: 
-  - 체력 관리
-  - 코인 수집
+  - 체력 관리(피해/회복)
+  - 코인 수집 및 자원 운영
   - 회복 아이템 사용
 
 ### 🤖 AI 몬스터 시스템
-각 스테이지별 독특한 몬스터들:
+- **스테이지별 고유 몬스터**: 각 스테이지에 맞춘 개성 있는 몬스터와 패턴 설계
+- **다양한 행동 유형**: 패트롤/추적/공격/특수 행동 등 상황 기반 행동 변화
+- **탐지 메커닉**: 시야각·거리·상황 요소를 활용한 플레이어 인식 로직
 
 | 몬스터 | 특징 | 스테이지 |
-|--------|------|--------|
+|:--------:|:------:|:--------:|
 | **Security A/B** | 경비원 AI, NavMesh 패트롤 | 회사 |
 | **Turret Sentinel** | 감시탑, 범위 공격 | 공장 |
 | **Welding Robot** | 용접 로봇, 추적 및 공격 | 공장 |
@@ -53,24 +89,25 @@
 | **Doll Monster** | 인형 몬스터, 특수 행동 | 유치원 |
 | **Dog** | 개, 냄새 추적 | 가족 주택 |
 
-### 🎨 시각 효과
-- **Universal Render Pipeline (URP)**: 최적화된 그래픽 파이프라인
-- **Volume Lighting**: 분위기 있는 조명 효과
-- **고품질 3D 모델**: 다양한 에셋 라이브러리 활용
+### 💾 게임 진행 및 상태 관
+- **세이브/로드 시스템**: 게임 진행 상황 저장 및 불러오기
+- **글로벌 상태 관**: 씬 전환에서도 게임 상태가 유지되는 진행 구조
+- **로딩 씬**: 자연스러운 씬 전환 및 플레이 흐름 개선
 
-### 🔊 오디오
-- 배경음악 및 효과음
-- 장면별 음성 디렉션
-- 영상 재생 기능 (Intro 영상 플레이어)
+### 🎨 비주얼 & 그래픽
+- **Universal Render Pipeline (URP)**: 최적화된 그래픽 파이프라인 적용
+- **Volume Lighting**: 분위기 연출을 위한 조명/볼륨 효과
+- **고품질 3D 모델**: 다양한 에셋 활용을 통한 씬 완성도 강화
 
-### 💾 게임 진행
-- **세이브/로드 시스템**: 게임 진행 상황 저장
-- **글로벌 스테이트**: 게임 상태 관리
-- **로딩 씬**: 부드러운 씬 전환
+### 🔊 오디오 & 연출
+- **배경음악/효과음**: 상황별 몰입감 강화
+- **장면별 음성 디렉션**: 스테이지 분위기와 서사 전달 보조
+- **인트로 영상 재생**: 시작 연출을 위한 Intro 영상 플레이어
 
 ---
 
-## 🛠️ 기술 스택
+<a id="4"></a>
+## 4️⃣ 🛠️ 기술 스택
 
 ### 엔진 & 프레임워크
 - **Unity Engine** 2022.3.47f1 (LTS)
@@ -92,8 +129,18 @@
 
 ---
 
-## 📁 프로젝트-구조
+<a id="5"></a>
+## 5️⃣ 🎮 게임 데모 영상
 
+
+---
+
+<a id="6"></a>
+## 6️⃣ 📁 프로젝트 구조
+
+<details>
+  <summary> <b><i>폴더/파일 트리 펼쳐보기</i></b> </summary>
+  
 ```
 DelRev/
 ├── Assets/
@@ -222,10 +269,12 @@ DelRev/
 └── DelRev.sln                       # Visual Studio 솔루션
 
 ```
+</details>
 
 ---
 
-## 🎮 설치-및-실행
+<a id="7"></a>
+## 7️⃣ 🕹️ 설치 및 실행
 
 ### 요구사항
 - **Unity 2022.3.47f1 LTS** 이상
@@ -261,8 +310,6 @@ File > Build Settings > 플랫폼 선택 > Build
 **안드로이드 / iOS:**
 - 해당 SDK 설치 후 동일하게 빌드
 
----
-
 ## 🎮 게임플레이 가이드
 
 ### 기본 조작
@@ -283,95 +330,15 @@ File > Build Settings > 플랫폼 선택 > Build
 
 ---
 
-## 🎨 주요 기술 구현
-
-### 1. **AI 시스템**
-- **NavMesh 기반 경로 찾기**: 효율적인 이동 경로 계산
-- **상태 머신 (State Machine)**: 각 몬스터의 행동 상태 관리
-- **시야각 및 거리 감지**: 플레이어 탐지 메커닉
-- **다양한 AI 유형**: 추적, 패트롤, 특수 행동 등
-
-### 2. **플레이어 시스템**
-- **CharacterController 기반 이동**: 부드러운 캐릭터 이동
-- **스테미나 시스템**: 동적 스태미나 회복/소모
-- **애니메이션 상태 동기화**: 이동 상태와 애니메이션 연동
-- **체력 관리**: 몬스터 충돌 시 피해 시스템
-
-### 3. **게임 관리**
-- **DontDestroyOnLoad 패턴**: 씬 전환 시 게임 상태 유지
-- **글로벌 상태 관리**: `GlobalState` 싱글톤 패턴
-- **세이브/로드**: 플레이어 진행 상황 저장
-
-### 4. **그래픽 최적화**
-- **URP (Universal Render Pipeline)**: 모바일-PC 크로스 플랫폼 최적화
-- **Volume Lighting**: 동적 조명 효과
-
----
-
-## 🤝 개발-팀
-
-<table>
-  <tr>
-    <td align="center" width="200">
-      <a href="https://github.com/yejin1029">
-        <img src="https://github.com/yejin1029.png" width="90" alt="USERNAME1"/>
-      </a>
-      <br />
-      <b>권예진</b>
-      <br />
-      Client Developer<br />UI/UX Designer
-    </td>
-    <td align="center" width="200">
-      <a href="https://github.com/doyeon112">
-        <img src="https://github.com/doyeon112.png" width="90" alt="USERNAME2"/>
-      </a>
-      <br />
-      <b>김도연</b>
-      <br />
-      Graphic Designer<br/>
-    </td>
-    <td align="center" width="200">
-      <a href="https://github.com/hitori839">
-        <img src="https://github.com/hitori839.png" width="90" alt="USERNAME3"/>
-      </a>
-      <br />
-      <b>김도현</b>
-      <br />
-      Client Developer<br/>
-    </td>
-    <td align="center" width="200">
-      <a href="https://github.com/LeeBellHa">
-        <img src="https://github.com/bell-ha.png" width="90" alt="USERNAME3"/>
-      </a>
-      <br />
-      <b>이종하</b>
-      <br />
-      Client Developer<br/>Sound Design
-    </td>
-  </tr>
-</table>
-
----
-
-## 📊 프로젝트 통계
-
-- **총 C# 스크립트**: 200+ 파일
-- **게임 씬**: 8개
-- **구현된 몬스터 AI**: 10+ 유형
-- **아이템 종류**: 회복, 속도부스트, 코인 등
-- **개발 기간**: ~6개월
-- **코드 라인**: 10,000+ 라인
-
----
-
-## 🏆 수상-내역
+<a id="8"></a>
+## 8️⃣ 🏆 수상 내역
 
 ### 🥉 2025 RIEF-FESTA 캡스톤디자인 경진대회 (G7 부문)
 - **수상:** 장려상  
 - **주관:** 단국대학교 G-RISE 사업단  
 - **선정:** 총 75팀 중 6팀 선정(대상, 우수, 장려)
 
-<img src="award_2.jpeg" alt="2025 RIEF-FESTA Award" width="400"/>
+<img src="award_2.jpeg" alt="2025 RIEF-FESTA Award" width="350"/>
 
 ---
 
@@ -381,8 +348,7 @@ File > Build Settings > 플랫폼 선택 > Build
 - **주관:** 단국대학교 SW중심대학사업단  
 - **선정:** 총 100팀 중 15팀 선정(대상, 최우수, 우수, 장려)
 
-<img width="400" alt="image" src="https://github.com/user-attachments/assets/a8d59ae1-ed84-4938-833a-7758892d9dc4" />
-
+<img width="350" alt="image" src="https://github.com/user-attachments/assets/a8d59ae1-ed84-4938-833a-7758892d9dc4" />
 
 ---
 
@@ -400,7 +366,7 @@ File > Build Settings > 플랫폼 선택 > Build
 
 ---
 
-## 📝 라이선스
+## 📝 라이선스 및 추가 리소스
 
 이 프로젝트는 **MIT License** 하에 배포됩니다.
 
@@ -424,22 +390,9 @@ INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR
 A PARTICULAR PURPOSE AND NONINFRINGEMENT.
 ```
 
----
-
-## 🔗 추가 리소스
-
 - **Unity 공식 문서**: https://docs.unity.com
 - **URP 문서**: https://docs.unity.com/Manual/universal-render-pipeline
 - **NavMesh 튜토리얼**: https://docs.unity.com/Manual/nav-mesh
-
----
-
-## 📧 연락처 및 피드백
-
-프로젝트에 대한 피드백, 버그 리포트, 기능 제안은 아래 방법으로 연락주세요:
-
-- **GitHub Issues**: [Issues 제출](https://github.com/hitori839/DelRev/issues)
-- **GitHub Discussions**: [토론 참여](https://github.com/hitori839/DelRev/discussions)
 
 ---
 
